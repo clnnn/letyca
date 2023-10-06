@@ -1,0 +1,22 @@
+/* You can add global styles to this file, and also import other style files */
+@import "ag-grid-community/styles/ag-grid.css";
+@import "ag-grid-community/styles/ag-theme-alpine.css";
+
+router-outlet {
+  display: none;
+}
+
+.ag-theme-alpine {
+  --ag-font-family: var(--tui-text-font);
+  --ag-header-background-color: transparent;
+  --ag-borders: none;
+  --ag-row-border-style: solid;
+  --ag-row-border-width: 1px;
+  --ag-row-border-color: var(--day-base-base-04, #e0e0e0);
+  --ag-row-hover-color: var(--tui-base-02);
+  --ag-odd-row-background-color: transparent;
+  --ag-header-foreground-color: var(
+    --day-text-icons-text-02,
+    rgba(27, 31, 59, 0.65)
+  );
+}

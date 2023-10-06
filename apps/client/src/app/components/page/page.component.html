@@ -1,0 +1,44 @@
+<header>
+  <tui-tabs class="navigation" [underline]="true">
+    <button tuiTab routerLink="/dashboard" routerLinkActive>Dashboard</button>
+    <button tuiTab routerLink="/browse" routerLinkActive>Browse</button>
+    <button tuiTab disabled routerLink="/settings" routerLinkActive>
+      Settings
+    </button>
+  </tui-tabs>
+
+  <tui-input
+    class="search"
+    [formControl]="search"
+    tuiTextfieldIconLeft="tuiIconSearchLarge"
+  >
+    Search
+    <input tuiTextfield />
+  </tui-input>
+
+  <div class="actions">
+    <tui-avatar text="John Doe" class="tui-space_top-1"></tui-avatar>
+    <tui-hosted-dropdown
+      #dropdown
+      [tuiDropdownMaxHeight]="500"
+      [content]="content"
+    >
+      <button
+        tuiIconButton
+        appearance="flat"
+        type="button"
+        [icon]="menuIcon"
+        size="s"
+        [pseudoHover]="dropdown.open || null"
+      ></button>
+    </tui-hosted-dropdown>
+    <ng-template #content>
+      <tui-data-list size="l">
+        <button tuiOption>Log out</button>
+      </tui-data-list>
+    </ng-template>
+  </div>
+</header>
+<main>
+  <router-outlet></router-outlet>
+</main>

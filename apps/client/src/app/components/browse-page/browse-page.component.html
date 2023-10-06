@@ -1,0 +1,15 @@
+<tui-tabs vertical="left" class="side-menu">
+  <button tuiTab class="option" routerLink="/connections" routerLinkActive>
+    <tui-svg src="tuiIconDatabaseLarge" class="tui-space_right-4"></tui-svg>
+    Connections
+  </button>
+
+  <button tuiTab class="option" disabled routerLink="/charts" routerLinkActive>
+    <tui-svg src="tuiIconPieChartLarge" class="tui-space_right-4"></tui-svg>
+    Charts
+  </button>
+</tui-tabs>
+
+<tui-island class="container">
+  <router-outlet></router-outlet>
+</tui-island>

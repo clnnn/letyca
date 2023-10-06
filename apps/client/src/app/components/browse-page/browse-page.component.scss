@@ -1,0 +1,32 @@
+:host {
+  display: flex;
+  gap: 40px;
+
+  .side-menu {
+    box-shadow: none;
+    flex: 1 0 0;
+    min-width: 0;
+    min-height: 0;
+
+    ._active {
+      &::after {
+        background-color: transparent;
+      }
+
+      &:hover {
+        box-shadow: none;
+      }
+    }
+
+    .option {
+      justify-content: flex-start;
+    }
+  }
+
+  .container {
+    flex: 6 0 auto;
+    min-width: 0;
+    min-height: 0;
+    padding: 32px;
+  }
+}

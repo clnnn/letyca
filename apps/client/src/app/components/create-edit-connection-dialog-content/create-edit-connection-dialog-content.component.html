@@ -1,0 +1,70 @@
+<form class="tui-form" [formGroup]="formGroup" (ngSubmit)="submit()">
+  <div class="tui-col-8">
+    <div class="tui-form__row tui-form__row_multi-fields">
+      <div class="tui-form__multi-field">
+        <tui-input formControlName="host"
+          >Host
+          <input tuiTextfield placeholder="192.168.10.23" inputmode="url" />
+        </tui-input>
+      </div>
+
+      <div class="tui-form__multi-field">
+        <tui-input-number [min]="80" [max]="9999" formControlName="port">
+          Port
+          <input tuiTextfield placeholder="80" />
+        </tui-input-number>
+      </div>
+    </div>
+
+    <div class="tui-form__row">
+      <tui-input formControlName="database"
+        >Database
+        <input tuiTextfield placeholder="production-database" />
+      </tui-input>
+    </div>
+
+    <div class="tui-form__row">
+      <tui-input formControlName="schema"
+        >Schema
+        <input tuiTextfield placeholder="public" />
+      </tui-input>
+    </div>
+
+    <div class="tui-form__row tui-form__row_multi-fields">
+      <div class="tui-form__multi-field">
+        <tui-input formControlName="username"
+          >Username
+          <input tuiTextfield placeholder="admin" inputmode="url" />
+        </tui-input>
+      </div>
+
+      <div class="tui-form__multi-field">
+        <tui-input-password formControlName="password">
+          Password
+        </tui-input-password>
+      </div>
+    </div>
+
+    <div class="tui-form__buttons">
+      <button
+        tuiButton
+        size="l"
+        type="submit"
+        class="tui-form__button"
+        [disabled]="formGroup.invalid"
+      >
+        Submit
+      </button>
+      <button
+        tuiButton
+        type="button"
+        appearance="flat"
+        size="l"
+        class="tui-form__button"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>
