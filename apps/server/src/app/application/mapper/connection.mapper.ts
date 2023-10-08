@@ -5,7 +5,6 @@ import { Connection } from '../../domain/connection.entity';
 @Injectable()
 export class ConnectionMapper {
   toEntity(dto: NewConnection): Connection {
-    console.log(dto);
     const entity = new Connection();
     entity.host = dto.host;
     entity.port = dto.port;
