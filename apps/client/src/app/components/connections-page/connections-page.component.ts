@@ -12,8 +12,8 @@ import { NewConnection } from '@letyca/contracts';
 })
 export class ConnectionsPageComponent implements OnInit {
   readonly pageTitle = 'Connections';
-  readonly connections$ = this.facade.connections$;
-  readonly loading$ = this.facade.loading$;
+  readonly connections = this.facade.connections;
+  readonly loading = this.facade.loading;
 
   constructor(
     private facade: ConnectionFacade,
