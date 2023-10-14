@@ -1,13 +1,25 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NewConnection } from '@letyca/contracts';
-import { TuiDialogContext } from '@taiga-ui/core';
+import { TuiDialogContext, TuiPrimitiveTextfieldModule } from '@taiga-ui/core';
 import { POLYMORPHEUS_CONTEXT } from '@tinkoff/ng-polymorpheus';
+import { TuiButtonModule } from '@taiga-ui/core/components/button';
+import { TuiInputModule, TuiInputNumberModule, TuiInputPasswordModule } from '@taiga-ui/kit';
 
 @Component({
-  selector: 'le-create-edit-connection-dialog-content',
-  templateUrl: './create-edit-connection-dialog-content.component.html',
-  styleUrls: ['./create-edit-connection-dialog-content.component.scss'],
+    selector: 'le-create-edit-connection-dialog-content',
+    templateUrl: './create-edit-connection-dialog-content.component.html',
+    styleUrls: ['./create-edit-connection-dialog-content.component.scss'],
+    standalone: true,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        TuiInputModule,
+        TuiPrimitiveTextfieldModule,
+        TuiInputNumberModule,
+        TuiInputPasswordModule,
+        TuiButtonModule,
+    ],
 })
 export class CreateEditConnectionDialogContentComponent {
   formGroup = this.fb.nonNullable.group({
