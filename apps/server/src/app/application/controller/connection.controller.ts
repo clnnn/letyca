@@ -1,35 +1,35 @@
 import { ConnectionListItem, NewConnection } from '@letyca/contracts';
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { ConnectionMapper } from '../mapper/connection.mapper';
-import { DataSource } from 'typeorm';
-import { Connection } from '../../domain/connection.entity';
+import { PrismaService } from '../data-access/prisma.service';
 
 @Controller('connections')
 export class ConnectionController {
-  constructor(
-    private mapper: ConnectionMapper,
-    private dataSource: DataSource
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   @Post()
-  async create(@Body() dto: NewConnection): Promise<void> {
-    const entity = this.mapper.toEntity(dto);
-    await this.dataSource.transaction(async (manager) => {
-      await manager.save(entity);
-    });
+  async create(@Body() newConnection: NewConnection): Promise<void> {
+    await this.prisma.connection.create({ data: newConnection });
   }
 
   @Get()
   async findAll(): Promise<ConnectionListItem[]> {
-    const entities = await this.dataSource.manager.find(Connection);
-    const list = this.mapper.toListItems(entities);
-    return list;
+    return await this.prisma.connection.findMany({
+      select: {
+        id: true,
+        host: true,
+        port: true,
+        database: true,
+        schema: true,
+      },
+    });
   }
 
   @Delete(':id')
   async deleteById(@Param('id') id: string): Promise<void> {
-    await this.dataSource.transaction(async (manager) => {
-      await manager.delete(Connection, id);
+    await this.prisma.connection.delete({
+      where: {
+        id,
+      },
     });
   }
 }

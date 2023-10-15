@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx run-many --target=serve --projects=client,server"
+    "start": "prisma generate && nx run-many --target=serve --projects=client,server"
   },
   "private": true,
   "dependencies": {
@@ -23,6 +23,7 @@
     "@nestjs/typeorm": "^10.0.0",
     "@ngrx/component-store": "^16.3.0",
     "@nrwl/angular": "^16.10.0",
+    "@prisma/client": "^5.4.2",
     "@taiga-ui/addon-charts": "^3.47.0",
     "@taiga-ui/addon-commerce": "^3.47.0",
     "@taiga-ui/addon-doc": "^3.47.0",
@@ -84,6 +85,7 @@
     "nx": "16.10.0",
     "nx-cloud": "latest",
     "prettier": "^2.6.2",
+    "prisma": "^5.4.2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "typescript": "~5.1.3"
