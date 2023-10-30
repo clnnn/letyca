@@ -1,10 +1,18 @@
-import { ConnectionListItem, NewConnection } from '@letyca/contracts';
+import {
+  ChartResponse,
+  ConnectionListItem,
+  NewConnection,
+} from '@letyca/contracts';
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { PrismaService } from '../data-access/prisma.service';
+import { ChartService } from '../../domain/chart.service';
 
 @Controller('connections')
 export class ConnectionController {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private chartService: ChartService
+  ) {}
 
   @Post()
   async create(@Body() newConnection: NewConnection): Promise<void> {
