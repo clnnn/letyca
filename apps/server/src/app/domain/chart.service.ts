@@ -31,37 +31,6 @@ export class ChartService {
       },
     });
 
-    // const sqlQueryGeneratorChain = RunnableSequence.from([
-    //   RunnablePassthrough.assign({
-    //     schema: async () => database.getTableInfo(),
-    //   }),
-    //   promptTemplate.sqlGenerator,
-    //   this.model.bind({ stop: ['\nSQLResult:'] }),
-    //   new StringOutputParser(),
-    // ]);
-
-    // const fullChain = RunnableSequence.from([
-    //   RunnablePassthrough.assign({
-    //     query: sqlQueryGeneratorChain,
-    //   }),
-    //   {
-    //     schema: async () => database.getTableInfo(),
-    //     question: (input) => input.question,
-    //     query: (input) => input.query,
-    //     response: async (input) => database.run(input.query),
-    //     formatInstructions: () => parser.chart.getFormatInstructions(),
-    //   },
-    //   promptTemplate.chartGenerator,
-    //   this.model,
-    //   parser.chart,
-    // ]);
-
-    // const response = await fullChain.invoke({
-    //   question: humanRequest,
-    // });
-
-    // return response;
-
     const sqlQueryChain = RunnableSequence.from<
       {
         schema: string;
