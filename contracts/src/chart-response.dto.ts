@@ -1,12 +1,12 @@
 export type ChartResponse = {
-  chartType: 'pie' | 'bar' | 'countLabel' | 'line';
-  data: {
-    columns: string[];
-    rows: (string | number)[];
+  chartType?: 'pie' | 'bar' | 'countLabel' | 'line';
+  data?: {
+    columns?: string[];
+    rows?: (string | number)[][];
   };
-  options: {
-    title: string;
-    xAxisLabel: string;
-    yAxisLabel: string;
+  options?: {
+    title?: string;
+    xAxisLabel?: string;
+    yAxisLabel?: string;
   };
 };

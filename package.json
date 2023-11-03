@@ -44,7 +44,7 @@
     "ag-grid-community": "^30.2.0",
     "axios": "^1.0.0",
     "dompurify": "2.2.9",
-    "langchain": "^0.0.167",
+    "langchain": "^0.0.177",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",

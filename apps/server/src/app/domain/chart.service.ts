@@ -1,67 +1,118 @@
 import { ChartResponse } from '@letyca/contracts';
 import { Injectable } from '@nestjs/common';
 import { ChatOpenAI } from 'langchain/chat_models/openai';
-import { RunnableSequence } from 'langchain/schema/runnable';
+import {
+  RunnablePassthrough,
+  RunnableSequence,
+} from 'langchain/schema/runnable';
 import { SqlDatabase } from 'langchain/sql_db';
 import { Connection } from 'prisma/prisma-client';
-import { generateSQLPrompt } from './generate-sql.prompt';
 import { StringOutputParser } from 'langchain/schema/output_parser';
-import { chartSchema } from './chart.schema';
-import { generateChartPrompt } from './generate-chart.prompt';
+import { promptTemplate } from './prompt';
+import { parser } from './parser';
+import { OutputFixingParser } from 'langchain/output_parsers';
 
 @Injectable()
 export class ChartService {
-  private readonly generateSQLPrompt = generateSQLPrompt;
-  private readonly generateChartPrompt = generateChartPrompt;
-  private readonly jsonSchema = chartSchema;
-
   constructor(private model: ChatOpenAI) {}
 
   async generate(
-    query: string,
+    humanRequest: string,
     connection: Connection
   ): Promise<ChartResponse> {
     const database = await SqlDatabase.fromOptionsParams({
       appDataSourceOptions: {
         type: 'postgres',
-        database: connection.database, // e.g. northwind
-        username: connection.username, // e.g. postgres
-        password: connection.password, // e.g. postgres
-        host: connection.host, // e.g. localhost
-        port: connection.port, // e.g. 55432
+        database: connection.database,
+        username: connection.username,
+        password: connection.password,
+        host: connection.host,
+        port: connection.port,
       },
     });
 
-    const sqlQueryGeneratorChain = RunnableSequence.from([
+    // const sqlQueryGeneratorChain = RunnableSequence.from([
+    //   RunnablePassthrough.assign({
+    //     schema: async () => database.getTableInfo(),
+    //   }),
+    //   promptTemplate.sqlGenerator,
+    //   this.model.bind({ stop: ['\nSQLResult:'] }),
+    //   new StringOutputParser(),
+    // ]);
+
+    // const fullChain = RunnableSequence.from([
+    //   RunnablePassthrough.assign({
+    //     query: sqlQueryGeneratorChain,
+    //   }),
+    //   {
+    //     schema: async () => database.getTableInfo(),
+    //     question: (input) => input.question,
+    //     query: (input) => input.query,
+    //     response: async (input) => database.run(input.query),
+    //     formatInstructions: () => parser.chart.getFormatInstructions(),
+    //   },
+    //   promptTemplate.chartGenerator,
+    //   this.model,
+    //   parser.chart,
+    // ]);
+
+    // const response = await fullChain.invoke({
+    //   question: humanRequest,
+    // });
+
+    // return response;
+
+    const sqlQueryChain = RunnableSequence.from<
       {
-        schema: async () => database.getTableInfo(),
-        question: (input: { question: string }) => input.question,
+        schema: string;
+        question: string;
       },
-      this.generateSQLPrompt,
+      string
+    >([
+      {
+        schema: (input) => input.schema,
+        question: (input) => input.question,
+      },
+      promptTemplate.sqlRequest,
       this.model.bind({ stop: ['\nSQLResult:'] }),
       new StringOutputParser(),
     ]);
 
-    const fullChain = RunnableSequence.from([
+    const chain = RunnableSequence.from<
       {
-        question: (input) => input.question,
-        query: sqlQueryGeneratorChain,
+        schema: string;
+        question: string;
+        formatInstructions: string;
       },
+      ChartResponse
+    >([
+      RunnablePassthrough.assign({
+        query: sqlQueryChain,
+      }),
       {
-        schema: async () => database.getTableInfo(),
         question: (input) => input.question,
         query: (input) => input.query,
-        response: (input) => database.run(input.query),
-        json_schema: () => JSON.stringify(this.jsonSchema),
+        schema: (input) => input.schema,
+        formatInstructions: (input) => input.formatInstructions,
+        response: async (input) => database.run(input.query),
       },
-      this.generateChartPrompt,
+      promptTemplate.chartRequest,
       this.model,
+      parser.chart,
     ]);
 
-    const response = await fullChain.invoke({
-      question: query,
+    const response = await chain.invoke({
+      question: humanRequest,
+      schema: await database.getTableInfo(),
+      formatInstructions: parser.chart.getFormatInstructions(),
     });
 
-    return JSON.parse(response.content);
+    try {
+      parser.chart.parse(JSON.stringify(response));
+      return response;
+    } catch {
+      const fixParser = OutputFixingParser.fromLLM(this.model, parser.chart);
+      return fixParser.parse(JSON.stringify(response));
+    }
   }
 }

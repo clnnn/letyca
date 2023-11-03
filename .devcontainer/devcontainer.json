@@ -26,7 +26,8 @@
 				"nrwl.angular-console",
 				"esbenp.prettier-vscode",
 				"dbaeumer.vscode-eslint",
-				"rangav.vscode-thunder-client"
+				"rangav.vscode-thunder-client",
+				"Prisma.prisma"
 			]
 		}
 	}

@@ -17,6 +17,7 @@ import { ChartService } from './domain/chart.service';
       provide: ChatOpenAI,
       useValue: new ChatOpenAI({
         openAIApiKey: process.env['OPEN_AI_API_KEY'],
+        temperature: 0,
       }),
     },
   ],

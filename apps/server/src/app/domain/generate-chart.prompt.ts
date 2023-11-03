@@ -1,10 +1,8 @@
 import { PromptTemplate } from 'langchain/prompts';
 
 export const generateChartPrompt =
-  PromptTemplate.fromTemplate(`Based on the table schema below, question, sql query, sql response, JSON Schema Response, write a JSON Response based on the JSON Schema:
+  PromptTemplate.fromTemplate(`Based on the table schema below, Question, SQL Query, SQL Response answer the question as best as possible.\n{formatInstructions}:
       {schema}
-
       Question: {question}
       SQL Query: {query}
-      SQL Response: {response}
-      JSON Schema: {json_schema}`);
+      SQL Response: {response}`);
