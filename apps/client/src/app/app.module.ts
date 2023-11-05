@@ -11,6 +11,7 @@ import { ConnectionService } from './service/connection.service';
 import { ConnectionFacade } from './facade/connection.facade';
 import { PageComponent } from './components/page/page.component';
 import { ChartFacade } from './facade/chart.facade';
+import { ChartService } from './service/chart.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { ChartFacade } from './facade/chart.facade';
     ConnectionService,
     ConnectionFacade,
     ChartFacade,
+    ChartService,
     { provide: TUI_SANITIZER, useClass: NgDompurifySanitizer },
   ],
   bootstrap: [AppComponent],

@@ -4,7 +4,7 @@ import { TuiAlertOptions, TuiAlertService } from '@taiga-ui/core';
 import { ConnectionListItem, NewConnection } from '@letyca/contracts';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { tap, exhaustMap, switchMap, delay } from 'rxjs';
+import { tap, exhaustMap, switchMap } from 'rxjs';
 import { LoadingState } from '../utils';
 
 export type ConnectionState = {
@@ -31,7 +31,7 @@ export class ConnectionFacade extends ComponentStore<ConnectionState> {
         this.service.fetchAll().pipe(
           tapResponse(
             (connections) => this.patchState({ connections }),
-            (error: HttpErrorResponse) => console.error(error),
+            () => this.patchState({ loading: LoadingState.ERROR }),
             () => this.patchState({ loading: LoadingState.LOADED })
           )
         )
