@@ -7,25 +7,19 @@ import { AgGridModule } from 'ag-grid-angular';
 import { NgIf, NgClass } from '@angular/common';
 
 @Component({
-    selector: 'le-connections-grid',
-    templateUrl: './connections-grid.component.html',
-    styleUrls: ['./connections-grid.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [
-        NgIf,
-        AgGridModule,
-        NgClass,
-        TuiBlockStatusModule,
-        TuiLoaderModule,
-    ],
+  selector: 'le-connections-grid',
+  templateUrl: './connections-grid.component.html',
+  styleUrls: ['./connections-grid.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf, AgGridModule, NgClass, TuiBlockStatusModule, TuiLoaderModule],
 })
 export class ConnectionsGridComponent {
   readonly config = configuration;
 
-  @Input()
+  @Input({ required: true })
   data!: ConnectionListItem[];
 
-  @Input()
-  isLoading?: boolean;
+  @Input({ required: true })
+  isLoading!: boolean;
 }
