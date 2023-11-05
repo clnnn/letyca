@@ -1,0 +1,34 @@
+<ng-container *ngIf="selectedConnection; else connectionNotSelected">
+  <form [formGroup]="form" (submit)="submit()">
+    <div class="message-container">
+      <tui-textarea
+        #message
+        formControlName="message"
+        class="tui-space_bottom-4 field-large"
+      >
+        What do you want to display?
+      </tui-textarea>
+      <button
+        tuiIconButton
+        iconRight="tuiIconSearch"
+        type="submit"
+        class="tui-space_right-3 tui-space_bottom-3 send-button"
+        [disabled]="message.value.length === 0"
+      ></button>
+    </div>
+  </form>
+</ng-container>
+
+<ng-template #connectionNotSelected>
+  <tui-block-status>
+    <img
+      tuiSlot="top"
+      alt="not selected"
+      src="./assets/images/camping.svg"
+      class="image"
+    />
+
+    <h4>No connection selected</h4>
+    Try selecting a connection
+  </tui-block-status>
+</ng-template>
