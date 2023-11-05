@@ -5,11 +5,19 @@ import { ConnectionFacade } from '../../facade/connection.facade';
 import { ConnectionListItem } from '@letyca/contracts';
 import { ChartPromptComponent } from '../chart-prompt/chart-prompt.component';
 import { ChartFacade } from '../../facade/chart.facade';
+import { ChartPreviewComponent } from '../chart-preview/chart-preview.component';
+import { TuiBlockStatusModule } from '@taiga-ui/layout';
 
 @Component({
   selector: 'le-charts-page',
   standalone: true,
-  imports: [CommonModule, ChartsPageHeaderComponent, ChartPromptComponent],
+  imports: [
+    CommonModule,
+    ChartsPageHeaderComponent,
+    ChartPromptComponent,
+    ChartPreviewComponent,
+    TuiBlockStatusModule,
+  ],
   templateUrl: './charts-page.component.html',
   styleUrls: ['./charts-page.component.scss'],
 })

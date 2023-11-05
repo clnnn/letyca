@@ -7,6 +7,7 @@ import { NewConnection } from '@letyca/contracts';
 import { ConnectionsGridComponent } from '../connections-grid/connections-grid.component';
 import { ConnectionsPageHeaderComponent } from '../connections-page-header/connections-page-header.component';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'le-connections-page',
@@ -41,8 +42,13 @@ export class ConnectionsPageComponent implements OnInit {
           dismissible: true,
         }
       )
-      .pipe(takeUntilDestroyed(this.destroy))
-      .subscribe((data) => {
+      .pipe(
+        filter(
+          (data: NewConnection | null): data is NewConnection => data !== null
+        ),
+        takeUntilDestroyed(this.destroy)
+      )
+      .subscribe((data: NewConnection) => {
         this.facade.add(data);
       });
   }

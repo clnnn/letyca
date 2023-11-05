@@ -1,5 +1,5 @@
 import { NgDompurifySanitizer } from '@tinkoff/ng-dompurify';
-import { TuiRootModule, TUI_SANITIZER } from '@taiga-ui/core';
+import { TuiRootModule, TUI_SANITIZER, TuiDialogModule } from '@taiga-ui/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,6 +22,7 @@ import { ChartService } from './service/chart.service';
     BrowserAnimationsModule,
     TuiRootModule,
     PageComponent,
+    TuiDialogModule,
   ],
   providers: [
     ConnectionService,

@@ -36,9 +36,6 @@ import { LoadingState } from '../../utils';
 export class ChartPromptComponent implements OnChanges {
   private readonly fb = inject(FormBuilder);
 
-  @Input()
-  selectedConnection?: ConnectionListItem;
-
   @Input({ required: true })
   chartLoading?: LoadingState;
 

@@ -21,6 +21,9 @@ export class ChartFacade extends ComponentStore<ChartState> {
 
   readonly generate = this.effect<ChartRequest>((trigger$) =>
     trigger$.pipe(
+      tap(() =>
+        this.patchState({ loading: LoadingState.INIT, chart: undefined })
+      ),
       tap(() => this.patchState({ loading: LoadingState.LOADING })),
       exhaustMap((request) =>
         this.service.generateChart(request).pipe(

@@ -4,9 +4,31 @@
   [connectionsLoading]="connectionsLoading()"
   (connectionChange)="connectionChange($event)"
 />
-<le-chart-prompt
-  class="main-content"
-  [selectedConnection]="selectedConnection"
-  [chartLoading]="chartLoading()"
-  (humanQuerySubmit)="humanQuerySubmit($event)"
-/>
+<ng-container *ngIf="selectedConnection; else connectionNotSelected">
+  <div class="main-content">
+    <le-chart-prompt
+      class="prompt"
+      [chartLoading]="chartLoading()"
+      (humanQuerySubmit)="humanQuerySubmit($event)"
+    />
+    <le-chart-preview
+      class="preview"
+      [chart]="chart()"
+      [loading]="chartLoading()"
+    ></le-chart-preview>
+  </div>
+</ng-container>
+
+<ng-template #connectionNotSelected>
+  <tui-block-status>
+    <img
+      tuiSlot="top"
+      alt="not selected"
+      src="./assets/images/camping.svg"
+      class="image"
+    />
+
+    <h4>No connection selected</h4>
+    Try selecting a connection
+  </tui-block-status>
+</ng-template>
