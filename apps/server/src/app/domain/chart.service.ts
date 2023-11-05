@@ -17,7 +17,7 @@ export class ChartService {
   constructor(private model: ChatOpenAI) {}
 
   async generate(
-    humanRequest: string,
+    humanQuery: string,
     connection: Connection
   ): Promise<ChartResponse> {
     const database = await SqlDatabase.fromOptionsParams({
@@ -71,7 +71,7 @@ export class ChartService {
     ]);
 
     const response = await chain.invoke({
-      question: humanRequest,
+      question: humanQuery,
       schema: await database.getTableInfo(),
       formatInstructions: parser.chart.getFormatInstructions(),
     });

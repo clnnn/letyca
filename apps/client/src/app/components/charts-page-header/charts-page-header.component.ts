@@ -15,6 +15,7 @@ import { TuiDataListModule } from '@taiga-ui/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConnectionListItem } from '@letyca/contracts';
 import { TuiValueChangesModule } from '@taiga-ui/cdk';
+import { LoadingState } from '../../utils';
 
 @Component({
   selector: 'le-charts-page-header',
@@ -39,6 +40,9 @@ export class ChartsPageHeaderComponent {
 
   @Input({ required: true })
   connections!: ConnectionListItem[];
+
+  @Input({ required: true })
+  connectionsLoading!: LoadingState;
 
   @Output()
   readonly connectionChange = new EventEmitter<ConnectionListItem>();

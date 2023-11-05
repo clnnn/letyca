@@ -15,6 +15,6 @@ export class ChartController {
       },
     });
 
-    return await this.service.generate(request.query, connection);
+    return await this.service.generate(request.humanQuery, connection);
   }
 }

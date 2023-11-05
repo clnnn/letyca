@@ -1,6 +1,7 @@
 <span class="tui-text_h5 title">{{ title }}</span>
 <tui-combo-box
   class="dropdown"
+  [class.tui-skeleton]="connectionsLoading === 'LOADING'"
   [formControl]="connectionDropdown"
   [stringify]="stringify"
   (tuiValueChanges)="onChanges($event)"

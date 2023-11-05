@@ -2,8 +2,8 @@
   <form [formGroup]="form" (submit)="submit()">
     <div class="message-container">
       <tui-textarea
-        #message
-        formControlName="message"
+        #humanQuery
+        formControlName="humanQuery"
         class="tui-space_bottom-4 field-large"
       >
         What do you want to display?
@@ -13,7 +13,8 @@
         iconRight="tuiIconSearch"
         type="submit"
         class="tui-space_right-3 tui-space_bottom-3 send-button"
-        [disabled]="message.value.length === 0"
+        [showLoader]="chartLoading === 'LOADING'"
+        [disabled]="humanQuery.value.length === 0 || chartLoading === 'LOADING'"
       ></button>
     </div>
   </form>

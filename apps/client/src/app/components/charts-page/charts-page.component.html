@@ -1,10 +1,12 @@
 <le-charts-page-header
   [title]="pageTitle"
   [connections]="connections()"
+  [connectionsLoading]="connectionsLoading()"
   (connectionChange)="connectionChange($event)"
 />
-<le-chart-preview
+<le-chart-prompt
   class="main-content"
   [selectedConnection]="selectedConnection"
-  (messageSubmit)="messageSubmit($event)"
+  [chartLoading]="chartLoading()"
+  (humanQuerySubmit)="humanQuerySubmit($event)"
 />
