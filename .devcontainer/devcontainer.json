@@ -27,7 +27,8 @@
 				"esbenp.prettier-vscode",
 				"dbaeumer.vscode-eslint",
 				"rangav.vscode-thunder-client",
-				"Prisma.prisma"
+				"Prisma.prisma",
+				"Angular.ng-template"
 			]
 		}
 	}
