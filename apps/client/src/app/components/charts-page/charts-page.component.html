@@ -3,4 +3,8 @@
   [connections]="connections()"
   (connectionChange)="connectionChange($event)"
 />
-<div class="main-content">main</div>
+<le-chart-preview
+  class="main-content"
+  [selectedConnection]="selectedConnection"
+  (messageSubmit)="messageSubmit($event)"
+/>
