@@ -5,6 +5,7 @@ import { TuiLoaderModule } from '@taiga-ui/core/components/loader';
 import { TuiBlockStatusModule } from '@taiga-ui/layout';
 import { AgGridModule } from 'ag-grid-angular';
 import { NgIf, NgClass } from '@angular/common';
+import { LoadingState } from '../../utils';
 
 @Component({
   selector: 'le-connections-grid',
@@ -21,5 +22,5 @@ export class ConnectionsGridComponent {
   data!: ConnectionListItem[];
 
   @Input({ required: true })
-  isLoading!: boolean;
+  loading!: LoadingState;
 }

@@ -4,10 +4,11 @@ import { TuiAlertOptions, TuiAlertService } from '@taiga-ui/core';
 import { ConnectionListItem, NewConnection } from '@letyca/contracts';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { tap, exhaustMap, switchMap } from 'rxjs';
+import { tap, exhaustMap, switchMap, delay } from 'rxjs';
+import { LoadingState } from '../utils';
 
 export type ConnectionState = {
-  loading: boolean;
+  loading: LoadingState;
   connections: ConnectionListItem[];
 };
 
@@ -20,18 +21,18 @@ export class ConnectionFacade extends ComponentStore<ConnectionState> {
     private service: ConnectionService,
     @Inject(TuiAlertService) private alertService: TuiAlertService
   ) {
-    super({ loading: false, connections: [] });
+    super({ loading: LoadingState.INIT, connections: [] });
   }
 
   readonly refresh = this.effect<void>((trigger$) =>
     trigger$.pipe(
-      tap(() => this.patchState({ loading: true })),
+      tap(() => this.patchState({ loading: LoadingState.LOADING })),
       exhaustMap(() =>
         this.service.fetchAll().pipe(
           tapResponse(
             (connections) => this.patchState({ connections }),
             (error: HttpErrorResponse) => console.error(error),
-            () => this.patchState({ loading: false })
+            () => this.patchState({ loading: LoadingState.LOADED })
           )
         )
       )
