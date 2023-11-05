@@ -1,7 +1,7 @@
 <tui-island *ngIf="loading !== 'INIT'" size="l">
   <p class="tui-island__category">Response</p>
   <h3 class="tui-island__title" [class.tui-skeleton]="loading === 'LOADING'">
-    {{ chart?.options?.title ?? 'Generated Chart' }}
+    {{ chart?.options?.title ?? 'Chart' }}
   </h3>
 
   <ng-container *ngIf="chart?.chartType === 'countLabel'">
