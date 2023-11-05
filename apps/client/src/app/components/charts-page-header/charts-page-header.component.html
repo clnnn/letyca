@@ -1,1 +1,15 @@
-<span class="tui-text_h5">{{ title }}</span>
+<span class="tui-text_h5 title">{{ title }}</span>
+<tui-combo-box
+  class="dropdown"
+  [formControl]="connectionDropdown"
+  [stringify]="stringify"
+  (tuiValueChanges)="onChanges($event)"
+>
+  Selected connection:
+  <tui-data-list-wrapper
+    *tuiDataList
+    [items]="connections"
+    [itemContent]="stringify | tuiStringifyContent"
+  >
+  </tui-data-list-wrapper>
+</tui-combo-box>

@@ -1,2 +1,6 @@
-<le-charts-page-header [title]="pageTitle" />
+<le-charts-page-header
+  [title]="pageTitle"
+  [connections]="connections()"
+  (connectionChange)="connectionChange($event)"
+/>
 <div class="main-content">main</div>
