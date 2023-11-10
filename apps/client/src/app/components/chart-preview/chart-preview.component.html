@@ -6,11 +6,11 @@
 </tui-island>
 
 <ng-template #displayChart>
-  <h3 class="tui-island__title" [class.tui-skeleton]="loading === 'LOADING'">
-    {{ chart?.options?.title ?? 'Chart' }}
-  </h3>
-
-  <ng-container *ngIf="chart?.chartType === 'countLabel'">
-    <h1 [leCountUp]="countLabelValue" class="tui-text_h1"></h1>
+  <ng-container [ngSwitch]="chart?.chartType">
+    <le-count-label
+      *ngSwitchCase="'countLabel'"
+      [title]="title"
+      [value]="countLabelValue"
+    ></le-count-label>
   </ng-container>
 </ng-template>
