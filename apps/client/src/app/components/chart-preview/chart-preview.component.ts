@@ -5,11 +5,17 @@ import { LoadingState } from '../../utils';
 import { TuiIslandModule } from '@taiga-ui/kit';
 import { CountUpDirective } from '../../directive/count-up.directive';
 import { tuiIsString } from '@taiga-ui/cdk';
+import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 
 @Component({
   selector: 'le-chart-preview',
   standalone: true,
-  imports: [CommonModule, TuiIslandModule, CountUpDirective],
+  imports: [
+    CommonModule,
+    TuiIslandModule,
+    CountUpDirective,
+    LoadingSpinnerComponent,
+  ],
   templateUrl: './chart-preview.component.html',
   styleUrls: ['./chart-preview.component.scss'],
 })
