@@ -2,6 +2,7 @@
 <tui-combo-box
   class="dropdown"
   [class.tui-skeleton]="connectionsLoading === 'LOADING'"
+  [class.tui-skeleton_rounded]="true"
   [formControl]="connectionDropdown"
   [stringify]="stringify"
   (tuiValueChanges)="onChanges($event)"
