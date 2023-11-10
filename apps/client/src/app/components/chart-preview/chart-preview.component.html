@@ -1,5 +1,11 @@
 <tui-island *ngIf="loading !== 'INIT'" size="l">
   <p class="tui-island__category">Response</p>
+  <div class="tui-island__content">
+    <le-loading-spinner *ngIf="loading === 'LOADING'; else displayChart" />
+  </div>
+</tui-island>
+
+<ng-template #displayChart>
   <h3 class="tui-island__title" [class.tui-skeleton]="loading === 'LOADING'">
     {{ chart?.options?.title ?? 'Chart' }}
   </h3>
@@ -7,4 +13,4 @@
   <ng-container *ngIf="chart?.chartType === 'countLabel'">
     <h1 [leCountUp]="countLabelValue" class="tui-text_h1"></h1>
   </ng-container>
-</tui-island>
+</ng-template>
