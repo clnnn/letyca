@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ChartResponse } from '@letyca/contracts';
 import { LoadingState } from '../../utils';
 import { TuiIslandModule } from '@taiga-ui/kit';
-import { CountUpDirective } from '../../directive/count-up.directive';
 import { tuiIsString } from '@taiga-ui/cdk';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { CountLabelComponent } from '../count-label/count-label.component';

@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+
+  tui-island {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 0;
+  }
+}
