@@ -1,16 +1,19 @@
 <tui-island *ngIf="loading !== 'INIT'" size="l">
   <p class="tui-island__category">Response</p>
-  <div class="tui-island__content">
-    <le-loading-spinner *ngIf="loading === 'LOADING'; else displayChart" />
+  <div
+    class="tui-island__content"
+    *ngIf="loading === 'LOADING'; else displayChart"
+  >
+    <le-loading-spinner />
   </div>
 </tui-island>
 
 <ng-template #displayChart>
-  <ng-container [ngSwitch]="chart?.chartType">
+  <div class="container" [ngSwitch]="chart?.chartType">
     <le-count-label
       *ngSwitchCase="'countLabel'"
       [title]="title"
       [value]="countLabelValue"
     ></le-count-label>
-  </ng-container>
+  </div>
 </ng-template>
