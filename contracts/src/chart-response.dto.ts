@@ -1,12 +1,19 @@
-export type ChartResponse = {
-  chartType?: 'pie' | 'bar' | 'countLabel' | 'line';
+type CommonChartResponse = {
+  chartType?: 'countLabel' | 'pie';
+  title?: string;
+};
+
+export type CountLabelChartResponse = CommonChartResponse & {
+  chartType?: 'countLabel';
+  data?: number;
+};
+
+export type PieChartResponse = CommonChartResponse & {
+  chartType?: 'pie';
   data?: {
-    columns?: string[];
-    rows?: (string | number)[][];
-  };
-  options?: {
-    title?: string;
-    xAxisLabel?: string;
-    yAxisLabel?: string;
+    labels?: string[];
+    values?: number[];
   };
 };
+
+export type ChartResponse = CountLabelChartResponse | PieChartResponse;

@@ -1,0 +1,13 @@
+<tui-island>
+  <h3 class="tui-island__title">{{ title }}</h3>
+  <tui-pie-chart
+    [value]="values"
+    [tuiHintContent]="hintContent"
+    size="xl"
+  ></tui-pie-chart>
+</tui-island>
+
+<ng-template #hintContent let-index>
+  <div class="tui-text_body-xs">{{ labels[index] }}</div>
+  <div class="tui-text_body-s-2">{{ values[index] }}</div>
+</ng-template>
