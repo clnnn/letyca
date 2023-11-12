@@ -28,16 +28,16 @@ export class ChartPreviewComponent {
   @Input({ required: true })
   loading!: LoadingState;
 
+  get title() {
+    return this.chart?.title ?? '';
+  }
+
   get countLabelValue() {
     if (this.chart?.chartType !== 'countLabel') {
       return 0;
     }
     const value = this.chart.data;
     return tuiIsString(value) ? Number.parseInt(value) : value ?? 0;
-  }
-
-  get title() {
-    return this.chart?.title ?? '';
   }
 
   get pieChartLabels() {
