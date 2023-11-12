@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ChartResponse } from '@letyca/contracts';
 import { LoadingState } from '../../utils';
 import { TuiIslandModule } from '@taiga-ui/kit';
-import { tuiIsString } from '@taiga-ui/cdk';
+import { tuiIsNumber, tuiIsString } from '@taiga-ui/cdk';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
 import { CountLabelComponent } from '../count-label/count-label.component';
+import { PieComponent } from '../pie/pie.component';
 
 @Component({
   selector: 'le-chart-preview',
@@ -15,6 +16,7 @@ import { CountLabelComponent } from '../count-label/count-label.component';
     TuiIslandModule,
     LoadingSpinnerComponent,
     CountLabelComponent,
+    PieComponent,
   ],
   templateUrl: './chart-preview.component.html',
   styleUrls: ['./chart-preview.component.scss'],
@@ -27,11 +29,30 @@ export class ChartPreviewComponent {
   loading!: LoadingState;
 
   get countLabelValue() {
-    const value = this.chart?.data?.rows?.[0]?.[0];
+    if (this.chart?.chartType !== 'countLabel') {
+      return 0;
+    }
+    const value = this.chart.data;
     return tuiIsString(value) ? Number.parseInt(value) : value ?? 0;
   }
 
   get title() {
-    return this.chart?.options?.title ?? '';
+    return this.chart?.title ?? '';
+  }
+
+  get pieChartLabels() {
+    if (this.chart?.chartType !== 'pie') {
+      return [];
+    }
+
+    return this.chart.data?.labels ?? [];
+  }
+
+  get pieChartValues() {
+    if (this.chart?.chartType !== 'pie') {
+      return [];
+    }
+
+    return this.chart.data?.values ?? [];
   }
 }

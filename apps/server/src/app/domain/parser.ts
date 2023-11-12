@@ -3,29 +3,24 @@ import { z } from 'zod';
 
 export const parser = {
   chart: StructuredOutputParser.fromZodSchema(
-    z.object({
-      chartType: z
-        .enum(['pie', 'bar', 'countLabel', 'line'])
-        .describe('The type of chart to render.'),
-      data: z.object({
-        columns: z.array(z.string()),
-        rows: z.array(z.array(z.union([z.string(), z.number()]))),
-      }),
-      options: z.object({
-        title: z.string().describe('The title of the chart.'),
-        xAxisLabel: z
+    z.discriminatedUnion('chartType', [
+      z.object({
+        chartType: z.literal('countLabel'),
+        title: z
           .string()
-          .optional()
-          .describe(
-            'The label for the x-axis. This property is not applicable for "countLabel"'
-          ),
-        yAxisLabel: z
-          .string()
-          .optional()
-          .describe(
-            'The label for the y-axis. This property is not applicable for "countLabel"'
-          ),
+          .describe('The title of the chart. Should start with uppercase'),
+        data: z.number().describe('The count of the label.'),
       }),
-    })
+      z.object({
+        chartType: z.literal('pie'),
+        title: z
+          .string()
+          .describe('The title of the chart. Should start with uppercase'),
+        data: z.object({
+          labels: z.array(z.string()).describe('The labels for the pie chart.'),
+          values: z.array(z.number()).describe('The values for the pie chart.'),
+        }),
+      }),
+    ])
   ),
 };

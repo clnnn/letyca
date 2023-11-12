@@ -15,5 +15,11 @@
       [title]="title"
       [value]="countLabelValue"
     ></le-count-label>
+    <le-pie
+      *ngSwitchCase="'pie'"
+      [title]="title"
+      [labels]="pieChartLabels"
+      [values]="pieChartValues"
+    ></le-pie>
   </div>
 </ng-template>
