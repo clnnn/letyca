@@ -21,6 +21,24 @@ export const parser = {
           values: z.array(z.number()).describe('The values for the pie chart.'),
         }),
       }),
+      z.object({
+        chartType: z.literal('line'),
+        title: z
+          .string()
+          .describe('The title of the chart. Should start with uppercase'),
+        data: z.object({
+          points: z
+            .array(
+              z
+                .object({
+                  x: z.number().describe('The X coordinate of a data point'),
+                  y: z.number().describe('The Y coordinate of a data point'),
+                })
+                .describe('A data point')
+            )
+            .describe('An array of data points'),
+        }),
+      }),
     ])
   ),
 };
