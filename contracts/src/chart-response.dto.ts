@@ -1,5 +1,5 @@
 type CommonChartResponse = {
-  chartType?: 'countLabel' | 'pie';
+  chartType?: 'countLabel' | 'pie' | 'line';
   title?: string;
 };
 
@@ -16,4 +16,14 @@ export type PieChartResponse = CommonChartResponse & {
   };
 };
 
-export type ChartResponse = CountLabelChartResponse | PieChartResponse;
+export type LineChartResponse = CommonChartResponse & {
+  chartType?: 'line';
+  data?: {
+    points?: { x?: number; y?: number }[];
+  };
+};
+
+export type ChartResponse =
+  | CountLabelChartResponse
+  | PieChartResponse
+  | LineChartResponse;
