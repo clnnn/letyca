@@ -28,8 +28,8 @@ import { LoadingState } from '../../utils';
     FormsModule,
     ReactiveFormsModule,
     TuiTextareaModule,
-    TuiButtonModule,
-  ],
+    TuiButtonModule
+],
   templateUrl: './chart-prompt.component.html',
   styleUrls: ['./chart-prompt.component.scss'],
 })

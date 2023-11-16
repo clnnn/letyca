@@ -16,8 +16,8 @@ import { TuiBlockStatusModule } from '@taiga-ui/layout';
     ChartsPageHeaderComponent,
     ChartPromptComponent,
     ChartPreviewComponent,
-    TuiBlockStatusModule,
-  ],
+    TuiBlockStatusModule
+],
   templateUrl: './charts-page.component.html',
   styleUrls: ['./charts-page.component.scss'],
 })

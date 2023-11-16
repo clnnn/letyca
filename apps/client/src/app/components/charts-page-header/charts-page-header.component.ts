@@ -28,8 +28,8 @@ import { LoadingState } from '../../utils';
     FormsModule,
     ReactiveFormsModule,
     TuiStringifyContentPipeModule,
-    TuiValueChangesModule,
-  ],
+    TuiValueChangesModule
+],
   templateUrl: './charts-page-header.component.html',
   styleUrls: ['./charts-page-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

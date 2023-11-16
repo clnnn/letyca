@@ -1,5 +1,7 @@
-<ng-container *ngIf="loading === 'LOADED'; else isLoading">
-  <ng-container *ngIf="data.length > 0; else emptyGrid">
+@if (loading === 'LOADED') {
+
+  @if (data.length > 0) {
+
     <ag-grid-angular
       style="width: 100%; height: 100%"
       [ngClass]="config.theme"
@@ -8,9 +10,9 @@
       [animateRows]="config.animatedRows"
       [getRowId]="config.getRowId"
     ></ag-grid-angular>
-  </ng-container>
+  
+} @else {
 
-  <ng-template #emptyGrid>
     <tui-block-status>
       <img
         tuiSlot="top"
@@ -23,9 +25,13 @@
 
       Try to add a new connection
     </tui-block-status>
-  </ng-template>
-</ng-container>
+  
+}
 
-<ng-template #isLoading>
+  
+} @else {
+
   <tui-loader style="width: 100%" size="xxl"></tui-loader>
-</ng-template>
+
+}
+
