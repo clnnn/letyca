@@ -19,8 +19,8 @@ import { TuiPoint } from '@taiga-ui/core';
     LoadingSpinnerComponent,
     CountLabelComponent,
     PieComponent,
-    LineComponent,
-  ],
+    LineComponent
+],
   templateUrl: './chart-preview.component.html',
   styleUrls: ['./chart-preview.component.scss'],
 })

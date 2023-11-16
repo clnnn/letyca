@@ -1,30 +1,26 @@
-<tui-island *ngIf="loading !== 'INIT'" size="l">
+@if (loading !== 'INIT') {
+<tui-island size="l">
   <p class="tui-island__category">Response</p>
-  <div
-    class="tui-island__content"
-    *ngIf="loading === 'LOADING'; else displayChart"
-  >
+  @if (loading === 'LOADING') {
+  <div class="tui-island__content">
     <le-loading-spinner />
   </div>
-</tui-island>
+  } @else {
 
-<ng-template #displayChart>
-  <div class="container" [ngSwitch]="chart?.chartType">
-    <le-count-label
-      *ngSwitchCase="'countLabel'"
-      [title]="title"
-      [value]="countLabelValue"
-    ></le-count-label>
+  <div class="container">
+    @switch (chart?.chartType) { @case ('countLabel') {
+    <le-count-label [title]="title" [value]="countLabelValue" />
+    } @case ('pie') {
     <le-pie
-      *ngSwitchCase="'pie'"
       [title]="title"
       [labels]="pieChartLabels"
       [values]="pieChartValues"
-    ></le-pie>
-    <le-line
-      *ngSwitchCase="'line'"
-      [title]="title"
-      [points]="lineChartPoints"
-    ></le-line>
+    />
+    } @case ('line') {
+    <le-line [title]="title" [points]="lineChartPoints" />
+    } }
   </div>
-</ng-template>
+
+  }
+</tui-island>
+}

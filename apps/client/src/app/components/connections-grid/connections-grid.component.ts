@@ -4,7 +4,7 @@ import { ConnectionListItem } from '@letyca/contracts';
 import { TuiLoaderModule } from '@taiga-ui/core/components/loader';
 import { TuiBlockStatusModule } from '@taiga-ui/layout';
 import { AgGridModule } from 'ag-grid-angular';
-import { NgIf, NgClass } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { LoadingState } from '../../utils';
 
 @Component({
@@ -13,7 +13,7 @@ import { LoadingState } from '../../utils';
   styleUrls: ['./connections-grid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgIf, AgGridModule, NgClass, TuiBlockStatusModule, TuiLoaderModule],
+  imports: [AgGridModule, NgClass, TuiBlockStatusModule, TuiLoaderModule],
 })
 export class ConnectionsGridComponent {
   readonly config = configuration;

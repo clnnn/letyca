@@ -16,7 +16,7 @@ import { TuiLinkModule } from '@taiga-ui/core';
     RouterLinkActive,
     TuiSvgModule,
     TuiIslandModule,
-    RouterOutlet,
-  ],
+    RouterOutlet
+],
 })
 export class BrowsePageComponent {}

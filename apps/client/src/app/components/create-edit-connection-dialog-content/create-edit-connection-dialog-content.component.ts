@@ -12,14 +12,14 @@ import { TuiInputModule, TuiInputNumberModule, TuiInputPasswordModule } from '@t
     styleUrls: ['./create-edit-connection-dialog-content.component.scss'],
     standalone: true,
     imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        TuiInputModule,
-        TuiPrimitiveTextfieldModule,
-        TuiInputNumberModule,
-        TuiInputPasswordModule,
-        TuiButtonModule,
-    ],
+    FormsModule,
+    ReactiveFormsModule,
+    TuiInputModule,
+    TuiPrimitiveTextfieldModule,
+    TuiInputNumberModule,
+    TuiInputPasswordModule,
+    TuiButtonModule
+],
 })
 export class CreateEditConnectionDialogContentComponent {
   formGroup = this.fb.nonNullable.group({
