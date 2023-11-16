@@ -21,5 +21,10 @@
       [labels]="pieChartLabels"
       [values]="pieChartValues"
     ></le-pie>
+    <le-line
+      *ngSwitchCase="'line'"
+      [title]="title"
+      [points]="lineChartPoints"
+    ></le-line>
   </div>
 </ng-template>
