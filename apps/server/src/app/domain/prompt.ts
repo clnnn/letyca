@@ -8,7 +8,7 @@ export const promptTemplate = {
     ---------
     QUESTION: {question}
     _________
-    SQL Query;`
+    SQL Query:`
   ),
   chartRequest: PromptTemplate.fromTemplate(
     `Based on the table schema below, question, SQL Query, SQL Response, and the expected format, answer the question using as best as possible.
