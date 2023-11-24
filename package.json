@@ -45,11 +45,13 @@
     "axios": "^1.0.0",
     "dompurify": "2.2.9",
     "langchain": "^0.0.177",
+    "openai": "^4.20.0",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "tslib": "^2.3.0",
     "typeorm": "^0.3.17",
+    "zod-to-json-schema": "^3.22.0",
     "zone.js": "0.14.2"
   },
   "devDependencies": {
@@ -64,6 +66,7 @@
     "@angular/language-service": "17.0.3",
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/testing": "^10.0.2",
+    "@nx/eslint": "17.1.2",
     "@nx/eslint-plugin": "17.1.2",
     "@nx/jest": "17.1.2",
     "@nx/js": "17.1.2",
@@ -89,7 +92,6 @@
     "prisma": "^5.4.2",
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
-    "typescript": "5.2.2",
-    "@nx/eslint": "17.1.2"
+    "typescript": "5.2.2"
   }
 }
