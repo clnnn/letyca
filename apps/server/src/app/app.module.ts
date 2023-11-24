@@ -6,6 +6,7 @@ import { PrismaService } from './application/data-access/prisma.service';
 import { ChartController } from './application/controller/chart.controller';
 import { ChatOpenAI } from 'langchain/chat_models/openai';
 import { ChartService } from './domain/chart.service';
+import OpenAI from 'openai';
 
 @Module({
   imports: [ConfigModule.forRoot()],
@@ -19,6 +20,12 @@ import { ChartService } from './domain/chart.service';
         openAIApiKey: process.env['OPEN_AI_API_KEY'],
         temperature: 0,
         modelName: 'gpt-3.5-turbo-1106',
+      }),
+    },
+    {
+      provide: OpenAI,
+      useValue: new OpenAI({
+        apiKey: process.env['OPEN_AI_API_KEY'],
       }),
     },
   ],
