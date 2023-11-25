@@ -52,14 +52,16 @@ export class ChartController {
       stop: '\nSQLResult:',
       messages: [
         {
-          role: 'system',
-          content: `Based on the provided SQL table schema below, answer the user question using just a SQL Query and nothing else.
+          role: 'assistant',
+          content: `You are SQL Generator assistent. Based on the provided SQL table schema below, answer the user question using just a SQL Query and nothing else.
           ---------
           SCHEMA: ${schema}
           _________
-          QUESTION: ${question}
-          _________
           SQL Query:`,
+        },
+        {
+          role: 'system',
+          content: 'Extract only SQL query from the assistent response',
         },
         {
           role: 'user',
@@ -94,8 +96,12 @@ export class ChartController {
             .array(
               z
                 .object({
-                  x: z.number().describe('The X coordinate of a data point of'),
-                  y: z.number().describe('The Y coordinate of a data point'),
+                  x: z
+                    .number()
+                    .describe('The X coordinate of a data point of line chart'),
+                  y: z
+                    .number()
+                    .describe('The Y coordinate of a data point of line chart'),
                 })
                 .describe('A data point')
             )
@@ -108,12 +114,8 @@ export class ChartController {
       model: 'gpt-4',
       messages: [
         {
-          role: 'system',
-          content: `Based on the table schema below, SQL Query, SQL Response, answer the user question using a JSON Response.
-          ---------
-          SCHEMA: ${schema}
-          ---------
-          SQL Query: ${sqlQuery}
+          role: 'assistant',
+          content: `Based on the SQL Response, answer the user question using a JSON Response:
           ---------
           SQL Response: ${sqlResponse}
           ---------
@@ -125,16 +127,27 @@ export class ChartController {
           content: `${question}`,
         },
       ],
-      functions: [
+      tools: [
         {
-          name: 'generateChart',
-          parameters: zodToJsonSchema(zodSchema),
+          type: 'function',
+          function: {
+            name: 'generateChart',
+            parameters: zodToJsonSchema(zodSchema),
+            description: 'Generates a chart based on the schema',
+          },
         },
       ],
-      function_call: { name: 'generateChart' },
+      tool_choice: {
+        type: 'function',
+        function: {
+          name: 'generateChart',
+        },
+      },
     });
 
-    console.log(chartCompletion.choices[0].message.function_call.arguments);
+    console.log(
+      chartCompletion.choices[0].message.tool_calls[0].function.arguments
+    );
 
     // just for testing
     return {
