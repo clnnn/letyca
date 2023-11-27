@@ -8,6 +8,6 @@ export class ChartService {
   constructor(private http: HttpClient) {}
 
   generateChart(request: ChartRequest): Observable<ChartResponse> {
-    return this.http.post('api/charts', request);
+    return this.http.post<ChartResponse>('api/charts', request);
   }
 }

@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 
 import { ConfigModule } from '@nestjs/config';
-import { ConnectionController } from './application/controller/connection.controller';
-import { PrismaService } from './application/data-access/prisma.service';
-import { ChartController } from './application/controller/chart.controller';
-import { ChartService } from './domain/chart.service';
 import OpenAI from 'openai';
-import { DatabaseService } from './domain/database.service';
+import { ConnectionController } from './controller/connection.controller';
+import { ChartController } from './controller/chart.controller';
+import { PrismaService } from './data-access/prisma.service';
+import { DatabaseService } from './service/database.service';
+import { ChartService } from './service/chart.service';
 
 @Module({
   imports: [ConfigModule.forRoot()],
