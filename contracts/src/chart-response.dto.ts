@@ -5,12 +5,12 @@ type CommonChartResponse = {
 
 export type CountLabelChartResponse = CommonChartResponse & {
   chartType?: 'countLabel';
-  data?: number;
+  countLabelData?: number;
 };
 
 export type PieChartResponse = CommonChartResponse & {
   chartType?: 'pie';
-  data?: {
+  pieChartData?: {
     labels?: string[];
     values?: number[];
   };
@@ -18,7 +18,7 @@ export type PieChartResponse = CommonChartResponse & {
 
 export type LineChartResponse = CommonChartResponse & {
   chartType?: 'line';
-  data?: {
+  lineChartData?: {
     points?: { x?: number; y?: number }[];
   };
 };

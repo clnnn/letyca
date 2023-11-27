@@ -19,8 +19,8 @@ import { TuiPoint } from '@taiga-ui/core';
     LoadingSpinnerComponent,
     CountLabelComponent,
     PieComponent,
-    LineComponent
-],
+    LineComponent,
+  ],
   templateUrl: './chart-preview.component.html',
   styleUrls: ['./chart-preview.component.scss'],
 })
@@ -39,7 +39,7 @@ export class ChartPreviewComponent {
     if (this.chart?.chartType !== 'countLabel') {
       return 0;
     }
-    const value = this.chart.data;
+    const value = this.chart.countLabelData;
     return tuiIsString(value) ? Number.parseInt(value) : value ?? 0;
   }
 
@@ -48,7 +48,7 @@ export class ChartPreviewComponent {
       return [];
     }
 
-    return this.chart.data?.labels ?? [];
+    return this.chart.pieChartData?.labels ?? [];
   }
 
   get pieChartValues() {
@@ -56,7 +56,7 @@ export class ChartPreviewComponent {
       return [];
     }
 
-    return this.chart.data?.values ?? [];
+    return this.chart.pieChartData?.values ?? [];
   }
 
   get lineChartPoints() {
@@ -64,7 +64,7 @@ export class ChartPreviewComponent {
       return [];
     }
 
-    const points = this.chart.data?.points ?? [];
+    const points = this.chart.lineChartData?.points ?? [];
     return points.map<TuiPoint>((point) => [point.x ?? 0, point.y ?? 0]);
   }
 }
