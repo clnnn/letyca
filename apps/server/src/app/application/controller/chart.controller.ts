@@ -20,7 +20,7 @@ export class ChartController {
       },
     });
 
-    const userRequest = request.humanQuery;
+    const userRequest = request.userRequest;
     const database = await this.databaseMetadata.getDatabase(connection);
     const query = await this.databaseMetadata.generateQuery(
       await database.getTableInfo(),

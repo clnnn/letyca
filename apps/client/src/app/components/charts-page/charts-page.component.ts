@@ -16,8 +16,8 @@ import { TuiBlockStatusModule } from '@taiga-ui/layout';
     ChartsPageHeaderComponent,
     ChartPromptComponent,
     ChartPreviewComponent,
-    TuiBlockStatusModule
-],
+    TuiBlockStatusModule,
+  ],
   templateUrl: './charts-page.component.html',
   styleUrls: ['./charts-page.component.scss'],
 })
@@ -41,7 +41,7 @@ export class ChartsPageComponent implements OnInit {
     this.selectedConnection = item;
   }
 
-  humanQuerySubmit(humanQuery: string): void {
+  humanQuerySubmit(userRequest: string): void {
     const connectionId = this.selectedConnection?.id;
     if (!connectionId) {
       return;
@@ -49,7 +49,7 @@ export class ChartsPageComponent implements OnInit {
 
     this.chartFacade.generate({
       connectionId,
-      humanQuery,
+      userRequest,
     });
   }
 }
