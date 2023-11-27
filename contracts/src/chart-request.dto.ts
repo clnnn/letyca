@@ -1,4 +1,4 @@
 export type ChartRequest = {
   connectionId: string;
-  humanQuery: string;
+  userRequest: string;
 };
