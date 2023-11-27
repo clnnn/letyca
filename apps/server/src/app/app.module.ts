@@ -7,12 +7,14 @@ import { ChartController } from './application/controller/chart.controller';
 import { ChatOpenAI } from 'langchain/chat_models/openai';
 import { ChartService } from './domain/chart.service';
 import OpenAI from 'openai';
+import { DatabaseService } from './domain/database.service';
 
 @Module({
   imports: [ConfigModule.forRoot()],
   controllers: [ConnectionController, ChartController],
   providers: [
     PrismaService,
+    DatabaseService,
     ChartService,
     {
       provide: ChatOpenAI,
