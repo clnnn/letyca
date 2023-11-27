@@ -1,7 +1,6 @@
-import { ChartResponse } from '@letyca/contracts';
+import { ChartResponse, chartResponseSchema } from '@letyca/contracts';
 import { Injectable } from '@nestjs/common';
 import OpenAI from 'openai';
-import { chartSchema } from './chart.schema';
 
 @Injectable()
 export class ChartService {
@@ -33,7 +32,7 @@ export class ChartService {
           type: 'function',
           function: {
             name: 'generateChart',
-            parameters: chartSchema,
+            parameters: chartResponseSchema,
             description: 'Generates a chart based on the schema',
           },
         },

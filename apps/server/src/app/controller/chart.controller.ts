@@ -1,8 +1,8 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ChartRequest, ChartResponse } from '@letyca/contracts';
-import { ChartService } from '../../domain/chart.service';
 import { PrismaService } from '../data-access/prisma.service';
-import { DatabaseService } from '../../domain/database.service';
+import { ChartService } from '../service/chart.service';
+import { DatabaseService } from '../service/database.service';
 
 @Controller('charts')
 export class ChartController {
