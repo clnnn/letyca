@@ -1,6 +1,14 @@
 version: '3.8'
 
 services:
+  autoheal:
+    restart: unless-stopped
+    image: willfarrell/autoheal
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=all
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      
   traefik:
     restart: unless-stopped
     image: traefik:v2.10
