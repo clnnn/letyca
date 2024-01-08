@@ -6,7 +6,8 @@
     "migrate-dev": "prisma migrate dev",
     "generate": "prisma generate",
     "start": "nx run-many --target=serve --projects=client,server",
-    "build-frontend": "nx run-many --target=build --projects=client"
+    "build-frontend": "nx run-many --target=build --projects=client",
+    "build-backend": "nx run-many --target=build --projects=server"
   },
   "private": true,
   "dependencies": {
