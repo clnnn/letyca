@@ -1,0 +1,39 @@
+providers:
+  docker:
+    endpoint: 'unix:///var/run/docker.sock'
+    exposedByDefault: false
+
+  # file:
+  #   filename: /etc/traefik/file-config.yml
+
+api:
+  dashboard: true
+  insecure: true
+
+entryPoints:
+  web:
+    address: ':80'
+
+    # http:
+    #   redirections:
+    #     entryPoint:
+    #       to: websecure
+    #       permanent: true
+
+  websecure:
+    address: ':443'
+
+  metrics:
+    address: ':8082'
+
+metrics:
+  prometheus:
+    entryPoint: metrics
+    buckets:
+      - 0.1
+      - 0.3
+      - 1.2
+      - 5.0
+    addEntryPointsLabels: true
+    addRoutersLabels: true
+    addServicesLabels: true
