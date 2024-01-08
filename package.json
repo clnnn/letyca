@@ -5,7 +5,8 @@
   "scripts": {
     "migrate-dev": "prisma migrate dev",
     "generate": "prisma generate",
-    "start": "nx run-many --target=serve --projects=client,server"
+    "start": "nx run-many --target=serve --projects=client,server",
+    "build-frontend": "nx run-many --target=build --projects=client"
   },
   "private": true,
   "dependencies": {

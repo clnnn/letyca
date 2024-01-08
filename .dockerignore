@@ -1,0 +1,17 @@
+.angular
+.devcontainer
+.nx
+.vscode
+dist
+iac
+node_modules
+.dockerignore
+.editorconfig
+.env
+.env.template
+.gitignore
+.prettierignore
+.prettierrc
+Dockerfile.*
+LICENSE
+README.md
