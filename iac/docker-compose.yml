@@ -32,6 +32,8 @@ services:
     build:
       context: ../
       dockerfile: ./apps/client/docker-pack/Dockerfile
+    depends_on:
+      - backend
     # ports:
     #   - 14200:80
     labels:
@@ -48,6 +50,9 @@ services:
     #   - 13000:3000
     volumes:
       - ./backend/.env:/app/.env
+    depends_on:
+      - letyca-db
+      - northwind-db
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.backend.rule=PathPrefix(`/api`) && Host(`${DOMAIN_NAME}`)'
