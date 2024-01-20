@@ -9,6 +9,7 @@ import { CountLabelComponent } from '../count-label/count-label.component';
 import { PieComponent } from '../pie/pie.component';
 import { LineComponent } from '../line/line.component';
 import { TuiPoint } from '@taiga-ui/core';
+import { ChartData } from 'chart.js';
 
 @Component({
   selector: 'le-chart-preview',
@@ -43,20 +44,35 @@ export class ChartPreviewComponent {
     return tuiIsString(value) ? Number.parseInt(value) : value ?? 0;
   }
 
-  get pieChartLabels() {
+  // get pieChartLabels() {
+  //   if (this.chart?.chartType !== 'pie') {
+  //     return [];
+  //   }
+
+  //   return this.chart.pieChartData?.labels ?? [];
+  // }
+
+  // get pieChartValues() {
+  //   if (this.chart?.chartType !== 'pie') {
+  //     return [];
+  //   }
+
+  //   return this.chart.pieChartData?.values ?? [];
+  // }
+
+  get pieChartData(): ChartData<'pie', number[], string | string[]> {
     if (this.chart?.chartType !== 'pie') {
-      return [];
+      return { datasets: [] };
     }
 
-    return this.chart.pieChartData?.labels ?? [];
-  }
-
-  get pieChartValues() {
-    if (this.chart?.chartType !== 'pie') {
-      return [];
-    }
-
-    return this.chart.pieChartData?.values ?? [];
+    return {
+      labels: this.chart.pieChartData?.labels ?? [],
+      datasets: [
+        {
+          data: this.chart.pieChartData?.values ?? [],
+        },
+      ],
+    };
   }
 
   get lineChartPoints() {

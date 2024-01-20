@@ -11,11 +11,7 @@
     @switch (chart?.chartType) { @case ('countLabel') {
     <le-count-label [title]="title" [value]="countLabelValue" />
     } @case ('pie') {
-    <le-pie
-      [title]="title"
-      [labels]="pieChartLabels"
-      [values]="pieChartValues"
-    />
+    <le-pie [title]="title" [data]="pieChartData" />
     } @case ('line') {
     <le-line [title]="title" [points]="lineChartPoints" />
     } }
