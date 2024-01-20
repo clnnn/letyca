@@ -9,6 +9,7 @@ import { CountLabelComponent } from '../count-label/count-label.component';
 import { PieComponent } from '../pie/pie.component';
 import { LineComponent } from '../line/line.component';
 import { ChartData } from 'chart.js';
+import { BarComponent } from '../bar/bar.component';
 
 @Component({
   selector: 'le-chart-preview',
@@ -20,6 +21,7 @@ import { ChartData } from 'chart.js';
     CountLabelComponent,
     PieComponent,
     LineComponent,
+    BarComponent,
   ],
   templateUrl: './chart-preview.component.html',
   styleUrls: ['./chart-preview.component.scss'],
@@ -69,8 +71,26 @@ export class ChartPreviewComponent {
       labels: this.chart.lineChartData?.points.map((p) => p.x) ?? [],
       datasets: [
         {
-          label: this.chart.title,
+          label: this.chart.lineChartData?.label ?? this.chart.title,
           data: this.chart.lineChartData?.points.map((p) => p.y) ?? [],
+        },
+      ],
+    };
+  }
+
+  get barChartData(): ChartData<'bar', number[], string> {
+    if (this.chart?.chartType !== 'bar') {
+      return {
+        datasets: [],
+      };
+    }
+
+    return {
+      labels: this.chart.barChartData?.labels ?? [],
+      datasets: [
+        {
+          label: this.chart.barChartData?.label ?? this.chart.title,
+          data: this.chart.barChartData?.data ?? [],
         },
       ],
     };

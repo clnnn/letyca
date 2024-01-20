@@ -14,7 +14,9 @@
     <le-pie [title]="title" [data]="pieChartData" />
     } @case ('line') {
     <le-line [title]="title" [data]="lineChartData" />
-    } }
+    } @case('bar') {
+    <le-bar [title]="title" [data]="barChartData" />
+    }}
   </div>
 
   }
