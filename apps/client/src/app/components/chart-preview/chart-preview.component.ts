@@ -44,22 +44,6 @@ export class ChartPreviewComponent {
     return tuiIsString(value) ? Number.parseInt(value) : value ?? 0;
   }
 
-  // get pieChartLabels() {
-  //   if (this.chart?.chartType !== 'pie') {
-  //     return [];
-  //   }
-
-  //   return this.chart.pieChartData?.labels ?? [];
-  // }
-
-  // get pieChartValues() {
-  //   if (this.chart?.chartType !== 'pie') {
-  //     return [];
-  //   }
-
-  //   return this.chart.pieChartData?.values ?? [];
-  // }
-
   get pieChartData(): ChartData<'pie', number[], string | string[]> {
     if (this.chart?.chartType !== 'pie') {
       return { datasets: [] };
