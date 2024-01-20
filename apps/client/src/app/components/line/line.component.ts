@@ -1,54 +1,44 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TuiHintModule, TuiPoint } from '@taiga-ui/core';
-import { TuiAxesModule, TuiLineChartModule } from '@taiga-ui/addon-charts';
-import { TUI_DEFAULT_STRINGIFY, TuiContextWithImplicit } from '@taiga-ui/cdk';
 import { TuiIslandModule } from '@taiga-ui/kit';
+import { NgChartsModule } from 'ng2-charts';
+import { ChartData, ChartType, ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'le-line',
   standalone: true,
-  imports: [
-    CommonModule,
-    TuiAxesModule,
-    TuiLineChartModule,
-    TuiHintModule,
-    TuiIslandModule,
-  ],
+  imports: [CommonModule, NgChartsModule, TuiIslandModule],
   templateUrl: './line.component.html',
   styleUrls: ['./line.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LineComponent implements OnChanges {
+export class LineComponent {
   @Input({ required: true })
   title!: string;
 
   @Input({ required: true })
-  points!: TuiPoint[];
+  data!: ChartData<'line', number[], string | number>;
 
-  readonly stringify = TUI_DEFAULT_STRINGIFY;
-  readonly hintContent = ({
-    $implicit,
-  }: TuiContextWithImplicit<readonly TuiPoint[]>): number => $implicit[0][1];
-
-  height = 0;
-  width = 0;
-
-  ngOnChanges(): void {
-    [this.width, this.height] = this.points.reduce(
-      (acc, curr) => {
-        const maxX = Math.max(acc[0], curr[0]);
-        const maxY = Math.max(acc[1], acc[1]);
-        return [maxX, maxY];
+  protected readonly chartType: ChartType = 'line';
+  protected readonly options: ChartOptions = {
+    elements: {
+      line: {
+        tension: 0.5,
       },
-      [this.width, this.height]
-    );
-    this.width = this.width + 20;
-    this.height = this.height + 20;
-  }
+    },
+    scales: {
+      y: {
+        position: 'left',
+      },
+      y1: {
+        position: 'right',
+        grid: {
+          color: 'rgba(255,0,0,0.3)',
+        },
+        ticks: {
+          color: 'red',
+        },
+      },
+    },
+  };
 }

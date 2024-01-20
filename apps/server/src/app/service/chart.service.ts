@@ -45,6 +45,10 @@ export class ChartService {
       },
     });
 
+    console.log(
+      chartCompletion.choices[0].message.tool_calls[0].function.arguments
+    );
+
     return chartCompletion.choices[0].message.tool_calls[0].function
       .arguments as ChartResponse;
   }

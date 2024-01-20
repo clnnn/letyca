@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TuiIslandModule } from '@taiga-ui/kit';
 import { NgChartsModule } from 'ng2-charts';
-import { ChartData, ChartType, ChartConfiguration } from 'chart.js';
+import { ChartData, ChartType, ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'le-pie',
@@ -17,10 +17,10 @@ export class PieComponent {
   title!: string;
 
   @Input({ required: true })
-  data!: ChartData<'pie', number[], string | string[]>;
+  data!: ChartData<'pie', number[], string>;
 
   protected readonly chartType: ChartType = 'pie';
-  protected readonly options: ChartConfiguration['options'] = {
+  protected readonly options: ChartOptions = {
     plugins: {
       legend: {
         display: true,

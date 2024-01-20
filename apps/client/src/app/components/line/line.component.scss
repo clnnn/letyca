@@ -9,11 +9,9 @@
     display: flex;
     flex-direction: column;
 
-    .axes {
-      flex: 1 1 auto;
-      min-width: 0;
-      min-height: 0;
-      color: #bc71c9;
+    .container {
+      width: 1000px;
+      height: 600px;
     }
   }
 }
