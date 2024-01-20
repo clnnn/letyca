@@ -3,7 +3,7 @@ import { zodToJsonSchema } from 'zod-to-json-schema';
 
 const zodSchema = z.object({
   chartType: z
-    .enum(['countLabel', 'pie', 'line'])
+    .enum(['countLabel', 'pie', 'line', 'bar'])
     .describe('The type of the chart'),
   title: z
     .string()
@@ -20,6 +20,7 @@ const zodSchema = z.object({
     .optional(),
   lineChartData: z
     .object({
+      label: z.string(),
       points: z
         .array(
           z
@@ -35,6 +36,15 @@ const zodSchema = z.object({
             .describe('A data point')
         )
         .describe('An array of data points for line chart'),
+    })
+    .optional(),
+  barChartData: z
+    .object({
+      label: z.string(),
+      labels: z
+        .array(z.string())
+        .describe('The labels for each data of the bar chart'),
+      data: z.array(z.number()).describe('The data array the bar chart'),
     })
     .optional(),
 });
