@@ -25,7 +25,8 @@ const zodSchema = z.object({
           z
             .object({
               x: z
-                .number()
+                .string()
+                .or(z.number())
                 .describe('The X coordinate of a data point of line chart'),
               y: z
                 .number()

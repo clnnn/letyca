@@ -8,7 +8,6 @@ import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.comp
 import { CountLabelComponent } from '../count-label/count-label.component';
 import { PieComponent } from '../pie/pie.component';
 import { LineComponent } from '../line/line.component';
-import { TuiPoint } from '@taiga-ui/core';
 import { ChartData } from 'chart.js';
 
 @Component({
@@ -44,7 +43,7 @@ export class ChartPreviewComponent {
     return tuiIsString(value) ? Number.parseInt(value) : value ?? 0;
   }
 
-  get pieChartData(): ChartData<'pie', number[], string | string[]> {
+  get pieChartData(): ChartData<'pie', number[], string | string> {
     if (this.chart?.chartType !== 'pie') {
       return { datasets: [] };
     }
@@ -59,12 +58,21 @@ export class ChartPreviewComponent {
     };
   }
 
-  get lineChartPoints() {
+  get lineChartData(): ChartData<'line', number[], string | number> {
     if (this.chart?.chartType !== 'line') {
-      return [];
+      return {
+        datasets: [],
+      };
     }
 
-    const points = this.chart.lineChartData?.points ?? [];
-    return points.map<TuiPoint>((point) => [point.x ?? 0, point.y ?? 0]);
+    return {
+      labels: this.chart.lineChartData?.points.map((p) => p.x) ?? [],
+      datasets: [
+        {
+          label: this.chart.title,
+          data: this.chart.lineChartData?.points.map((p) => p.y) ?? [],
+        },
+      ],
+    };
   }
 }

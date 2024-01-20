@@ -1,21 +1,12 @@
 <tui-island>
   <h3 class="tui-island__title">{{ title }}</h3>
-  <tui-axes
-    class="axes"
-    [horizontalLines]="2"
-    [tuiLineChartHint]="hintContent"
-    [verticalLines]="4"
-  >
-    <tui-line-chart
-      [dots]="true"
-      [filled]="true"
-      [height]="167547"
-      [width]="20"
-      [value]="points"
-      [x]="0"
-      [xStringify]="stringify"
-      [y]="0"
-      [yStringify]="stringify"
-    ></tui-line-chart>
-  </tui-axes>
+  <div class="container">
+    <canvas
+      class="pie-chart"
+      baseChart
+      [data]="data"
+      [type]="chartType"
+      [options]="options"
+    ></canvas>
+  </div>
 </tui-island>
