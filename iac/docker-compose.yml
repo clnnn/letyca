@@ -16,8 +16,9 @@ services:
   traefik:
     restart: unless-stopped
     image: traefik:v2.10
-    ports:
-      - '80:80'
+    # ports:
+    #   - '80:80'
+    #   - '8080:8080'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./traefik:/etc/traefik
@@ -26,6 +27,7 @@ services:
       - 'traefik.http.routers.traefik-dashboard.priority=100'
       - 'traefik.http.routers.traefik-dashboard.rule=Host(`traefik.${DOMAIN_NAME}`)'
       - 'traefik.http.services.traefik-dashboard.loadbalancer.server.port=8080'
+      - 'iac-name=letyca-iac'
 
   frontend:
     restart: unless-stopped
@@ -40,6 +42,7 @@ services:
       - 'traefik.enable=true'
       - 'traefik.http.routers.frontend.rule=Host(`${DOMAIN_NAME}`)'
       - 'traefik.http.services.frontend.loadbalancer.server.port=80'
+      - 'iac-name=letyca-iac'
 
   backend:
     restart: unless-stopped
@@ -58,6 +61,7 @@ services:
       - 'traefik.http.routers.backend.rule=PathPrefix(`/api`) && Host(`${DOMAIN_NAME}`)'
       - 'traefik.http.routers.backend.priority=90'
       - 'traefik.http.services.backend.loadbalancer.server.port=3000'
+      - 'iac-name=letyca-iac'
 
   letyca-db:
     restart: unless-stopped
