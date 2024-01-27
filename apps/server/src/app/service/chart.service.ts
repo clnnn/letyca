@@ -45,7 +45,8 @@ export class ChartService {
       },
     });
 
-    return chartCompletion.choices[0].message.tool_calls[0].function
-      .arguments as LetycaChart;
+    const json =
+      chartCompletion.choices[0].message.tool_calls[0].function.arguments;
+    return JSON.parse(json) as LetycaChart;
   }
 }

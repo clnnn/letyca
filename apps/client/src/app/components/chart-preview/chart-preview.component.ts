@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TuiIslandModule } from '@taiga-ui/kit';
 import { tuiIsString } from '@taiga-ui/cdk';

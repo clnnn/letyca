@@ -5,6 +5,7 @@ import { BrowsePageComponent } from './components/browse-page/browse-page.compon
 import { ConnectionsPageComponent } from './components/connections-page/connections-page.component';
 import { ChartsPageComponent } from './components/charts-page/charts-page.component';
 import { ChartPreviewComponent } from './components/chart-preview/chart-preview.component';
+import { ChartRawDataComponent } from './components/chart-raw-data/chart-raw-data.component';
 
 const routes: Routes = [
   {
@@ -32,6 +33,10 @@ const routes: Routes = [
           {
             path: 'preview',
             component: ChartPreviewComponent,
+          },
+          {
+            path: 'raw-data',
+            component: ChartRawDataComponent,
           },
         ],
       },

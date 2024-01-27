@@ -26,11 +26,11 @@ export class ChartFacade extends ComponentStore<ChartState> {
       tap(() => this.patchState({ loading: LoadingState.LOADING })),
       exhaustMap((request) =>
         this.service.generateChart(request).pipe(
-          tapResponse(
-            ({ chart, sql }) => this.patchState({ chart, sql }),
-            () => this.patchState({ loading: LoadingState.ERROR }),
-            () => this.patchState({ loading: LoadingState.LOADED })
-          )
+          tapResponse({
+            next: ({ chart, sql }) => this.patchState({ chart, sql }),
+            error: () => this.patchState({ loading: LoadingState.ERROR }),
+            complete: () => this.patchState({ loading: LoadingState.LOADED }),
+          })
         )
       )
     )
