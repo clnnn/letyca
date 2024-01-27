@@ -1,6 +1,6 @@
 <tui-island size="l">
   <div class="container">
-    @switch (chart()?.chartType) { @case ('countLabel') {
+    @switch (this.chart()?.chartType) { @case ('countLabel') {
     <le-count-label [title]="title" [value]="countLabelValue" />
     } @case ('pie') {
     <le-pie [title]="title" [data]="pieChartData" />
