@@ -1,14 +1,6 @@
-@if (loading !== 'INIT') {
 <tui-island size="l">
-  <p class="tui-island__category">Response</p>
-  @if (loading === 'LOADING') {
-  <div class="tui-island__content">
-    <le-loading-spinner />
-  </div>
-  } @else {
-
   <div class="container">
-    @switch (chart?.chartType) { @case ('countLabel') {
+    @switch (chart()?.chartType) { @case ('countLabel') {
     <le-count-label [title]="title" [value]="countLabelValue" />
     } @case ('pie') {
     <le-pie [title]="title" [data]="pieChartData" />
@@ -18,7 +10,4 @@
     <le-bar [title]="title" [data]="barChartData" />
     }}
   </div>
-
-  }
 </tui-island>
-}

@@ -7,7 +7,6 @@ import {
   inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConnectionListItem } from '@letyca/contracts';
 import { TuiBlockStatusModule } from '@taiga-ui/layout';
 import {
   FormBuilder,
@@ -28,8 +27,8 @@ import { LoadingState } from '../../utils';
     FormsModule,
     ReactiveFormsModule,
     TuiTextareaModule,
-    TuiButtonModule
-],
+    TuiButtonModule,
+  ],
   templateUrl: './chart-prompt.component.html',
   styleUrls: ['./chart-prompt.component.scss'],
 })
