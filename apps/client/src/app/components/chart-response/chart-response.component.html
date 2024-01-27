@@ -1,0 +1,10 @@
+@if (loadingState === 'LOADED') {
+<tui-tabs>
+  <a tuiTab routerLink="/preview" routerLinkActive> Preview </a>
+  <a tuiTab routerLink="/raw-data" routerLinkActive> Raw Data </a>
+  <a tuiTab routerLink="/sql-query" routerLinkActive> SQL Query </a>
+</tui-tabs>
+<router-outlet />
+} @else if (loadingState === 'LOADING') {
+<le-loading-spinner />
+}

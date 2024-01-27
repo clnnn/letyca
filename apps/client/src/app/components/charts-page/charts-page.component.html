@@ -12,11 +12,7 @@
     [chartLoading]="chartLoading()"
     (humanQuerySubmit)="humanQuerySubmit($event)"
   />
-  <le-chart-preview
-    class="preview"
-    [chart]="chart()"
-    [loading]="chartLoading()"
-  ></le-chart-preview>
+  <le-chart-response class="response" [loadingState]="chartLoading()" />
 </div>
 } @else {
 <tui-block-status>

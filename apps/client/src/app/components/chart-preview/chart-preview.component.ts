@@ -1,7 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChartResponse } from '@letyca/contracts';
-import { LoadingState } from '../../utils';
 import { TuiIslandModule } from '@taiga-ui/kit';
 import { tuiIsString } from '@taiga-ui/cdk';
 import { LoadingSpinnerComponent } from '../loading-spinner/loading-spinner.component';
@@ -10,6 +8,7 @@ import { PieComponent } from '../pie/pie.component';
 import { LineComponent } from '../line/line.component';
 import { ChartData } from 'chart.js';
 import { BarComponent } from '../bar/bar.component';
+import { ChartFacade } from '../../facade/chart.facade';
 
 @Component({
   selector: 'le-chart-preview',
@@ -27,70 +26,69 @@ import { BarComponent } from '../bar/bar.component';
   styleUrls: ['./chart-preview.component.scss'],
 })
 export class ChartPreviewComponent {
-  @Input()
-  chart?: ChartResponse;
+  chart = this.facade.chart;
 
-  @Input({ required: true })
-  loading!: LoadingState;
+  constructor(private facade: ChartFacade) {}
 
   get title() {
-    return this.chart?.title ?? '';
+    return this.chart()?.title ?? '';
   }
 
   get countLabelValue() {
-    if (this.chart?.chartType !== 'countLabel') {
+    if (this.chart()?.chartType !== 'countLabel') {
       return 0;
     }
-    const value = this.chart.countLabelData;
+    const value = this.chart()?.countLabelData;
     return tuiIsString(value) ? Number.parseInt(value) : value ?? 0;
   }
 
   get pieChartData(): ChartData<'pie', number[], string | string> {
-    if (this.chart?.chartType !== 'pie') {
+    if (this.chart()?.chartType !== 'pie') {
       return { datasets: [] };
     }
 
     return {
-      labels: this.chart.pieChartData?.labels ?? [],
+      labels: this.chart()?.pieChartData?.labels ?? [],
       datasets: [
         {
-          data: this.chart.pieChartData?.values ?? [],
+          data: this.chart()?.pieChartData?.values ?? [],
         },
       ],
     };
   }
 
   get lineChartData(): ChartData<'line', number[], string | number> {
-    if (this.chart?.chartType !== 'line') {
+    if (this.chart()?.chartType !== 'line') {
       return {
         datasets: [],
       };
     }
 
     return {
-      labels: this.chart.lineChartData?.points.map((p) => p.x) ?? [],
+      labels: this.chart()?.lineChartData?.points.map((p) => p.x) ?? [],
       datasets: [
         {
-          label: this.chart.lineChartData?.label ?? this.chart.title,
-          data: this.chart.lineChartData?.points.map((p) => p.y) ?? [],
+          label:
+            this.chart()?.lineChartData?.label ?? this.chart()?.title ?? '',
+          data: this.chart()?.lineChartData?.points.map((p) => p.y) ?? [],
         },
       ],
     };
   }
 
   get barChartData(): ChartData<'bar', number[], string> {
-    if (this.chart?.chartType !== 'bar') {
+    if (this.chart()?.chartType !== 'bar') {
       return {
         datasets: [],
       };
     }
 
     return {
-      labels: this.chart.barChartData?.labels ?? [],
+      labels: this.chart()?.barChartData?.labels ?? [],
       datasets: [
         {
-          label: this.chart.barChartData?.label ?? this.chart.title,
-          data: this.chart.barChartData?.data ?? [],
+          label: this.chart()?.barChartData?.label ?? this.chart()?.title ?? '',
+          data: this.chart()?.barChartData?.data ?? [],
         },
       ],
     };
