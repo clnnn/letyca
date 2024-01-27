@@ -31,6 +31,9 @@ export class ChartController {
       sqlResponse,
       userRequest
     );
-    return chart;
+    return {
+      chart,
+      sql: query,
+    };
   }
 }

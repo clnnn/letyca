@@ -1,4 +1,4 @@
-import { ChartResponse, chartResponseSchema } from '@letyca/contracts';
+import { letycaChartSchema, LetycaChart } from '@letyca/contracts';
 import { Injectable } from '@nestjs/common';
 import OpenAI from 'openai';
 
@@ -9,7 +9,7 @@ export class ChartService {
   async generateChart(
     sqlResponse: string,
     userRequest: string
-  ): Promise<ChartResponse> {
+  ): Promise<LetycaChart> {
     const chartCompletion = await this.client.chat.completions.create({
       model: 'gpt-4',
       messages: [
@@ -32,7 +32,7 @@ export class ChartService {
           type: 'function',
           function: {
             name: 'generateChart',
-            parameters: chartResponseSchema,
+            parameters: letycaChartSchema,
             description: 'Generates a chart based on the schema',
           },
         },
@@ -46,6 +46,6 @@ export class ChartService {
     });
 
     return chartCompletion.choices[0].message.tool_calls[0].function
-      .arguments as ChartResponse;
+      .arguments as LetycaChart;
   }
 }
