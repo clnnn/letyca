@@ -6,6 +6,7 @@ import { ConnectionsPageComponent } from './components/connections-page/connecti
 import { ChartsPageComponent } from './components/charts-page/charts-page.component';
 import { ChartPreviewComponent } from './components/chart-preview/chart-preview.component';
 import { ChartRawDataComponent } from './components/chart-raw-data/chart-raw-data.component';
+import { ChartSqlViewerComponent } from './components/chart-sql-viewer/chart-sql-viewer.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
             path: 'raw-data',
             component: ChartRawDataComponent,
           },
+          {
+            path: 'sql-query',
+            component: ChartSqlViewerComponent
+          }
         ],
       },
     ],
