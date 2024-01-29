@@ -1,3 +1,33 @@
 :host {
-  background-color: #2a2f3a;
+  background-color: #fafafa;
+
+  json-viewer {
+    /* Background, font and indentation */
+    --background-color: #fafafa;
+    --color: #484b6a;
+    --font-family: monaco, Consolas, 'Lucida Console', monospace;
+    --font-size: 1rem;
+    --indent-size: 1.5em;
+    --indentguide-size: 1px;
+    --indentguide-style: solid;
+    --indentguide-color: #ccc;
+    --indentguide-color-active: #999;
+    --indentguide: var(--indentguide-size) var(--indentguide-style)
+      var(--indentguide-color);
+    --indentguide-active: var(--indentguide-size) var(--indentguide-style)
+      var(--indentguide-color-active);
+
+    /* Types colors */
+    --string-color: #089000;
+    --number-color: #ab00ff;
+    --boolean-color: #00d2ff;
+    --null-color: #9394a5;
+    --property-color: #484b6a;
+
+    /* Collapsed node preview */
+    --preview-color: #f96161;
+
+    /* Search highlight color */
+    --highlight-color: #0000ff;
+  }
 }
