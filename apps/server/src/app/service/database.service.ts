@@ -23,7 +23,7 @@ export class DatabaseService {
 
   async generateQuery(schema: string, userRequest: string): Promise<string> {
     const sqlQueryCompletion = await this.client.chat.completions.create({
-      model: 'gpt-4',
+      model: 'gpt-3.5-turbo',
       temperature: 0,
       stop: '\nSQLResult:',
       messages: [
