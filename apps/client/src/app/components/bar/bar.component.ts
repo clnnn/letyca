@@ -21,12 +21,6 @@ export class BarComponent {
 
   protected readonly chartType: ChartType = 'bar';
   protected readonly options: ChartOptions = {
-    scales: {
-      x: {},
-      y: {
-        min: 10,
-      },
-    },
     plugins: {
       legend: {
         display: true,
