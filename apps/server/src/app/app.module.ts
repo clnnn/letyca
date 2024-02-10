@@ -7,10 +7,11 @@ import { ChartController } from './controller/chart.controller';
 import { PrismaService } from './data-access/prisma.service';
 import { DatabaseService } from './service/database.service';
 import { ChartService } from './service/chart.service';
+import { FlagController } from './controller/flag.controller';
 
 @Module({
   imports: [ConfigModule.forRoot()],
-  controllers: [ConnectionController, ChartController],
+  controllers: [ConnectionController, ChartController, FlagController],
   providers: [
     PrismaService,
     DatabaseService,
