@@ -32,7 +32,7 @@ export class ChartController {
       userRequest
     );
     return {
-      chart,
+      chart: chart,
       sql: query,
     };
   }

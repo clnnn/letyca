@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TuiSvgModule } from '@taiga-ui/core/components/svg';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TuiTabsModule, TuiIslandModule } from '@taiga-ui/kit';
 import { TuiLinkModule } from '@taiga-ui/core';
+import { FeatureFlagFacade } from '../../facade/feature-flag.facade';
 
 @Component({
   selector: 'le-browse-page',
@@ -16,7 +17,10 @@ import { TuiLinkModule } from '@taiga-ui/core';
     RouterLinkActive,
     TuiSvgModule,
     TuiIslandModule,
-    RouterOutlet
-],
+    RouterOutlet,
+  ],
 })
-export class BrowsePageComponent {}
+export class BrowsePageComponent {
+  facade = inject(FeatureFlagFacade);
+  demoMode = this.facade.demoMode;
+}
