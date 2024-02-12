@@ -1,5 +1,11 @@
 <tui-tabs vertical="left" class="side-menu">
-  <button tuiTab class="option" routerLink="connections" routerLinkActive>
+  <button
+    tuiTab
+    class="option"
+    routerLink="connections"
+    [disabled]="demoMode()"
+    routerLinkActive
+  >
     <tui-svg src="tuiIconDatabaseLarge" class="tui-space_right-4"></tui-svg>
     Connections
   </button>
