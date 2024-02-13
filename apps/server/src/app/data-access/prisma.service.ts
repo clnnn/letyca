@@ -1,18 +1,23 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { PrismaClient } from 'prisma/prisma-client';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit {
+  constructor(private configService: ConfigService) {
+    super();
+  }
+
   async onModuleInit() {
     await this.$connect();
 
-    const isDemoModeEnabled = Boolean(process.env['DEMO_MODE'] ?? false);
-    if (isDemoModeEnabled) {
-      this.createDemoData();
+    const demoMode = this.configService.get<string>('DEMO_MODE');
+    if (demoMode === 'true') {
+      this.createNorthwindConnection();
     }
   }
 
-  private async createDemoData() {
+  private async createNorthwindConnection() {
     const northwindCount = await this.connection.count({
       where: { host: 'northwind', port: 5432 },
     });

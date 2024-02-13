@@ -13,6 +13,7 @@ type FeatureFlagState = {
 @Injectable()
 export class FeatureFlagFacade extends ComponentStore<FeatureFlagState> {
   readonly demoMode = this.selectSignal((state) => state.flags.demoMode);
+  readonly demoMode$ = this.select((state) => state.flags.demoMode);
   readonly flagsLoaded = this.select((state) => state.loading).pipe(
     filter((loading) => loading === LoadingState.LOADED)
   );

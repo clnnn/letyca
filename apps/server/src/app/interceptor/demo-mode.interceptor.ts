@@ -12,9 +12,12 @@ import { Observable } from 'rxjs';
 export class DemoModeInterceptor implements NestInterceptor {
   constructor(private readonly configService: ConfigService) {}
 
-  intercept(context: ExecutionContext, next: CallHandler): Observable<unknown> {
-    const demoMode = this.configService.get<boolean>('DEMO_MODE');
-    if (demoMode) {
+  intercept(
+    _context: ExecutionContext,
+    next: CallHandler
+  ): Observable<unknown> {
+    const demoMode = this.configService.get<string>('DEMO_MODE');
+    if (demoMode === 'true') {
       throw new BadRequestException(
         'Demo mode is enabled. This action is not allowed.'
       );
