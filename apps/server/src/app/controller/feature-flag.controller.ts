@@ -8,7 +8,7 @@ export class FeatureFlagController {
 
   @Get()
   getFeatureFlags(): FeatureFlagResponse {
-    const demoMode = this.configService.get<boolean>('DEMO_MODE');
-    return { demoMode };
+    const demoMode = this.configService.get<string>('DEMO_MODE');
+    return { demoMode: demoMode === 'true' };
   }
 }
