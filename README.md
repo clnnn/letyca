@@ -71,6 +71,17 @@ If you already have **VS Code** and **Docker** installed, you can click the badg
 
 - `letyca` can run in demo mode without needing database connection. In this mode, the platform will automatically add some demo connections that can be used to generate charts and insights and will restrict the user from managing connections. To enable this mode, set `DEMO_MODE=true` in the `.env` file.
 
+### Supported databases
+
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+
+### Supported chart types
+
+- Bar chart
+- Line chart
+- Pie chart
+- Count label
+
 ## Meta
 
 ### Primary contributors
