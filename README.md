@@ -1,5 +1,7 @@
 <div align="center">
 
+# `letyca`
+
 ![Static Badge](https://img.shields.io/badge/mission-make_analytics_accessible_for_everyone-purple)
 <br />
 ![GitHub top language](https://img.shields.io/github/languages/top/clnnn/letyca)
