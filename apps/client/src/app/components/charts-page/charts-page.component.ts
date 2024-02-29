@@ -7,6 +7,7 @@ import { ChartPromptComponent } from '../chart-prompt/chart-prompt.component';
 import { ChartFacade } from '../../facade/chart.facade';
 import { TuiBlockStatusModule } from '@taiga-ui/layout';
 import { ChartResponseComponent } from '../chart-response/chart-response.component';
+import { FeatureFlagFacade } from '../../facade/feature-flag.facade';
 
 @Component({
   selector: 'le-charts-page',
@@ -24,15 +25,16 @@ import { ChartResponseComponent } from '../chart-response/chart-response.compone
 export class ChartsPageComponent implements OnInit {
   private readonly connectionFacade = inject(ConnectionFacade);
   private readonly chartFacade = inject(ChartFacade);
+  private readonly featureFlagFacade = inject(FeatureFlagFacade);
 
   readonly pageTitle = 'Charts';
   readonly connections = this.connectionFacade.connections;
   readonly connectionsLoading = this.connectionFacade.loading;
   readonly chart = this.chartFacade.chart;
   readonly chartLoading = this.chartFacade.loading;
+  readonly demoMode = this.featureFlagFacade.demoMode;
 
   selectedConnection = signal<ConnectionListItem | null>(null);
-  examples = computed(() => this.selectedConnection()?.QueryExample ?? []);
 
   ngOnInit(): void {
     this.connectionFacade.refresh();

@@ -30,12 +30,6 @@ export class ConnectionController {
         port: true,
         database: true,
         schema: true,
-        QueryExample: {
-          select: {
-            name: true,
-            query: true,
-          },
-        },
       },
     });
   }

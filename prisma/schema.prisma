@@ -11,20 +11,11 @@ datasource db {
 }
 
 model Connection {
-  id           String         @id @default(uuid())
-  host         String
-  port         Int
-  database     String
-  schema       String
-  username     String
-  password     String
-  QueryExample QueryExample[]
-}
-
-model QueryExample {
-  id           String     @id @default(uuid())
-  connection   Connection @relation(fields: [connectionId], references: [id])
-  name         String
-  query        String
-  connectionId String
+  id       String @id @default(uuid())
+  host     String
+  port     Int
+  database String
+  schema   String
+  username String
+  password String
 }

@@ -4,8 +4,4 @@ export type ConnectionListItem = {
   port: number;
   database: string;
   schema: string;
-  QueryExample: {
-    name: string;
-    query: string;
-  }[];
 };
