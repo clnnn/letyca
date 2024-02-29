@@ -9,4 +9,4 @@ CREATE TABLE "QueryExample" (
 );
 
 -- AddForeignKey
-ALTER TABLE "QueryExample" ADD CONSTRAINT "QueryExample_connectionId_fkey" FOREIGN KEY ("connectionId") REFERENCES "Connection"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "QueryExample" ADD CONSTRAINT "QueryExample_connectionId_fkey" FOREIGN KEY ("connectionId") REFERENCES "Connection"("id") ON DELETE CASCADE ON UPDATE CASCADE;
