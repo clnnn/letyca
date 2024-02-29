@@ -91,7 +91,7 @@ export class ChartPromptComponent implements OnInit, OnChanges {
       query: 'verage age of employees per country',
     },
     {
-      name: 'Top 5 customers',
+      name: 'Top 5 customers by revenue',
       query: 'Top 5 customers by revenue',
     },
     {
