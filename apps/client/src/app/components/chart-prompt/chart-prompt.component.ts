@@ -85,9 +85,6 @@ export class ChartPromptComponent implements OnInit, OnChanges {
       query: 'Represent monthly sales for year 1997 using a line chart',
     },
     {
-      query: 'Cumulative revenue for December 1996 on daily basis',
-    },
-    {
       query: 'Average age of employees per country',
     },
     {
