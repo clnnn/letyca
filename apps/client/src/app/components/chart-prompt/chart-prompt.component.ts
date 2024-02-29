@@ -69,40 +69,32 @@ export class ChartPromptComponent implements OnInit, OnChanges {
   @Input({ required: true })
   demoMode!: boolean;
 
-  readonly demoExamples: { name: string; query: string }[] = [
+  readonly demoExamples: { query: string }[] = [
     {
-      name: 'Total number of products',
       query: 'Total number of products',
     },
     {
-      name: 'Total number of products by type',
       query:
         'Please display the number of total products by types in a pie chart',
     },
     {
-      name: 'Filter products by price',
       query:
         'Number of products with price below 10 and products with price over 10 in a pie chart',
     },
     {
-      name: 'Monthly sales',
       query: 'Represent monthly sales for year 1997 using a line chart',
     },
     {
-      name: 'Daily Cumulative sales',
-      query: 'cumulative revenue for December 1996 on daily basis',
+      query: 'Cumulative revenue for December 1996 on daily basis',
     },
     {
-      name: 'Employees average age',
-      query: 'verage age of employees per country',
+      query: 'Average age of employees per country',
     },
     {
-      name: 'Top 5 customers by revenue',
       query: 'Top 5 customers by revenue',
     },
     {
-      name: 'Products sorted by price',
-      query: 'from most expensive to most cheapest product, in a bar chart',
+      query: 'From most expensive to most cheapest product, in a bar chart',
     },
   ];
 
@@ -111,14 +103,15 @@ export class ChartPromptComponent implements OnInit, OnChanges {
 
   form = this.fb.group({
     humanQuery: this.fb.control<string>('', Validators.required),
-    exampleQuery: this.fb.control<{ name: string; query: string } | null>(null),
   });
 
-  readonly stringifyExamples = (example: { name: string }): string =>
-    `${example.name}`;
+  exampleQuery = this.fb.control<{ query: string } | null>(null);
+
+  readonly stringifyExamples = (example: { query: string }): string =>
+    `${example.query}`;
 
   ngOnInit(): void {
-    this.form.controls.exampleQuery.valueChanges
+    this.exampleQuery.valueChanges
       .pipe(
         map((value) => value?.query ?? ''),
         takeUntilDestroyed(this.destroy)
@@ -127,7 +120,6 @@ export class ChartPromptComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.form.controls.exampleQuery;
     if (this.chartLoading === LoadingState.LOADING) {
       this.form.disable();
     } else {
