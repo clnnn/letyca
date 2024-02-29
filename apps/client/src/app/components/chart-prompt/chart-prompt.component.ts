@@ -24,12 +24,16 @@ import {
 } from '@taiga-ui/kit';
 import {
   TuiButtonModule,
+  TuiDialogContext,
+  TuiDialogModule,
+  TuiDialogService,
   TuiLabelModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/core';
 import { LoadingState } from '../../utils';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import { PolymorpheusContent } from '@tinkoff/ng-polymorpheus';
 
 @Component({
   selector: 'le-chart-prompt',
@@ -46,6 +50,7 @@ import { map } from 'rxjs';
     TuiComboBoxModule,
     TuiLabelModule,
     TuiTextfieldControllerModule,
+    TuiDialogModule,
   ],
   templateUrl: './chart-prompt.component.html',
   styleUrls: ['./chart-prompt.component.scss'],
@@ -60,6 +65,7 @@ export class ChartPromptComponent implements OnInit, OnChanges {
   @Output()
   readonly humanQuerySubmit = new EventEmitter<string>();
 
+  // DEMO only - to be removed in production
   @Input({ required: true })
   demoMode!: boolean;
 
@@ -100,6 +106,9 @@ export class ChartPromptComponent implements OnInit, OnChanges {
     },
   ];
 
+  private readonly dialogService = inject(TuiDialogService);
+  //
+
   form = this.fb.group({
     humanQuery: this.fb.control<string>('', Validators.required),
     exampleQuery: this.fb.control<{ name: string; query: string } | null>(null),
@@ -132,5 +141,12 @@ export class ChartPromptComponent implements OnInit, OnChanges {
       return;
     }
     this.humanQuerySubmit.emit(humanQuery);
+  }
+
+  openDiagram(content: PolymorpheusContent<TuiDialogContext>): void {
+    this.dialogService
+      .open(content, { size: 'auto' })
+      .pipe(takeUntilDestroyed(this.destroy))
+      .subscribe();
   }
 }
