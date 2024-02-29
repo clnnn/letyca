@@ -17,21 +17,19 @@
     ></button>
   </div>
   @if (demoMode) {
-  <label>
-    Select an example:
-    <tui-combo-box
-      formControlName="exampleQuery"
-      [stringify]="stringifyExamples"
-      [tuiTextfieldLabelOutside]="true"
-    >
-      Example
 
-      <tui-data-list-wrapper
-        *tuiDataList
-        [itemContent]="stringifyExamples | tuiStringifyContent"
-        [items]="demoExamples"
-      ></tui-data-list-wrapper>
-    </tui-combo-box>
-  </label>
+  <tui-combo-box
+    formControlName="exampleQuery"
+    [stringify]="stringifyExamples"
+    [tuiTextfieldLabelOutside]="true"
+  >
+    Example
+
+    <tui-data-list-wrapper
+      *tuiDataList
+      [itemContent]="stringifyExamples | tuiStringifyContent"
+      [items]="demoExamples"
+    ></tui-data-list-wrapper>
+  </tui-combo-box>
   }
 </form>
