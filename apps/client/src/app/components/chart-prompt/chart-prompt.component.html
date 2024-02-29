@@ -16,4 +16,20 @@
       [disabled]="humanQuery.value.length === 0 || chartLoading === 'LOADING'"
     ></button>
   </div>
+  <label>
+    Select an example:
+    <tui-combo-box
+      formControlName="exampleQuery"
+      [stringify]="stringifyExamples"
+      [tuiTextfieldLabelOutside]="true"
+    >
+      Example
+
+      <tui-data-list-wrapper
+        *tuiDataList
+        [itemContent]="stringifyExamples | tuiStringifyContent"
+        [items]="examples"
+      ></tui-data-list-wrapper>
+    </tui-combo-box>
+  </label>
 </form>

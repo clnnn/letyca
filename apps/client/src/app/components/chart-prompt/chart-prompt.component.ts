@@ -1,8 +1,10 @@
 import {
   Component,
+  DestroyRef,
   EventEmitter,
   Input,
   OnChanges,
+  OnInit,
   Output,
   inject,
 } from '@angular/core';
@@ -14,9 +16,20 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { TuiTextareaModule } from '@taiga-ui/kit';
-import { TuiButtonModule } from '@taiga-ui/core';
+import {
+  TuiComboBoxModule,
+  TuiDataListWrapperModule,
+  TuiStringifyContentPipeModule,
+  TuiTextareaModule,
+} from '@taiga-ui/kit';
+import {
+  TuiButtonModule,
+  TuiLabelModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/core';
 import { LoadingState } from '../../utils';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'le-chart-prompt',
@@ -28,29 +41,51 @@ import { LoadingState } from '../../utils';
     ReactiveFormsModule,
     TuiTextareaModule,
     TuiButtonModule,
+    TuiDataListWrapperModule,
+    TuiStringifyContentPipeModule,
+    TuiComboBoxModule,
+    TuiLabelModule,
+    TuiTextfieldControllerModule,
   ],
   templateUrl: './chart-prompt.component.html',
   styleUrls: ['./chart-prompt.component.scss'],
 })
-export class ChartPromptComponent implements OnChanges {
+export class ChartPromptComponent implements OnInit, OnChanges {
   private readonly fb = inject(FormBuilder);
+  private readonly destroy = inject(DestroyRef);
 
   @Input({ required: true })
   chartLoading?: LoadingState;
+
+  @Input({ required: true })
+  examples!: { name: string; query: string }[];
 
   @Output()
   readonly humanQuerySubmit = new EventEmitter<string>();
 
   form = this.fb.group({
     humanQuery: this.fb.control<string>('', Validators.required),
+    exampleQuery: this.fb.control<{ name: string; query: string } | null>(null),
   });
 
+  readonly stringifyExamples = (example: { name: string }): string =>
+    `${example.name}`;
+
+  ngOnInit(): void {
+    this.form.controls.exampleQuery.valueChanges
+      .pipe(
+        map((value) => value?.query ?? ''),
+        takeUntilDestroyed(this.destroy)
+      )
+      .subscribe((value) => this.form.controls.humanQuery.setValue(value));
+  }
+
   ngOnChanges(): void {
-    const humanQueryControl = this.form.controls.humanQuery;
+    this.form.controls.exampleQuery;
     if (this.chartLoading === LoadingState.LOADING) {
-      humanQueryControl.disable();
+      this.form.disable();
     } else {
-      humanQueryControl.enable();
+      this.form.enable();
     }
   }
 
