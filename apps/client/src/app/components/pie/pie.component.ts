@@ -28,4 +28,8 @@ export class PieComponent {
       },
     },
   };
+
+  chartClick(): void {
+    // No-op
+  }
 }

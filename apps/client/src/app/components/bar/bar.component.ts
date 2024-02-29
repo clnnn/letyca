@@ -27,4 +27,8 @@ export class BarComponent {
       },
     },
   };
+
+  chartClick(): void {
+    // No-op
+  }
 }

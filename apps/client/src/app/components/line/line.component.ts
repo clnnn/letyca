@@ -41,4 +41,8 @@ export class LineComponent {
       },
     },
   };
+
+  chartClick(): void {
+    // No-op
+  }
 }
