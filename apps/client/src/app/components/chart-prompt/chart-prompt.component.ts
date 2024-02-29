@@ -94,7 +94,8 @@ export class ChartPromptComponent implements OnInit, OnChanges {
       query: 'Top 5 customers by revenue',
     },
     {
-      query: 'From most expensive to most cheapest product, in a bar chart',
+      query:
+        'I want to display products by price in a bar chart, sorted in a descending order from the expensive to the cheapest product',
     },
   ];
 
