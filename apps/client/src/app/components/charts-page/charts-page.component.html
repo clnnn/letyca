@@ -5,10 +5,11 @@
   (connectionChange)="connectionChange($event)"
 />
 
-@if (selectedConnection) {
+@if (selectedConnection()) {
 <div class="main-content">
   <le-chart-prompt
     class="prompt"
+    [examples]="examples()"
     [chartLoading]="chartLoading()"
     (humanQuerySubmit)="humanQuerySubmit($event)"
   />

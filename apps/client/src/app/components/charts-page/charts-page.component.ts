@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartsPageHeaderComponent } from '../charts-page-header/charts-page-header.component';
 import { ConnectionFacade } from '../../facade/connection.facade';
@@ -31,18 +31,19 @@ export class ChartsPageComponent implements OnInit {
   readonly chart = this.chartFacade.chart;
   readonly chartLoading = this.chartFacade.loading;
 
-  selectedConnection?: ConnectionListItem;
+  selectedConnection = signal<ConnectionListItem | null>(null);
+  examples = computed(() => this.selectedConnection()?.QueryExample ?? []);
 
   ngOnInit(): void {
     this.connectionFacade.refresh();
   }
 
   connectionChange(item?: ConnectionListItem): void {
-    this.selectedConnection = item;
+    this.selectedConnection.set(item ?? null);
   }
 
   humanQuerySubmit(userRequest: string): void {
-    const connectionId = this.selectedConnection?.id;
+    const connectionId = this.selectedConnection()?.id;
     if (!connectionId) {
       return;
     }
