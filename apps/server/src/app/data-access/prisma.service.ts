@@ -18,20 +18,31 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
   }
 
   private async createNorthwindConnection() {
-    const northwindCount = await this.connection.count({
-      where: { host: 'northwind', port: 5432 },
-    });
-    if (northwindCount === 0) {
-      await this.connection.create({
-        data: {
-          host: 'northwind',
-          port: 5432,
-          database: 'northwind',
-          schema: 'public',
-          username: 'postgres',
-          password: 'postgres',
+    await this.connection.deleteMany({ where: { host: 'northwind' } });
+    await this.connection.create({
+      data: {
+        host: 'northwind',
+        port: 5432,
+        database: 'northwind',
+        schema: 'public',
+        username: 'postgres',
+        password: 'postgres',
+        QueryExample: {
+          createMany: {
+            data: [
+              {
+                name: 'Total number of products',
+                query: 'Total number of products',
+              },
+              {
+                name: 'Total number of products by type',
+                query:
+                  'Please display the number of total products by types in a pie chart',
+              },
+            ],
+          },
         },
-      });
-    }
+      },
+    });
   }
 }
