@@ -18,18 +18,40 @@
   </div>
   @if (demoMode) {
 
-  <tui-combo-box
-    formControlName="exampleQuery"
-    [stringify]="stringifyExamples"
-    [tuiTextfieldLabelOutside]="true"
-  >
-    Example
+  <div class="demo-examples">
+    <tui-combo-box
+      formControlName="exampleQuery"
+      [stringify]="stringifyExamples"
+      [tuiTextfieldLabelOutside]="true"
+      class="dropdown"
+    >
+      Example
 
-    <tui-data-list-wrapper
-      *tuiDataList
-      [itemContent]="stringifyExamples | tuiStringifyContent"
-      [items]="demoExamples"
-    ></tui-data-list-wrapper>
-  </tui-combo-box>
+      <tui-data-list-wrapper
+        *tuiDataList
+        [itemContent]="stringifyExamples | tuiStringifyContent"
+        [items]="demoExamples"
+      ></tui-data-list-wrapper>
+    </tui-combo-box>
+    <button
+      appearance="secondary"
+      tuiButton
+      type="button"
+      class="tui-space_right-3 tui-space_bottom-3"
+      (click)="openDiagram(diagram)"
+    >
+      Northwind Diagram
+    </button>
+  </div>
+
+  <ng-template #diagram let-observer>
+    <div class="diagram-dialog-content">
+      <img src="/assets/images/example-diagram.png" />
+      <button size="m" tuiButton type="button" (click)="observer.complete()">
+        OK, got it. Let me try some queries.
+      </button>
+    </div>
+  </ng-template>
+
   }
 </form>
