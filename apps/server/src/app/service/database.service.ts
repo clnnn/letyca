@@ -24,20 +24,15 @@ export class DatabaseService {
   async generateQuery(schema: string, userRequest: string): Promise<string> {
     const sqlQueryCompletion = await this.client.chat.completions.create({
       model: 'gpt-3.5-turbo',
-      temperature: 0,
-      stop: '\nSQLResult:',
+      temperature: 0.2,
       messages: [
         {
-          role: 'assistant',
-          content: `You are SQL Generator assistant. Based on the provided SQL table schema below, answer the user question using just a SQL Query and nothing else.
-          ---------
-          SCHEMA: ${schema}
-          _________
-          SQL Query:`,
+          role: 'system',
+          content: `You are SQL Generator assistant expert in generating SQL queries based on this schema [[${schema}]].Please answer the user question using just a SQL Query and nothing else.`,
         },
         {
           role: 'system',
-          content: 'Extract only SQL query from the assistent response',
+          content: 'Extract only SQL query from the assistant response',
         },
         {
           role: 'user',
