@@ -6,7 +6,9 @@ import { Connection, PrismaClient } from 'prisma/prisma-client';
 export class ExecutionService {
   async runQuery(query: string, connection: Connection): Promise<RawData[]> {
     const client = await this.createPrismaClient(connection);
-    return client.$queryRawUnsafe<RawData[]>(query);
+    const rawData = await client.$queryRawUnsafe<RawData[]>(query);
+    await client.$disconnect();
+    return rawData;
   }
 
   private async createPrismaClient(
