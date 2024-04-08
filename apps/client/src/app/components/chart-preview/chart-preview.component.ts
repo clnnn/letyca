@@ -1,4 +1,4 @@
-import { Component, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TuiIslandModule } from '@taiga-ui/kit';
 import { tuiIsString } from '@taiga-ui/cdk';
@@ -24,6 +24,7 @@ import { ChartFacade } from '../../facade/chart.facade';
   ],
   templateUrl: './chart-preview.component.html',
   styleUrls: ['./chart-preview.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartPreviewComponent {
   chart = this.facade.chart;
