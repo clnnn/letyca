@@ -4,3 +4,4 @@ export * from './chart-response.dto';
 export * from './letyca-chart.dto';
 export * from './chart-request.dto';
 export * from './flag-response.dto';
+export * from './raw-data.dto';
