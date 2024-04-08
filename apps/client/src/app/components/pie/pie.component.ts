@@ -1,13 +1,18 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TuiIslandModule } from '@taiga-ui/kit';
-import { NgChartsModule } from 'ng2-charts';
+import {
+  BaseChartDirective,
+  provideCharts,
+  withDefaultRegisterables,
+} from 'ng2-charts';
 import { ChartData, ChartType, ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'le-pie',
   standalone: true,
-  imports: [CommonModule, TuiIslandModule, NgChartsModule],
+  imports: [CommonModule, TuiIslandModule, BaseChartDirective],
+  providers: [provideCharts(withDefaultRegisterables())],
   templateUrl: './pie.component.html',
   styleUrls: ['./pie.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,8 +33,4 @@ export class PieComponent {
       },
     },
   };
-
-  chartClick(): void {
-    // No-op
-  }
 }

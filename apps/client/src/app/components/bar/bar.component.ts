@@ -2,12 +2,17 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartData, ChartType, ChartOptions } from 'chart.js';
 import { TuiIslandModule } from '@taiga-ui/kit';
-import { NgChartsModule } from 'ng2-charts';
+import {
+  BaseChartDirective,
+  provideCharts,
+  withDefaultRegisterables,
+} from 'ng2-charts';
 
 @Component({
   selector: 'le-bar',
   standalone: true,
-  imports: [CommonModule, TuiIslandModule, NgChartsModule],
+  imports: [CommonModule, TuiIslandModule, BaseChartDirective],
+  providers: [provideCharts(withDefaultRegisterables())],
   templateUrl: './bar.component.html',
   styleUrls: ['./bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,8 +32,4 @@ export class BarComponent {
       },
     },
   };
-
-  chartClick(): void {
-    // No-op
-  }
 }
