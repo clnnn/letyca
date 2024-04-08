@@ -34,7 +34,7 @@ export class QueryService {
     schema: string
   ): Promise<ChatCompletion> {
     return this.client.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4',
       temperature: 0.2,
       messages: [
         {
