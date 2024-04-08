@@ -41,7 +41,7 @@ export class QueryService {
           role: 'system',
           content: `You are PostgreSQL Generator assistant expert in generating PostgreSQL queries based on this schema [[${schema}]]. Please answer the user question using just a SQL Query and nothing else. If it is possible, try to get human readable data from tables that can be represented in a chart.
 
-          If user request a query that may generate a single row, single column value, use column name 'value' as alias. If user request data that can be represented in a bar chart, line chart or pie chart then use column 'label' and 'value' as alias
+          If user request a query that may generate a single row, single column value, use column name 'value' as alias. If user request data that can be represented in a bar chart, line chart or pie chart and the query select multiple columns then always use column names 'label' and 'value' as aliases.
           Examples:
           Example #1
           user: "total number of products"
