@@ -1,4 +1,4 @@
-import { letycaChartSchema, LetycaChart } from '@letyca/contracts';
+import { defaultSchema, LetycaChart, RawData } from '@letyca/contracts';
 import { Injectable } from '@nestjs/common';
 import OpenAI from 'openai';
 
@@ -7,24 +7,16 @@ export class ChartService {
   constructor(private client: OpenAI) {}
 
   async generateChart(
-    sqlResponse: string,
+    result: RawData[],
     userRequest: string
   ): Promise<LetycaChart> {
     const chartCompletion = await this.client.chat.completions.create({
       model: 'gpt-3.5-turbo',
+      temperature: 0.2,
       messages: [
         {
-          role: 'assistant',
-          content: `Based on the SQL Response, answer the user question using a JSON Response:
-          ---------
-          SQL Response: ${sqlResponse}
-          ---------
-          JSON Response:
-          `,
-        },
-        {
           role: 'user',
-          content: `${userRequest}`,
+          content: userRequest,
         },
       ],
       tools: [
@@ -32,7 +24,7 @@ export class ChartService {
           type: 'function',
           function: {
             name: 'generateChart',
-            parameters: letycaChartSchema,
+            parameters: defaultSchema,
             description: 'Generates a chart based on the schema',
           },
         },
@@ -47,6 +39,44 @@ export class ChartService {
 
     const json =
       chartCompletion.choices[0].message.tool_calls[0].function.arguments;
-    return JSON.parse(json) as LetycaChart;
+    const chart = JSON.parse(json) as LetycaChart;
+    if (chart.chartType === 'countLabel' && 'value' in result[0]) {
+      return {
+        ...chart,
+        countLabelData: Number(result[0].value),
+      };
+    }
+
+    if (chart.chartType === 'pie' && result.length > 0) {
+      return {
+        ...chart,
+        pieData: {
+          labels: result.map((r) => ('label' in r && r.label ? r.label : '')),
+          values: result.map((r) => Number(r.value)),
+        },
+      };
+    }
+
+    if (chart.chartType === 'line' && result.length > 0) {
+      return {
+        ...chart,
+        lineData: {
+          label: chart.title,
+          labels: result.map((r) => ('label' in r && r.label ? r.label : '')),
+          values: result.map((r) => Number(r.value)),
+        },
+      };
+    }
+
+    if (chart.chartType === 'bar' && result.length > 0) {
+      return {
+        ...chart,
+        barData: {
+          label: chart.title,
+          labels: result.map((r) => ('label' in r && r.label ? r.label : '')),
+          values: result.map((r) => Number(r.value)),
+        },
+      };
+    }
   }
 }

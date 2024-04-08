@@ -1,18 +1,12 @@
+import { RawData } from '@letyca/contracts';
 import { Injectable } from '@nestjs/common';
 import { Connection, PrismaClient } from 'prisma/prisma-client';
 
-type ExecutionResult =
-  | { value: number }
-  | { labels: string[]; values: number[] };
-
 @Injectable()
 export class ExecutionService {
-  async runQuery(
-    query: string,
-    connection: Connection
-  ): Promise<ExecutionResult[]> {
+  async runQuery(query: string, connection: Connection): Promise<RawData[]> {
     const client = await this.createPrismaClient(connection);
-    return client.$queryRawUnsafe<ExecutionResult[]>(query);
+    return client.$queryRawUnsafe<RawData[]>(query);
   }
 
   private async createPrismaClient(

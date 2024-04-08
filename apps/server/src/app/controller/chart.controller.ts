@@ -24,9 +24,9 @@ export class ChartController {
     });
     const query = await this.queryService.generate(userRequest, conn);
     const result = await this.executionService.runQuery(query, conn);
-    // const chart = await this.chartService.generateChart(result, userRequest);
+    const chart = await this.chartService.generateChart(result, userRequest);
     return {
-      chart: {},
+      chart: chart,
       sql: query,
     };
   }

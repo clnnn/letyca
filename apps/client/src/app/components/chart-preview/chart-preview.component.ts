@@ -48,10 +48,10 @@ export class ChartPreviewComponent {
     }
 
     return {
-      labels: this.chart()?.pieChartData?.labels ?? [],
+      labels: this.chart()?.pieData?.labels ?? [],
       datasets: [
         {
-          data: this.chart()?.pieChartData?.values ?? [],
+          data: this.chart()?.pieData?.values ?? [],
         },
       ],
     };
@@ -65,12 +65,11 @@ export class ChartPreviewComponent {
     }
 
     return {
-      labels: this.chart()?.lineChartData?.points.map((p) => p.x) ?? [],
+      labels: this.chart()?.lineData?.labels ?? [],
       datasets: [
         {
-          label:
-            this.chart()?.lineChartData?.label ?? this.chart()?.title ?? '',
-          data: this.chart()?.lineChartData?.points.map((p) => p.y) ?? [],
+          label: this.chart()?.title ?? '',
+          data: this.chart()?.lineData?.values ?? [],
         },
       ],
     };
@@ -84,11 +83,11 @@ export class ChartPreviewComponent {
     }
 
     return {
-      labels: this.chart()?.barChartData?.labels ?? [],
+      labels: this.chart()?.barData?.labels ?? [],
       datasets: [
         {
-          label: this.chart()?.barChartData?.label ?? this.chart()?.title ?? '',
-          data: this.chart()?.barChartData?.data ?? [],
+          label: this.chart()?.title ?? '',
+          data: this.chart()?.barData?.values ?? [],
         },
       ],
     };

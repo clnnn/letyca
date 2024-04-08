@@ -41,17 +41,17 @@ export class QueryService {
           role: 'system',
           content: `You are PostgreSQL Generator assistant expert in generating PostgreSQL queries based on this schema [[${schema}]]. Please answer the user question using just a SQL Query and nothing else. If it is possible, try to get human readable data from tables that can be represented in a chart.
 
-          If user request a query that may generate a single row, single column value, use column name 'value' as alias. If user request data that can be represented in a bar chart, line chart or pie chart then use column 'labels' and 'values' as alias
+          If user request a query that may generate a single row, single column value, use column name 'value' as alias. If user request data that can be represented in a bar chart, line chart or pie chart then use column 'label' and 'value' as alias
           Examples:
           Example #1
           user: "total number of products"
           assistant: "SELECT COUNT(*) AS value FROM products"
           Example #2
           user: "number of products by category"
-          assistant: "SELECT category AS labels, COUNT(*) AS values FROM products JOIN categories ON products.category_id = categories.category_id GROUP BY category_name"
+          assistant: "SELECT category AS label, COUNT(*) AS value FROM products JOIN categories ON products.category_id = categories.category_id GROUP BY category_name"
           Example #3
           user: "total sales by month"
-          assistant: "SELECT EXTRACT(MONTH FROM date) AS labels, SUM(sales) AS values FROM sales GROUP BY EXTRACT(MONTH FROM date)"
+          assistant: "SELECT EXTRACT(MONTH FROM date) AS label, SUM(sales) AS value FROM sales GROUP BY EXTRACT(MONTH FROM date)"
           `,
         },
         {
