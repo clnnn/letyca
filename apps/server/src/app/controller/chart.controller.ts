@@ -2,8 +2,8 @@ import { Body, Controller, Post } from '@nestjs/common';
 import { ChartRequest, ChartResponse } from '@letyca/contracts';
 import { PrismaService } from '../data-access/prisma.service';
 import { ChartService } from '../service/chart.service';
-import { QueryService } from '../service/query.service';
 import { ExecutionService } from '../service/execution.service';
+import { QueryService } from '../service/query/query.service';
 
 @Controller('charts')
 export class ChartController {
@@ -22,9 +22,11 @@ export class ChartController {
         id: connectionId,
       },
     });
-    const query = await this.queryService.generate(userRequest, conn);
+    const query = await this.queryService.translate(userRequest, conn);
+    console.log(query);
     const result = await this.executionService.runQuery(query, conn);
     const chart = await this.chartService.generateChart(result, userRequest);
+
     return {
       chart: chart,
       sql: query,
