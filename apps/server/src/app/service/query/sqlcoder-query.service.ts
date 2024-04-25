@@ -68,8 +68,9 @@ export class SQLCoderQueryService extends QueryService {
     
     ### Instructions
     - Use Table Aliases to prevent ambiguity. For example, "SELECT t1.col1 as label, t2.col1 as value FROM table1 t1 JOIN table2 t2 ON t1.id = t2.id".
-    - Always use 'value' and 'label' column aliases. It is very important.
-    - Generate only the SQL query, with the semicolon at the end. 
+    - Make sure to use 'value' as the alias for any numerical or aggregate values and 'label' as the alias for descriptive fields in the SELECT clause. This naming convention is crucial for integrating the query outputs into our visualization tools.
+    - If the query requires an average on a date, be sure to use the AVG(EXTRACT(YEAR FROM date)) function to a number
+    - Generate only the SQL query, with the semicolon at the end. The SQL should be always formatted;
 
     ### Database Schema
     This query will run on a database whose schema is represented in this string:
@@ -78,16 +79,37 @@ export class SQLCoderQueryService extends QueryService {
     ### Examples
 
     #### Example 1 - "total number of products":
-    "SELECT COUNT(*) AS value, 'Total Number of Products' AS label FROM products p;"
+
+    ${'```sql'}
+    SELECT COUNT(*) AS value, 'Total Number of Products' AS label\nFROM products p;
+    ${'```'}
 
     #### Example 2 - "total number of products by category":
-    "SELECT c.category_name AS label, COUNT(p.product_id) AS value FROM products p JOIN categories c ON p.category_id = c.category_id GROUP BY c.category_name;"
 
-    #### Example 3 - "total number of products by category, ordered by category name":
-    "SELECT c.category_name AS label, COUNT(p.product_id) AS value FROM products p JOIN categories c ON p.category_id = c.category_id GROUP BY c.category_name ORDER BY c.category_name;"
+    ${'```sql'}
+    SELECT c.category_name AS label, COUNT(p.product_id) AS value\nFROM products p JOIN categories c ON p.category_id = c.category_id\nGROUP BY c.category_name;
+    ${'```'}
 
-    #### Example 4 - "Top 5 customers by revenue":
-    "SELECT c.company_name AS label, SUM(od.unit_price * od.quantity) AS value FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_details od ON o.order_id = od.order_id GROUP BY c.company_name ORDER BY value DESC LIMIT 5;"
+    
+    #### Example 3 - "total number of products by category in a pie chart":
+    ${'```sql'}
+    SELECT c.category_name AS label, COUNT(p.product_id) AS value\nFROM products p JOIN categories c ON p.category_id = c.category_id\nGROUP BY c.category_name;
+    ${'```'}
+
+    #### Example 4 - "total number of products by category, ordered by category name":
+    ${'```sql'}
+    SELECT c.category_name AS label, COUNT(p.product_id) AS value\nFROM products p JOIN categories c ON p.category_id = c.category_id\nGROUP BY c.category_name ORDER BY c.category_name;
+    ${'```'}
+
+    #### Example 5 - "Top 5 customers by revenue":
+    ${'```sql'}
+    SELECT c.company_name AS label, SUM(od.unit_price * od.quantity) AS value\nFROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_details od ON o.order_id = od.order_id\nGROUP BY c.company_name\nORDER BY value\nDESC LIMIT 5;
+    ${'```'}
+
+    #### Example #6 - "monthly sales of condiments in 1997":
+    ${'```sql'}
+    SELECT TO_CHAR(o.order_date, 'YYYY-MM') AS label, \nSUM(od.quantity * od.unit_price * (1 - od.discount)) AS value \nFROM orders o \nINNER JOIN order_details od ON o.order_id = od.order_id \nINNER JOIN products p ON od.product_id = p.product_id \nINNER JOIN categories c ON p.category_id = c.category_id \nWHERE c.category_name = 'Condiments' AND EXTRACT(YEAR FROM o.order_date) = 1997 \nGROUP BY TO_CHAR(o.order_date, 'YYYY-MM') \nORDER BY label;
+    ${'```'}
     
     ### Answer
     Given the database schema, here is the SQL query that answers [QUESTION]${userRequest}[/QUESTION]:
@@ -98,11 +120,11 @@ export class SQLCoderQueryService extends QueryService {
       stream: false,
       prompt,
       options: {
-        temperature: 0.2,
         stop: ['```'],
       },
     });
 
+    console.log(result.response);
     return this.extractSQLQuery(result.response);
   }
 
