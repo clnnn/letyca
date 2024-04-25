@@ -67,7 +67,7 @@ export class SQLCoderQueryService extends QueryService {
     Generate a PostgreSQL query to answer [QUESTION]${userRequest}[/QUESTION]
     
     ### Instructions
-    - Use Table Aliases to prevent ambiguity. For example, "SELECT t1.col1, t2.col1 FROM table1 t1 JOIN table2 t2 ON t1.id = t2.id".
+    - Use Table Aliases to prevent ambiguity. For example, "SELECT t1.col1 as label, t2.col1 as value FROM table1 t1 JOIN table2 t2 ON t1.id = t2.id".
     - Always use 'value' and 'label' column aliases. It is very important.
     - Generate only the SQL query, with the semicolon at the end. 
 
@@ -90,12 +90,17 @@ export class SQLCoderQueryService extends QueryService {
     "SELECT c.company_name AS label, SUM(od.unit_price * od.quantity) AS value FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_details od ON o.order_id = od.order_id GROUP BY c.company_name ORDER BY value DESC LIMIT 5;"
     
     ### Answer
-    Given the database schema, here is the SQL query that answers [QUESTION]${userRequest}[/QUESTION]
-    [SQL]`;
+    Given the database schema, here is the SQL query that answers [QUESTION]${userRequest}[/QUESTION]:
+    ${'```sql'}
+    `;
     const result = await this.ollama.generate({
       model: 'sqlcoder',
       stream: false,
       prompt,
+      options: {
+        temperature: 0.2,
+        stop: ['```'],
+      },
     });
 
     return this.extractSQLQuery(result.response);
