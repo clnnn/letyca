@@ -1,8 +1,10 @@
 export function extractSQLQuery(inputString: string): string | null {
-  const sqlRegex = /SELECT\s+.*?;\s*/gis; // Regular expression to match SQL SELECT statements
+  const sqlRegex = /```sql\s+([\s\S]*?)\s+```/gis; // Regular expression to match SQL code enclosed in ```sql ```
   const sqlMatch = inputString.match(sqlRegex);
   if (sqlMatch) {
-    return sqlMatch.join(' ');
+    return sqlMatch
+      .map((match) => match.replace(/```sql\s+|\s+```/g, ''))
+      .join(' ');
   } else {
     return inputString; // it is what it is :D
   }
