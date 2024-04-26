@@ -30,12 +30,15 @@ export class PhiQueryService extends QueryService {
       prompt,
     });
 
-    console.log(result.response);
+    const rawResponse = result.response;
+    const sqlQuery = extractSQLQuery(rawResponse);
+    const columns = extractColumnNames(sqlQuery);
+
     return {
       prompt,
-      rawResponse: result.response,
-      sqlQuery: extractSQLQuery(result.response),
-      columns: extractColumnNames(result.response),
+      rawResponse,
+      sqlQuery,
+      columns,
     };
   }
 
