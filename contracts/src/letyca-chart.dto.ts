@@ -11,9 +11,8 @@ const metadataSchema = z.object({
     .string()
     .describe('The title of the chart. Should start with uppercase'),
 });
-
 export const defaultSchema = zodToJsonSchema(metadataSchema);
-
+export type ChartMetadata = z.infer<typeof metadataSchema>;
 export type ChartData = {
   countLabelData?: number;
   pieData?: {
@@ -32,4 +31,4 @@ export type ChartData = {
   };
 };
 
-export type LetycaChart = z.infer<typeof metadataSchema> & ChartData;
+export type LetycaChart = ChartMetadata & ChartData;
