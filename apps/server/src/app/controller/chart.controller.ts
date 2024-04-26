@@ -22,8 +22,8 @@ export class ChartController {
         id: connectionId,
       },
     });
-    const query = await this.queryService.translate(userRequest, conn);
-    console.log(query);
+    const response = await this.queryService.translate(userRequest, conn);
+    const query = response.sqlQuery;
     const result = await this.executionService.runQuery(query, conn);
     const chart = await this.chartService.generateChart(result, userRequest);
 
