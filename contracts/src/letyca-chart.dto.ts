@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { zodToJsonSchema } from 'zod-to-json-schema';
 
-const metadataSchema = z.object({
+export const metadataSchema = z.object({
   chartType: z
     .enum(['countLabel', 'pie', 'line', 'bar'])
     .describe(
@@ -11,7 +11,7 @@ const metadataSchema = z.object({
     .string()
     .describe('The title of the chart. Should start with uppercase'),
 });
-export const defaultSchema = zodToJsonSchema(metadataSchema);
+export const metadataSchemaJSON = zodToJsonSchema(metadataSchema);
 export type ChartMetadata = z.infer<typeof metadataSchema>;
 export type ChartData = {
   countLabelData?: number;

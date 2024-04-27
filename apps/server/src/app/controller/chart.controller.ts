@@ -1,9 +1,10 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ChartRequest, ChartResponse } from '@letyca/contracts';
 import { PrismaService } from '../data-access/prisma.service';
-import { ChartService } from '../service/chart.service';
-import { ExecutionService } from '../service/execution.service';
+import { ExecutionService } from '../service/query/execution.service';
 import { QueryService } from '../service/query/query.service';
+import { ChartMetadataService } from '../service/chart/chart-metadata.service';
+import { MergeService } from '../service/chart/merge.service';
 
 @Controller('charts')
 export class ChartController {
@@ -11,7 +12,8 @@ export class ChartController {
     private prisma: PrismaService,
     private queryService: QueryService,
     private executionService: ExecutionService,
-    private chartService: ChartService
+    private mergeService: MergeService,
+    private chartMetadataService: ChartMetadataService
   ) {}
 
   @Post()
@@ -22,14 +24,17 @@ export class ChartController {
         id: connectionId,
       },
     });
-    const response = await this.queryService.translate(userRequest, conn);
-    const query = response.sqlQuery;
-    const result = await this.executionService.runQuery(query, conn);
-    const chart = await this.chartService.generateChart(result, userRequest);
+
+    const translation = await this.queryService.translate(userRequest, conn);
+    const sql = translation.sqlQuery;
+    const result = await this.executionService.runQuery(sql, conn);
+
+    const metadata = await this.chartMetadataService.generate(userRequest);
+    const chart = this.mergeService.concat(metadata, result);
 
     return {
-      chart: chart,
-      sql: query,
+      chart,
+      sql,
     };
   }
 }
