@@ -4,6 +4,7 @@
 dist
 tmp
 /out-tsc
+./
 
 # dependencies
 node_modules
@@ -44,3 +45,4 @@ Thumbs.db
 .env
 
 .nx/cache
+.devcontainer/__data/ollama
