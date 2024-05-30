@@ -42,17 +42,6 @@ services:
     ports:
       - 5433:5432
 
-  ollama-server:
-    restart: unless-stopped
-    image: ollama/ollama
-    ports:
-      - "11434:11434"
-    volumes:
-      - ./__data/ollama:/root/.ollama
-    network_mode: service:db
-
-    
-
 volumes:
   postgres-data:
   try-node-node_modules:
