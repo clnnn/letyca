@@ -29,7 +29,7 @@ import { MergeService } from './service/chart/merge.service';
       provide: ChartMetadataService,
       useFactory: () => {
         const ollamaHost = process.env['OLLAMA_HOST'];
-        const openaiApiKey = process.env['OPEN_AI_API_KEY'];
+        const openaiApiKey = process.env['OPENAI_API_KEY'];
         if (ollamaHost.length === 0 && openaiApiKey.length === 0) {
           throw new Error('Missing environment variables for Ollama/OpenAI');
         }
@@ -49,7 +49,7 @@ import { MergeService } from './service/chart/merge.service';
       provide: QueryService,
       useFactory: (metadata: MetadataService) => {
         const ollamaHost = process.env['OLLAMA_HOST'];
-        const openaiApiKey = process.env['OPEN_AI_API_KEY'];
+        const openaiApiKey = process.env['OPENAI_API_KEY'];
         if (ollamaHost.length === 0 && openaiApiKey.length === 0) {
           throw new Error('Missing environment variables for Ollama/OpenAI');
         }
