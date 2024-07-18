@@ -13,9 +13,8 @@ import { Ollama } from 'ollama';
 import { MetadataService } from './service/query/metadata.service';
 import { QueryService } from './service/query/query.service';
 import { ChartMetadataService } from './service/chart/chart-metadata.service';
-import { PhiChartMetadataService } from './service/chart/phi-chart-metadata.service';
-import { OpenAIChartMetadataService } from './service/chart/openai-chart-metadata.service';
 import { MergeService } from './service/chart/merge.service';
+import { LocalChartMetadataService } from './service/chart/local-chart-metadata.service';
 
 @Module({
   imports: [ConfigModule.forRoot()],
@@ -29,42 +28,15 @@ import { MergeService } from './service/chart/merge.service';
       provide: ChartMetadataService,
       useFactory: () => {
         const ollamaHost = process.env['OLLAMA_HOST'];
-        const openaiApiKey = process.env['OPENAI_API_KEY'];
-        if (ollamaHost.length === 0 && openaiApiKey.length === 0) {
-          throw new Error('Missing environment variables for Ollama/OpenAI');
-        }
-
-        if (ollamaHost.length > 0) {
-          const llm = new Ollama({ host: ollamaHost });
-          return new PhiChartMetadataService(llm);
-        }
-
-        if (openaiApiKey.length > 0) {
-          const llm = new OpenAI({ apiKey: openaiApiKey });
-          return new OpenAIChartMetadataService(llm);
-        }
+        return new LocalChartMetadataService(new Ollama({ host: ollamaHost }));
       },
     },
     {
       provide: QueryService,
-      useFactory: (metadata: MetadataService) => {
-        const ollamaHost = process.env['OLLAMA_HOST'];
+      useFactory: () => {
         const openaiApiKey = process.env['OPENAI_API_KEY'];
-        if (ollamaHost.length === 0 && openaiApiKey.length === 0) {
-          throw new Error('Missing environment variables for Ollama/OpenAI');
-        }
-
-        if (ollamaHost.length > 0) {
-          const llm = new Ollama({ host: ollamaHost });
-          return new PhiQueryService(llm, metadata);
-        }
-
-        if (openaiApiKey.length > 0) {
-          const llm = new OpenAI({ apiKey: openaiApiKey });
-          return new OpenAIQueryService(llm);
-        }
+        return new OpenAIQueryService(new OpenAI({ apiKey: openaiApiKey }));
       },
-      inject: [MetadataService],
     },
   ],
 })
