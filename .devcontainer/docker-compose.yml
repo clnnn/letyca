@@ -41,19 +41,7 @@ services:
       POSTGRES_DB: northwind
     ports:
       - 5433:5432
-  
-  ollama:
-    restart: unless-stopped
-    image: ollama/ollama
-    ports:
-      - "11434:11434"
-    volumes:
-      - ./__data/ollama:/root/.ollama
-      - ../slm/chart-metadata/unsloth.Q4_K_M.gguf:/tmp/chart-metadata/unsloth.Q4_K_M.gguf
-      - ../slm/chart-metadata/Modelfile:/tmp/chart-metadata/Modelfile
-      - ./ollama-entrypoint.sh:/ollama-entrypoint.sh
-    entrypoint: ["/usr/bin/bash", "./ollama-entrypoint.sh"]
- 
+   
 volumes:
   postgres-data:
   try-node-node_modules:
