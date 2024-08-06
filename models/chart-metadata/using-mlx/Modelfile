@@ -1,5 +1,5 @@
 
-FROM chart-metadata.gguf
+FROM letyca-chart-metadata.gguf
 TEMPLATE """{{ if .System }}<|system|>
 {{ .System }}<|end|>
 {{ end }}{{ if .Prompt }}<|user|>

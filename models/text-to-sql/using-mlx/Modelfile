@@ -1,5 +1,5 @@
 
-FROM chart-data.gguf
+FROM letyca-text-to-sql.gguf
 
 PARAMETER stop "<|start_header_id|>
 PARAMETER stop "<|end_header_id|>"

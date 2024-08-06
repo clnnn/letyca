@@ -2,4 +2,4 @@
 /adapters
 /llama.cpp
 /lora_fused_model
-chart-metadata.gguf
+*.gguf
