@@ -72,7 +72,6 @@ export class OpenAIQueryService extends QueryService {
       prompt,
       rawResponse: assistantResponse,
       sqlQuery: assistantResponse,
-      columns: extractColumnNames(assistantResponse),
     };
   }
 }

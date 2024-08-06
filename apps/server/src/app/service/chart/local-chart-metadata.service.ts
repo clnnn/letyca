@@ -5,7 +5,7 @@ import { ChartMetadataService } from './chart-metadata.service';
 
 @Injectable()
 export class LocalChartMetadataService extends ChartMetadataService {
-  private readonly model = 'chart-metadata';
+  private readonly model = 'letyca-chart-metadata';
 
   constructor(private readonly ollama: Ollama) {
     super();
@@ -15,7 +15,7 @@ export class LocalChartMetadataService extends ChartMetadataService {
     const result = await this.ollama.chat({
       model: this.model,
       options: {
-        temperature: 0.2,
+        temperature: 0,
       },
       messages: [
         {
@@ -25,6 +25,7 @@ export class LocalChartMetadataService extends ChartMetadataService {
       ],
     });
 
+    console.debug(result);
     const jsonString = this.extractJson(result.message.content);
     const rawJson = JSON.parse(jsonString);
     const response = await metadataSchema.parseAsync(rawJson);
