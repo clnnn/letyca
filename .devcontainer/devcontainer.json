@@ -28,7 +28,8 @@
 				"dbaeumer.vscode-eslint",
 				"rangav.vscode-thunder-client",
 				"Prisma.prisma",
-				"Angular.ng-template"
+				"Angular.ng-template",
+				"Boundary.baml-extension"
 			]
 		}
 	}
