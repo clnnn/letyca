@@ -16,7 +16,9 @@ function ExtractChartMetadata(userRequest: string) -> ChartMetadata {
   prompt #"
     {{ userRequest }}
 
+    ```json
     {{ ctx.output_format }}
+    ```
   "#
 }
 
