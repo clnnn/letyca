@@ -1,40 +1,61 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { ChartRequest, ChartResponse } from '@letyca/contracts';
+import { GenerateChartRequest, GenerateChartResponse } from '@letyca/contracts';
 import { PrismaService } from '../data-access/prisma.service';
-import { ExecutionService } from '../service/query/execution.service';
-import { QueryService } from '../service/query/query.service';
-import { ChartMetadataService } from '../service/chart/chart-metadata.service';
-import { MergeService } from '../service/chart/merge.service';
+import { DataLayerService } from '../service/data-layer.service';
+import { ChartMetadataService } from '../service/chart-metadata.service';
+import { MergeService } from '../service/merge.service';
+import { QueryService } from '../service/query.service';
+import { ChartType } from 'baml_client';
 
 @Controller('charts')
 export class ChartController {
   constructor(
     private prisma: PrismaService,
+    private metadataService: ChartMetadataService,
     private queryService: QueryService,
-    private executionService: ExecutionService,
-    private mergeService: MergeService,
-    private chartMetadataService: ChartMetadataService
+    private dataLayer: DataLayerService,
+    private mergeService: MergeService
   ) {}
 
   @Post()
-  async generateChart(@Body() request: ChartRequest): Promise<ChartResponse> {
+  async generateChart(
+    @Body() request: GenerateChartRequest
+  ): Promise<GenerateChartResponse> {
     const { connectionId, userRequest } = request;
-    const conn = await this.prisma.connection.findUnique({
+    const connection = await this.prisma.connection.findUnique({
       where: {
         id: connectionId,
       },
     });
 
-    const translation = await this.queryService.translate(userRequest, conn);
-    const sql = translation.sqlQuery;
-    const result = await this.executionService.runQuery(sql, conn);
+    const metadata = await this.metadataService.generate(userRequest);
+    console.log(metadata);
 
-    const metadata = await this.chartMetadataService.generate(userRequest);
+    const sql = await this.queryService.generate(userRequest, connection);
+    console.log(sql);
+
+    const result = await this.dataLayer.runQuery(sql, connection);
     const chart = this.mergeService.concat(metadata, result);
 
     return {
-      chart,
+      chart: {
+        ...chart,
+        chartType: this.asUnion(chart.chartType),
+      },
       sql,
     };
+  }
+
+  private asUnion(chartType: ChartType): 'countLabel' | 'pie' | 'line' | 'bar' {
+    switch (chartType) {
+      case ChartType.CountLabel:
+        return 'countLabel';
+      case ChartType.Pie:
+        return 'pie';
+      case ChartType.Line:
+        return 'line';
+      case ChartType.Bar:
+        return 'bar';
+    }
   }
 }

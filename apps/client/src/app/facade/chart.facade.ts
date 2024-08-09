@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ChartRequest, LetycaChart } from '@letyca/contracts';
+import {
+  ChartData,
+  ChartMetadata,
+  GenerateChartRequest,
+} from '@letyca/contracts';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { ChartService } from '../service/chart.service';
 import { LoadingState } from '../utils';
@@ -7,7 +11,7 @@ import { exhaustMap, tap } from 'rxjs';
 
 type ChartState = {
   loading: LoadingState;
-  chart?: LetycaChart;
+  chart?: ChartMetadata & ChartData;
   sql?: string;
 };
 
@@ -21,7 +25,7 @@ export class ChartFacade extends ComponentStore<ChartState> {
     super({ loading: LoadingState.INIT });
   }
 
-  readonly generate = this.effect<ChartRequest>((trigger$) =>
+  readonly generate = this.effect<GenerateChartRequest>((trigger$) =>
     trigger$.pipe(
       tap(() => this.patchState({ loading: LoadingState.LOADING })),
       exhaustMap((request) =>

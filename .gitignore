@@ -46,3 +46,6 @@ Thumbs.db
 
 .nx/cache
 .devcontainer/__data/ollama
+
+# BAML
+baml_client

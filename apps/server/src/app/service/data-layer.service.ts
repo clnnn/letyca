@@ -1,9 +1,10 @@
-import { RawData } from '@letyca/contracts';
 import { Injectable } from '@nestjs/common';
 import { Connection, PrismaClient } from 'prisma/prisma-client';
 
+export type RawData = { label?: string; value: bigint };
+
 @Injectable()
-export class ExecutionService {
+export class DataLayerService {
   async runQuery(query: string, connection: Connection): Promise<RawData[]> {
     const client = await this.createPrismaClient(connection);
     const rawData = await client.$queryRawUnsafe<RawData[]>(query);

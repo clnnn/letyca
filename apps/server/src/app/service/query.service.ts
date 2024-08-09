@@ -1,10 +1,18 @@
 import { Injectable } from '@nestjs/common';
+import { b } from 'baml_client';
 import pgStructure, { Table } from 'pg-structure';
 import { Connection } from 'prisma/prisma-client';
 
 @Injectable()
-export class MetadataService {
-  async byConnection(connection: Connection): Promise<string> {
+export class QueryService {
+  async generate(userRequest: string, connection: Connection): Promise<string> {
+    const ddlStatements = await this.ddlStatements(connection);
+    const sql = await b.GenerateSQL(userRequest, ddlStatements);
+    // validations
+    return sql;
+  }
+
+  private async ddlStatements(connection: Connection): Promise<string> {
     const db = await pgStructure(
       {
         host: connection.host,

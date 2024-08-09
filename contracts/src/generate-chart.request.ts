@@ -1,4 +1,4 @@
-export type ChartRequest = {
+export type GenerateChartRequest = {
   connectionId: string;
   userRequest: string;
 };
