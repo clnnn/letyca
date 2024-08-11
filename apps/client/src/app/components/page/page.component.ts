@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 import { TitleComponent } from '../title/title.component';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { AvatarComponent } from '../avatar/avatar.component';
@@ -22,7 +22,7 @@ const tuiImports = [TuiButton];
   ],
 })
 export class PageComponent {
-  protected readonly appTitle = 'Analytical Copilot';
+  protected readonly appTitle = 'Letyca';
   protected readonly guestUser: User = {
     id: 'guest',
     firstName: 'John',

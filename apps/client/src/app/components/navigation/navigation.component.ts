@@ -1,12 +1,15 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TuiButton, TuiIcon } from '@taiga-ui/core';
+import { TuiIcon } from '@taiga-ui/core';
 import { TuiNavigation } from '@taiga-ui/layout';
 import { TuiTabs } from '@taiga-ui/kit';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+
+const tuiImports = [TuiNavigation, TuiIcon, TuiTabs];
 
 @Component({
   selector: 'le-navigation',
   standalone: true,
-  imports: [TuiNavigation, TuiIcon, TuiTabs],
+  imports: [...tuiImports, RouterLink, RouterLinkActive],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <tui-tabs>
