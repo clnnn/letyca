@@ -6,7 +6,15 @@ import { PageComponent } from './components/page/page.component';
   selector: 'le-root',
   standalone: true,
   imports: [TuiRoot, PageComponent],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  template: `
+    <tui-root>
+      <le-page />
+    </tui-root>
+  `,
+  styles: `
+  :host {
+    background-color: #f0f2f5;
+  }
+  `,
 })
 export class AppComponent {}

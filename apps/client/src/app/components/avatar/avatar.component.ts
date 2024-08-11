@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { TuiFallbackSrcPipe } from '@taiga-ui/core';
 import { TuiAvatar } from '@taiga-ui/kit';
 import { User } from '../../models';
 import { AsyncPipe } from '@angular/common';
