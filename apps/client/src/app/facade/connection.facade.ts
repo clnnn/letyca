@@ -2,7 +2,8 @@ import { Inject, Injectable } from '@angular/core';
 import { ConnectionService } from '../service/connection.service';
 import { TuiAlertOptions, TuiAlertService } from '@taiga-ui/core';
 import { ConnectionListItem, NewConnection } from '@letyca/contracts';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { tap, exhaustMap, switchMap } from 'rxjs';
 import { LoadingState } from '../utils';
@@ -48,7 +49,6 @@ export class ConnectionFacade extends ComponentStore<ConnectionState> {
             content: 'The connection was successfully added',
             options: {
               label: 'Connection Added',
-              status: 'success',
               icon: 'tuiIconCheckCircleLarge',
             },
           });
@@ -68,7 +68,6 @@ export class ConnectionFacade extends ComponentStore<ConnectionState> {
             content: 'The connection was successfully deleted',
             options: {
               label: 'Connection Deleted',
-              status: 'success',
               icon: 'tuiIconCheckCircleLarge',
             },
           });

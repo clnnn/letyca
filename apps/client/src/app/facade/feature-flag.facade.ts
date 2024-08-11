@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { FeatureFlagService } from '../service/feature-flag.service';
 import { LoadingState } from '../utils';
 import { exhaustMap, filter, tap } from 'rxjs';

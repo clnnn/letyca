@@ -4,7 +4,8 @@ import {
   ChartMetadata,
   GenerateChartRequest,
 } from '@letyca/contracts';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 import { ChartService } from '../service/chart.service';
 import { LoadingState } from '../utils';
 import { exhaustMap, tap } from 'rxjs';
