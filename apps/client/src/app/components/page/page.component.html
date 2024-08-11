@@ -1,6 +1,10 @@
 <header>
-  <le-title content="Analytical Copilot" />
-  <nav></nav>
+  <le-title [content]="appTitle" />
+  <div class="right">
+    <le-navigation />
+    <a size="m" tuiButton routerLink="explore" routerLinkActive>Explore</a>
+    <le-avatar [currentUser]="guestUser" />
+  </div>
 </header>
 <main>
   <router-outlet></router-outlet>

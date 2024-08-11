@@ -1,13 +1,32 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TuiIcon } from '@taiga-ui/core';
 import { TitleComponent } from '../title/title.component';
+import { NavigationComponent } from '../navigation/navigation.component';
+import { AvatarComponent } from '../avatar/avatar.component';
+import { User } from '../../models';
+import { TuiButton } from '@taiga-ui/core';
+
+const tuiImports = [TuiButton];
 
 @Component({
   selector: 'le-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
   standalone: true,
-  imports: [RouterOutlet, TuiIcon, TitleComponent],
+  imports: [
+    ...tuiImports,
+    RouterOutlet,
+    TitleComponent,
+    NavigationComponent,
+    AvatarComponent,
+  ],
 })
-export class PageComponent {}
+export class PageComponent {
+  protected readonly appTitle = 'Analytical Copilot';
+  protected readonly guestUser: User = {
+    id: 'guest',
+    firstName: 'John',
+    lastName: 'Doe',
+    avatarSrc: '',
+  };
+}

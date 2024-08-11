@@ -13,8 +13,7 @@ import { TuiIcon } from '@taiga-ui/core';
         display: flex;
         align-items: center;
         gap: 0.25rem;
-    }
-  `,
+    }`,
   imports: [TuiIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
