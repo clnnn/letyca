@@ -37,9 +37,10 @@ import {
 })
 export class HomeComponent implements OnInit {
   titles = [
-    `What's up chef?`,
-    `I'm your analytical copilot, Letyca`,
+    `Hi. I'm Letyca, your Analytical Copilot`,
     'I am here to help you make sense of your data',
+    'I can help you with data analysis, visualization, and more',
+    'I am a proof of concept, so please be patient with me',
   ];
 
   t$ = this.getTypewriterEffect(this.titles);
@@ -63,9 +64,9 @@ export class HomeComponent implements OnInit {
 
   typeEffect(word: string) {
     return concat(
-      this.type({ word, speed: 50 }),
+      this.type({ word, speed: 40 }),
       of('').pipe(delay(1200), ignoreElements()),
-      this.type({ word, speed: 30, backwards: true }),
+      this.type({ word, speed: 25, backwards: true }),
       of('').pipe(delay(300), ignoreElements())
     );
   }
