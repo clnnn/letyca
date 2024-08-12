@@ -13,9 +13,7 @@ const tuiImports = [TuiNavigation, TuiIcon, TuiTabs];
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <tui-tabs>
-      <a tuiTab iconStart="@tui.home" routerLink="/home" routerLinkActive
-        >Home
-      </a>
+      <a tuiTab iconStart="@tui.home" routerLink="/" routerLinkActive>Home </a>
       <a tuiTab iconStart="cable" routerLink="/connections" routerLinkActive
         >Connections
       </a>

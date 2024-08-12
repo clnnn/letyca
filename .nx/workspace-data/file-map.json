@@ -21,12 +21,14 @@
     "@ngrx/component-store": "18.0.2",
     "@nx/angular": "19.5.7",
     "@prisma/client": "^5.9.1",
+    "@taiga-ui/addon-table": "^4.0.0",
     "@taiga-ui/cdk": "4.0.0",
     "@taiga-ui/core": "4.0.0",
     "@taiga-ui/icons": "4.0.0",
     "@taiga-ui/kit": "4.0.0",
     "@taiga-ui/layout": "4.0.0",
-    "@taiga-ui/styles": "4.0.0",
+    "@taiga-ui/legacy": "^4.0.0",
+    "@taiga-ui/styles": "^4.0.0",
     "@tinkoff/ng-dompurify": "3.0.0",
     "ag-grid-angular": "^30.2.0",
     "ag-grid-community": "^30.2.0",
@@ -129,6 +131,235 @@
         {
           "file": "apps/server-e2e/tsconfig.spec.json",
           "hash": "14954872453723519891"
+        }
+      ],
+      "client": [
+        {
+          "file": "apps/client/.eslintrc.json",
+          "hash": "4467887497391585285"
+        },
+        {
+          "file": "apps/client/docker-pack/Dockerfile",
+          "hash": "353480758339302614"
+        },
+        {
+          "file": "apps/client/docker-pack/default.conf.template",
+          "hash": "3968758670396541974"
+        },
+        {
+          "file": "apps/client/jest.config.ts",
+          "hash": "325689089722790099"
+        },
+        {
+          "file": "apps/client/project.json",
+          "hash": "14111557199479998385"
+        },
+        {
+          "file": "apps/client/proxy.conf.json",
+          "hash": "11281046345527164812"
+        },
+        {
+          "file": "apps/client/src/app/app.component.ts",
+          "hash": "11409334242163273724",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@taiga-ui/core"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/app.config.ts",
+          "hash": "2120253766220848786",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:@angular/platform-browser",
+            "npm:@taiga-ui/event-plugins"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/app.routes.ts",
+          "hash": "8923647670818860786",
+          "deps": [
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/components/avatar/avatar.component.ts",
+          "hash": "7580444193109711946",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@taiga-ui/kit",
+            "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/components/connections-table/connections-table.component.html",
+          "hash": "519172235771180356"
+        },
+        {
+          "file": "apps/client/src/app/components/connections-table/connections-table.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/client/src/app/components/connections-table/connections-table.component.ts",
+          "hash": "9853076517333580026",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@taiga-ui/core",
+            "npm:@taiga-ui/kit",
+            "npm:@taiga-ui/layout",
+            "npm:@taiga-ui/addon-table"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/components/home/home.component.ts",
+          "hash": "4643431285684498460",
+          "deps": [
+            "npm:@angular/common",
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/components/index.ts",
+          "hash": "3311020362545702602"
+        },
+        {
+          "file": "apps/client/src/app/components/navigation/navigation.component.ts",
+          "hash": "17413636212764722146",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@taiga-ui/core",
+            "npm:@taiga-ui/layout",
+            "npm:@taiga-ui/kit",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/components/page/page.component.html",
+          "hash": "7601423367494520599"
+        },
+        {
+          "file": "apps/client/src/app/components/page/page.component.scss",
+          "hash": "11805403184873760025"
+        },
+        {
+          "file": "apps/client/src/app/components/page/page.component.ts",
+          "hash": "11925772656354194657",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:@taiga-ui/core"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/components/title/title.component.ts",
+          "hash": "5963113036587482817",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@taiga-ui/core"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/directive/count-up.directive.ts",
+          "hash": "16435573914823166727",
+          "deps": [
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/models/index.ts",
+          "hash": "878059302405567240"
+        },
+        {
+          "file": "apps/client/src/app/models/user.model.ts",
+          "hash": "4546757088950660626"
+        },
+        {
+          "file": "apps/client/src/app/service/chart.service.ts",
+          "hash": "1446920391623007921",
+          "deps": [
+            "contracts"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/service/connection.service.ts",
+          "hash": "16227520945327688332",
+          "deps": [
+            "contracts"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/service/feature-flag.service.ts",
+          "hash": "6451283800447261141",
+          "deps": [
+            "contracts"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/state.ts",
+          "hash": "3054344661039967096",
+          "deps": [
+            "contracts"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/utils.ts",
+          "hash": "1211290466952706076"
+        },
+        {
+          "file": "apps/client/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/client/src/assets/images/welcome.svg",
+          "hash": "12321207580283930391"
+        },
+        {
+          "file": "apps/client/src/favicon.ico",
+          "hash": "9303420814833116677"
+        },
+        {
+          "file": "apps/client/src/index.html",
+          "hash": "513095500048849548"
+        },
+        {
+          "file": "apps/client/src/main.ts",
+          "hash": "15452952190485127215",
+          "deps": [
+            "npm:@angular/platform-browser"
+          ]
+        },
+        {
+          "file": "apps/client/src/styles.scss",
+          "hash": "14199083552821029603"
+        },
+        {
+          "file": "apps/client/src/test-setup.ts",
+          "hash": "12935735732682149507",
+          "deps": [
+            "npm:jest-preset-angular"
+          ]
+        },
+        {
+          "file": "apps/client/tsconfig.app.json",
+          "hash": "8365644956319658761"
+        },
+        {
+          "file": "apps/client/tsconfig.editor.json",
+          "hash": "17511610827034788226"
+        },
+        {
+          "file": "apps/client/tsconfig.json",
+          "hash": "12094030803572703611"
+        },
+        {
+          "file": "apps/client/tsconfig.spec.json",
+          "hash": "2927375835638640771"
         }
       ],
       "server": [
@@ -329,549 +560,6 @@
           "file": "contracts/tsconfig.spec.json",
           "hash": "2129196202529263968"
         }
-      ],
-      "client": [
-        {
-          "file": "apps/client/.eslintrc.json",
-          "hash": "4467887497391585285"
-        },
-        {
-          "file": "apps/client/docker-pack/Dockerfile",
-          "hash": "353480758339302614"
-        },
-        {
-          "file": "apps/client/docker-pack/default.conf.template",
-          "hash": "3968758670396541974"
-        },
-        {
-          "file": "apps/client/jest.config.ts",
-          "hash": "325689089722790099"
-        },
-        {
-          "file": "apps/client/project.json",
-          "hash": "4927298798117321167"
-        },
-        {
-          "file": "apps/client/proxy.conf.json",
-          "hash": "11281046345527164812"
-        },
-        {
-          "file": "apps/client/src/app/app-routing.module.ts",
-          "hash": "5877609761828692732",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/app.component.html",
-          "hash": "15577400140249583759"
-        },
-        {
-          "file": "apps/client/src/app/app.component.scss",
-          "hash": "6005564225566682895"
-        },
-        {
-          "file": "apps/client/src/app/app.component.ts",
-          "hash": "1393688050938256161",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/app.module.ts",
-          "hash": "6769093809545141804",
-          "deps": [
-            "npm:@tinkoff/ng-dompurify",
-            "npm:@angular/platform-browser",
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/action-cell-renderer/action-cell-renderer.component.html",
-          "hash": "7121928259985883715"
-        },
-        {
-          "file": "apps/client/src/app/components/action-cell-renderer/action-cell-renderer.component.scss",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/client/src/app/components/action-cell-renderer/action-cell-renderer.component.ts",
-          "hash": "9293895354576229983",
-          "deps": [
-            "npm:@angular/core",
-            "npm:ag-grid-angular",
-            "npm:ag-grid-community",
-            "npm:@taiga-ui/core"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/bar/bar.component.html",
-          "hash": "7161263812818736409"
-        },
-        {
-          "file": "apps/client/src/app/components/bar/bar.component.scss",
-          "hash": "16088791949630681824"
-        },
-        {
-          "file": "apps/client/src/app/components/bar/bar.component.ts",
-          "hash": "4585882459545154948",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:chart.js",
-            "npm:@taiga-ui/kit",
-            "npm:ng2-charts"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/browse-page/browse-page.component.html",
-          "hash": "10729455337689399553"
-        },
-        {
-          "file": "apps/client/src/app/components/browse-page/browse-page.component.scss",
-          "hash": "4903401665177655938"
-        },
-        {
-          "file": "apps/client/src/app/components/browse-page/browse-page.component.ts",
-          "hash": "16601458369145001578",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@taiga-ui/core",
-            "npm:@angular/router",
-            "npm:@taiga-ui/kit",
-            "npm:@angular/common",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/chart-preview/chart-preview.component.html",
-          "hash": "8226710256700445193"
-        },
-        {
-          "file": "apps/client/src/app/components/chart-preview/chart-preview.component.scss",
-          "hash": "18136870086624029520"
-        },
-        {
-          "file": "apps/client/src/app/components/chart-preview/chart-preview.component.ts",
-          "hash": "1348773275935024438",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@taiga-ui/kit",
-            "npm:@taiga-ui/cdk",
-            "npm:chart.js"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/chart-prompt/chart-prompt.component.html",
-          "hash": "428039721764418434"
-        },
-        {
-          "file": "apps/client/src/app/components/chart-prompt/chart-prompt.component.scss",
-          "hash": "3408709689004742587"
-        },
-        {
-          "file": "apps/client/src/app/components/chart-prompt/chart-prompt.component.ts",
-          "hash": "15459348103512995564",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@taiga-ui/layout",
-            "npm:@angular/forms",
-            "npm:@taiga-ui/kit",
-            "npm:@taiga-ui/core",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/chart-raw-data/chart-raw-data.component.html",
-          "hash": "9819715315687204808"
-        },
-        {
-          "file": "apps/client/src/app/components/chart-raw-data/chart-raw-data.component.scss",
-          "hash": "3566543559801984341"
-        },
-        {
-          "file": "apps/client/src/app/components/chart-raw-data/chart-raw-data.component.ts",
-          "hash": "17861054258281445339",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@alenaksu/json-viewer"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/chart-response/chart-response.component.html",
-          "hash": "18217839280588625868"
-        },
-        {
-          "file": "apps/client/src/app/components/chart-response/chart-response.component.scss",
-          "hash": "17001744808668219205"
-        },
-        {
-          "file": "apps/client/src/app/components/chart-response/chart-response.component.ts",
-          "hash": "4920149788653967648",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@taiga-ui/kit",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/chart-sql-viewer/chart-sql-viewer.component.html",
-          "hash": "1138129177717850131"
-        },
-        {
-          "file": "apps/client/src/app/components/chart-sql-viewer/chart-sql-viewer.component.scss",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/client/src/app/components/chart-sql-viewer/chart-sql-viewer.component.ts",
-          "hash": "4628745625760058802",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:ngx-highlight-js"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/charts-page-header/charts-page-header.component.html",
-          "hash": "2954882589700894668"
-        },
-        {
-          "file": "apps/client/src/app/components/charts-page-header/charts-page-header.component.scss",
-          "hash": "2310771486453245981"
-        },
-        {
-          "file": "apps/client/src/app/components/charts-page-header/charts-page-header.component.ts",
-          "hash": "14962306917708128936",
-          "deps": [
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/charts-page/charts-page.component.html",
-          "hash": "13318454269498869190"
-        },
-        {
-          "file": "apps/client/src/app/components/charts-page/charts-page.component.scss",
-          "hash": "5238805066433996461"
-        },
-        {
-          "file": "apps/client/src/app/components/charts-page/charts-page.component.ts",
-          "hash": "7824072893853283603",
-          "deps": [
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/connections-grid/configuration.ts",
-          "hash": "3280563159268270956",
-          "deps": [
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/connections-grid/connections-grid.component.html",
-          "hash": "11637192705173082243"
-        },
-        {
-          "file": "apps/client/src/app/components/connections-grid/connections-grid.component.scss",
-          "hash": "7857401662199673146"
-        },
-        {
-          "file": "apps/client/src/app/components/connections-grid/connections-grid.component.ts",
-          "hash": "17949465366044497183",
-          "deps": [
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/connections-page-header/connections-page-header.component.html",
-          "hash": "586713865502425270"
-        },
-        {
-          "file": "apps/client/src/app/components/connections-page-header/connections-page-header.component.scss",
-          "hash": "14987348857374498780"
-        },
-        {
-          "file": "apps/client/src/app/components/connections-page-header/connections-page-header.component.ts",
-          "hash": "9682532866998146639",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@taiga-ui/core"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/connections-page/connections-page.component.html",
-          "hash": "13178269968533522568"
-        },
-        {
-          "file": "apps/client/src/app/components/connections-page/connections-page.component.scss",
-          "hash": "17391358076013596707"
-        },
-        {
-          "file": "apps/client/src/app/components/connections-page/connections-page.component.ts",
-          "hash": "16444048432559122711",
-          "deps": [
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/count-label/count-label.component.html",
-          "hash": "6779921921122826279"
-        },
-        {
-          "file": "apps/client/src/app/components/count-label/count-label.component.scss",
-          "hash": "15195531171031953561"
-        },
-        {
-          "file": "apps/client/src/app/components/count-label/count-label.component.ts",
-          "hash": "2578454208823261343",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@taiga-ui/kit"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/create-edit-connection-dialog-content/create-edit-connection-dialog-content.component.html",
-          "hash": "3612877719622711818"
-        },
-        {
-          "file": "apps/client/src/app/components/create-edit-connection-dialog-content/create-edit-connection-dialog-content.component.scss",
-          "hash": "1178647169382088098"
-        },
-        {
-          "file": "apps/client/src/app/components/create-edit-connection-dialog-content/create-edit-connection-dialog-content.component.ts",
-          "hash": "4474120078600998054",
-          "deps": [
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/dashboard-page/dashboard-page.component.html",
-          "hash": "3197393412660820477"
-        },
-        {
-          "file": "apps/client/src/app/components/dashboard-page/dashboard-page.component.scss",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/client/src/app/components/dashboard-page/dashboard-page.component.ts",
-          "hash": "2958395968828628717",
-          "deps": [
-            "npm:@angular/core"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/line/line.component.html",
-          "hash": "15028478532840480172"
-        },
-        {
-          "file": "apps/client/src/app/components/line/line.component.scss",
-          "hash": "16088791949630681824"
-        },
-        {
-          "file": "apps/client/src/app/components/line/line.component.ts",
-          "hash": "15971596411015955609",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:@taiga-ui/kit",
-            "npm:ng2-charts",
-            "npm:chart.js"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/loading-spinner/loading-spinner.component.html",
-          "hash": "16756823366890238927"
-        },
-        {
-          "file": "apps/client/src/app/components/loading-spinner/loading-spinner.component.scss",
-          "hash": "1146967230045031830"
-        },
-        {
-          "file": "apps/client/src/app/components/loading-spinner/loading-spinner.component.ts",
-          "hash": "9302002743944119122",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/page/page.component.html",
-          "hash": "7597973797474011146"
-        },
-        {
-          "file": "apps/client/src/app/components/page/page.component.scss",
-          "hash": "4219377212455522192"
-        },
-        {
-          "file": "apps/client/src/app/components/page/page.component.ts",
-          "hash": "14711219929541897753",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/forms",
-            "npm:@angular/router"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/components/pie/pie.component.html",
-          "hash": "1735232155901022189"
-        },
-        {
-          "file": "apps/client/src/app/components/pie/pie.component.scss",
-          "hash": "409825804188864471"
-        },
-        {
-          "file": "apps/client/src/app/components/pie/pie.component.ts",
-          "hash": "7441618964307182882",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@angular/common",
-            "npm:ng2-charts",
-            "npm:chart.js",
-            "npm:@taiga-ui/layout"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/directive/count-up.directive.ts",
-          "hash": "16435573914823166727",
-          "deps": [
-            "npm:@angular/core",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/facade/chart.facade.ts",
-          "hash": "1088018144803692916",
-          "deps": [
-            "npm:@angular/core",
-            "contracts",
-            "npm:@ngrx/component-store",
-            "npm:@ngrx/operators",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/facade/connection.facade.ts",
-          "hash": "1325113340132276442",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@taiga-ui/core",
-            "contracts",
-            "npm:@ngrx/component-store",
-            "npm:@ngrx/operators",
-            "npm:@angular/common",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/facade/feature-flag.facade.ts",
-          "hash": "12532899610533861116",
-          "deps": [
-            "npm:@angular/core",
-            "npm:@ngrx/component-store",
-            "npm:@ngrx/operators",
-            "npm:rxjs",
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/service/chart.service.ts",
-          "hash": "1446920391623007921",
-          "deps": [
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/service/connection.service.ts",
-          "hash": "16227520945327688332",
-          "deps": [
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/service/feature-flag.service.ts",
-          "hash": "6451283800447261141",
-          "deps": [
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/state.ts",
-          "hash": "3054344661039967096",
-          "deps": [
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/client/src/app/utils.ts",
-          "hash": "1211290466952706076"
-        },
-        {
-          "file": "apps/client/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/client/src/assets/images/camping.svg",
-          "hash": "4896320583451536023"
-        },
-        {
-          "file": "apps/client/src/assets/images/example-diagram.png",
-          "hash": "207023901152345944"
-        },
-        {
-          "file": "apps/client/src/assets/images/not-found.svg",
-          "hash": "16845000891779581007"
-        },
-        {
-          "file": "apps/client/src/favicon.ico",
-          "hash": "9303420814833116677"
-        },
-        {
-          "file": "apps/client/src/index.html",
-          "hash": "513095500048849548"
-        },
-        {
-          "file": "apps/client/src/main.ts",
-          "hash": "14191774545949582757",
-          "deps": [
-            "npm:@angular/platform-browser-dynamic"
-          ]
-        },
-        {
-          "file": "apps/client/src/styles.scss",
-          "hash": "2617923306184891553"
-        },
-        {
-          "file": "apps/client/src/test-setup.ts",
-          "hash": "12935735732682149507",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
-        },
-        {
-          "file": "apps/client/tsconfig.app.json",
-          "hash": "8365644956319658761"
-        },
-        {
-          "file": "apps/client/tsconfig.editor.json",
-          "hash": "17511610827034788226"
-        },
-        {
-          "file": "apps/client/tsconfig.json",
-          "hash": "12094030803572703611"
-        },
-        {
-          "file": "apps/client/tsconfig.spec.json",
-          "hash": "2927375835638640771"
-        }
       ]
     },
     "nonProjectFiles": [
@@ -893,7 +581,7 @@
       },
       {
         "file": ".devcontainer/post-create.sh",
-        "hash": "21836132103084728"
+        "hash": "2941257852784078859"
       },
       {
         "file": ".dockerignore",
@@ -1017,11 +705,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "6755763631643606188"
+        "hash": "8680558366098225672"
       },
       {
         "file": "package.json",
-        "hash": "6496546265028296038"
+        "hash": "12160345017330759503"
       },
       {
         "file": "prisma/migrations/20231015145732_init/migration.sql",

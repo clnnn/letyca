@@ -93,9 +93,9 @@
                 }
               ],
               "styles": [
-                "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less",
-                "node_modules/@taiga-ui/core/styles/taiga-ui-fonts.less",
-                "node_modules/@taiga-ui/styles/taiga-ui-global.less",
+                "@taiga-ui/core/styles/taiga-ui-theme.less",
+                "@taiga-ui/core/styles/taiga-ui-fonts.less",
+                "@taiga-ui/styles/taiga-ui-global.less",
                 "apps/client/src/styles.scss"
               ],
               "scripts": []
@@ -5046,6 +5046,15 @@
         "hash": "sha512-Uy0+khmZqUrUGm5dmMqVlnvufZRSK0FbYzVgp0UMstm+F5+W2/jnEEQyc9vo1ZR/E5ZI/B1WjjoTqBqwJL6Krw=="
       }
     },
+    "npm:@taiga-ui/addon-table": {
+      "type": "npm",
+      "name": "npm:@taiga-ui/addon-table",
+      "data": {
+        "version": "4.0.0",
+        "packageName": "@taiga-ui/addon-table",
+        "hash": "sha512-d+6Ct5QN/gVRAaFtxFGaWvnbf79QCCPl7O1p4kPw4PXKQDo42BeZkvtpta6nFFt1CWl9ANlTBmf4w3lDeFx0Rw=="
+      }
+    },
     "npm:@taiga-ui/cdk": {
       "type": "npm",
       "name": "npm:@taiga-ui/cdk",
@@ -5107,6 +5116,15 @@
         "version": "4.0.0",
         "packageName": "@taiga-ui/layout",
         "hash": "sha512-L3U3uJhNrTjVs4sw+XPm8u47I6/w+nA9SxGXbT8dYItGOl0BisilcVRkkkMq502n1/HaDijheMz/d1TK4EGxUg=="
+      }
+    },
+    "npm:@taiga-ui/legacy": {
+      "type": "npm",
+      "name": "npm:@taiga-ui/legacy",
+      "data": {
+        "version": "4.0.0",
+        "packageName": "@taiga-ui/legacy",
+        "hash": "sha512-0zK0YhSQ7UNoEluG7hvRKmhkSv2ZgdNkCdzcGK75FamgUm6sHUDOaIZ/jovcKyfqVeXboTwL/5/QBeIMTrsW8w=="
       }
     },
     "npm:@taiga-ui/polymorpheus": {
@@ -13780,17 +13798,7 @@
       },
       {
         "source": "client",
-        "target": "npm:@angular/router",
-        "type": "static"
-      },
-      {
-        "source": "client",
-        "target": "npm:@tinkoff/ng-dompurify",
-        "type": "static"
-      },
-      {
-        "source": "client",
-        "target": "npm:@angular/platform-browser",
+        "target": "npm:@taiga-ui/core",
         "type": "static"
       },
       {
@@ -13800,27 +13808,17 @@
       },
       {
         "source": "client",
-        "target": "npm:rxjs",
+        "target": "npm:@angular/router",
         "type": "static"
       },
       {
         "source": "client",
-        "target": "npm:ag-grid-angular",
+        "target": "npm:@angular/platform-browser",
         "type": "static"
       },
       {
         "source": "client",
-        "target": "npm:ag-grid-community",
-        "type": "static"
-      },
-      {
-        "source": "client",
-        "target": "npm:@taiga-ui/core",
-        "type": "static"
-      },
-      {
-        "source": "client",
-        "target": "npm:chart.js",
+        "target": "npm:@taiga-ui/event-plugins",
         "type": "static"
       },
       {
@@ -13830,12 +13828,7 @@
       },
       {
         "source": "client",
-        "target": "npm:ng2-charts",
-        "type": "static"
-      },
-      {
-        "source": "client",
-        "target": "npm:@taiga-ui/cdk",
+        "target": "npm:@angular/forms",
         "type": "static"
       },
       {
@@ -13845,37 +13838,17 @@
       },
       {
         "source": "client",
-        "target": "npm:@angular/forms",
+        "target": "npm:@taiga-ui/addon-table",
         "type": "static"
       },
       {
         "source": "client",
-        "target": "npm:@alenaksu/json-viewer",
-        "type": "static"
-      },
-      {
-        "source": "client",
-        "target": "npm:ngx-highlight-js",
+        "target": "npm:rxjs",
         "type": "static"
       },
       {
         "source": "client",
         "target": "contracts",
-        "type": "static"
-      },
-      {
-        "source": "client",
-        "target": "npm:@ngrx/component-store",
-        "type": "static"
-      },
-      {
-        "source": "client",
-        "target": "npm:@ngrx/operators",
-        "type": "static"
-      },
-      {
-        "source": "client",
-        "target": "npm:@angular/platform-browser-dynamic",
         "type": "static"
       },
       {
@@ -21521,6 +21494,58 @@
         "type": "static"
       }
     ],
+    "npm:@taiga-ui/addon-table": [
+      {
+        "source": "npm:@taiga-ui/addon-table",
+        "target": "npm:@angular/common",
+        "type": "static"
+      },
+      {
+        "source": "npm:@taiga-ui/addon-table",
+        "target": "npm:@angular/core",
+        "type": "static"
+      },
+      {
+        "source": "npm:@taiga-ui/addon-table",
+        "target": "npm:@ng-web-apis/intersection-observer",
+        "type": "static"
+      },
+      {
+        "source": "npm:@taiga-ui/addon-table",
+        "target": "npm:@taiga-ui/cdk",
+        "type": "static"
+      },
+      {
+        "source": "npm:@taiga-ui/addon-table",
+        "target": "npm:@taiga-ui/core",
+        "type": "static"
+      },
+      {
+        "source": "npm:@taiga-ui/addon-table",
+        "target": "npm:@taiga-ui/i18n",
+        "type": "static"
+      },
+      {
+        "source": "npm:@taiga-ui/addon-table",
+        "target": "npm:@taiga-ui/kit",
+        "type": "static"
+      },
+      {
+        "source": "npm:@taiga-ui/addon-table",
+        "target": "npm:@taiga-ui/polymorpheus",
+        "type": "static"
+      },
+      {
+        "source": "npm:@taiga-ui/addon-table",
+        "target": "npm:rxjs",
+        "type": "static"
+      },
+      {
+        "source": "npm:@taiga-ui/addon-table",
+        "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
     "npm:@taiga-ui/cdk": [
       {
         "source": "npm:@taiga-ui/cdk",
@@ -21861,6 +21886,18 @@
       },
       {
         "source": "npm:@taiga-ui/layout",
+        "target": "npm:tslib",
+        "type": "static"
+      }
+    ],
+    "npm:@taiga-ui/legacy": [
+      {
+        "source": "npm:@taiga-ui/legacy",
+        "target": "npm:@angular/core",
+        "type": "static"
+      },
+      {
+        "source": "npm:@taiga-ui/legacy",
         "target": "npm:tslib",
         "type": "static"
       }
