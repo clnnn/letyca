@@ -1,5 +1,12 @@
-[tuiTh],
-[tuiTd] {
-  border-inline-start: none;
-  border-inline-end: none;
+:host {
+  [tuiTh],
+  [tuiTd] {
+    border-inline-start: none;
+    border-inline-end: none;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
 }

@@ -13828,11 +13828,6 @@
       },
       {
         "source": "client",
-        "target": "npm:@angular/forms",
-        "type": "static"
-      },
-      {
-        "source": "client",
         "target": "npm:@taiga-ui/layout",
         "type": "static"
       },
@@ -13843,12 +13838,12 @@
       },
       {
         "source": "client",
-        "target": "npm:rxjs",
+        "target": "contracts",
         "type": "static"
       },
       {
         "source": "client",
-        "target": "contracts",
+        "target": "npm:rxjs",
         "type": "static"
       },
       {

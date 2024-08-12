@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './components/home/home.component';
-import { ConnectionsTableComponent } from './components/connections-table/connections-table.component';
+import { ConnectionsComponent, HomeComponent } from './components';
 
 export const routes: Routes = [
   {
@@ -9,6 +8,6 @@ export const routes: Routes = [
   },
   {
     path: 'connections',
-    component: ConnectionsTableComponent,
+    component: ConnectionsComponent,
   },
 ];

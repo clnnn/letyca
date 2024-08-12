@@ -1,3 +1,4 @@
+<button tuiButton iconStart="circle-plus" [size]="size">New Connection</button>
 <table tuiTable [size]="size" [style.width.rem]="58">
   <thead>
     <tr>
@@ -8,7 +9,8 @@
     </tr>
   </thead>
   <tbody tuiTbody>
-    <tr *ngFor="let conn of connections">
+    @for (conn of connections; track $index) {
+    <tr>
       <td tuiTd>
         <div [tuiCell]="size">
           <span tuiTitle>
@@ -44,16 +46,20 @@
           >
             Edit
           </button>
-          <button
-            appearance="link"
-            iconStart="@tui.ellipsis"
-            size="xs"
-            tuiIconButton
-          >
+          <button appearance="link" iconStart="trash-2" size="xs" tuiIconButton>
             More
           </button>
         </span>
       </td>
     </tr>
+    } @empty {
+    <tr>
+      <td tuiTd colspan="4">
+        <div [tuiCell]="size">
+          <span tuiTitle>No connections found</span>
+        </div>
+      </td>
+    </tr>
+    }
   </tbody>
 </table>

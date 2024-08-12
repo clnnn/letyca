@@ -1,2 +1,3 @@
+// Pages and smart components
 export { HomeComponent } from './home/home.component';
-export { ConnectionsTableComponent } from './connections-table/connections-table.component'; // TODO temp
+export { ConnectionsComponent } from './connections/connections.component';
