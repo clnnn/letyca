@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { ConnectionsTableComponent } from '../connections-table/connections-table.component';
 import { TuiButton } from '@taiga-ui/core';
+import { Store } from '../../state';
 
 @Component({
   selector: 'le-connections',
@@ -8,7 +14,9 @@ import { TuiButton } from '@taiga-ui/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ConnectionsTableComponent, TuiButton],
   template: `
-    <le-connections-table [connections]="connections"></le-connections-table>
+    <le-connections-table
+      [connections]="store.connections()"
+    ></le-connections-table>
   `,
   styles: [
     `
@@ -21,23 +29,12 @@ import { TuiButton } from '@taiga-ui/core';
     `,
   ],
 })
-export class ConnectionsComponent {
-  connections = [
-    {
-      id: '1',
-      host: 'localhost',
-      port: 8080,
-      database: 'northwind',
-      schema: 'northwind',
-    },
-    {
-      id: '2',
-      host: 'localhost',
-      port: 8080,
-      database: 'northwind',
-      schema: 'northwind',
-    },
-  ];
+export class ConnectionsComponent implements OnInit {
+  readonly store = inject(Store);
+
+  ngOnInit(): void {
+    this.store.loadConnections();
+  }
 
   newConnection() {
     console.log('New connection');

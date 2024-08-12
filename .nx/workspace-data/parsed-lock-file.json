@@ -3195,6 +3195,15 @@
         "hash": "sha512-M+QMrHNKgcuiLaRGZxJ4aQi5/OCRfKC4+T/63dsHyLFZ53/FFpF6a/ytSO1Q+tzOplZ5o99S+i8FVaZqNQ3LmQ=="
       }
     },
+    "npm:@ngrx/signals": {
+      "type": "npm",
+      "name": "npm:@ngrx/signals",
+      "data": {
+        "version": "18.0.2",
+        "packageName": "@ngrx/signals",
+        "hash": "sha512-FXmcY2cmkbhZtg9k8Ntq69SyelGmmb6fWtdButH4T8GGFH0o3f1FZTR829j4ynphy8SzuDhD/pzrnpWcV481oQ=="
+      }
+    },
     "npm:@ngtools/webpack": {
       "type": "npm",
       "name": "npm:@ngtools/webpack",
@@ -18589,6 +18598,21 @@
     },
     {
       "source": "npm:@ngrx/operators",
+      "target": "npm:tslib",
+      "type": "static"
+    },
+    {
+      "source": "npm:@ngrx/signals",
+      "target": "npm:@angular/core",
+      "type": "static"
+    },
+    {
+      "source": "npm:@ngrx/signals",
+      "target": "npm:rxjs",
+      "type": "static"
+    },
+    {
+      "source": "npm:@ngrx/signals",
       "target": "npm:tslib",
       "type": "static"
     },
