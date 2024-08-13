@@ -24,7 +24,6 @@ import { Store } from '../../state';
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        padding: 2rem;
       }
     `,
   ],
