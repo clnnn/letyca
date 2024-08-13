@@ -23,8 +23,8 @@ import { Store } from '../../state';
       :host {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        padding: 1rem;
+        align-items: flex-start;
+        padding: 2rem;
       }
     `,
   ],

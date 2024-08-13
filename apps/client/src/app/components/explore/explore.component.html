@@ -1,1 +1,6 @@
-<h1>Hello</h1>
+<le-explore-header
+  title="Explore"
+  [connections]="store.connections()"
+  [connectionsLoading]="store.connectionsLoading()"
+  (connectionChange)="store.selectConnection($event.id)"
+></le-explore-header>
