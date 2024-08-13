@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterModule, RouterOutlet } from '@angular/router';
+import {
+  RouterLink,
+  RouterLinkActive,
+  RouterModule,
+  RouterOutlet,
+} from '@angular/router';
 import { TitleComponent } from '../title/title.component';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { AvatarComponent } from '../avatar/avatar.component';
@@ -19,6 +24,8 @@ const tuiImports = [TuiButton];
     TitleComponent,
     NavigationComponent,
     AvatarComponent,
+    RouterLink,
+    RouterLinkActive,
   ],
 })
 export class PageComponent {
