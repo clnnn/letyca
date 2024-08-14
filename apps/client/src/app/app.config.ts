@@ -6,6 +6,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { NG_EVENT_PLUGINS } from '@taiga-ui/event-plugins';
 import { ConnectionService } from './service/connection.service';
 import { SuggestionsService } from './service/suggestions.service';
+import { TypeWritterSerivce } from './service/typewriter.service';
+import { ChartService } from './service/chart.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,5 +17,7 @@ export const appConfig: ApplicationConfig = {
     NG_EVENT_PLUGINS,
     ConnectionService,
     SuggestionsService,
+    TypeWritterSerivce,
+    ChartService,
   ],
 };

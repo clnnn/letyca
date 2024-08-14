@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TuiAvatar } from '@taiga-ui/kit';
-import { User } from '../../models';
 import { AsyncPipe } from '@angular/common';
+import { User } from '../../state';
 
 @Component({
   selector: 'le-avatar',

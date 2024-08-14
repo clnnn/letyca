@@ -1,0 +1,7 @@
+<span class="tui-text_h3 title">{{ typeWrittenUserRequest$ | async }}</span>
+@if (store.previewChartLoading() === 'LOADING') {
+  <tui-block-status>
+    <h4>Loading</h4>
+    Generating your awesome chart...
+  </tui-block-status>
+}

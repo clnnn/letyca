@@ -1,23 +1,15 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   concat,
   concatMap,
   delay,
   from,
   ignoreElements,
-  interval,
-  map,
   of,
   repeat,
-  take,
 } from 'rxjs';
-
-type TypeParams = {
-  text: string;
-  speed: number;
-  backwards?: boolean;
-};
+import { TypeWritterSerivce } from '../../service/typewriter.service';
 
 @Component({
   selector: 'le-home',
@@ -41,6 +33,7 @@ type TypeParams = {
   `,
 })
 export class HomeComponent {
+  private readonly typeWritterService = inject(TypeWritterSerivce);
   protected readonly typewriterText$ = this.typewriterEffect([
     `Hi. I'm Letyca, your Analytical Copilot.`,
     'I am here to help you make sense of your data.',
@@ -57,21 +50,10 @@ export class HomeComponent {
 
   private typeEffect(text: string) {
     return concat(
-      this.type({ text, speed: 40 }),
+      this.typeWritterService.type({ text, speed: 40 }),
       of('').pipe(delay(1200), ignoreElements()),
-      this.type({ text, speed: 25, backwards: true }),
+      this.typeWritterService.type({ text, speed: 25, backwards: true }),
       of('').pipe(delay(300), ignoreElements()),
-    );
-  }
-
-  private type({ text, speed, backwards = false }: TypeParams) {
-    return interval(speed).pipe(
-      map((x) =>
-        backwards
-          ? text.substring(0, text.length - x)
-          : text.substring(0, x + 1),
-      ),
-      take(text.length),
     );
   }
 }

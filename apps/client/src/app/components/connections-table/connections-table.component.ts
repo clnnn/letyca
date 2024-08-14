@@ -3,10 +3,7 @@ import { TuiTitle, TuiButton, TuiIcon } from '@taiga-ui/core';
 import { TuiCell } from '@taiga-ui/layout';
 import { TuiTable } from '@taiga-ui/addon-table';
 import { TuiChip } from '@taiga-ui/kit';
-
-import { ConnectionListItem } from '@letyca/contracts';
-
-type Connection = ConnectionListItem;
+import { Connection } from '../../state';
 
 const tuiImports = [TuiCell, TuiTitle, TuiButton, TuiIcon, TuiTable, TuiChip];
 

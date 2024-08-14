@@ -8,8 +8,8 @@ import {
 import { TitleComponent } from '../title/title.component';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { AvatarComponent } from '../avatar/avatar.component';
-import { User } from '../../models';
 import { TuiButton } from '@taiga-ui/core';
+import { User } from '../../state';
 
 const tuiImports = [TuiButton];
 
