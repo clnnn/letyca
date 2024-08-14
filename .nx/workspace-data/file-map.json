@@ -35,8 +35,10 @@
     "ag-grid-community": "^30.2.0",
     "axios": "1.6.7",
     "dompurify": "2.2.9",
+    "lottie-web": "^5.12.2",
     "ng2-charts": "^6.0.0",
     "ngx-highlight-js": "^17.0.0",
+    "ngx-lottie": "^12.0.0",
     "pg": "^8.11.3",
     "pg-structure": "^7.15.2",
     "reflect-metadata": "^0.1.13",
@@ -224,6 +226,71 @@
           ]
         }
       ],
+      "contracts": [
+        {
+          "file": "contracts/.eslintrc.json",
+          "hash": "10868475473741014577"
+        },
+        {
+          "file": "contracts/README.md",
+          "hash": "16932128431962063377"
+        },
+        {
+          "file": "contracts/jest.config.ts",
+          "hash": "10733571996953449077"
+        },
+        {
+          "file": "contracts/project.json",
+          "hash": "3422854332292414280"
+        },
+        {
+          "file": "contracts/src/connection-list-item.dto.ts",
+          "hash": "4002572307574356273"
+        },
+        {
+          "file": "contracts/src/flag-response.dto.ts",
+          "hash": "12685813801065089658"
+        },
+        {
+          "file": "contracts/src/generate-chart.request.ts",
+          "hash": "13913775839230237254"
+        },
+        {
+          "file": "contracts/src/generate-chart.response.ts",
+          "hash": "16258389341331205488"
+        },
+        {
+          "file": "contracts/src/index.ts",
+          "hash": "3276743637713154561"
+        },
+        {
+          "file": "contracts/src/new-connection.dto.ts",
+          "hash": "4040930304295829005"
+        },
+        {
+          "file": "contracts/src/query-example.dto.ts",
+          "hash": "7381452099684733800"
+        },
+        {
+          "file": "contracts/src/test-setup.ts",
+          "hash": "12935735732682149507",
+          "deps": [
+            "npm:jest-preset-angular"
+          ]
+        },
+        {
+          "file": "contracts/tsconfig.json",
+          "hash": "4881022640630122902"
+        },
+        {
+          "file": "contracts/tsconfig.lib.json",
+          "hash": "4766185256741444917"
+        },
+        {
+          "file": "contracts/tsconfig.spec.json",
+          "hash": "2129196202529263968"
+        }
+      ],
       "client": [
         {
           "file": "apps/client/.eslintrc.json",
@@ -259,28 +326,49 @@
         },
         {
           "file": "apps/client/src/app/app.config.ts",
-          "hash": "9691939058138342415",
+          "hash": "9094086536521022602",
           "deps": [
             "npm:@angular/common",
             "npm:@angular/core",
             "npm:@angular/router",
             "npm:@angular/platform-browser",
-            "npm:@taiga-ui/event-plugins"
+            "npm:@taiga-ui/event-plugins",
+            "npm:ngx-lottie",
+            "npm:lottie-web"
           ]
         },
         {
           "file": "apps/client/src/app/app.routes.ts",
-          "hash": "5485649782413809312",
+          "hash": "14935256098304772965",
           "deps": [
             "npm:@angular/router"
           ]
         },
         {
           "file": "apps/client/src/app/components/avatar/avatar.component.ts",
-          "hash": "7580444193109711946",
+          "hash": "1024742124844090504",
           "deps": [
             "npm:@angular/core",
             "npm:@taiga-ui/kit",
+            "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/components/chart-preview/chart-preview.component.html",
+          "hash": "10087103521971976579"
+        },
+        {
+          "file": "apps/client/src/app/components/chart-preview/chart-preview.component.scss",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/client/src/app/components/chart-preview/chart-preview.component.ts",
+          "hash": "15749828627873926067",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:@taiga-ui/layout",
+            "npm:rxjs",
             "npm:@angular/common"
           ]
         },
@@ -294,14 +382,13 @@
         },
         {
           "file": "apps/client/src/app/components/connections-table/connections-table.component.ts",
-          "hash": "9025149870184543265",
+          "hash": "4115357681554412342",
           "deps": [
             "npm:@angular/core",
             "npm:@taiga-ui/core",
             "npm:@taiga-ui/layout",
             "npm:@taiga-ui/addon-table",
-            "npm:@taiga-ui/kit",
-            "contracts"
+            "npm:@taiga-ui/kit"
           ]
         },
         {
@@ -335,42 +422,43 @@
         },
         {
           "file": "apps/client/src/app/components/explore-prompt/explore-prompt.component.html",
-          "hash": "12899672791426109461"
+          "hash": "2526171155079422387"
         },
         {
           "file": "apps/client/src/app/components/explore-prompt/explore-prompt.component.scss",
-          "hash": "7355481616894535898"
+          "hash": "3902098880352368058"
         },
         {
           "file": "apps/client/src/app/components/explore-prompt/explore-prompt.component.ts",
-          "hash": "6530162913065179066",
+          "hash": "17769766530699553380",
           "deps": [
             "npm:@angular/core",
             "npm:@taiga-ui/core",
             "npm:@taiga-ui/kit",
             "npm:@taiga-ui/legacy",
             "npm:@angular/forms",
-            "npm:@taiga-ui/layout"
+            "npm:@taiga-ui/layout",
+            "npm:@angular/router"
           ]
         },
         {
           "file": "apps/client/src/app/components/explore/explore.component.html",
-          "hash": "16535977191016099189"
+          "hash": "9331651963987635089"
         },
         {
           "file": "apps/client/src/app/components/explore/explore.component.scss",
-          "hash": "16107680418613366660"
+          "hash": "9977442767144134395"
         },
         {
           "file": "apps/client/src/app/components/explore/explore.component.ts",
-          "hash": "13912805090169542087",
+          "hash": "3085919500700578508",
           "deps": [
             "npm:@angular/core"
           ]
         },
         {
           "file": "apps/client/src/app/components/home/home.component.ts",
-          "hash": "4643431285684498460",
+          "hash": "3283507223411072778",
           "deps": [
             "npm:@angular/common",
             "npm:@angular/core",
@@ -402,7 +490,7 @@
         },
         {
           "file": "apps/client/src/app/components/page/page.component.ts",
-          "hash": "6096858453740463902",
+          "hash": "14870274091118120874",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/router",
@@ -424,14 +512,6 @@
             "npm:@angular/core",
             "npm:rxjs"
           ]
-        },
-        {
-          "file": "apps/client/src/app/models/index.ts",
-          "hash": "878059302405567240"
-        },
-        {
-          "file": "apps/client/src/app/models/user.model.ts",
-          "hash": "4546757088950660626"
         },
         {
           "file": "apps/client/src/app/service/chart.service.ts",
@@ -456,7 +536,7 @@
         },
         {
           "file": "apps/client/src/app/service/suggestions.service.ts",
-          "hash": "9041561727364460907",
+          "hash": "12476324581542112850",
           "deps": [
             "npm:@angular/common",
             "npm:@angular/core",
@@ -464,8 +544,16 @@
           ]
         },
         {
+          "file": "apps/client/src/app/service/typewriter.service.ts",
+          "hash": "7292110335054931237",
+          "deps": [
+            "npm:@angular/core",
+            "npm:rxjs"
+          ]
+        },
+        {
           "file": "apps/client/src/app/state.ts",
-          "hash": "12242958747554748845",
+          "hash": "5348416818079974955",
           "deps": [
             "contracts",
             "npm:@ngrx/signals",
@@ -575,71 +663,6 @@
         {
           "file": "apps/server-e2e/tsconfig.spec.json",
           "hash": "14954872453723519891"
-        }
-      ],
-      "contracts": [
-        {
-          "file": "contracts/.eslintrc.json",
-          "hash": "10868475473741014577"
-        },
-        {
-          "file": "contracts/README.md",
-          "hash": "16932128431962063377"
-        },
-        {
-          "file": "contracts/jest.config.ts",
-          "hash": "10733571996953449077"
-        },
-        {
-          "file": "contracts/project.json",
-          "hash": "3422854332292414280"
-        },
-        {
-          "file": "contracts/src/connection-list-item.dto.ts",
-          "hash": "4002572307574356273"
-        },
-        {
-          "file": "contracts/src/flag-response.dto.ts",
-          "hash": "12685813801065089658"
-        },
-        {
-          "file": "contracts/src/generate-chart.request.ts",
-          "hash": "13913775839230237254"
-        },
-        {
-          "file": "contracts/src/generate-chart.response.ts",
-          "hash": "16258389341331205488"
-        },
-        {
-          "file": "contracts/src/index.ts",
-          "hash": "3276743637713154561"
-        },
-        {
-          "file": "contracts/src/new-connection.dto.ts",
-          "hash": "4040930304295829005"
-        },
-        {
-          "file": "contracts/src/query-example.dto.ts",
-          "hash": "7381452099684733800"
-        },
-        {
-          "file": "contracts/src/test-setup.ts",
-          "hash": "12935735732682149507",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
-        },
-        {
-          "file": "contracts/tsconfig.json",
-          "hash": "4881022640630122902"
-        },
-        {
-          "file": "contracts/tsconfig.lib.json",
-          "hash": "4766185256741444917"
-        },
-        {
-          "file": "contracts/tsconfig.spec.json",
-          "hash": "2129196202529263968"
         }
       ]
     },
@@ -786,11 +809,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "12159845594746176358"
+        "hash": "14962237312512219599"
       },
       {
         "file": "package.json",
-        "hash": "5284917280651812023"
+        "hash": "16258495075793773341"
       },
       {
         "file": "prisma/migrations/20231015145732_init/migration.sql",

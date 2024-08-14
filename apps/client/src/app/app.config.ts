@@ -8,6 +8,18 @@ import { ConnectionService } from './service/connection.service';
 import { SuggestionsService } from './service/suggestions.service';
 import { TypeWritterSerivce } from './service/typewriter.service';
 import { ChartService } from './service/chart.service';
+import {
+  provideCacheableAnimationLoader,
+  provideLottieOptions,
+} from 'ngx-lottie';
+import player from 'lottie-web';
+
+const services = [
+  ConnectionService,
+  SuggestionsService,
+  TypeWritterSerivce,
+  ChartService,
+];
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,9 +27,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     NG_EVENT_PLUGINS,
-    ConnectionService,
-    SuggestionsService,
-    TypeWritterSerivce,
-    ChartService,
+    provideLottieOptions({ player: () => player }),
+    provideCacheableAnimationLoader(),
+    ...services,
   ],
 };

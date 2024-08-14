@@ -6,11 +6,14 @@ import { TypeWritterSerivce } from '../../service/typewriter.service';
 import { AsyncPipe } from '@angular/common';
 import { Store } from '../../state';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChartGenerationLoadingComponent } from '../chart-generation-loading/chart-generation-loading.component';
+
+const tuiImports = [TuiBlockStatus];
 
 @Component({
   selector: 'le-chart-preview',
   standalone: true,
-  imports: [TuiBlockStatus, AsyncPipe],
+  imports: [...tuiImports, AsyncPipe, ChartGenerationLoadingComponent],
   templateUrl: './chart-preview.component.html',
   styleUrls: ['./chart-preview.component.scss'],
 })
