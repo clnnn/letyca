@@ -2,7 +2,6 @@ import { Component, effect, inject, OnInit } from '@angular/core';
 import { Store } from '../../state';
 import { ExploreHeaderComponent } from '../explore-header/explore-header.component';
 import { ExplorePromptComponent } from '../explore-prompt/explore-prompt.component';
-import { LoadingState } from '../../utils';
 
 @Component({
   selector: 'le-explore',
@@ -17,8 +16,6 @@ export class ExploreComponent implements OnInit {
   ngOnInit(): void {
     this.store.loadConnections();
   }
-
-  chartLoading = LoadingState.INIT;
 
   selectConnection(connectionId?: string): void {
     if (!connectionId) {

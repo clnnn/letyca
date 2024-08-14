@@ -35,9 +35,6 @@ export class ExplorePromptComponent {
   protected userRequest = '';
 
   @Input({ required: true })
-  chartLoading: LoadingState = LoadingState.INIT;
-
-  @Input({ required: true })
   connectionSelected!: boolean;
 
   @Input({ required: true })

@@ -13,6 +13,8 @@ export class SuggestionsService {
       'I want to display monthly sales of condiments from 1997',
       'In descending order give all products with a price greater than 100',
       'Show me the total sales by category',
+      'Give me the total sales by year',
+      'What is the total sales by month?',
     ]).pipe(delay(3000));
   }
 }
