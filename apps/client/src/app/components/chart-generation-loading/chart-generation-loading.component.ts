@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AnimationOptions, LottieComponent } from 'ngx-lottie';
 import { TuiBlockStatus } from '@taiga-ui/layout';
 
@@ -8,6 +8,7 @@ const tuiImports = [TuiBlockStatus];
   selector: 'le-chart-generation-loading',
   standalone: true,
   imports: [...tuiImports, LottieComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <tui-block-status>
       <ng-lottie
@@ -16,8 +17,8 @@ const tuiImports = [TuiBlockStatus];
         tuiSlot="top"
         [options]="options"
       />
-      <h4>Loading</h4>
-      Generating your awesome chart...
+      <h2>Generating...</h2>
+      Be patient, the chart is being preparing for you.
     </tui-block-status>
   `,
 })
