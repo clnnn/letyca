@@ -51,7 +51,7 @@ export class HomeComponent {
   private typewriterEffect(text: string[]) {
     return from(text).pipe(
       concatMap((text) => this.typeEffect(text)),
-      repeat()
+      repeat(),
     );
   }
 
@@ -60,7 +60,7 @@ export class HomeComponent {
       this.type({ text, speed: 40 }),
       of('').pipe(delay(1200), ignoreElements()),
       this.type({ text, speed: 25, backwards: true }),
-      of('').pipe(delay(300), ignoreElements())
+      of('').pipe(delay(300), ignoreElements()),
     );
   }
 
@@ -69,9 +69,9 @@ export class HomeComponent {
       map((x) =>
         backwards
           ? text.substring(0, text.length - x)
-          : text.substring(0, x + 1)
+          : text.substring(0, x + 1),
       ),
-      take(text.length)
+      take(text.length),
     );
   }
 }

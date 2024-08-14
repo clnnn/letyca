@@ -1,0 +1,26 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .suggestions-container {
+    display: flex;
+    gap: 1rem;
+
+    .list {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  }
+
+  .message-container {
+    position: relative;
+    .send-button {
+      position: absolute;
+      top: 50%;
+      right: 3px;
+      transform: translateY(-50%);
+    }
+  }
+}

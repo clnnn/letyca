@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { NG_EVENT_PLUGINS } from '@taiga-ui/event-plugins';
 import { ConnectionService } from './service/connection.service';
+import { SuggestionsService } from './service/suggestions.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,5 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     NG_EVENT_PLUGINS,
     ConnectionService,
+    SuggestionsService,
   ],
 };

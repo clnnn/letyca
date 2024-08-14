@@ -1,0 +1,39 @@
+<div class="message-container">
+  <tui-textarea
+    class="tui-space_bottom-4 field-large"
+    [(ngModel)]="userRequest"
+    [disabled]="chartLoading === 'LOADING' || !connectionSelected"
+  >
+    What do you want to display?
+  </tui-textarea>
+  <button
+    tuiIconButton
+    iconEnd="search"
+    type="submit"
+    class="tui-space_right-3 tui-space_bottom-3 send-button"
+    [loading]="chartLoading === 'LOADING'"
+    [disabled]="
+      userRequest.length === 0 ||
+      chartLoading === 'LOADING' ||
+      !connectionSelected
+    "
+    (click)="submitUserRequest.emit(userRequest)"
+  ></button>
+</div>
+
+<section
+  class="suggestions-container"
+  tuiCardLarge
+  tuiSurface="flat"
+  [style]="{ opacity: !connectionSelected ? 0 : 1 }"
+  [tuiSkeleton]="suggestionsLoading === 'LOADING'"
+>
+  <h2 tuiHeader>
+    <span tuiTitle>Suggestions</span>
+  </h2>
+  <div class="list">
+    @for (suggestion of suggestions; track $index) {
+      <tui-chip>{{ suggestion }}</tui-chip>
+    }
+  </div>
+</section>

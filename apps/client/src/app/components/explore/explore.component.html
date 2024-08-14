@@ -2,5 +2,11 @@
   title="Explore"
   [connections]="store.connections()"
   [connectionsLoading]="store.connectionsLoading()"
-  (connectionChange)="store.selectConnection($event.id)"
-></le-explore-header>
+  (connectionChange)="selectConnection($event.id)"
+/>
+<le-explore-prompt
+  [connectionSelected]="store.selectedConnectionId() !== null"
+  [chartLoading]="chartLoading"
+  [suggestions]="store.suggestions()"
+  [suggestionsLoading]="store.suggestionsLoading()"
+/>
