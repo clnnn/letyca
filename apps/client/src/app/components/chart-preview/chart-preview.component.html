@@ -2,3 +2,7 @@
 @if (store.previewChartLoading() === 'LOADING') {
   <le-chart-generation-loading />
 }
+
+@if (store.previewChartLoading() === 'ERROR') {
+  <le-chart-generation-error />
+}

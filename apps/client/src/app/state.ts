@@ -1,8 +1,4 @@
-import {
-  ConnectionListItem,
-  GenerateChartRequest,
-  GenerateChartResponse,
-} from '@letyca/contracts';
+import { ConnectionListItem, GenerateChartResponse } from '@letyca/contracts';
 import { LoadingState } from './utils';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -97,7 +93,7 @@ export const Store = signalStore(
           }),
         ),
       ),
-      generateChart: rxMethod<GenerateChartRequest>(
+      generateChart: rxMethod<{ connectionId: string; userRequest: string }>(
         pipe(
           tap(() =>
             patchState(store, { previewChartLoading: LoadingState.LOADING }),
