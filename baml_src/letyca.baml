@@ -31,6 +31,7 @@ function GenerateSQL(userRequest: string, ddlStatements: string) -> string {
     - Remember that revenue is price multiplied by quantity
     - Remember that cost is supply_price multiplied by quantity
     - Remember that the aggregate function has always the alias 'value'
+    - IDs should be returned as strings
 
     DDL statements:
     {{ ddlStatements }}

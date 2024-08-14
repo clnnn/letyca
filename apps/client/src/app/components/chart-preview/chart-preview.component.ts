@@ -8,6 +8,7 @@ import { Store } from '../../state';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ChartGenerationLoadingComponent } from '../chart-generation-loading/chart-generation-loading.component';
 import { ChartGenerationErrorComponent } from '../chart-generation-error/chart-generation-error.component';
+import { ChartComponent } from '../chart/chart.component';
 
 const tuiImports = [TuiBlockStatus];
 
@@ -19,6 +20,7 @@ const tuiImports = [TuiBlockStatus];
     AsyncPipe,
     ChartGenerationLoadingComponent,
     ChartGenerationErrorComponent,
+    ChartComponent,
   ],
   templateUrl: './chart-preview.component.html',
   styleUrls: ['./chart-preview.component.scss'],
@@ -47,10 +49,17 @@ export class ChartPreviewComponent implements OnInit {
   ngOnInit(): void {
     combineLatest([this.connectionIdParam$, this.userRequestParam$])
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(([connectionId, userRequest]) => {
-        if (connectionId !== null && userRequest !== null) {
-          this.store.generateChart({ connectionId, userRequest });
-        }
-      });
+      .subscribe(([connectionId, userRequest]) =>
+        this.paramsLoaded(connectionId, userRequest),
+      );
+  }
+
+  private paramsLoaded(
+    connectionId: string | null,
+    userRequest: string | null,
+  ) {
+    if (connectionId !== null && userRequest !== null) {
+      this.store.generateChart({ connectionId, userRequest });
+    }
   }
 }

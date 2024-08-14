@@ -4,12 +4,10 @@ import pgStructure, { Table } from 'pg-structure';
 import { Connection } from 'prisma/prisma-client';
 
 @Injectable()
-export class QueryService {
+export class QueryGenerationService {
   async generate(userRequest: string, connection: Connection): Promise<string> {
     const ddlStatements = await this.ddlStatements(connection);
-    const sql = await b.GenerateSQL(userRequest, ddlStatements);
-    // validations
-    return sql;
+    return await b.GenerateSQL(userRequest, ddlStatements);
   }
 
   private async ddlStatements(connection: Connection): Promise<string> {
@@ -21,7 +19,7 @@ export class QueryService {
         user: connection.username,
         password: connection.password,
       },
-      { includeSchemas: [connection.schema] }
+      { includeSchemas: [connection.schema] },
     );
 
     const tables = db.schemas.get(connection.schema).tables;

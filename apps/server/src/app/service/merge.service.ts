@@ -1,61 +1,49 @@
-import { ChartMetadata, ChartType } from 'baml_client';
 import { Injectable } from '@nestjs/common';
-import { RawData } from './data-layer.service';
-
-export type Chart = ChartMetadata & {
-  countLabelData?: number;
-  pieData?: {
-    labels: string[];
-    values: number[];
-  };
-  lineData?: {
-    labels: string[];
-    values: number[];
-  };
-  barData?: {
-    labels: string[];
-    values: number[];
-  };
-};
+import { Row } from './data-layer.service';
+import { Chart, ChartMetadata } from '@letyca/contracts';
 
 @Injectable()
 export class MergeService {
-  concat(metadata: ChartMetadata, rawData: RawData[]): Chart {
-    if (metadata.chartType === ChartType.CountLabel && 'value' in rawData[0]) {
+  concat(metadata: ChartMetadata, rows: Row[]): Chart {
+    const chartType = metadata.chartType;
+    if (chartType === 'countLabel') {
       return {
         ...metadata,
-        countLabelData: Number(rawData[0].value),
+        chartType,
+        data: rows[0][Object.keys(rows[0])[0]] as unknown as number,
       };
     }
 
-    const data = {
-      labels: rawData.map((r) => ('label' in r && r.label ? r.label : '')),
-      values: rawData.map((r) => Number(r.value)),
-    };
+    if (chartType === 'pie' || chartType === 'line' || chartType === 'bar') {
+      const labels: string[] = [];
+      const values: number[] = [];
+      for (const row of rows) {
+        if (typeof row !== 'object') {
+          continue;
+        }
 
-    if (metadata.chartType === ChartType.Pie && rawData.length > 0) {
+        for (const key in row) {
+          const cellValue = row[key as keyof typeof row];
+          if (typeof cellValue === 'bigint') {
+            values.push(Number(cellValue));
+          }
+
+          // if (typeof cellValue === 'number') {
+          //   values.push(cellValue);
+          // }
+
+          if (typeof cellValue === 'string') {
+            labels.push(cellValue);
+          }
+        }
+      }
+
       return {
         ...metadata,
-        pieData: data,
-      };
-    }
-
-    if (metadata.chartType === ChartType.Line && rawData.length > 0) {
-      return {
-        ...metadata,
-        lineData: {
-          labels: metadata.title,
-          ...data,
-        },
-      };
-    }
-
-    if (metadata.chartType === ChartType.Bar && rawData.length > 0) {
-      return {
-        ...metadata,
-        barData: {
-          labels: metadata.title,
-          ...data,
+        chartType,
+        data: {
+          labels,
+          values,
         },
       };
     }

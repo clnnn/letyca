@@ -1,8 +1,13 @@
 <span class="tui-text_h3 title">{{ typeWrittenUserRequest$ | async }}</span>
-@if (store.previewChartLoading() === 'LOADING') {
-  <le-chart-generation-loading />
-}
 
-@if (store.previewChartLoading() === 'ERROR') {
-  <le-chart-generation-error />
+@switch (store.previewChartLoading()) {
+  @case ('ERROR') {
+    <le-chart-generation-error />
+  }
+  @case ('LOADING') {
+    <le-chart-generation-loading />
+  }
+  @case ('LOADED') {
+    <le-chart />
+  }
 }

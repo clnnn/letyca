@@ -1,4 +1,8 @@
-import { ConnectionListItem, GenerateChartResponse } from '@letyca/contracts';
+import {
+  AbstractChart,
+  ConnectionListItem,
+  GenerateChartResponse,
+} from '@letyca/contracts';
 import { LoadingState } from './utils';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -18,6 +22,7 @@ export type User = {
 };
 
 export type Connection = ConnectionListItem;
+
 export type GeneratedPreviewChart = GenerateChartResponse;
 
 type State = {

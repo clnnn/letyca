@@ -1,25 +1,40 @@
-export type ChartMetadata = {
-  title: string;
-  chartType: 'countLabel' | 'pie' | 'line' | 'bar';
+type ChartDataSet = {
+  labels: string[];
+  values: (number | bigint)[];
 };
 
-export type ChartData = {
-  countLabelData?: number;
-  pieData?: {
-    labels: string[];
-    values: number[];
-  };
-  lineData?: {
-    labels: string[];
-    values: number[];
-  };
-  barData?: {
-    labels: string[];
-    values: number[];
-  };
+export type ChartMetadata = {
+  chartType: 'countLabel' | 'pie' | 'line' | 'bar';
+  title: string;
 };
+
+export type AbstractChart = ChartMetadata & {
+  data: number | ChartDataSet;
+};
+
+interface CountLabel extends AbstractChart {
+  chartType: 'countLabel';
+  data: number;
+}
+
+interface PieChart extends AbstractChart {
+  chartType: 'pie';
+  data: ChartDataSet;
+}
+
+interface LineChart extends AbstractChart {
+  chartType: 'line';
+  data: ChartDataSet;
+}
+
+interface BarChart extends AbstractChart {
+  chartType: 'bar';
+  data: ChartDataSet;
+}
+
+export type Chart = CountLabel | PieChart | LineChart | BarChart;
 
 export type GenerateChartResponse = {
-  chart: ChartMetadata & ChartData;
+  chart: Chart;
   sql: string;
 };
