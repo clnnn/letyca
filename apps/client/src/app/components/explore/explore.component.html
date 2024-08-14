@@ -5,7 +5,7 @@
   (connectionChange)="selectConnection($event.id)"
 />
 <le-explore-prompt
-  [connectionSelected]="store.selectedConnectionId() !== null"
+  [connectionId]="selectedConnectionId()"
   [suggestions]="store.suggestions()"
   [suggestionsLoading]="store.suggestionsLoading()"
 />

@@ -2,7 +2,7 @@
   <tui-textarea
     class="tui-space_bottom-4 field-large"
     [(ngModel)]="userRequest"
-    [disabled]="!connectionSelected"
+    [disabled]="connectionId === null"
   >
     What do you want to display?
   </tui-textarea>
@@ -11,8 +11,9 @@
     iconEnd="search"
     type="submit"
     class="tui-space_right-3 tui-space_bottom-3 send-button"
-    [disabled]="userRequest.length === 0 || !connectionSelected"
-    (click)="submitUserRequest.emit(userRequest)"
+    [disabled]="userRequest.length === 0 || connectionId === null"
+    routerLink="/explore/charts"
+    [queryParams]="{ connection: connectionId, request: userRequest }"
   ></button>
 </div>
 
@@ -20,7 +21,7 @@
   class="suggestions-container"
   tuiCardLarge
   tuiSurface="flat"
-  [style]="{ opacity: !connectionSelected ? 0 : 1 }"
+  [style]="{ opacity: connectionId === null ? 0 : 1 }"
   [tuiSkeleton]="suggestionsLoading === 'LOADING'"
 >
   <h2 tuiHeader>

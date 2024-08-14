@@ -17,7 +17,6 @@ import { SuggestionsService } from './service/suggestions.service';
 type State = {
   connectionsLoading: LoadingState;
   connections: ConnectionListItem[];
-  selectedConnectionId: string | null;
 
   suggestions: string[];
   suggestionsLoading: LoadingState;
@@ -26,7 +25,6 @@ type State = {
 const initialState: State = {
   connectionsLoading: LoadingState.INIT,
   connections: [],
-  selectedConnectionId: null,
 
   suggestions: [],
   suggestionsLoading: LoadingState.INIT,
@@ -35,23 +33,17 @@ const initialState: State = {
 export const Store = signalStore(
   { providedIn: 'root' },
   withState(initialState),
-  withComputed(({ connections, selectedConnectionId }) => ({
-    selectedConnection: computed(
-      () =>
-        connections().find((conn) => conn.id === selectedConnectionId()) ?? null
-    ),
-  })),
   withMethods(
     (
       store,
       connectionService = inject(ConnectionService),
-      suggestionsService = inject(SuggestionsService)
+      suggestionsService = inject(SuggestionsService),
     ) => ({
       loadConnections: rxMethod<void>(
         pipe(
           distinctUntilChanged(),
           tap(() =>
-            patchState(store, { connectionsLoading: LoadingState.LOADING })
+            patchState(store, { connectionsLoading: LoadingState.LOADING }),
           ),
           exhaustMap(() => connectionService.fetchAll()),
           tapResponse({
@@ -62,20 +54,17 @@ export const Store = signalStore(
               }),
             error: () =>
               patchState(store, { connectionsLoading: LoadingState.ERROR }),
-          })
-        )
+          }),
+        ),
       ),
-      selectConnection(selectedConnectionId: string): void {
-        patchState(store, () => ({ selectedConnectionId }));
-      },
       loadSuggestions: rxMethod<string>(
         pipe(
           distinctUntilChanged(),
           tap(() =>
-            patchState(store, { suggestionsLoading: LoadingState.LOADING })
+            patchState(store, { suggestionsLoading: LoadingState.LOADING }),
           ),
           exhaustMap((connectionId: string) =>
-            suggestionsService.fetchAll(connectionId)
+            suggestionsService.fetchAll(connectionId),
           ),
           tapResponse({
             next: (recommendations) =>
@@ -87,9 +76,9 @@ export const Store = signalStore(
               patchState(store, {
                 suggestionsLoading: LoadingState.ERROR,
               }),
-          })
-        )
+          }),
+        ),
       ),
-    })
-  )
+    }),
+  ),
 );

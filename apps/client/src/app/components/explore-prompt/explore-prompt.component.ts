@@ -11,6 +11,7 @@ import { TuiTextareaModule } from '@taiga-ui/legacy';
 import { LoadingState } from '../../utils';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiCardLarge } from '@taiga-ui/layout';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 const tuiImports = [
   TuiTextareaModule,
@@ -25,7 +26,13 @@ const tuiImports = [
 @Component({
   selector: 'le-explore-prompt',
   standalone: true,
-  imports: [...tuiImports, ReactiveFormsModule, FormsModule],
+  imports: [
+    ...tuiImports,
+    ReactiveFormsModule,
+    FormsModule,
+    RouterLink,
+    RouterLinkActive,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './explore-prompt.component.html',
   styleUrls: ['./explore-prompt.component.scss'],
@@ -35,13 +42,11 @@ export class ExplorePromptComponent {
   protected userRequest = '';
 
   @Input({ required: true })
-  connectionSelected!: boolean;
+  connectionId!: string | null;
 
   @Input({ required: true })
   suggestions: string[] = [];
 
   @Input({ required: true })
   suggestionsLoading: LoadingState = LoadingState.INIT;
-
-  readonly submitUserRequest = output<string>();
 }

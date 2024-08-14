@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Store } from '../../state';
 import { ExploreHeaderComponent } from '../explore-header/explore-header.component';
 import { ExplorePromptComponent } from '../explore-prompt/explore-prompt.component';
@@ -12,6 +12,7 @@ import { ExplorePromptComponent } from '../explore-prompt/explore-prompt.compone
 })
 export class ExploreComponent implements OnInit {
   readonly store = inject(Store);
+  readonly selectedConnectionId = signal<string | null>(null);
 
   ngOnInit(): void {
     this.store.loadConnections();
@@ -21,7 +22,8 @@ export class ExploreComponent implements OnInit {
     if (!connectionId) {
       return;
     }
-    this.store.selectConnection(connectionId);
+
+    this.selectedConnectionId.set(connectionId);
     this.store.loadSuggestions(connectionId);
   }
 }
