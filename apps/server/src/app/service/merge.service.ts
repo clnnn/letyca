@@ -1,16 +1,21 @@
 import { Injectable } from '@nestjs/common';
 import { Row } from './data-layer.service';
 import { Chart, ChartMetadata } from '@letyca/contracts';
+import { AggregationSQLQuery } from './query-parsing.service';
 
 @Injectable()
 export class MergeService {
-  concat(metadata: ChartMetadata, rows: Row[]): Chart {
+  concat(
+    metadata: ChartMetadata,
+    rows: Row[],
+    query: AggregationSQLQuery,
+  ): Chart {
     const chartType = metadata.chartType;
     if (chartType === 'countLabel') {
       return {
         ...metadata,
         chartType,
-        data: rows[0][Object.keys(rows[0])[0]] as unknown as number,
+        data: rows[0][query.aggregatedValue] as unknown as number,
       };
     }
 

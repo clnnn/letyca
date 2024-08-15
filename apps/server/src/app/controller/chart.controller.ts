@@ -40,13 +40,13 @@ export class ChartController {
     );
     this.logger.log('Generated SQL', rawSql);
 
-    const sqlQuery = this.queryParsingService.parse(rawSql);
-    this.logger.debug('Parsed SQL', sqlQuery);
+    const query = this.queryParsingService.parse(rawSql);
+    this.logger.debug('Parsed SQL', query);
 
-    const result = await this.dataLayer.runQuery(sqlQuery, connection);
+    const result = await this.dataLayer.runQuery(query.rawSQL, connection);
     this.logger.debug('Got result', result);
 
-    const chart = this.mergeService.concat(metadata, result);
+    const chart = this.mergeService.concat(metadata, result, query);
     this.logger.debug('Generated chart', chart);
 
     return {
