@@ -77,7 +77,9 @@ export class MergeService {
     }
 
     return {
-      chartType: 'notSupported',
+      title: 'Unknown chart type',
+      chartType: 'countLabel',
+      data: [-1],
     };
   }
 }

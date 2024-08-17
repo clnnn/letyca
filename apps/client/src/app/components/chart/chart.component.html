@@ -1,1 +1,7 @@
-<h1>Hello</h1>
+@if (chart) {
+  @switch (chart.chartType) {
+    @case ('countLabel') {
+      <le-count-label [chart]="chart" />
+    }
+  }
+}

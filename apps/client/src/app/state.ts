@@ -4,10 +4,16 @@ import {
   GenerateChartResponse,
 } from '@letyca/contracts';
 import { LoadingState } from './utils';
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withComputed,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { distinctUntilChanged, exhaustMap, pipe, tap } from 'rxjs';
-import { inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { ConnectionService } from './service/connection.service';
 import { tapResponse } from '@ngrx/operators';
 import { SuggestionsService } from './service/suggestions.service';

@@ -181,7 +181,7 @@
         },
         {
           "file": "apps/server/src/app/service/merge.service.ts",
-          "hash": "15340202653400434716",
+          "hash": "5155516783791353574",
           "deps": [
             "npm:@nestjs/common",
             "contracts"
@@ -202,7 +202,7 @@
         },
         {
           "file": "apps/server/src/app/service/query-parsing.service.ts",
-          "hash": "16876602656686408184",
+          "hash": "4707942879786804136",
           "deps": [
             "npm:@nestjs/common",
             "npm:pgsql-parser",
@@ -346,7 +346,7 @@
         },
         {
           "file": "apps/client/src/app/components/chart/chart.component.html",
-          "hash": "7643338043631396718"
+          "hash": "7012088040859752741"
         },
         {
           "file": "apps/client/src/app/components/chart/chart.component.scss",
@@ -354,9 +354,11 @@
         },
         {
           "file": "apps/client/src/app/components/chart/chart.component.ts",
-          "hash": "9575389561128964794",
+          "hash": "12921616117233574401",
           "deps": [
-            "npm:@angular/core"
+            "npm:@angular/core",
+            "npm:@taiga-ui/layout",
+            "npm:@taiga-ui/core"
           ]
         },
         {
@@ -384,6 +386,16 @@
           "deps": [
             "npm:@angular/core",
             "npm:@taiga-ui/core"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/components/count-label/count-label.component.ts",
+          "hash": "6115311583431600922",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@taiga-ui/core",
+            "npm:@taiga-ui/layout",
+            "contracts"
           ]
         },
         {
@@ -540,7 +552,7 @@
         },
         {
           "file": "apps/client/src/app/state.ts",
-          "hash": "6326938606107661065",
+          "hash": "12383513144743851269",
           "deps": [
             "contracts",
             "npm:@ngrx/signals",
@@ -612,71 +624,6 @@
           "hash": "2927375835638640771"
         }
       ],
-      "contracts": [
-        {
-          "file": "contracts/.eslintrc.json",
-          "hash": "10868475473741014577"
-        },
-        {
-          "file": "contracts/README.md",
-          "hash": "16932128431962063377"
-        },
-        {
-          "file": "contracts/jest.config.ts",
-          "hash": "10733571996953449077"
-        },
-        {
-          "file": "contracts/project.json",
-          "hash": "3422854332292414280"
-        },
-        {
-          "file": "contracts/src/connection-list-item.dto.ts",
-          "hash": "4002572307574356273"
-        },
-        {
-          "file": "contracts/src/flag-response.dto.ts",
-          "hash": "12685813801065089658"
-        },
-        {
-          "file": "contracts/src/generate-chart.request.ts",
-          "hash": "13913775839230237254"
-        },
-        {
-          "file": "contracts/src/generate-chart.response.ts",
-          "hash": "12885165085853526516"
-        },
-        {
-          "file": "contracts/src/index.ts",
-          "hash": "3276743637713154561"
-        },
-        {
-          "file": "contracts/src/new-connection.dto.ts",
-          "hash": "4040930304295829005"
-        },
-        {
-          "file": "contracts/src/query-example.dto.ts",
-          "hash": "7381452099684733800"
-        },
-        {
-          "file": "contracts/src/test-setup.ts",
-          "hash": "12935735732682149507",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
-        },
-        {
-          "file": "contracts/tsconfig.json",
-          "hash": "4881022640630122902"
-        },
-        {
-          "file": "contracts/tsconfig.lib.json",
-          "hash": "4766185256741444917"
-        },
-        {
-          "file": "contracts/tsconfig.spec.json",
-          "hash": "2129196202529263968"
-        }
-      ],
       "server-e2e": [
         {
           "file": "apps/server-e2e/.eslintrc.json",
@@ -719,6 +666,71 @@
         {
           "file": "apps/server-e2e/tsconfig.spec.json",
           "hash": "14954872453723519891"
+        }
+      ],
+      "contracts": [
+        {
+          "file": "contracts/.eslintrc.json",
+          "hash": "10868475473741014577"
+        },
+        {
+          "file": "contracts/README.md",
+          "hash": "16932128431962063377"
+        },
+        {
+          "file": "contracts/jest.config.ts",
+          "hash": "10733571996953449077"
+        },
+        {
+          "file": "contracts/project.json",
+          "hash": "3422854332292414280"
+        },
+        {
+          "file": "contracts/src/connection-list-item.dto.ts",
+          "hash": "4002572307574356273"
+        },
+        {
+          "file": "contracts/src/flag-response.dto.ts",
+          "hash": "12685813801065089658"
+        },
+        {
+          "file": "contracts/src/generate-chart.request.ts",
+          "hash": "13913775839230237254"
+        },
+        {
+          "file": "contracts/src/generate-chart.response.ts",
+          "hash": "6079451011811414124"
+        },
+        {
+          "file": "contracts/src/index.ts",
+          "hash": "3276743637713154561"
+        },
+        {
+          "file": "contracts/src/new-connection.dto.ts",
+          "hash": "4040930304295829005"
+        },
+        {
+          "file": "contracts/src/query-example.dto.ts",
+          "hash": "7381452099684733800"
+        },
+        {
+          "file": "contracts/src/test-setup.ts",
+          "hash": "12935735732682149507",
+          "deps": [
+            "npm:jest-preset-angular"
+          ]
+        },
+        {
+          "file": "contracts/tsconfig.json",
+          "hash": "4881022640630122902"
+        },
+        {
+          "file": "contracts/tsconfig.lib.json",
+          "hash": "4766185256741444917"
+        },
+        {
+          "file": "contracts/tsconfig.spec.json",
+          "hash": "2129196202529263968"
         }
       ]
     },

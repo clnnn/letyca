@@ -14276,12 +14276,12 @@
       },
       {
         "source": "client",
-        "target": "npm:@angular/forms",
+        "target": "contracts",
         "type": "static"
       },
       {
         "source": "client",
-        "target": "contracts",
+        "target": "npm:@angular/forms",
         "type": "static"
       },
       {

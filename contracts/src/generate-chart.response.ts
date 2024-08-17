@@ -14,36 +14,27 @@ export type AbstractChart<T> = ChartMetadata & {
   data: T;
 };
 
-interface CountLabel extends AbstractChart<number[]> {
+export interface CountLabel extends AbstractChart<number[]> {
   chartType: 'countLabel';
   data: number[];
 }
 
-interface PieChart extends AbstractChart<ChartDataSet> {
+export interface PieChart extends AbstractChart<ChartDataSet> {
   chartType: 'pie';
   data: ChartDataSet;
 }
 
-interface LineChart extends AbstractChart<ChartDataSet> {
+export interface LineChart extends AbstractChart<ChartDataSet> {
   chartType: 'line';
   data: ChartDataSet;
 }
 
-interface BarChart extends AbstractChart<ChartDataSet> {
+export interface BarChart extends AbstractChart<ChartDataSet> {
   chartType: 'bar';
   data: ChartDataSet;
 }
 
-interface NotSupportedChart {
-  chartType: 'notSupported';
-}
-
-export type Chart =
-  | CountLabel
-  | PieChart
-  | LineChart
-  | BarChart
-  | NotSupportedChart;
+export type Chart = CountLabel | PieChart | LineChart | BarChart;
 
 export type GenerateChartResponse = {
   chart: Chart;

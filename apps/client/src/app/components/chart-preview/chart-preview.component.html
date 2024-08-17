@@ -2,12 +2,12 @@
 
 @switch (store.previewChartLoading()) {
   @case ('ERROR') {
-    <le-chart-generation-error />
+    <le-chart-generation-error class="content" />
   }
   @case ('LOADING') {
-    <le-chart-generation-loading />
+    <le-chart-generation-loading class="content" />
   }
   @case ('LOADED') {
-    <le-chart />
+    <le-chart class="content" />
   }
 }
