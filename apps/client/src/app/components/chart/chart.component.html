@@ -3,5 +3,17 @@
     @case ('countLabel') {
       <le-count-label [chart]="chart" />
     }
+
+    @case ('pie') {
+      <le-pie-chart [chart]="chart" />
+    }
+
+    @case ('bar') {
+      <le-bar-chart [chart]="chart" />
+    }
+
+    @case ('line') {
+      <le-line-chart [chart]="chart" />
+    }
   }
 }

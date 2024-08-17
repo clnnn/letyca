@@ -13,6 +13,7 @@ import {
   provideLottieOptions,
 } from 'ngx-lottie';
 import player from 'lottie-web';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 const services = [
   ConnectionService,
@@ -29,6 +30,7 @@ export const appConfig: ApplicationConfig = {
     NG_EVENT_PLUGINS,
     provideLottieOptions({ player: () => player }),
     provideCacheableAnimationLoader(),
+    provideCharts(withDefaultRegisterables()),
     ...services,
   ],
 };

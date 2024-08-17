@@ -1,5 +1,5 @@
 type ChartDataSet = {
-  labels: (string | number | boolean)[];
+  labels: string[];
   datasets: {
     data: number[];
   }[];
