@@ -195,4 +195,58 @@ describe('QueryParsingService', () => {
       });
     });
   });
+
+  describe('Grouping aggregation with multiple dimension columns and multiple aggregation functions (no alias)', () => {
+    it('should return multiple dimension columns and multiple aggregation function names', () => {
+      // given
+      const rawSQL = `SELECT category_id, supplier_id, avg(unit_price), count(product_id) FROM products GROUP BY category_id, supplier_id`;
+
+      // when
+      const result = service.parse(rawSQL);
+
+      // then
+      expect(result).toEqual({
+        type: 'groupingAggregation',
+        rawSQL,
+        aggregationColumns: ['avg', 'count'],
+        dimensionColumns: ['category_id', 'supplier_id'],
+      });
+    });
+  });
+
+  describe('Grouping aggregation with multiple dimension columns and multiple aggregation functions (with alias)', () => {
+    it('should return multiple dimension column aliases and multiple aggregation function aliases', () => {
+      // given
+      const rawSQL = `SELECT category_id as category, supplier_id as supplier, avg(unit_price) as avg_price, count(product_id) as total_products FROM products GROUP BY category_id, supplier_id`;
+
+      // when
+      const result = service.parse(rawSQL);
+
+      // then
+      expect(result).toEqual({
+        type: 'groupingAggregation',
+        rawSQL,
+        aggregationColumns: ['avg_price', 'total_products'],
+        dimensionColumns: ['category', 'supplier'],
+      });
+    });
+  });
+
+  describe('Grouping aggregation with casting', () => {
+    it('should return dimension column and aggregation function name', () => {
+      // given
+      const rawSQL = `SELECT category_id::text as category, avg(unit_price) FROM products GROUP BY category_id`;
+
+      // when
+      const result = service.parse(rawSQL);
+
+      // then
+      expect(result).toEqual({
+        type: 'groupingAggregation',
+        rawSQL,
+        aggregationColumns: ['avg'],
+        dimensionColumns: ['category'],
+      });
+    });
+  });
 });

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Connection, PrismaClient } from 'prisma/prisma-client';
 
 export type Row = {
-  [key: string]: string | number;
+  [key: string]: string | number | bigint;
 };
 
 @Injectable()

@@ -1,54 +1,77 @@
 import { Injectable } from '@nestjs/common';
 import { Row } from './data-layer.service';
 import { Chart, ChartMetadata } from '@letyca/contracts';
-import { AggregationSQLQuery } from './query-parsing.service';
+import { SQLQuery } from './query-parsing.service';
 
 @Injectable()
 export class MergeService {
-  concat(
-    metadata: ChartMetadata,
-    rows: Row[],
-    query: AggregationSQLQuery,
-  ): Chart {
-    const chartType = metadata.chartType;
+  concat(metadata: ChartMetadata, rows: Row[], query: SQLQuery): Chart {
+    const { title, chartType } = metadata;
     if (chartType === 'countLabel') {
       return {
-        ...metadata,
+        title,
         chartType,
-        data: rows[0][query.aggregatedValue] as unknown as number,
+        data: query.aggregationColumns
+          .map((col) => rows[0][col])
+          .map((value) => {
+            if (typeof value === 'number') {
+              return value;
+            }
+
+            if (typeof value === 'bigint') {
+              return Number(value);
+            }
+
+            if (typeof value === 'string' && !isNaN(Number(value))) {
+              return Number(value);
+            }
+
+            return -1;
+          }),
       };
     }
 
-    if (chartType === 'pie' || chartType === 'line' || chartType === 'bar') {
-      const labels: string[] = [];
-      const values: number[] = [];
-      for (const row of rows) {
-        if (typeof row !== 'object') {
-          continue;
+    if (
+      (chartType === 'pie' || chartType === 'line' || chartType === 'bar') &&
+      query.type === 'groupingAggregation'
+    ) {
+      const labels = rows.reduce((acc, row) => {
+        const label = query.dimensionColumns
+          .map((col) => row[col])
+          .join(' - ')
+          .trim();
+
+        if (label.length > 0) {
+          acc.push(label);
         }
 
-        for (const key in row) {
-          const cellValue = row[key as keyof typeof row];
-          if (typeof cellValue === 'bigint') {
-            values.push(Number(cellValue));
+        return acc;
+      }, [] as string[]);
+      const datasets = query.aggregationColumns.map((col) => ({
+        data: rows.map((row) => {
+          const value = row[col];
+          if (typeof value === 'number') {
+            return value;
           }
 
-          // if (typeof cellValue === 'number') {
-          //   values.push(cellValue);
-          // }
-
-          if (typeof cellValue === 'string') {
-            labels.push(cellValue);
+          if (typeof value === 'bigint') {
+            return Number(value);
           }
-        }
-      }
+
+          if (typeof value === 'string' && !isNaN(Number(value))) {
+            return Number(value);
+          }
+
+          return 0;
+        }),
+      }));
 
       return {
-        ...metadata,
+        title,
         chartType,
         data: {
           labels,
-          values,
+          datasets,
         },
       };
     }

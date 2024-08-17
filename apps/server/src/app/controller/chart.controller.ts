@@ -32,29 +32,25 @@ export class ChartController {
     });
 
     const metadata = await this.metadataService.generate(userRequest);
-    this.logger.log('Generated metadata', metadata);
+    this.logger.debug('Generated metadata', metadata);
 
     const rawSql = await this.queryGenerationService.generate(
       userRequest,
       connection,
     );
-    this.logger.log('Generated SQL', rawSql);
+    this.logger.debug('Generated SQL', rawSql);
 
     const query = this.queryParsingService.parse(rawSql);
     this.logger.debug('Parsed SQL', query);
 
     const result = await this.dataLayer.runQuery(query.rawSQL, connection);
-    this.logger.debug('Got result', result);
+    this.logger.debug('Data result', result);
 
     const chart = this.mergeService.concat(metadata, result, query);
     this.logger.debug('Generated chart', chart);
 
     return {
-      chart: {
-        chartType: 'countLabel',
-        data: 1,
-        title: 'Count',
-      },
+      chart,
       sql: rawSql,
     };
   }

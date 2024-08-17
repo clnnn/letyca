@@ -13,7 +13,7 @@ export type GroupingAggregation = {
   dimensionColumns: string[];
 };
 
-export type ParseResult = {
+export type SQLQuery = {
   rawSQL: string;
 } & (BasicAggregation | GroupingAggregation);
 
@@ -29,7 +29,7 @@ export type ParseResult = {
 export class QueryParsingService {
   private readonly parser = new Parser();
 
-  parse(rawSQL: string): ParseResult | null {
+  parse(rawSQL: string): SQLQuery | null {
     const parseResult = this.parser.astify(rawSQL, { database: 'Postgresql' });
     const ast = Array.isArray(parseResult) ? parseResult[0] : parseResult;
 
@@ -50,7 +50,6 @@ export class QueryParsingService {
         rawSQL,
       };
     }
-    xw;
   }
 
   private basicAggregation(columns: Column[]): BasicAggregation {
@@ -94,11 +93,12 @@ export class QueryParsingService {
       }
 
       if (column.expr.type === 'cast') {
-        const columnRef = (column.expr as Cast).expr as ColumnRef;
+        const cast = column.expr as Cast;
+        const columnRef = cast.expr as ColumnRef;
         for (const groupByColumnRef of groupBy.columns) {
           if (isDeepStrictEqual(columnRef, groupByColumnRef)) {
-            if (column.as) {
-              dimensionColumns.push(column.as.toString().toLowerCase());
+            if (cast['as']) {
+              dimensionColumns.push(cast['as'].toString().toLowerCase());
             } else if (typeof columnRef.column === 'string') {
               dimensionColumns.push(columnRef.column.toLowerCase());
             } else {

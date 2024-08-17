@@ -1,6 +1,8 @@
 type ChartDataSet = {
-  labels: string[];
-  values: (number | bigint)[];
+  labels: (string | number | boolean)[];
+  datasets: {
+    data: number[];
+  }[];
 };
 
 export type ChartMetadata = {
@@ -8,26 +10,26 @@ export type ChartMetadata = {
   title: string;
 };
 
-export type AbstractChart = ChartMetadata & {
-  data: number | ChartDataSet;
+export type AbstractChart<T> = ChartMetadata & {
+  data: T;
 };
 
-interface CountLabel extends AbstractChart {
+interface CountLabel extends AbstractChart<number[]> {
   chartType: 'countLabel';
-  data: number;
+  data: number[];
 }
 
-interface PieChart extends AbstractChart {
+interface PieChart extends AbstractChart<ChartDataSet> {
   chartType: 'pie';
   data: ChartDataSet;
 }
 
-interface LineChart extends AbstractChart {
+interface LineChart extends AbstractChart<ChartDataSet> {
   chartType: 'line';
   data: ChartDataSet;
 }
 
-interface BarChart extends AbstractChart {
+interface BarChart extends AbstractChart<ChartDataSet> {
   chartType: 'bar';
   data: ChartDataSet;
 }
