@@ -2,165 +2,196 @@ import { QueryParsingService } from './query-parsing.service';
 
 describe('QueryParsingService', () => {
   let service: QueryParsingService;
+  const aggregationFunctions = ['avg', 'count', 'max', 'min', 'sum'];
 
   beforeEach(() => {
     service = new QueryParsingService();
   });
 
-  describe('SELECT AVG(unit_price) from products', () => {
-    it('should return aggregation function name and the raw sql', () => {
+  describe('Basic aggregation with single aggregation function (no alias)', () => {
+    test.each(aggregationFunctions)(
+      'should return aggregation function name %p',
+      (aggFunc) => {
+        // given
+        const rawSQL = `SELECT ${aggFunc}(unit_price) FROM products`;
+
+        // when
+        const result = service.parse(rawSQL);
+
+        // then
+        expect(result).toEqual({
+          type: 'basicAggregation',
+          rawSQL,
+          aggregationColumns: [aggFunc],
+        });
+      },
+    );
+  });
+
+  describe('Basic aggregation with single aggregation function (with alias)', () => {
+    test.each(aggregationFunctions)(
+      'should return aggregation function alias for %p',
+      (aggFunc) => {
+        // given
+        const rawSQL = `SELECT ${aggFunc}(unit_price) as price FROM products`;
+
+        // when
+        const result = service.parse(rawSQL);
+
+        // then
+        expect(result).toEqual({
+          type: 'basicAggregation',
+          rawSQL,
+          aggregationColumns: ['price'],
+        });
+      },
+    );
+  });
+
+  describe('Basic aggregation with multiple aggregation functions (no alias)', () => {
+    it('should return multiple aggregation function names', () => {
       // given
-      const rawSQL = 'SELECT AVG(unit_price) from products';
+      const rawSQL = `SELECT avg(unit_price), count(product_id) FROM products`;
 
       // when
       const result = service.parse(rawSQL);
 
       // then
       expect(result).toEqual({
-        aggregatedValue: 'avg',
+        type: 'basicAggregation',
         rawSQL,
+        aggregationColumns: ['avg', 'count'],
       });
     });
   });
 
-  describe('SELECT COUNT(*) as total_products FROM products', () => {
-    it('should return aggregation function alias and the raw sql', () => {
+  describe('Basic aggregation with multiple aggregation functions (with alias)', () => {
+    it('should return multiple aggregation function aliases', () => {
       // given
-      const rawSQL = 'SELECT COUNT(*) as total_products FROM products';
+      const rawSQL = `SELECT avg(unit_price) as avg_price, count(product_id) as total_products FROM products`;
 
       // when
       const result = service.parse(rawSQL);
 
       // then
       expect(result).toEqual({
-        aggregatedValue: 'total_products',
+        type: 'basicAggregation',
         rawSQL,
+        aggregationColumns: ['avg_price', 'total_products'],
       });
     });
   });
 
-  describe('SELECT p.category_id AS category, COUNT(p.product_id) FROM public.products p GROUP BY p.category_id ORDER BY p.category_id NULLS LAST', () => {
-    it('should return dimension alias, aggregation function name and the raw sql', () => {
+  describe('Grouping aggregation with single aggregation function (no alias)', () => {
+    test.each(aggregationFunctions)(
+      'should return aggregation function name %p and dimension column',
+      (aggFunc) => {
+        // given
+        const rawSQL = `SELECT category_id, ${aggFunc}(unit_price) FROM products GROUP BY category_id`;
+
+        // when
+        const result = service.parse(rawSQL);
+
+        // then
+        expect(result).toEqual({
+          type: 'groupingAggregation',
+          rawSQL,
+          aggregationColumns: [aggFunc],
+          dimensionColumns: ['category_id'],
+        });
+      },
+    );
+  });
+
+  describe('Grouping aggregation with single aggregation function (with alias)', () => {
+    test.each(aggregationFunctions)(
+      'should return aggregation function alias for %p and dimension column alias',
+      (aggFunc) => {
+        // given
+        const rawSQL = `SELECT category_id as category, ${aggFunc}(unit_price) as price FROM products GROUP BY category_id`;
+
+        // when
+        const result = service.parse(rawSQL);
+
+        // then
+        expect(result).toEqual({
+          type: 'groupingAggregation',
+          rawSQL,
+          aggregationColumns: ['price'],
+          dimensionColumns: ['category'],
+        });
+      },
+    );
+  });
+
+  describe('Grouping aggregation with multiple aggregation functions (no alias)', () => {
+    it('should return multiple aggregation function names and dimension column', () => {
       // given
-      const rawSQL =
-        'SELECT p.category_id AS category, COUNT(p.product_id) FROM public.products p GROUP BY p.category_id ORDER BY p.category_id NULLS LAST';
+      const rawSQL = `SELECT category_id, avg(unit_price), count(product_id) FROM products GROUP BY category_id`;
 
       // when
       const result = service.parse(rawSQL);
 
       // then
       expect(result).toEqual({
-        aggregatedValue: 'count',
-        dimension: 'category',
+        type: 'groupingAggregation',
         rawSQL,
+        aggregationColumns: ['avg', 'count'],
+        dimensionColumns: ['category_id'],
       });
     });
   });
 
-  describe('SELECT p.category_id AS category, COUNT(p.product_id) AS total_products FROM public.products p GROUP BY p.category_id ORDER BY p.category_id NULLS LAST', () => {
-    it('should return dimension alias, aggregation function alias and the raw sql', () => {
+  describe('Grouping aggregation with multiple aggregation functions (with alias)', () => {
+    it('should return multiple aggregation function aliases and dimension column alias', () => {
       // given
-      const rawSQL =
-        'SELECT p.category_id AS category, COUNT(p.product_id) AS total_products FROM public.products p GROUP BY p.category_id ORDER BY p.category_id NULLS LAST';
+      const rawSQL = `SELECT category_id as category, avg(unit_price) as avg_price, count(product_id) as total_products FROM products GROUP BY category_id`;
 
       // when
       const result = service.parse(rawSQL);
 
       // then
       expect(result).toEqual({
-        aggregatedValue: 'total_products',
-        dimension: 'category',
+        type: 'groupingAggregation',
         rawSQL,
+        aggregationColumns: ['avg_price', 'total_products'],
+        dimensionColumns: ['category'],
       });
     });
   });
 
-  describe('SELECT p.category_id, COUNT(p.product_id) AS total_products FROM public.products p GROUP BY p.category_id;', () => {
-    it('should return dimension column, aggregation function alias and raw sql', () => {
+  describe('Grouping aggregation with multiple dimension columns (no alias)', () => {
+    it('should return multiple dimension columns and aggregation function name', () => {
       // given
-      const rawSQL =
-        'SELECT p.category_id, COUNT(p.product_id) AS total_products FROM public.products p GROUP BY p.category_id;';
+      const rawSQL = `SELECT category_id, supplier_id, avg(unit_price) FROM products GROUP BY category_id, supplier_id`;
 
       // when
       const result = service.parse(rawSQL);
 
       // then
       expect(result).toEqual({
-        aggregatedValue: 'total_products',
-        dimension: 'category_id',
+        type: 'groupingAggregation',
         rawSQL,
+        aggregationColumns: ['avg'],
+        dimensionColumns: ['category_id', 'supplier_id'],
       });
     });
   });
 
-  describe('SELECT p.category_id::text AS category, COUNT(p.product_id) AS total_products FROM public.products p GROUP BY p.category_id;', () => {
-    it('should return dimension alias, aggregation function alias and raw sql', () => {
+  describe('Grouping aggregation with multiple dimension columns (with alias)', () => {
+    it('should return multiple dimension column aliases and aggregation function alias', () => {
       // given
-      const rawSQL =
-        'SELECT p.category_id::text AS category, COUNT(p.product_id) AS total_products FROM public.products p GROUP BY p.category_id;';
+      const rawSQL = `SELECT category_id as category, supplier_id as supplier, avg(unit_price) as avg_price FROM products GROUP BY category_id, supplier_id`;
 
       // when
       const result = service.parse(rawSQL);
 
       // then
       expect(result).toEqual({
-        aggregatedValue: 'total_products',
-        dimension: 'category',
+        type: 'groupingAggregation',
         rawSQL,
-      });
-    });
-  });
-
-  describe('SELECT category_id, COUNT(product_id) FROM public.products GROUP BY category_id ORDER BY category_id NULLS LAST', () => {
-    it('should return dimension column, aggregation function name and raw sql', () => {
-      // given
-      const rawSQL =
-        'SELECT category_id, COUNT(product_id) FROM public.products GROUP BY category_id ORDER BY category_id NULLS LAST';
-
-      // when
-      const result = service.parse(rawSQL);
-
-      // then
-      expect(result).toEqual({
-        aggregatedValue: 'count',
-        dimension: 'category_id',
-        rawSQL,
-      });
-    });
-  });
-
-  describe('SELECT category_id::text, COUNT(product_id) FROM products GROUP BY category_id ORDER BY category_id NULLS LAST', () => {
-    it('should return dimension column, aggregation function name and raw sql', () => {
-      // given
-      const rawSQL =
-        'SELECT category_id::text, COUNT(product_id) FROM public.products GROUP BY category_id ORDER BY category_id NULLS LAST';
-
-      // when
-      const result = service.parse(rawSQL);
-
-      // then
-      expect(result).toEqual({
-        aggregatedValue: 'count',
-        dimension: 'category_id',
-        rawSQL,
-      });
-    });
-  });
-
-  describe('SELECT category_id, COUNT(product_id) AS total_products FROM public.products GROUP BY category_id ORDER BY category_id NULLS LAST', () => {
-    it('should return dimension column, aggregation function alias and the raw sql', () => {
-      // given
-      const rawSQL =
-        'SELECT category_id, COUNT(product_id) AS total_products FROM public.products GROUP BY category_id ORDER BY category_id NULLS LAST';
-
-      // when
-      const result = service.parse(rawSQL);
-
-      // then
-      expect(result).toEqual({
-        aggregatedValue: 'total_products',
-        dimension: 'category_id',
-        rawSQL,
+        aggregationColumns: ['avg_price'],
+        dimensionColumns: ['category', 'supplier'],
       });
     });
   });

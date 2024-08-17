@@ -1,90 +1,120 @@
 import { Injectable } from '@nestjs/common';
+import { AggrFunc, Cast, Column, ColumnRef, Parser } from 'node-sql-parser';
+import { isDeepStrictEqual } from 'util';
 
-export type AggregationSQLQuery = {
-  dimension?: string;
-  aggregatedValue: string;
-  rawSQL: string;
+export type BasicAggregation = {
+  type: 'basicAggregation';
+  aggregationColumns: string[];
 };
 
+export type GroupingAggregation = {
+  type: 'groupingAggregation';
+  aggregationColumns: string[];
+  dimensionColumns: string[];
+};
+
+export type ParseResult = {
+  rawSQL: string;
+} & (BasicAggregation | GroupingAggregation);
+
+/**
+ * TODO
+ * - Derived queries: SELECT product_name, sales_price - cost_price AS profit FROM products;
+ * - Nested queries: SELECT * FROM (SELECT * FROM products) AS subquery;
+ * - With clause: WITH sales AS (SELECT * FROM products) SELECT * FROM sales;
+ * - Window functions: SELECT product_name, SUM(unit_price) OVER (PARTITION BY category_id) FROM products;
+ * - Non-aggregation functions: SELECT product_name, UPPER(price) FROM products;
+ */
 @Injectable()
 export class QueryParsingService {
-  parse(rawSQL: string): AggregationSQLQuery {
-    const normalizedSQL = rawSQL
-      .trim()
-      .toLocaleLowerCase()
-      .replace(/\s+/g, ' ')
-      .replace(/;$/, '');
+  private readonly parser = new Parser();
 
-    // Define a regex to extract the select clause
-    const selectRegex = /SELECT\s+(.+?)\s+FROM/i;
-    const match = selectRegex.exec(normalizedSQL);
+  parse(rawSQL: string): ParseResult | null {
+    const parseResult = this.parser.astify(rawSQL, { database: 'Postgresql' });
+    const ast = Array.isArray(parseResult) ? parseResult[0] : parseResult;
 
-    if (!match) {
+    if (ast.type !== 'select') {
       return null;
     }
 
-    const selectClause = match[1];
+    const columns = ast.columns as Column[];
 
-    // Regex to capture the GROUP BY clause
-    const groupByRegex = /GROUP\s+BY\s+(.*?)(\s+ORDER\s+BY|\s*$)/i;
-    const groupByMatch = normalizedSQL.match(groupByRegex);
+    if (!ast.groupby) {
+      return {
+        ...this.basicAggregation(columns),
+        rawSQL,
+      };
+    } else {
+      return {
+        ...this.groupingAggregation(columns, ast.groupby),
+        rawSQL,
+      };
+    }
+    xw;
+  }
 
-    // Check if the query has a GROUP BY clause
-    if (groupByMatch) {
-      const groupByClause = groupByMatch[1].trim();
-      const groupByColumn = groupByClause.split(' ')[0];
+  private basicAggregation(columns: Column[]): BasicAggregation {
+    const aggregationColumns = columns
+      .filter((c) => c.type === 'expr' && c.expr.type === 'aggr_func')
+      .map((c) => {
+        const aggFunction = c.expr as AggrFunc;
+        return c.as ? c.as.toString() : aggFunction.name;
+      })
+      .map((agg) => agg.toLowerCase());
+    return {
+      type: 'basicAggregation',
+      aggregationColumns,
+    };
+  }
 
-      // Find the column alias or the group by column name
-      //   const dimensionMatch = new RegExp(
-      //     `\\b(${groupByColumn})\\s+AS\\s+(\\w+)`,
-      //     'i',
-      const dimensionMatch = new RegExp(
-        `\\b(${groupByColumn}::\\w+|${groupByColumn})\\s+as\\s+(\\w+)`,
-        'i',
-      ).exec(selectClause);
-      const dimension = dimensionMatch
-        ? dimensionMatch[2]
-        : groupByColumn.split('.').pop();
+  private groupingAggregation(
+    columns: Column[],
+    groupBy: { columns: ColumnRef[] },
+  ): GroupingAggregation {
+    const aggregationColumns =
+      this.basicAggregation(columns).aggregationColumns;
 
-      // Find the aggregated value
-      // Split the select clause by comma to get individual columns
-      const columns = selectClause.split(',').map((col) => col.trim());
-      for (const column of columns) {
-        // Check if column contains an aggregate function like COUNT, SUM, etc.
-        const aggregationMatch = /COUNT|SUM|AVG|MIN|MAX/i.exec(column);
-        if (aggregationMatch) {
-          // Extract alias or the function name itself if no alias
-          const aliasMatch = /AS\s+(\w+)/i.exec(column);
-          const aggregationFunctionName = aggregationMatch[0];
-          const aggregatedValue = aliasMatch
-            ? aliasMatch[1]
-            : aggregationFunctionName;
-
-          return { dimension, aggregatedValue, rawSQL };
+    const dimensionColumns: string[] = [];
+    for (const column of columns) {
+      if (column.expr.type === 'column_ref') {
+        const columnRef = column.expr as ColumnRef;
+        for (const groupByColumnRef of groupBy.columns) {
+          if (isDeepStrictEqual(columnRef, groupByColumnRef)) {
+            if (column.as) {
+              dimensionColumns.push(column.as.toString().toLowerCase());
+            } else if (typeof columnRef.column === 'string') {
+              dimensionColumns.push(columnRef.column.toLowerCase());
+            } else {
+              dimensionColumns.push(
+                columnRef.column.expr.value.toString().toLowerCase(),
+              );
+            }
+          }
         }
       }
 
-      // error?
-    } else {
-      // No GROUP BY clause; find the aggregated value
-      const columns = selectClause.split(',').map((col) => col.trim());
-      for (const column of columns) {
-        // Check if column contains an aggregate function like COUNT, SUM, etc.
-        const aggregationMatch = /COUNT|SUM|AVG|MIN|MAX/i.exec(column);
-        if (aggregationMatch) {
-          // Extract alias or the function name itself if no alias
-          const aliasMatch = /AS\s+(\w+)/i.exec(column);
-          const aggregationFunctionName = aggregationMatch[0];
-          const aggregatedValue = aliasMatch
-            ? aliasMatch[1]
-            : aggregationFunctionName;
-
-          return {
-            aggregatedValue,
-            rawSQL,
-          };
+      if (column.expr.type === 'cast') {
+        const columnRef = (column.expr as Cast).expr as ColumnRef;
+        for (const groupByColumnRef of groupBy.columns) {
+          if (isDeepStrictEqual(columnRef, groupByColumnRef)) {
+            if (column.as) {
+              dimensionColumns.push(column.as.toString().toLowerCase());
+            } else if (typeof columnRef.column === 'string') {
+              dimensionColumns.push(columnRef.column.toLowerCase());
+            } else {
+              dimensionColumns.push(
+                columnRef.column.expr.value.toString().toLowerCase(),
+              );
+            }
+          }
         }
       }
     }
+
+    return {
+      type: 'groupingAggregation',
+      aggregationColumns,
+      dimensionColumns,
+    };
   }
 }
