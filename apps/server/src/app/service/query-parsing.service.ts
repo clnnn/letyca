@@ -139,7 +139,8 @@ export class QueryParsingService {
               if (selectNode.ResTarget.name) {
                 dimensionColumns.push(selectNode.ResTarget.name);
               } else {
-                const field = selectColumnRef.fields?.[0];
+                const field =
+                  selectColumnRef.fields?.[1] ?? selectColumnRef.fields?.[0];
                 if (
                   field &&
                   'String' in field &&
@@ -157,7 +158,8 @@ export class QueryParsingService {
             selectNode.ResTarget.val &&
             'FuncCall' in selectNode.ResTarget.val
           ) {
-            const selectFuncCall = groupColumnRef.fields?.[0];
+            const selectFuncCall =
+              groupColumnRef.fields?.[1] ?? groupColumnRef.fields?.[0];
             if (
               selectFuncCall &&
               'String' in selectFuncCall &&

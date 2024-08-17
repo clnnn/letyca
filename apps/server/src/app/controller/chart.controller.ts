@@ -34,6 +34,10 @@ export class ChartController {
     const metadata = await this.metadataService.generate(userRequest);
     this.logger.debug('Generated metadata', metadata);
 
+    if (!connection) {
+      throw new Error('Connection not found');
+    }
+
     const rawSql = await this.queryGenerationService.generate(
       userRequest,
       connection,
@@ -42,6 +46,10 @@ export class ChartController {
 
     const query = this.queryParsingService.parse(rawSql);
     this.logger.debug('Parsed SQL', query);
+
+    if ('message' in query) {
+      throw new Error(query.message);
+    }
 
     const result = await this.dataLayer.runQuery(query.rawSQL, connection);
     this.logger.debug('Data result', result);

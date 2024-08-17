@@ -34,7 +34,16 @@ interface BarChart extends AbstractChart<ChartDataSet> {
   data: ChartDataSet;
 }
 
-export type Chart = CountLabel | PieChart | LineChart | BarChart;
+interface NotSupportedChart {
+  chartType: 'notSupported';
+}
+
+export type Chart =
+  | CountLabel
+  | PieChart
+  | LineChart
+  | BarChart
+  | NotSupportedChart;
 
 export type GenerateChartResponse = {
   chart: Chart;

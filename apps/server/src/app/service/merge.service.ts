@@ -75,5 +75,9 @@ export class MergeService {
         },
       };
     }
+
+    return {
+      chartType: 'notSupported',
+    };
   }
 }
