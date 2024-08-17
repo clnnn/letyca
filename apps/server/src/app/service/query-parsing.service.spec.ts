@@ -253,7 +253,7 @@ describe('QueryParsingService', () => {
   describe('Grouping aggregation with functions as dimension columns (no alias)', () => {
     it('should return dimension function name and aggregation function name', () => {
       // given
-      const rawSQL = `SELECT date_trunc('month', o.order_date), SUM(od.quantity * p.unit_price) AS total_sales FROM orders o JOIN order_details od ON o.order_id = od.order_id JOIN products p ON od.product_id = p.product_id WHERE date_part('year', o.order_date) = 1997 AND p.category_id IN (SELECT category_id FROM products WHERE product_name ilike '%condiment%') GROUP BY date_trunc('month', o.order_date) ORDER BY MONTH`;
+      const rawSQL = `SELECT date_trunc('month', o.order_date), SUM(od.quantity * p.unit_price) FROM orders o JOIN order_details od ON o.order_id = od.order_id JOIN products p ON od.product_id = p.product_id WHERE date_part('year', o.order_date) = 1997 AND p.category_id IN (SELECT category_id FROM products WHERE product_name ilike '%condiment%') GROUP BY date_trunc('month', o.order_date) ORDER BY MONTH`;
 
       // when
       const result = service.parse(rawSQL);
@@ -262,8 +262,8 @@ describe('QueryParsingService', () => {
       expect(result).toEqual({
         type: 'groupingAggregation',
         rawSQL,
-        aggregationColumns: ['total_sales'],
-        dimensionColumns: ['month'],
+        aggregationColumns: ['sum'],
+        dimensionColumns: ['date_trunc'],
       });
     });
   });
