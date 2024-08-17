@@ -1,5 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { AggrFunc, Cast, Column, ColumnRef, Parser } from 'node-sql-parser';
+import {
+  AggrFunc,
+  Cast,
+  Column,
+  ColumnRef,
+  Function,
+  Parser,
+} from 'node-sql-parser';
 import { isDeepStrictEqual } from 'util';
 
 export type BasicAggregation = {
@@ -19,11 +26,10 @@ export type SQLQuery = {
 
 /**
  * TODO
- * - Derived queries: SELECT product_name, sales_price - cost_price AS profit FROM products;
- * - Nested queries: SELECT * FROM (SELECT * FROM products) AS subquery;
  * - With clause: WITH sales AS (SELECT * FROM products) SELECT * FROM sales;
- * - Window functions: SELECT product_name, SUM(unit_price) OVER (PARTITION BY category_id) FROM products;
+ * - Grouping using functions (no alias): SELECT date_trunc('month', o.order_date), SUM(od.quantity * p.unit_price) AS total_sales FROM orders o GROUP BY date_trunc('month', o.order_date);
  * - Non-aggregation functions: SELECT product_name, UPPER(price) FROM products;
+ * - Derived queries: SELECT product_name, sales_price - cost_price AS profit FROM products;
  */
 @Injectable()
 export class QueryParsingService {
@@ -108,6 +114,10 @@ export class QueryParsingService {
             }
           }
         }
+      }
+
+      if (column.expr.type === 'function') {
+        // not implemented
       }
     }
 
