@@ -11,7 +11,12 @@ import { TuiTextareaModule } from '@taiga-ui/legacy';
 import { LoadingState } from '../../utils';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiCardLarge } from '@taiga-ui/layout';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 
 const tuiImports = [
   TuiTextareaModule,
@@ -39,6 +44,7 @@ const tuiImports = [
 })
 export class ExplorePromptComponent {
   private readonly fb = inject(FormBuilder);
+  private readonly router = inject(Router);
   protected userRequest = '';
 
   @Input({ required: true })
@@ -49,4 +55,10 @@ export class ExplorePromptComponent {
 
   @Input({ required: true })
   suggestionsLoading: LoadingState = LoadingState.INIT;
+
+  protected suggestionClick(suggestion: string): void {
+    this.router.navigate(['/explore/charts'], {
+      queryParams: { c: this.connectionId, q: suggestion },
+    });
+  }
 }

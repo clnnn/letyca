@@ -29,7 +29,9 @@
   </h2>
   <div class="list">
     @for (suggestion of suggestions; track $index) {
-      <tui-chip>{{ suggestion }}</tui-chip>
+      <button tuiChip (click)="suggestionClick(suggestion)">
+        {{ suggestion }}
+      </button>
     }
   </div>
 </section>
