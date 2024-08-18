@@ -2,7 +2,7 @@ import { ConnectionListItem, GenerateChartResponse } from '@letyca/contracts';
 import { LoadingState } from './utils';
 import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { distinctUntilChanged, exhaustMap, pipe, tap } from 'rxjs';
+import { distinctUntilChanged, exhaustMap, pipe, switchMap, tap } from 'rxjs';
 import { inject } from '@angular/core';
 import { ConnectionService } from './service/connection.service';
 import { tapResponse } from '@ngrx/operators';
@@ -78,7 +78,7 @@ export const Store = signalStore(
           tap(() =>
             patchState(store, { suggestionsLoading: LoadingState.LOADING }),
           ),
-          exhaustMap((connectionId: string) =>
+          switchMap((connectionId: string) =>
             suggestionsService.fetchAll(connectionId),
           ),
           tapResponse({
@@ -99,7 +99,7 @@ export const Store = signalStore(
           tap(() =>
             patchState(store, { previewChartLoading: LoadingState.LOADING }),
           ),
-          exhaustMap((request) => chartService.generateChart(request)),
+          switchMap((request) => chartService.generateChart(request)),
           tapResponse({
             next: (previewChart) =>
               patchState(store, {

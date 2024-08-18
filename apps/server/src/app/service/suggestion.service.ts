@@ -4,11 +4,12 @@ import { Connection } from 'prisma/prisma-client';
 import { DDLService } from './ddl.service';
 
 @Injectable()
-export class QueryGenerationService {
+export class SuggestionService {
   constructor(private readonly ddl: DDLService) {}
 
-  async generate(userRequest: string, connection: Connection): Promise<string> {
-    const ddlStatements = await this.ddl.retrieve(connection);
-    return await b.GenerateSQL(userRequest, ddlStatements);
+  async byConnection(connection: Connection): Promise<string[]> {
+    const ddl = await this.ddl.retrieve(connection);
+    const result = await b.GetSuggestionsByDDL(ddl);
+    return result.suggestions;
   }
 }

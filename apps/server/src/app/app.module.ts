@@ -10,10 +10,18 @@ import { ChartMetadataService } from './service/chart-metadata.service';
 import { MergeService } from './service/merge.service';
 import { QueryGenerationService } from './service/query-generation.service';
 import { QueryParsingService } from './service/query-parsing.service';
+import { DDLService } from './service/ddl.service';
+import { SuggestionController } from './controller/suggestion.controller';
+import { SuggestionService } from './service/suggestion.service';
 
 @Module({
   imports: [ConfigModule.forRoot()],
-  controllers: [ConnectionController, ChartController, FeatureFlagController],
+  controllers: [
+    ConnectionController,
+    ChartController,
+    FeatureFlagController,
+    SuggestionController,
+  ],
   providers: [
     PrismaService,
     DataLayerService,
@@ -21,6 +29,8 @@ import { QueryParsingService } from './service/query-parsing.service';
     ChartMetadataService,
     QueryGenerationService,
     QueryParsingService,
+    DDLService,
+    SuggestionService,
   ],
 })
 export class AppModule {}

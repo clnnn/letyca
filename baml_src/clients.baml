@@ -1,10 +1,8 @@
 retry_policy LetycaRetryPolicy {
   max_retries 5
   strategy {
-    type exponential_backoff
-    delay_ms 200
-    multiplier 2
-    max_delay_ms 15000
+    type constant_delay
+    delay_ms 1000
   }
 }
 
