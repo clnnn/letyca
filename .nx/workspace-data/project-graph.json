@@ -14256,7 +14256,22 @@
       },
       {
         "source": "client",
+        "target": "npm:ng2-charts",
+        "type": "static"
+      },
+      {
+        "source": "client",
         "target": "npm:@taiga-ui/kit",
+        "type": "static"
+      },
+      {
+        "source": "client",
+        "target": "contracts",
+        "type": "static"
+      },
+      {
+        "source": "client",
+        "target": "npm:chart.js",
         "type": "static"
       },
       {
@@ -14272,11 +14287,6 @@
       {
         "source": "client",
         "target": "npm:@taiga-ui/addon-table",
-        "type": "static"
-      },
-      {
-        "source": "client",
-        "target": "contracts",
         "type": "static"
       },
       {

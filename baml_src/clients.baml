@@ -27,3 +27,12 @@ client<llm> TextToSQLOllamaClient {
     base_url env.OLLAMA_HOST
   }
 }
+
+client<llm> Phi3OllamaClient {
+  provider ollama
+  retry_policy LetycaRetryPolicy
+  options {
+    model phi3
+    base_url env.OLLAMA_HOST
+  }
+}
