@@ -12,7 +12,7 @@ class ChartMetadata {
 }
 
 function ExtractChartMetadata(userRequest: string) -> ChartMetadata {
-  client Phi3OllamaClient
+  client ChartMetadataOllamaClient
   prompt #"
     {{ userRequest }}
 
@@ -30,6 +30,7 @@ function GenerateSQL(userRequest: string, ddlStatements: string) -> string {
     - Remember that revenue is price multiplied by quantity
     - Remember that cost is supply_price multiplied by quantity
     - Try to avoid as much as possible using IDs as grouping columns. Prefer using names or joining with other tables to get names
+    - The SQL must be well formatted and readable
 
     DDL statements:
     {{ ddlStatements }}

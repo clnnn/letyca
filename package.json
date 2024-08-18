@@ -55,6 +55,7 @@
     "pgsql-parser": "^13.16.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
+    "sql-formatter": "^15.4.0",
     "tslib": "^2.3.0",
     "zone.js": "0.14.3"
   },

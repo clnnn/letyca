@@ -1,19 +1,31 @@
 @if (chart) {
-  @switch (chart.chartType) {
-    @case ('countLabel') {
-      <le-count-label [chart]="chart" />
-    }
+  <tui-tabs [(activeItemIndex)]="activeItemIndex">
+    <button tuiTab>Rendered Chart</button>
+    <button tuiTab>JSON</button>
+    <button tuiTab>Data Query</button>
+  </tui-tabs>
 
-    @case ('pie') {
-      <le-pie-chart [chart]="chart" />
-    }
+  @if (activeItemIndex === 0) {
+    @switch (chart.chartType) {
+      @case ('countLabel') {
+        <le-count-label [chart]="chart" />
+      }
 
-    @case ('bar') {
-      <le-bar-chart [chart]="chart" />
-    }
+      @case ('pie') {
+        <le-pie-chart [chart]="chart" />
+      }
 
-    @case ('line') {
-      <le-line-chart [chart]="chart" />
+      @case ('bar') {
+        <le-bar-chart [chart]="chart" />
+      }
+
+      @case ('line') {
+        <le-line-chart [chart]="chart" />
+      }
     }
+  } @else if (activeItemIndex === 1) {
+    <json-viewer [data]="chart"> </json-viewer>
+  } @else if (activeItemIndex === 2) {
+    <textarea highlight-js lang="sql">{{ sql }}</textarea>
   }
 }

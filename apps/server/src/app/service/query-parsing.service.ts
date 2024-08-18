@@ -1,12 +1,4 @@
 import { Injectable } from '@nestjs/common';
-// import {
-//   AggrFunc,
-//   Cast,
-//   Column,
-//   ColumnRef,
-//   Function,
-//   Parser,
-// } from 'node-sql-parser';
 import { isDeepStrictEqual } from 'util';
 import { parse } from 'pgsql-parser';
 import { Node, RawStmt, ResTarget } from '@pgsql/types';

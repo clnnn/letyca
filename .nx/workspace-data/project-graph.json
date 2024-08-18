@@ -8133,6 +8133,15 @@
         "hash": "sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA=="
       }
     },
+    "npm:discontinuous-range": {
+      "type": "npm",
+      "name": "npm:discontinuous-range",
+      "data": {
+        "version": "1.0.0",
+        "packageName": "discontinuous-range",
+        "hash": "sha512-c68LpLbO+7kP/b1Hr1qs8/BJ09F5khZGTxqxZuhzxpmwJKOgRFHJWIb9/KmqnqHhLdO55aOxFH/EGBvUQbL/RQ=="
+      }
+    },
     "npm:dns-packet": {
       "type": "npm",
       "name": "npm:dns-packet",
@@ -9184,6 +9193,15 @@
         "version": "0.1.0",
         "packageName": "get-package-type",
         "hash": "sha512-pjzuKtY64GYfWizNAJ0fr9VqttZkNiK2iS430LtIHzjBEr6bX8Am2zm4sW4Ro5wjWW5cAlRL1qAMTcXbjNAO2Q=="
+      }
+    },
+    "npm:get-stdin": {
+      "type": "npm",
+      "name": "npm:get-stdin",
+      "data": {
+        "version": "8.0.0",
+        "packageName": "get-stdin",
+        "hash": "sha512-sY22aA6xchAzprjyqmSEQv4UbAAzRN0L2dQB0NlN5acTTK9Don6nhoc3eAbUnpZiCANAMfd/+40kVdKfFygohg=="
       }
     },
     "npm:get-stream": {
@@ -11193,6 +11211,15 @@
         "hash": "sha512-bAxsR8BVfj60DWXHE3u30oHzfl4G7khkSuPW+qvpd7jFRHm7dLxOjUk1EHACJ/hxLY8phGJ0YhYHZo7jil7Qdg=="
       }
     },
+    "npm:moo": {
+      "type": "npm",
+      "name": "npm:moo",
+      "data": {
+        "version": "0.5.2",
+        "packageName": "moo",
+        "hash": "sha512-iSAJLHYKnX41mKcJKjqvnAN9sf0LMDTXDEvFv+ffuRR9a1MIuXLjMNL6EsnDHSkKLTWNqQQ5uo61P4EbU4NU+Q=="
+      }
+    },
     "npm:mrmime": {
       "type": "npm",
       "name": "npm:mrmime",
@@ -11281,6 +11308,15 @@
         "version": "1.4.0",
         "packageName": "natural-compare",
         "hash": "sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw=="
+      }
+    },
+    "npm:nearley": {
+      "type": "npm",
+      "name": "npm:nearley",
+      "data": {
+        "version": "2.20.1",
+        "packageName": "nearley",
+        "hash": "sha512-+Mc8UaAebFzgV+KpI5n7DasuuQCHA89dmwm7JXw3TV43ukfNQ9DnBH3Mdb2g/I4Fdxc26pwimBWvjIw0UAILSQ=="
       }
     },
     "npm:needle": {
@@ -12552,6 +12588,15 @@
         "hash": "sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A=="
       }
     },
+    "npm:railroad-diagrams": {
+      "type": "npm",
+      "name": "npm:railroad-diagrams",
+      "data": {
+        "version": "1.0.0",
+        "packageName": "railroad-diagrams",
+        "hash": "sha512-cz93DjNeLY0idrCNOH6PviZGRN9GJhsdm9hpn1YCS879fj4W+x5IFJhhkRZcwVgMmFF7R82UA/7Oh+R8lLZg6A=="
+      }
+    },
     "npm:rambda": {
       "type": "npm",
       "name": "npm:rambda",
@@ -12559,6 +12604,15 @@
         "version": "9.2.1",
         "packageName": "rambda",
         "hash": "sha512-6Dp+QQVQuAuhwBlbIvL2FjJVHCKF29W+n9ca/BMTVDqpj+Q7KKqUh7UAINEna8aaB2/oRvPuL5hViCTQARa70Q=="
+      }
+    },
+    "npm:randexp": {
+      "type": "npm",
+      "name": "npm:randexp",
+      "data": {
+        "version": "0.4.6",
+        "packageName": "randexp",
+        "hash": "sha512-80WNmd9DA0tmZrw9qQa62GPPWfuXJknrmVmLcxvq4uZBdYqb1wYoKTmnlGUchvVWe0XiLupYkBoXVOxz3C8DYQ=="
       }
     },
     "npm:randombytes": {
@@ -12775,6 +12829,15 @@
         "version": "3.1.0",
         "packageName": "restore-cursor",
         "hash": "sha512-l+sSefzHpj5qimhFSE5a8nufZYAM3sBSVMAPtYkmC+4EH2anSGaEMXSD0izRQbu9nfyQ9y5JrVmp7E8oZrUjvA=="
+      }
+    },
+    "npm:ret": {
+      "type": "npm",
+      "name": "npm:ret",
+      "data": {
+        "version": "0.1.15",
+        "packageName": "ret",
+        "hash": "sha512-TTlYpa+OL+vMMNG24xSlQGEJ3B/RzEfUlLct7b5G/ytav+wPrplCpVMFuwzXbkecJrb6IYo1iFb0S9v37754mg=="
       }
     },
     "npm:reusify": {
@@ -13207,6 +13270,24 @@
         "version": "4.2.0",
         "packageName": "split2",
         "hash": "sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg=="
+      }
+    },
+    "npm:sql-formatter": {
+      "type": "npm",
+      "name": "npm:sql-formatter",
+      "data": {
+        "version": "15.4.0",
+        "packageName": "sql-formatter",
+        "hash": "sha512-h3uVulRmOfARvDejuSzs9GMbua/UmGCKiP08zyHT1PnG376zk9CHVsDAcKIc9TcIwIrDH3YULWwI4PrXdmLRVw=="
+      }
+    },
+    "npm:sql-highlight": {
+      "type": "npm",
+      "name": "npm:sql-highlight",
+      "data": {
+        "version": "6.0.0",
+        "packageName": "sql-highlight",
+        "hash": "sha512-+fLpbAbWkQ+d0JEchJT/NrRRXbYRNbG15gFpANx73EwxQB1PRjj+k/OI0GTU0J63g8ikGkJECQp9z8XEJZvPRw=="
       }
     },
     "npm:stack-utils": {
@@ -14282,6 +14363,21 @@
       {
         "source": "client",
         "target": "npm:rxjs",
+        "type": "static"
+      },
+      {
+        "source": "client",
+        "target": "npm:@alenaksu/json-viewer",
+        "type": "static"
+      },
+      {
+        "source": "client",
+        "target": "npm:ngx-highlight-js",
+        "type": "static"
+      },
+      {
+        "source": "client",
+        "target": "npm:sql-formatter",
         "type": "static"
       },
       {
@@ -29956,6 +30052,28 @@
         "type": "static"
       }
     ],
+    "npm:nearley": [
+      {
+        "source": "npm:nearley",
+        "target": "npm:commander@2.20.3",
+        "type": "static"
+      },
+      {
+        "source": "npm:nearley",
+        "target": "npm:moo",
+        "type": "static"
+      },
+      {
+        "source": "npm:nearley",
+        "target": "npm:railroad-diagrams",
+        "type": "static"
+      },
+      {
+        "source": "npm:nearley",
+        "target": "npm:randexp",
+        "type": "static"
+      }
+    ],
     "npm:needle": [
       {
         "source": "npm:needle",
@@ -31795,6 +31913,18 @@
         "type": "static"
       }
     ],
+    "npm:randexp": [
+      {
+        "source": "npm:randexp",
+        "target": "npm:discontinuous-range",
+        "type": "static"
+      },
+      {
+        "source": "npm:randexp",
+        "target": "npm:ret",
+        "type": "static"
+      }
+    ],
     "npm:randombytes": [
       {
         "source": "npm:randombytes",
@@ -32647,6 +32777,23 @@
       {
         "source": "npm:spdy-transport",
         "target": "npm:wbuf",
+        "type": "static"
+      }
+    ],
+    "npm:sql-formatter": [
+      {
+        "source": "npm:sql-formatter",
+        "target": "npm:argparse@2.0.1",
+        "type": "static"
+      },
+      {
+        "source": "npm:sql-formatter",
+        "target": "npm:get-stdin",
+        "type": "static"
+      },
+      {
+        "source": "npm:sql-formatter",
+        "target": "npm:nearley",
         "type": "static"
       }
     ],

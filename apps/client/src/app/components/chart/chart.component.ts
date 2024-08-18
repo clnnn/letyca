@@ -1,4 +1,12 @@
-import { Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  effect,
+  ElementRef,
+  inject,
+  ViewChild,
+} from '@angular/core';
 import { TuiCardLarge } from '@taiga-ui/layout';
 import { TuiTitle } from '@taiga-ui/core';
 import { CountUpDirective } from '../../directive/count-up.directive';
@@ -7,8 +15,12 @@ import { Store } from '../../state';
 import { PieChartComponent } from '../pie-chart/pie-chart.component';
 import { BarChartComponent } from '../bar-chart/bar-chart.component';
 import { LineChartComponent } from '../line-chart/bar-chart.component';
+import { TuiTabs } from '@taiga-ui/kit';
+import '@alenaksu/json-viewer';
+import { HighlightJsDirective } from 'ngx-highlight-js';
+import { format } from 'sql-formatter';
 
-const tuiImports = [TuiCardLarge, TuiTitle];
+const tuiImports = [TuiCardLarge, TuiTitle, TuiTabs];
 
 @Component({
   selector: 'le-chart',
@@ -20,11 +32,21 @@ const tuiImports = [TuiCardLarge, TuiTitle];
     PieChartComponent,
     BarChartComponent,
     LineChartComponent,
+    HighlightJsDirective,
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
 })
 export class ChartComponent {
   readonly store = inject(Store);
   readonly chart = this.store.previewChart()?.chart;
+
+  get sql(): string {
+    const sql = this.store.previewChart()?.sql ?? '';
+    return format(sql, { language: 'postgresql' });
+  }
+
+  protected activeItemIndex = 0;
 }
