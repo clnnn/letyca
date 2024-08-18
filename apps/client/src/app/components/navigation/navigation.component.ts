@@ -12,19 +12,19 @@ const tuiImports = [TuiNavigation, TuiIcon, TuiTabs];
   imports: [...tuiImports, RouterLink, RouterLinkActive],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <tui-tabs>
-      <a tuiTab iconStart="@tui.home" routerLink="/" routerLinkActive>Home </a>
-      <a tuiTab iconStart="cable" routerLink="/connections" routerLinkActive
+    <tui-tabs [underline]="false">
+      <a tuiTab routerLink="/" routerLinkActive iconStart="@tui.home">Home</a>
+      <a tuiTab routerLink="/connections" routerLinkActive iconStart="cable"
         >Connections
       </a>
-      <a tuiTab iconStart="chart-scatter" routerLink="/widgets" routerLinkActive
+      <a tuiTab routerLink="/widgets" routerLinkActive iconStart="chart-scatter"
         >Widgets
       </a>
       <a
         tuiTab
-        iconStart="layout-dashboard"
         routerLink="/dashboards"
         routerLinkActive
+        iconStart="layout-dashboard"
         >Dashboards
       </a>
     </tui-tabs>
