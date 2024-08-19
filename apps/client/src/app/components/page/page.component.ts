@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  RouterLink,
-  RouterLinkActive,
-  RouterModule,
-  RouterOutlet,
-} from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TitleComponent } from '../title/title.component';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { AvatarComponent } from '../avatar/avatar.component';

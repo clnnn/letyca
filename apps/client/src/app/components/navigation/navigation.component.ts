@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TuiIcon } from '@taiga-ui/core';
+import { TuiButton, TuiIcon } from '@taiga-ui/core';
 import { TuiNavigation } from '@taiga-ui/layout';
 import { TuiTabs } from '@taiga-ui/kit';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
-const tuiImports = [TuiNavigation, TuiIcon, TuiTabs];
+const tuiImports = [TuiNavigation, TuiIcon, TuiTabs, TuiButton];
 
 @Component({
   selector: 'le-navigation',
@@ -12,24 +12,26 @@ const tuiImports = [TuiNavigation, TuiIcon, TuiTabs];
   imports: [...tuiImports, RouterLink, RouterLinkActive],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <tui-tabs [underline]="false">
-      <a tuiTab routerLink="/" routerLinkActive iconStart="@tui.home">Home</a>
-      <a tuiTab routerLink="/connections" routerLinkActive iconStart="cable"
-        >Connections
-      </a>
-      <a tuiTab routerLink="/widgets" routerLinkActive iconStart="chart-scatter"
-        >Widgets
-      </a>
-      <a
+    <tui-tabs [(activeItemIndex)]="activeItemIndex">
+      <button tuiTab routerLink="/" iconStart="@tui.home">Home</button>
+      <button tuiTab routerLink="/explore" iconStart="chart-bar">
+        Explore
+      </button>
+      <button tuiTab routerLink="/connections" iconStart="cable">
+        Connections
+      </button>
+
+      <button
         tuiTab
-        routerLink="/dashboards"
-        routerLinkActive
-        iconStart="layout-dashboard"
-        >Dashboards
-      </a>
+        [disabled]="true"
+        routerLink="/widgets"
+        iconStart="chart-scatter"
+      >
+        Widgets
+      </button>
     </tui-tabs>
   `,
 })
 export class NavigationComponent {
-  // Component logic goes here
+  protected activeItemIndex = 0;
 }

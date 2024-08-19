@@ -19,7 +19,7 @@ import { TuiIcon } from '@taiga-ui/core';
 })
 export class TitleComponent {
   @Input({ required: true, transform: trimTitle })
-  content: string = '';
+  content = '';
 }
 
 function trimTitle(content: string): string {
