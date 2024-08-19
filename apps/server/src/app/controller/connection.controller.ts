@@ -1,4 +1,7 @@
-import { GetConnectionsResponse, NewConnection } from '@letyca/contracts';
+import {
+  GetConnectionsResponse,
+  CreateConnectionRequest,
+} from '@letyca/contracts';
 import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { PrismaService } from '../data-access/prisma.service';
 
@@ -7,8 +10,8 @@ export class ConnectionController {
   constructor(private readonly prisma: PrismaService) {}
 
   @Post()
-  async create(@Body() newConnection: NewConnection): Promise<void> {
-    await this.prisma.connection.create({ data: newConnection });
+  async create(@Body() req: CreateConnectionRequest): Promise<void> {
+    await this.prisma.connection.create({ data: req });
   }
 
   @Get()

@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GetConnectionsResponse, NewConnection } from '@letyca/contracts';
+import {
+  GetConnectionsResponse,
+  CreateConnectionRequest,
+} from '@letyca/contracts';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -9,7 +12,7 @@ export class ConnectionService {
 
   constructor(private readonly http: HttpClient) {}
 
-  create(connection: NewConnection): Observable<string> {
+  create(connection: CreateConnectionRequest): Observable<string> {
     return this.http.post<string>(this.apiUrl, connection);
   }
 

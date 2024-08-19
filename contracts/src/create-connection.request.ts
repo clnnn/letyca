@@ -1,4 +1,4 @@
-export type NewConnection = {
+export type CreateConnectionRequest = {
   host: string;
   port: number;
   database: string;

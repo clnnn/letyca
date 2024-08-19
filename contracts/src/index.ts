@@ -1,4 +1,4 @@
-export * from './new-connection.dto';
+export * from './create-connection.request';
 export * from './get-connections.response';
 export * from './generate-chart.request';
 export * from './generate-chart.response';
