@@ -22,13 +22,13 @@
   tuiCardLarge
   tuiSurface="flat"
   [style]="{ opacity: connectionId === null ? 0 : 1 }"
-  [tuiSkeleton]="suggestionsLoading === 'LOADING'"
+  [tuiSkeleton]="store.suggestionsLoading() === 'LOADING'"
 >
   <h2 tuiHeader>
     <span tuiTitle>Suggestions</span>
   </h2>
   <div class="list">
-    @for (suggestion of suggestions; track $index) {
+    @for (suggestion of store.suggestions(); track $index) {
       <button tuiChip (click)="suggestionClick(suggestion)">
         {{ suggestion }}
       </button>

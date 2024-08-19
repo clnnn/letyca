@@ -1,9 +1,15 @@
 import { ConnectionListItem, GenerateChartResponse } from '@letyca/contracts';
 import { LoadingState } from './utils';
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import {
+  patchState,
+  signalStore,
+  withComputed,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { distinctUntilChanged, exhaustMap, pipe, tap } from 'rxjs';
-import { inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { ConnectionService } from './service/connection.service';
 import { tapResponse } from '@ngrx/operators';
 import { SuggestionsService } from './service/suggestions.service';
@@ -25,6 +31,8 @@ type State = {
   connectionsLoading: LoadingState;
   connections: Connection[];
 
+  selectedConnectionId: string | null;
+
   suggestions: string[];
   suggestionsLoading: LoadingState;
 
@@ -35,6 +43,8 @@ type State = {
 const initialState: State = {
   connectionsLoading: LoadingState.INIT,
   connections: [],
+
+  selectedConnectionId: null,
 
   suggestions: [],
   suggestionsLoading: LoadingState.INIT,
@@ -47,6 +57,11 @@ const initialState: State = {
 export const Store = signalStore(
   { providedIn: 'root' },
   withState(initialState),
+  withComputed(({ selectedConnectionId, connections }) => ({
+    selectedConnection: computed(() => {
+      return connections().find((c) => c.id === selectedConnectionId()) ?? null;
+    }),
+  })),
   withMethods(
     (
       store,
@@ -72,6 +87,9 @@ export const Store = signalStore(
           }),
         ),
       ),
+      selectConnection(connectionId: string): void {
+        patchState(store, { selectedConnectionId: connectionId });
+      },
       loadSuggestions: rxMethod<string>(
         pipe(
           distinctUntilChanged(),

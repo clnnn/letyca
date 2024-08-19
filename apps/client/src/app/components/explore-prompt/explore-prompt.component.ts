@@ -17,6 +17,7 @@ import {
   RouterLink,
   RouterLinkActive,
 } from '@angular/router';
+import { Store } from '../../state';
 
 const tuiImports = [
   TuiTextareaModule,
@@ -43,18 +44,10 @@ const tuiImports = [
   styleUrls: ['./explore-prompt.component.scss'],
 })
 export class ExplorePromptComponent {
-  private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
+  protected readonly store = inject(Store);
   protected userRequest = '';
-
-  @Input({ required: true })
-  connectionId!: string | null;
-
-  @Input({ required: true })
-  suggestions: string[] = [];
-
-  @Input({ required: true })
-  suggestionsLoading: LoadingState = LoadingState.INIT;
+  protected readonly connectionId = this.store.selectedConnectionId();
 
   protected suggestionClick(suggestion: string): void {
     this.router.navigate(['/explore/charts'], {

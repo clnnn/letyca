@@ -1,7 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
   EventEmitter,
+  inject,
   Input,
   Output,
 } from '@angular/core';
@@ -11,7 +13,7 @@ import { LoadingState } from '../../utils';
 import { TuiDataListWrapper, TuiStringifyContentPipe } from '@taiga-ui/kit';
 import { TuiDataList } from '@taiga-ui/core';
 import { TuiComboBoxModule } from '@taiga-ui/legacy';
-import { Connection } from '../../state';
+import { Connection, Store } from '../../state';
 
 const tuiImports = [
   TuiDataListWrapper,
@@ -29,24 +31,30 @@ const tuiImports = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExploreHeaderComponent {
+  readonly store = inject(Store);
+
   @Input({ required: true })
   title!: string;
-
-  @Input({ required: true })
-  connections!: Connection[];
-
-  @Input({ required: true })
-  connectionsLoading!: LoadingState;
-
-  @Output()
-  readonly connectionChange = new EventEmitter<Connection>();
 
   connectionDropdown = new FormControl<Connection | undefined>(undefined);
 
   readonly stringify = (item: Connection): string =>
     `${item.host}:${item.port} - ${item.database}`;
 
+  constructor() {
+    effect(() => {
+      const selectedConnection = this.store.selectedConnection();
+      if (selectedConnection) {
+        this.connectionDropdown.setValue(selectedConnection);
+      }
+    });
+  }
+
   onChanges(selected?: Connection): void {
-    this.connectionChange.emit(selected);
+    if (!selected) {
+      return;
+    }
+
+    this.store.selectConnection(selected.id);
   }
 }
