@@ -18,8 +18,9 @@ export type SQLQuery = {
   rawSQL: string;
 } & (BasicAggregation | GroupingAggregation);
 
-export type ParseError = {
-  message: string;
+export type InvalidQuery = {
+  type: 'invalidQuery';
+  errorMessage: string;
 };
 
 /**
@@ -31,14 +32,13 @@ export type ParseError = {
  */
 @Injectable()
 export class QueryParsingService {
-  // private readonly parser = new Parser();
-
-  parse(rawSQL: string): SQLQuery | ParseError {
+  parse(rawSQL: string): SQLQuery | InvalidQuery {
     const stmts = parse(rawSQL);
 
     if (stmts.length < 1) {
       return {
-        message: 'No statement found',
+        type: 'invalidQuery',
+        errorMessage: 'The provided SQL statement is empty',
       };
     }
 
@@ -46,13 +46,15 @@ export class QueryParsingService {
 
     if (!rawStmt?.stmt) {
       return {
-        message: 'No statement found',
+        type: 'invalidQuery',
+        errorMessage: 'The provided SQL statement is invalid',
       };
     }
 
     if (!('SelectStmt' in rawStmt.stmt)) {
       return {
-        message: 'Only SELECT statements are supported',
+        type: 'invalidQuery',
+        errorMessage: 'Only SELECT statements are supported',
       };
     }
 
@@ -224,59 +226,3 @@ export class QueryParsingService {
     };
   }
 }
-
-// private groupingAggregation(
-//   columns: Column[],
-//   groupBy: { columns: ColumnRef[] },
-// ): GroupingAggregation {
-//   const aggregationColumns =
-//     this.basicAggregation(columns).aggregationColumns;
-
-//   const dimensionColumns: string[] = [];
-//   for (const column of columns) {
-//     if (column.expr.type === 'column_ref') {
-//       const columnRef = column.expr as ColumnRef;
-//       for (const groupByColumnRef of groupBy.columns) {
-//         if (isDeepStrictEqual(columnRef, groupByColumnRef)) {
-//           if (column.as) {
-//             dimensionColumns.push(column.as.toString().toLowerCase());
-//           } else if (typeof columnRef.column === 'string') {
-//             dimensionColumns.push(columnRef.column.toLowerCase());
-//           } else {
-//             dimensionColumns.push(
-//               columnRef.column.expr.value.toString().toLowerCase(),
-//             );
-//           }
-//         }
-//       }
-//     }
-
-//     if (column.expr.type === 'cast') {
-//       const cast = column.expr as Cast;
-//       const columnRef = cast.expr as ColumnRef;
-//       for (const groupByColumnRef of groupBy.columns) {
-//         if (isDeepStrictEqual(columnRef, groupByColumnRef)) {
-//           if (cast['as']) {
-//             dimensionColumns.push(cast['as'].toString().toLowerCase());
-//           } else if (typeof columnRef.column === 'string') {
-//             dimensionColumns.push(columnRef.column.toLowerCase());
-//           } else {
-//             dimensionColumns.push(
-//               columnRef.column.expr.value.toString().toLowerCase(),
-//             );
-//           }
-//         }
-//       }
-//     }
-
-//     if (column.expr.type === 'function') {
-//       // not implemented
-//     }
-//   }
-
-//   return {
-//     type: 'groupingAggregation',
-//     aggregationColumns,
-//     dimensionColumns,
-//   };
-// }

@@ -1,14 +1,32 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { b } from 'baml_client';
 import { Connection } from 'prisma/prisma-client';
 import { DDLService } from './ddl.service';
+import {
+  InvalidQuery,
+  QueryParsingService,
+  SQLQuery,
+} from './query-parsing.service';
 
 @Injectable()
 export class QueryGenerationService {
-  constructor(private readonly ddl: DDLService) {}
+  private readonly logger = new Logger(QueryGenerationService.name);
 
-  async generate(userRequest: string, connection: Connection): Promise<string> {
+  constructor(
+    private readonly ddl: DDLService,
+    private readonly parser: QueryParsingService,
+  ) {}
+
+  async generate(
+    userRequest: string,
+    connection: Connection,
+  ): Promise<SQLQuery | InvalidQuery> {
     const ddlStatements = await this.ddl.retrieve(connection);
-    return await b.GenerateSQL(userRequest, ddlStatements);
+
+    const rawSQL = await b.GenerateSQL(userRequest, ddlStatements);
+    this.logger.debug('Raw SQL', rawSQL);
+
+    const parsedSQL = this.parser.parse(rawSQL);
+    return parsedSQL;
   }
 }

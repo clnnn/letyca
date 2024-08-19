@@ -5,7 +5,6 @@ import { DataLayerService } from '../service/data-layer.service';
 import { ChartMetadataService } from '../service/chart-metadata.service';
 import { MergeService } from '../service/merge.service';
 import { QueryGenerationService } from '../service/query-generation.service';
-import { QueryParsingService } from '../service/query-parsing.service';
 
 @Controller('charts')
 export class ChartController {
@@ -15,51 +14,49 @@ export class ChartController {
     private prisma: PrismaService,
     private metadataService: ChartMetadataService,
     private queryGenerationService: QueryGenerationService,
-    private queryParsingService: QueryParsingService,
     private dataLayer: DataLayerService,
     private mergeService: MergeService,
   ) {}
 
   @Post()
   async generateChart(
-    @Body() request: GenerateChartRequest,
+    @Body() req: GenerateChartRequest,
   ): Promise<GenerateChartResponse> {
-    const { connectionId, userRequest } = request;
+    const { connectionId, userRequest } = req;
     const connection = await this.prisma.connection.findUnique({
       where: {
         id: connectionId,
       },
     });
 
-    const metadata = await this.metadataService.generate(userRequest);
-    this.logger.debug('Generated metadata', metadata);
-
     if (!connection) {
       throw new Error('Connection not found');
     }
 
-    const rawSql = await this.queryGenerationService.generate(
-      userRequest,
-      connection,
-    );
-    this.logger.debug('Generated SQL', rawSql);
+    const [metadata, query] = await Promise.all([
+      this.metadataService.generate(userRequest),
+      this.queryGenerationService.generate(userRequest, connection),
+    ]);
 
-    const query = this.queryParsingService.parse(rawSql);
-    this.logger.debug('Parsed SQL', query);
+    this.logger.debug('Generated metadata', metadata);
+    this.logger.debug('Generated SQL', query);
 
-    if ('message' in query) {
-      throw new Error(query.message);
+    if (query.type === 'invalidQuery') {
+      throw new Error(query.errorMessage);
     }
 
     const result = await this.dataLayer.runQuery(query.rawSQL, connection);
-    this.logger.debug('Data result', result);
+    if (result.status === 'fail') {
+      throw new Error(result.reason);
+    }
 
-    const chart = this.mergeService.concat(metadata, result, query);
-    this.logger.debug('Generated chart', chart);
+    this.logger.log('Data result size', result.data.length);
+
+    const chart = this.mergeService.concat(metadata, result.data, query);
 
     return {
       chart,
-      sql: rawSql,
+      sql: query.rawSQL,
     };
   }
 }

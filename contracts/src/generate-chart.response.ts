@@ -34,7 +34,11 @@ export interface BarChart extends AbstractChart<ChartDataSet> {
   data: ChartDataSet;
 }
 
-export type Chart = CountLabel | PieChart | LineChart | BarChart;
+export interface UnknownChart {
+  chartType: 'unknown';
+}
+
+export type Chart = CountLabel | PieChart | LineChart | BarChart | UnknownChart;
 
 export type GenerateChartResponse = {
   chart: Chart;
