@@ -18,7 +18,7 @@ const tuiImports = [TuiBlockStatus];
         [options]="options"
       />
       <h2>No Chart Loaded</h2>
-      Select a connection, enter a query, and generate the chart to get started.
+      Please describe your chart requirements
     </tui-block-status>
   `,
 })
