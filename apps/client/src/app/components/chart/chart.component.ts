@@ -2,10 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   CUSTOM_ELEMENTS_SCHEMA,
-  effect,
-  ElementRef,
   inject,
-  ViewChild,
 } from '@angular/core';
 import { TuiCardLarge } from '@taiga-ui/layout';
 import { TuiTitle } from '@taiga-ui/core';

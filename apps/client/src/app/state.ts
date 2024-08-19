@@ -78,7 +78,7 @@ export const Store = signalStore(
           tap(() =>
             patchState(store, { suggestionsLoading: LoadingState.LOADING }),
           ),
-          switchMap((connectionId: string) =>
+          exhaustMap((connectionId: string) =>
             suggestionsService.fetchAll(connectionId),
           ),
           tapResponse({
@@ -99,7 +99,7 @@ export const Store = signalStore(
           tap(() =>
             patchState(store, { previewChartLoading: LoadingState.LOADING }),
           ),
-          switchMap((request) => chartService.generateChart(request)),
+          exhaustMap((request) => chartService.generateChart(request)),
           tapResponse({
             next: (previewChart) =>
               patchState(store, {
