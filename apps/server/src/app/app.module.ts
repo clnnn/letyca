@@ -3,7 +3,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ConnectionController } from './controller/connection.controller';
 import { PrismaService } from './data-access/prisma.service';
-import { FeatureFlagController } from './controller/feature-flag.controller';
 import { DataLayerService } from './service/data-layer.service';
 import { ChartController } from './controller/chart.controller';
 import { ChartMetadataService } from './service/chart-metadata.service';
@@ -16,12 +15,7 @@ import { SuggestionService } from './service/suggestion.service';
 
 @Module({
   imports: [ConfigModule.forRoot()],
-  controllers: [
-    ConnectionController,
-    ChartController,
-    FeatureFlagController,
-    SuggestionController,
-  ],
+  controllers: [ConnectionController, ChartController, SuggestionController],
   providers: [
     PrismaService,
     DataLayerService,
