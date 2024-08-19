@@ -56,5 +56,6 @@ export class ExploreHeaderComponent {
     }
 
     this.store.selectConnection(selected.id);
+    this.store.loadSuggestions(selected.id);
   }
 }
