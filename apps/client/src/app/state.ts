@@ -32,6 +32,7 @@ type State = {
   connections: Connection[];
 
   selectedConnectionId: string | null;
+  userRequest: string;
 
   suggestions: string[];
   suggestionsLoading: LoadingState;
@@ -45,6 +46,7 @@ const initialState: State = {
   connections: [],
 
   selectedConnectionId: null,
+  userRequest: '',
 
   suggestions: [],
   suggestionsLoading: LoadingState.INIT,
@@ -92,6 +94,9 @@ export const Store = signalStore(
       ),
       selectConnection(connectionId: string): void {
         patchState(store, { selectedConnectionId: connectionId });
+      },
+      setUserRequest(userRequest: string): void {
+        patchState(store, { userRequest });
       },
       loadSuggestions: rxMethod<string>(
         pipe(

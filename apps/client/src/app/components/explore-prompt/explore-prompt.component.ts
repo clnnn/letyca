@@ -1,22 +1,10 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  Input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TuiButton, TuiTitle } from '@taiga-ui/core';
 import { TuiButtonLoading, TuiChip, TuiSkeleton } from '@taiga-ui/kit';
 import { TuiTextareaModule } from '@taiga-ui/legacy';
-import { LoadingState } from '../../utils';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TuiCardLarge } from '@taiga-ui/layout';
-import {
-  ActivatedRoute,
-  Router,
-  RouterLink,
-  RouterLinkActive,
-} from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { Store } from '../../state';
 
 const tuiImports = [
@@ -46,7 +34,6 @@ const tuiImports = [
 export class ExplorePromptComponent {
   private readonly router = inject(Router);
   protected readonly store = inject(Store);
-  protected userRequest = '';
 
   protected suggestionClick(suggestion: string): void {
     this.router.navigate(['/explore/charts'], {

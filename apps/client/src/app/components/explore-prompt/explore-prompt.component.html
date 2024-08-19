@@ -1,7 +1,8 @@
 <div class="message-container">
   <tui-textarea
     class="tui-space_bottom-4 field-large"
-    [(ngModel)]="userRequest"
+    [ngModel]="store.userRequest()"
+    (ngModelChange)="store.setUserRequest($event)"
     [disabled]="this.store.selectedConnectionId() === null"
   >
     What do you want to display?
@@ -12,10 +13,14 @@
     type="submit"
     class="tui-space_right-3 tui-space_bottom-3 send-button"
     [disabled]="
-      userRequest.length === 0 || this.store.selectedConnectionId() === null
+      store.userRequest().length === 0 ||
+      this.store.selectedConnectionId() === null
     "
     routerLink="/explore/charts"
-    [queryParams]="{ c: this.store.selectedConnectionId(), q: userRequest }"
+    [queryParams]="{
+      c: this.store.selectedConnectionId(),
+      q: store.userRequest()
+    }"
   ></button>
 </div>
 
