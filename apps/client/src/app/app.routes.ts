@@ -4,7 +4,6 @@ import {
   ExploreComponent,
   HomeComponent,
 } from './components';
-import { ChartPreviewComponent } from './components/chart-preview/chart-preview.component';
 
 export const routes: Routes = [
   {
@@ -17,15 +16,6 @@ export const routes: Routes = [
   },
   {
     path: 'explore',
-    children: [
-      {
-        path: '',
-        component: ExploreComponent,
-      },
-      {
-        path: 'charts',
-        component: ChartPreviewComponent,
-      },
-    ],
+    component: ExploreComponent,
   },
 ];

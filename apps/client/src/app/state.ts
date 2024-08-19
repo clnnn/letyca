@@ -1,4 +1,8 @@
-import { ConnectionListItem, GenerateChartResponse } from '@letyca/contracts';
+import {
+  ConnectionListItem,
+  GenerateChartRequest,
+  GenerateChartResponse,
+} from '@letyca/contracts';
 import { LoadingState } from './utils';
 import {
   patchState,
@@ -8,7 +12,7 @@ import {
   withState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { distinctUntilChanged, exhaustMap, pipe, tap } from 'rxjs';
+import { distinctUntilChanged, exhaustMap, filter, map, pipe, tap } from 'rxjs';
 import { computed, inject } from '@angular/core';
 import { ConnectionService } from './service/connection.service';
 import { tapResponse } from '@ngrx/operators';
@@ -34,9 +38,6 @@ type State = {
   selectedConnectionId: string | null;
   userRequest: string;
 
-  suggestions: string[];
-  suggestionsLoading: LoadingState;
-
   previewChart: GeneratedPreviewChart | null;
   previewChartLoading: LoadingState;
 };
@@ -47,9 +48,6 @@ const initialState: State = {
 
   selectedConnectionId: null,
   userRequest: '',
-
-  suggestions: [],
-  suggestionsLoading: LoadingState.INIT,
 
   previewChart: null,
   previewChartLoading: LoadingState.INIT,
@@ -68,7 +66,6 @@ export const Store = signalStore(
     (
       store,
       connectionService = inject(ConnectionService),
-      suggestionsService = inject(SuggestionsService),
       chartService = inject(ChartService),
     ) => ({
       loadConnections: rxMethod<void>(
@@ -98,36 +95,25 @@ export const Store = signalStore(
       setUserRequest(userRequest: string): void {
         patchState(store, { userRequest });
       },
-      loadSuggestions: rxMethod<string>(
-        pipe(
-          distinctUntilChanged(),
-          tap(() =>
-            patchState(store, { suggestionsLoading: LoadingState.LOADING }),
-          ),
-          exhaustMap((connectionId: string) =>
-            suggestionsService.fetchAll(connectionId).pipe(
-              tapResponse({
-                next: (suggestions) =>
-                  patchState(store, {
-                    suggestionsLoading: LoadingState.LOADED,
-                    suggestions,
-                  }),
-                error: () =>
-                  patchState(store, {
-                    suggestionsLoading: LoadingState.ERROR,
-                  }),
-              }),
-            ),
-          ),
-        ),
-      ),
-      generateChart: rxMethod<{ connectionId: string; userRequest: string }>(
+      generateChart: rxMethod<void>(
         pipe(
           tap(() =>
             patchState(store, { previewChartLoading: LoadingState.LOADING }),
           ),
-          exhaustMap((request) =>
-            chartService.generateChart(request).pipe(
+          map(() => {
+            const connectionId = store.selectedConnectionId();
+            const userRequest = store.userRequest();
+
+            if (!connectionId || !userRequest) {
+              return null;
+            }
+            const req: GenerateChartRequest = { connectionId, userRequest };
+            console.log(req);
+            return req;
+          }),
+          filter((req): req is GenerateChartRequest => req !== null),
+          exhaustMap((req) =>
+            chartService.generateChart(req).pipe(
               tapResponse({
                 next: (previewChart) =>
                   patchState(store, {
@@ -143,10 +129,12 @@ export const Store = signalStore(
           ),
         ),
       ),
-      clearPreviewChart(): void {
+      explorePageClosed(): void {
         patchState(store, {
           previewChart: null,
           previewChartLoading: LoadingState.INIT,
+          userRequest: '',
+          selectedConnectionId: null,
         });
       },
     }),

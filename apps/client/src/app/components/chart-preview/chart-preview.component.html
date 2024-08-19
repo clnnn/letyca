@@ -1,11 +1,17 @@
-<span class="tui-text_h3 title">{{ typeWrittenUserRequest$ | async }}</span>
+<!-- <span class="tui-text_h3 title">{{ typeWrittenUserRequest$ | async }}</span> -->
 
 @switch (store.previewChartLoading()) {
+  @case ('INIT') {
+    <h1>No charts loaded</h1>
+  }
   @case ('ERROR') {
     <le-chart-generation-error class="content" />
   }
   @case ('LOADING') {
-    <le-chart-generation-loading class="content" />
+    <le-chart-generation-loading
+      [userRequest]="store.userRequest()"
+      class="content"
+    />
   }
   @case ('LOADED') {
     <le-chart class="content" />

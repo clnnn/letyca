@@ -32,12 +32,5 @@ const tuiImports = [
   styleUrls: ['./explore-prompt.component.scss'],
 })
 export class ExplorePromptComponent {
-  private readonly router = inject(Router);
   protected readonly store = inject(Store);
-
-  protected suggestionClick(suggestion: string): void {
-    this.router.navigate(['/explore/charts'], {
-      queryParams: { c: this.store.selectedConnectionId(), q: suggestion },
-    });
-  }
 }

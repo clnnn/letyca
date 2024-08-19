@@ -16,29 +16,6 @@
       store.userRequest().length === 0 ||
       this.store.selectedConnectionId() === null
     "
-    routerLink="/explore/charts"
-    [queryParams]="{
-      c: this.store.selectedConnectionId(),
-      q: store.userRequest()
-    }"
+    (click)="store.generateChart()"
   ></button>
 </div>
-
-<section
-  class="suggestions-container"
-  tuiCardLarge
-  tuiSurface="flat"
-  [style]="{ opacity: this.store.selectedConnectionId() === null ? 0 : 1 }"
-  [tuiSkeleton]="store.suggestionsLoading() === 'LOADING'"
->
-  <h2 tuiHeader>
-    <span tuiTitle>Suggestions</span>
-  </h2>
-  <div class="list">
-    @for (suggestion of store.suggestions(); track $index) {
-      <button tuiChip (click)="suggestionClick(suggestion)">
-        {{ suggestion }}
-      </button>
-    }
-  </div>
-</section>
