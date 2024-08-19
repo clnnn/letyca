@@ -1,4 +1,10 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TuiBlockStatus } from '@taiga-ui/layout';
 import { combineLatest, filter, map, switchMap } from 'rxjs';
@@ -25,7 +31,7 @@ const tuiImports = [TuiBlockStatus];
   templateUrl: './chart-preview.component.html',
   styleUrls: ['./chart-preview.component.scss'],
 })
-export class ChartPreviewComponent implements OnInit {
+export class ChartPreviewComponent implements OnInit, OnDestroy {
   private readonly route = inject(ActivatedRoute);
   private readonly destroyRef = inject(DestroyRef);
   private readonly typeWritter = inject(TypeWritterSerivce);
@@ -52,6 +58,10 @@ export class ChartPreviewComponent implements OnInit {
       .subscribe(([connectionId, userRequest]) =>
         this.paramsLoaded(connectionId, userRequest),
       );
+  }
+
+  ngOnDestroy(): void {
+    this.store.clearPreviewChart();
   }
 
   private paramsLoaded(
