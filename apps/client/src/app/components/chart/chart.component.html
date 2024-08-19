@@ -22,6 +22,11 @@
       @case ('line') {
         <le-line-chart [chart]="chart" />
       }
+      @default {
+        <tui-chip appearance="error"
+          >The visualisation of your request is not supported yet!</tui-chip
+        >
+      }
     }
   } @else if (activeItemIndex === 1) {
     <json-viewer [data]="chart"> </json-viewer>
