@@ -1,4 +1,4 @@
-import { ConnectionListItem, NewConnection } from '@letyca/contracts';
+import { GetConnectionsResponse, NewConnection } from '@letyca/contracts';
 import {
   Body,
   Controller,
@@ -22,7 +22,7 @@ export class ConnectionController {
   }
 
   @Get()
-  async findAll(): Promise<ConnectionListItem[]> {
+  async findAll(): Promise<GetConnectionsResponse> {
     return await this.prisma.connection.findMany({
       select: {
         id: true,

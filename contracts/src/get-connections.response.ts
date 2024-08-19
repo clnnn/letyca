@@ -5,3 +5,5 @@ export type ConnectionListItem = {
   database: string;
   schema: string;
 };
+
+export type GetConnectionsResponse = ConnectionListItem[];

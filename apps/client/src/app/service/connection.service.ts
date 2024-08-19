@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ConnectionListItem, NewConnection } from '@letyca/contracts';
+import { GetConnectionsResponse, NewConnection } from '@letyca/contracts';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -13,8 +13,8 @@ export class ConnectionService {
     return this.http.post<string>(this.apiUrl, connection);
   }
 
-  fetchAll(): Observable<ConnectionListItem[]> {
-    return this.http.get<ConnectionListItem[]>(this.apiUrl);
+  fetchAll(): Observable<GetConnectionsResponse> {
+    return this.http.get<GetConnectionsResponse>(this.apiUrl);
   }
 
   deleteById(connectionId: string): Observable<void> {

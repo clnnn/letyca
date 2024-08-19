@@ -7,11 +7,11 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ConnectionListItem } from '@letyca/contracts';
 import { LoadingState } from '../../utils';
 import { TuiDataListWrapper, TuiStringifyContentPipe } from '@taiga-ui/kit';
 import { TuiDataList } from '@taiga-ui/core';
 import { TuiComboBoxModule } from '@taiga-ui/legacy';
+import { Connection } from '../../state';
 
 const tuiImports = [
   TuiDataListWrapper,
@@ -33,22 +33,20 @@ export class ExploreHeaderComponent {
   title!: string;
 
   @Input({ required: true })
-  connections!: ConnectionListItem[];
+  connections!: Connection[];
 
   @Input({ required: true })
   connectionsLoading!: LoadingState;
 
   @Output()
-  readonly connectionChange = new EventEmitter<ConnectionListItem>();
+  readonly connectionChange = new EventEmitter<Connection>();
 
-  connectionDropdown = new FormControl<ConnectionListItem | undefined>(
-    undefined
-  );
+  connectionDropdown = new FormControl<Connection | undefined>(undefined);
 
-  readonly stringify = (item: ConnectionListItem): string =>
+  readonly stringify = (item: Connection): string =>
     `${item.host}:${item.port} - ${item.database}`;
 
-  onChanges(selected?: ConnectionListItem): void {
+  onChanges(selected?: Connection): void {
     this.connectionChange.emit(selected);
   }
 }
