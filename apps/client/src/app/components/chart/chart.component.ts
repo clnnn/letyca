@@ -11,7 +11,7 @@ import { CountLabelComponent } from '../count-label/count-label.component';
 import { Store } from '../../state';
 import { PieChartComponent } from '../pie-chart/pie-chart.component';
 import { BarChartComponent } from '../bar-chart/bar-chart.component';
-import { LineChartComponent } from '../line-chart/bar-chart.component';
+import { LineChartComponent } from '../line-chart/line-chart.component';
 import { TuiTabs } from '@taiga-ui/kit';
 import '@alenaksu/json-viewer';
 import { HighlightJsDirective } from 'ngx-highlight-js';

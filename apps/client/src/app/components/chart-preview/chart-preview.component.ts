@@ -1,7 +1,4 @@
-import { Component, inject, OnDestroy } from '@angular/core';
-import { TuiBlockStatus } from '@taiga-ui/layout';
-import { TypeWritterSerivce } from '../../service/typewriter.service';
-import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { Store } from '../../state';
 import { ChartGenerationLoadingComponent } from '../chart-generation-loading/chart-generation-loading.component';
 import { ChartGenerationErrorComponent } from '../chart-generation-error/chart-generation-error.component';
@@ -23,6 +20,5 @@ import { ChartGenerationInitComponent } from '../chart-generation-init/chart-gen
   styleUrls: ['./chart-preview.component.scss'],
 })
 export class ChartPreviewComponent {
-  private readonly typeWritter = inject(TypeWritterSerivce);
   protected readonly store = inject(Store);
 }

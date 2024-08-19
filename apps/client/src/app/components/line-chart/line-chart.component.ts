@@ -1,22 +1,32 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { BarChart, LineChart } from '@letyca/contracts';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  input,
+  Input,
+} from '@angular/core';
+import { LineChart } from '@letyca/contracts';
 import { TuiTitle } from '@taiga-ui/core';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartOptions } from 'chart.js';
+import { AsyncPipe } from '@angular/common';
+import { TypeWritterSerivce } from '../../service/typewriter.service';
+import { toObservable } from '@angular/core/rxjs-interop';
+import { map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'le-line-chart',
   standalone: true,
-  imports: [TuiTitle, BaseChartDirective],
+  imports: [TuiTitle, BaseChartDirective, AsyncPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <span class="tui-text_h6">{{ chart.title }}</span>
+    <span class="tui-text_h6">{{ title$ | async }}</span>
     <div class="container">
       <canvas
         class="line-chart"
         baseChart
         type="line"
-        [data]="chart.data"
+        [data]="chart().data"
         [options]="options"
       ></canvas>
     </div>
@@ -27,14 +37,19 @@ import { ChartOptions } from 'chart.js';
     flex-direction: column;
 
     .container {
-      width: 1000px;
-      height: 600px;
+      width: 800px;
+      height: 500px;
     }
   }`,
 })
 export class LineChartComponent {
-  @Input({ required: true })
-  chart!: LineChart;
+  private readonly typeWritter = inject(TypeWritterSerivce);
+
+  readonly chart = input.required<LineChart>();
+  readonly title$ = toObservable(this.chart).pipe(
+    map((chart) => chart.title.trim()),
+    switchMap((text) => this.typeWritter.type({ text, speed: 40 })),
+  );
 
   protected readonly options: ChartOptions = {
     elements: {

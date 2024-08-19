@@ -1,9 +1,9 @@
 @if (chart) {
-  <tui-tabs [(activeItemIndex)]="activeItemIndex">
+  <nav tuiTabs [(activeItemIndex)]="activeItemIndex" vertical="left">
     <button tuiTab>Rendered Chart</button>
     <button tuiTab>JSON</button>
     <button tuiTab>Data Query</button>
-  </tui-tabs>
+  </nav>
 
   @if (activeItemIndex === 0) {
     @switch (chart.chartType) {
@@ -26,6 +26,6 @@
   } @else if (activeItemIndex === 1) {
     <json-viewer [data]="chart"> </json-viewer>
   } @else if (activeItemIndex === 2) {
-    <textarea highlight-js lang="sql">{{ sql }}</textarea>
+    <textarea class="main" highlight-js lang="sql">{{ sql }}</textarea>
   }
 }

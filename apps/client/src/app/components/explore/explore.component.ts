@@ -21,24 +21,37 @@ import { ChartComponent } from '../chart/chart.component';
     ChartComponent,
   ],
   template: `
-    <div class="preview">
-      <le-explore-header title="Explore" />
-      <le-chart-preview />
-    </div>
-    <le-explore-prompt />
+    <le-explore-header class="header" title="Explore" />
+    <le-chart-preview class="chart-preview" />
+    <le-explore-prompt class="footer" />
   `,
   styles: `
   :host {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template-areas:
+      'header'
+      'main'
+      'footer';
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: 1rem;
+    overflow: hidden;
 
-    .preview {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-  }
-}
+    .header {
+      grid-area: header;
+    }
+
+    .chart-preview {
+      grid-area: main;
+      overflow: auto;
+    }
+
+    .footer {
+      grid-area: footer;
+    }
+
+    
+  } 
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
