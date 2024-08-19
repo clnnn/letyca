@@ -75,16 +75,19 @@ export const Store = signalStore(
           tap(() =>
             patchState(store, { connectionsLoading: LoadingState.LOADING }),
           ),
-          exhaustMap(() => connectionService.fetchAll()),
-          tapResponse({
-            next: (connections) =>
-              patchState(store, {
-                connectionsLoading: LoadingState.LOADED,
-                connections,
+          exhaustMap(() =>
+            connectionService.fetchAll().pipe(
+              tapResponse({
+                next: (connections) =>
+                  patchState(store, {
+                    connectionsLoading: LoadingState.LOADED,
+                    connections,
+                  }),
+                error: () =>
+                  patchState(store, { connectionsLoading: LoadingState.ERROR }),
               }),
-            error: () =>
-              patchState(store, { connectionsLoading: LoadingState.ERROR }),
-          }),
+            ),
+          ),
         ),
       ),
       selectConnection(connectionId: string): void {
@@ -97,19 +100,20 @@ export const Store = signalStore(
             patchState(store, { suggestionsLoading: LoadingState.LOADING }),
           ),
           exhaustMap((connectionId: string) =>
-            suggestionsService.fetchAll(connectionId),
+            suggestionsService.fetchAll(connectionId).pipe(
+              tapResponse({
+                next: (suggestions) =>
+                  patchState(store, {
+                    suggestionsLoading: LoadingState.LOADED,
+                    suggestions,
+                  }),
+                error: () =>
+                  patchState(store, {
+                    suggestionsLoading: LoadingState.ERROR,
+                  }),
+              }),
+            ),
           ),
-          tapResponse({
-            next: (recommendations) =>
-              patchState(store, {
-                suggestionsLoading: LoadingState.LOADED,
-                suggestions: recommendations,
-              }),
-            error: () =>
-              patchState(store, {
-                suggestionsLoading: LoadingState.ERROR,
-              }),
-          }),
         ),
       ),
       generateChart: rxMethod<{ connectionId: string; userRequest: string }>(
@@ -117,20 +121,29 @@ export const Store = signalStore(
           tap(() =>
             patchState(store, { previewChartLoading: LoadingState.LOADING }),
           ),
-          exhaustMap((request) => chartService.generateChart(request)),
-          tapResponse({
-            next: (previewChart) =>
-              patchState(store, {
-                previewChartLoading: LoadingState.LOADED,
-                previewChart,
+          exhaustMap((request) =>
+            chartService.generateChart(request).pipe(
+              tapResponse({
+                next: (previewChart) =>
+                  patchState(store, {
+                    previewChartLoading: LoadingState.LOADED,
+                    previewChart,
+                  }),
+                error: () =>
+                  patchState(store, {
+                    previewChartLoading: LoadingState.ERROR,
+                  }),
               }),
-            error: () =>
-              patchState(store, {
-                previewChartLoading: LoadingState.ERROR,
-              }),
-          }),
+            ),
+          ),
         ),
       ),
+      clearPreviewChart(): void {
+        patchState(store, {
+          previewChart: null,
+          previewChartLoading: LoadingState.INIT,
+        });
+      },
     }),
   ),
 );
