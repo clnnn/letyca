@@ -16,7 +16,6 @@ import { distinctUntilChanged, exhaustMap, filter, map, pipe, tap } from 'rxjs';
 import { computed, inject } from '@angular/core';
 import { ConnectionService } from './service/connection.service';
 import { tapResponse } from '@ngrx/operators';
-import { SuggestionsService } from './service/suggestions.service';
 import { ChartService } from './service/chart.service';
 
 // State models

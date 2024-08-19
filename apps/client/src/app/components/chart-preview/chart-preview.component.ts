@@ -7,15 +7,13 @@ import { ChartGenerationLoadingComponent } from '../chart-generation-loading/cha
 import { ChartGenerationErrorComponent } from '../chart-generation-error/chart-generation-error.component';
 import { ChartComponent } from '../chart/chart.component';
 import { ExplorePromptComponent } from '../explore-prompt/explore-prompt.component';
-
-const tuiImports = [TuiBlockStatus];
+import { ChartGenerationInitComponent } from '../chart-generation-init/chart-generation-init.component';
 
 @Component({
   selector: 'le-chart-preview',
   standalone: true,
   imports: [
-    ...tuiImports,
-    AsyncPipe,
+    ChartGenerationInitComponent,
     ChartGenerationLoadingComponent,
     ChartGenerationErrorComponent,
     ChartComponent,
