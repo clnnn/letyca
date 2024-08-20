@@ -32,8 +32,9 @@ export class MergeService {
     }
 
     if (
-      (chartType === 'pie' || chartType === 'line' || chartType === 'bar') &&
-      query.type === 'groupingAggregation'
+      ((chartType === 'pie' || chartType === 'line' || chartType === 'bar') &&
+        query.type === 'groupingAggregation') ||
+      query.type === 'nonAggregation'
     ) {
       const labels = rows.reduce((acc, row) => {
         const label = query.dimensionColumns

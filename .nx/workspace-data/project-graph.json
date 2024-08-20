@@ -14357,12 +14357,12 @@
       },
       {
         "source": "client",
-        "target": "npm:@taiga-ui/layout",
+        "target": "npm:rxjs",
         "type": "static"
       },
       {
         "source": "client",
-        "target": "npm:rxjs",
+        "target": "npm:@taiga-ui/layout",
         "type": "static"
       },
       {
@@ -14430,11 +14430,6 @@
       {
         "source": "server",
         "target": "npm:prisma",
-        "type": "static"
-      },
-      {
-        "source": "server",
-        "target": "npm:rxjs",
         "type": "static"
       },
       {

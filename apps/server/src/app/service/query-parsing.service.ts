@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { isDeepStrictEqual } from 'util';
 import { parse } from 'pgsql-parser';
 import { Node, RawStmt, ResTarget } from '@pgsql/types';
+import { b } from 'baml_client';
 
 export type BasicAggregation = {
   type: 'basicAggregation';
@@ -14,9 +15,15 @@ export type GroupingAggregation = {
   dimensionColumns: string[];
 };
 
+export type NonAggregation = {
+  type: 'nonAggregation';
+  dimensionColumns: string[];
+  aggregationColumns: string[];
+};
+
 export type SQLQuery = {
   rawSQL: string;
-} & (BasicAggregation | GroupingAggregation);
+} & (BasicAggregation | GroupingAggregation | NonAggregation);
 
 export type InvalidQuery = {
   type: 'invalidQuery';
@@ -32,7 +39,7 @@ export type InvalidQuery = {
  */
 @Injectable()
 export class QueryParsingService {
-  parse(rawSQL: string): SQLQuery | InvalidQuery {
+  async parse(rawSQL: string): Promise<SQLQuery | InvalidQuery> {
     const stmts = parse(rawSQL);
 
     if (stmts.length < 1) {
@@ -60,8 +67,23 @@ export class QueryParsingService {
 
     const selectStmt = rawStmt.stmt.SelectStmt;
     if (!selectStmt.groupClause) {
+      const targetList = selectStmt.targetList ?? [];
+      for (const target of targetList) {
+        if ('ResTarget' in target && target.ResTarget.val) {
+          if ('FuncCall' in target.ResTarget.val) {
+            return {
+              ...this.basicAggregation(targetList),
+              rawSQL,
+            };
+          }
+        }
+      }
+
+      const axis = await b.ExtractChartAxis(rawSQL);
       return {
-        ...this.basicAggregation(selectStmt.targetList ?? []),
+        type: 'nonAggregation',
+        dimensionColumns: axis.xAxisKey,
+        aggregationColumns: axis.yAxisKey,
         rawSQL,
       };
     } else {

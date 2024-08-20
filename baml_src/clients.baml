@@ -31,6 +31,7 @@ client<llm> Phi3OllamaClient {
   retry_policy LetycaRetryPolicy
   options {
     model phi3
+    temperature 0
     base_url env.OLLAMA_HOST
   }
 }

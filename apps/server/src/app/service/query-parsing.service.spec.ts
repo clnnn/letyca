@@ -285,4 +285,21 @@ describe('QueryParsingService', () => {
       });
     });
   });
+
+  describe('Basic aggregation using CTEs (no alias)', () => {
+    it('should return aggregation function name', () => {
+      // given
+      const rawSQL = `WITH sales AS (SELECT * FROM products) SELECT avg(unit_price) FROM sales`;
+
+      // when
+      const result = service.parse(rawSQL);
+
+      // then
+      expect(result).toEqual({
+        type: 'basicAggregation',
+        rawSQL,
+        aggregationColumns: ['avg'],
+      });
+    });
+  });
 });
