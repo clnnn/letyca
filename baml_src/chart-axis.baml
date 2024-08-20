@@ -4,7 +4,7 @@ class ChartAxis {
 }
 
 function ExtractChartAxis(sql: string) -> ChartAxis {
-  client Phi3OllamaClient
+  client ChartAxisExtractionClient
   prompt #"
     extract the label and value for a chart from the following query:
     ```sql

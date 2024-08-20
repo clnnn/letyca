@@ -1,5 +1,5 @@
 function GenerateSQL(userRequest: string, ddlStatements: string) -> string {
-  client TextToSQLOllamaClient
+  client TextToSQLClient
   prompt #"
     <|begin_of_text|><|start_header_id|>user<|end_header_id|>
     Generate a SQL query to answer this question: `{{ userRequest }}`.

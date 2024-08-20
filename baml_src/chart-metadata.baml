@@ -11,7 +11,7 @@ class ChartMetadata {
 }
 
 function ExtractChartMetadata(userRequest: string) -> ChartMetadata {
-  client ChartMetadataOllamaClient
+  client ChartMetadataClient
   prompt #"
     {{ userRequest }}
 

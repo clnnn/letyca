@@ -1,13 +1,9 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import { SuggestionService } from '../service/suggestion.service';
 import { PrismaService } from '../data-access/prisma.service';
 
 @Controller('suggestions')
 export class SuggestionController {
-  constructor(
-    private readonly suggestionService: SuggestionService,
-    private readonly prisma: PrismaService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   @Get()
   async getAll(
@@ -29,7 +25,7 @@ export class SuggestionController {
     }
 
     if (!userRequest) {
-      return this.suggestionService.byConnection(connection);
+      return [];
     } else {
       // not implemented yet
       return [];

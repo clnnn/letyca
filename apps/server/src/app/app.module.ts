@@ -11,7 +11,6 @@ import { QueryGenerationService } from './service/query-generation.service';
 import { QueryParsingService } from './service/query-parsing.service';
 import { DDLService } from './service/ddl.service';
 import { SuggestionController } from './controller/suggestion.controller';
-import { SuggestionService } from './service/suggestion.service';
 
 @Module({
   imports: [ConfigModule.forRoot()],
@@ -24,7 +23,6 @@ import { SuggestionService } from './service/suggestion.service';
     QueryGenerationService,
     QueryParsingService,
     DDLService,
-    SuggestionService,
   ],
 })
 export class AppModule {}
