@@ -19,3 +19,10 @@ function ExtractChartMetadata(userRequest: string) -> ChartMetadata {
     ```json
   "#
 }
+
+test Test1Name {
+  functions [ExtractChartMetadata]
+  args {
+    userRequest "total number of products by category"
+  }
+}

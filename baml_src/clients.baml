@@ -20,7 +20,7 @@ client<llm> ChartMetadataClient {
 client<llm> ChartMetadataOllamaClient {
   provider ollama
   options {
-    model letyca-chart-metadata
+    model letyca-chart-metadata:mini
     temperature 0
     base_url env.OLLAMA_HOST
   }
