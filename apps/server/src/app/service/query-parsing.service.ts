@@ -30,13 +30,6 @@ export type InvalidQuery = {
   errorMessage: string;
 };
 
-/**
- * TODO
- * - With clause: WITH sales AS (SELECT * FROM products) SELECT * FROM sales;
- * - Grouping using functions (no alias): SELECT date_trunc('month', o.order_date), SUM(od.quantity * p.unit_price) AS total_sales FROM orders o GROUP BY date_trunc('month', o.order_date);
- * - Non-aggregation functions: SELECT product_name, UPPER(price) FROM products;
- * - Derived queries: SELECT product_name, sales_price - cost_price AS profit FROM products;
- */
 @Injectable()
 export class QueryParsingService {
   async parse(rawSQL: string): Promise<SQLQuery | InvalidQuery> {
