@@ -6,7 +6,7 @@
     "prisma-migrate-dev": "npx prisma migrate dev",
     "prisma-generate": "npx prisma generate",
     "baml-generate": "baml-cli generate",
-    "start": "nx run-many --target=serve --projects=client,server --host 0.0.0.0",
+    "start": "BAML_LOG=debug nx run-many --target=serve --projects=client,server --host 0.0.0.0",
     "build-frontend": "nx run-many --target=build --projects=client",
     "build-backend": "nx run-many --target=build --projects=server"
   },
