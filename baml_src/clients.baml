@@ -91,3 +91,31 @@ client<llm> ChartAxisExtractionOpenAIClient {
     api_key env.OPENAI_API_KEY
   }
 }
+
+client<llm> UserRequestSuggestionsClient {
+  provider fallback
+  retry_policy LetycaRetryPolicy
+  options {
+    strategy [
+      UserRequestSuggestionsOllamaClient
+      UserRequestSuggestionsOpenAIClient
+    ]
+  }
+}
+
+client<llm> UserRequestSuggestionsOllamaClient {
+  provider ollama
+  retry_policy LetycaRetryPolicy
+  options {
+    model phi3
+    base_url env.OLLAMA_HOST
+  }
+}
+
+client<llm> UserRequestSuggestionsOpenAIClient {
+  provider openai
+  options {
+    model gpt-4o-mini
+    api_key env.OPENAI_API_KEY
+  }
+}
