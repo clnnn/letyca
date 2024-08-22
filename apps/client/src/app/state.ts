@@ -17,6 +17,7 @@ import { computed, inject } from '@angular/core';
 import { ConnectionService } from './service/connection.service';
 import { tapResponse } from '@ngrx/operators';
 import { ChartService } from './service/chart.service';
+import { SuggestionsService } from './service/suggestions.service';
 
 // State models
 export type User = {
@@ -39,6 +40,9 @@ type State = {
 
   previewChart: GeneratedPreviewChart | null;
   previewChartLoading: LoadingState;
+
+  suggestions: string[];
+  suggestionsLoading: LoadingState;
 };
 
 const initialState: State = {
@@ -50,6 +54,9 @@ const initialState: State = {
 
   previewChart: null,
   previewChartLoading: LoadingState.INIT,
+
+  suggestions: [],
+  suggestionsLoading: LoadingState.INIT,
 };
 
 // Signal store
@@ -66,6 +73,7 @@ export const Store = signalStore(
       store,
       connectionService = inject(ConnectionService),
       chartService = inject(ChartService),
+      suggestionsService = inject(SuggestionsService),
     ) => ({
       loadConnections: rxMethod<void>(
         pipe(
@@ -90,6 +98,7 @@ export const Store = signalStore(
       ),
       selectConnection(connectionId: string): void {
         patchState(store, { selectedConnectionId: connectionId });
+        this.loadSuggestions({ connectionId });
       },
       setUserRequest(userRequest: string): void {
         patchState(store, { userRequest });
@@ -136,6 +145,28 @@ export const Store = signalStore(
           selectedConnectionId: null,
         });
       },
+      loadSuggestions: rxMethod<{ connectionId: string }>(
+        pipe(
+          tap(() =>
+            patchState(store, { suggestionsLoading: LoadingState.LOADING }),
+          ),
+          exhaustMap(({ connectionId }) =>
+            suggestionsService.fetchAll(connectionId).pipe(
+              tapResponse({
+                next: (suggestions) =>
+                  patchState(store, {
+                    suggestionsLoading: LoadingState.LOADED,
+                    suggestions,
+                  }),
+                error: () =>
+                  patchState(store, {
+                    suggestionsLoading: LoadingState.ERROR,
+                  }),
+              }),
+            ),
+          ),
+        ),
+      ),
     }),
   ),
 );
