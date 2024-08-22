@@ -3,8 +3,7 @@ import { TuiButton, TuiTitle } from '@taiga-ui/core';
 import { TuiButtonLoading, TuiChip, TuiSkeleton } from '@taiga-ui/kit';
 import { TuiTextareaModule } from '@taiga-ui/legacy';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TuiCardLarge } from '@taiga-ui/layout';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Store } from '../../state';
 
 const tuiImports = [
@@ -13,7 +12,6 @@ const tuiImports = [
   TuiButtonLoading,
   TuiChip,
   TuiSkeleton,
-  TuiCardLarge,
   TuiTitle,
 ];
 
