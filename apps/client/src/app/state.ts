@@ -213,6 +213,24 @@ export const Store = signalStore(
           ),
         ),
       ),
+      deleteWidget: rxMethod<string>(
+        pipe(
+          exhaustMap((widgetId) =>
+            widgetService.delete(widgetId).pipe(
+              tapResponse({
+                next: () => {
+                  patchState(store, {
+                    widgets: store.widgets().filter((w) => w.id !== widgetId),
+                  });
+                },
+                error: () => {
+                  console.error('Failed to delete widget');
+                },
+              }),
+            ),
+          ),
+        ),
+      ),
       explorePageClosed(): void {
         patchState(store, {
           previewChart: null,

@@ -24,4 +24,10 @@ export class WidgetService {
   fetchAll(): Observable<GetWidgetsResponse> {
     return this.http.get<GetWidgetsResponse>(this.apiUrl);
   }
+
+  delete(widgetId: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}`, {
+      params: { id: widgetId },
+    });
+  }
 }

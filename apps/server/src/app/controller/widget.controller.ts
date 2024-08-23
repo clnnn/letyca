@@ -3,7 +3,15 @@ import {
   CreateWidgetResponse,
   GetWidgetsResponse,
 } from '@letyca/contracts';
-import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { PrismaService } from '../data-access/prisma.service';
 
 @Controller('widgets')
