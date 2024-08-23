@@ -30,6 +30,7 @@ import { tapResponse } from '@ngrx/operators';
 import { ChartService } from './service/chart.service';
 import { SuggestionsService } from './service/suggestions.service';
 import { WidgetService } from './service/widget.service';
+import { TuiAlertService } from '@taiga-ui/core';
 
 // State models
 export type User = {
@@ -101,6 +102,7 @@ export const Store = signalStore(
       chartService = inject(ChartService),
       suggestionsService = inject(SuggestionsService),
       widgetService = inject(WidgetService),
+      alerts = inject(TuiAlertService),
     ) => ({
       loadConnections: rxMethod<void>(
         pipe(
@@ -184,8 +186,20 @@ export const Store = signalStore(
               tapResponse({
                 next: () => {
                   patchState(store, { savingWidget: LoadingState.LOADED });
+                  alerts
+                    .open('Widget saved successfully', {
+                      label: 'Success',
+                      appearance: 'success',
+                    })
+                    .subscribe();
                 },
                 error: () => {
+                  alerts
+                    .open('Failed to save widget', {
+                      label: 'Error',
+                      appearance: 'error',
+                    })
+                    .subscribe();
                   patchState(store, { savingWidget: LoadingState.ERROR });
                 },
               }),
@@ -222,9 +236,20 @@ export const Store = signalStore(
                   patchState(store, {
                     widgets: store.widgets().filter((w) => w.id !== widgetId),
                   });
+                  alerts
+                    .open('Widget deleted successfully', {
+                      label: 'Success',
+                      appearance: 'success',
+                    })
+                    .subscribe();
                 },
                 error: () => {
-                  console.error('Failed to delete widget');
+                  alerts
+                    .open('Failed to delete widget', {
+                      label: 'Error',
+                      appearance: 'error',
+                    })
+                    .subscribe();
                 },
               }),
             ),
