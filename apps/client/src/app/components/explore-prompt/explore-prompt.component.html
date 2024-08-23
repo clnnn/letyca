@@ -1,3 +1,20 @@
+<div class="header">
+  <button
+    tuiChip
+    iconStart="star"
+    appearance="custom"
+    [tuiSkeleton]="store.suggestionsLoading() === 'LOADING'"
+    (click)="store.loadSuggestion()"
+    [disabled]="
+      store.selectedConnectionId() === null ||
+      store.suggestionsLoading() === 'LOADING' ||
+      store.previewChartLoading() === 'LOADING'
+    "
+  >
+    AI Assisted Suggestion
+  </button>
+</div>
+
 <div class="message-container">
   <tui-textarea
     class="tui-space_bottom-4 field-large"
