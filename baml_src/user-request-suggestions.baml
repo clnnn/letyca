@@ -7,14 +7,29 @@ class UserRequestSuggestions {
 function GetSuggestionsByDDL(ddlStatements: string) -> UserRequestSuggestions {
   client UserRequestSuggestionsClient
   prompt #"
-   You are an chart insight assistant that provides only aggregation insights descriptions that be represented in a chart based on database structure:
-    {{ ddlStatements }}
+  You are an expert data analyst working with the following database schema. 
+  Your task is to generate clear and accurate titles for charts that summarize simple aggregations of data from this database. 
+  Ensure the titles precisely reflect the data being analyzed, the aggregation method, and the relevant entities from the database.
+  Do not include any information that isn't directly based on the dataset.
 
-  Examples:
-  1. What is the total revenue by region?
-  2. What is the total sales by product?
-  3. What is the total orders by salesperson?
+  Database Schema:  
+  {{ ddlStatements }}
 
+  Examples of the titles I need to include:
+  ```json
+  {
+    "suggestions": [
+      "Total Sales by Product Category",
+      "Total Number of Orders by Customer",
+      "Average Order Quantity by Product",
+      "Top 10 Products by Revenue",
+      "Count of Products by Supplier",
+      "Sum of Sales by Employee"
+    ]
+  }
+  ```
+
+  Please provide similar titles for other potential charts using data from the database, ensuring accuracy and relevance.
 
     {{ ctx.output_format }}
     ```json

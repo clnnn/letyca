@@ -1,14 +1,7 @@
-retry_policy LetycaRetryPolicy {
-  max_retries 5
-  strategy {
-    type constant_delay
-    delay_ms 1000
-  }
-}
+
 
 client<llm> ChartMetadataClient {
   provider fallback
-  retry_policy LetycaRetryPolicy
   options {
     strategy [
       ChartMetadataOllamaClient
@@ -36,7 +29,6 @@ client<llm> ChartMetadataOpenAIClient {
 
 client<llm> TextToSQLClient {
   provider fallback
-  retry_policy LetycaRetryPolicy
   options {
     strategy [
       TextToSQLOllamaClient
@@ -47,7 +39,6 @@ client<llm> TextToSQLClient {
 
 client<llm> TextToSQLOllamaClient {
   provider ollama
-  retry_policy LetycaRetryPolicy
   options {
     model letyca-text-to-sql
     temperature 0
@@ -65,7 +56,6 @@ client<llm> TextToSQLOpenAIClient {
 
 client<llm> ChartAxisExtractionClient {
   provider fallback
-  retry_policy LetycaRetryPolicy
   options {
     strategy [
       ChartAxisExtractionOllamaClient
@@ -76,7 +66,6 @@ client<llm> ChartAxisExtractionClient {
 
 client<llm> ChartAxisExtractionOllamaClient {
   provider ollama
-  retry_policy LetycaRetryPolicy
   options {
     model phi3
     temperature 0
@@ -94,7 +83,6 @@ client<llm> ChartAxisExtractionOpenAIClient {
 
 client<llm> UserRequestSuggestionsClient {
   provider fallback
-  retry_policy LetycaRetryPolicy
   options {
     strategy [
       UserRequestSuggestionsOllamaClient
@@ -105,7 +93,6 @@ client<llm> UserRequestSuggestionsClient {
 
 client<llm> UserRequestSuggestionsOllamaClient {
   provider ollama
-  retry_policy LetycaRetryPolicy
   options {
     model phi3
     base_url env.OLLAMA_HOST
