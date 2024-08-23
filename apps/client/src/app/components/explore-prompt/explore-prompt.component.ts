@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { TuiButton, TuiTitle } from '@taiga-ui/core';
+import { TuiButton, TuiHint, TuiTitle } from '@taiga-ui/core';
 import { TuiButtonLoading, TuiChip, TuiSkeleton } from '@taiga-ui/kit';
 import { TuiTextareaModule } from '@taiga-ui/legacy';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +24,7 @@ const tuiImports = [
     FormsModule,
     RouterLink,
     RouterLinkActive,
+    TuiHint,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './explore-prompt.component.html',

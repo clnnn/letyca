@@ -3,6 +3,8 @@
     tuiChip
     iconStart="star"
     appearance="custom"
+    tuiHintAppearance="warning"
+    tuiHint="The result may not be accurate"
     [tuiSkeleton]="store.suggestionsLoading() === 'LOADING'"
     (click)="store.loadSuggestion()"
     [disabled]="
