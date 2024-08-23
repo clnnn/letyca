@@ -82,9 +82,16 @@ const initialState: State = {
 export const Store = signalStore(
   { providedIn: 'root' },
   withState(initialState),
-  withComputed(({ selectedConnectionId, connections }) => ({
+  withComputed(({ selectedConnectionId, connections, widgets }) => ({
     selectedConnection: computed(() => {
       return connections().find((c) => c.id === selectedConnectionId()) ?? null;
+    }),
+    widgetTableData: computed(() => {
+      return widgets().map((w) => {
+        const connection =
+          connections().find((c) => c.id === w.connectionId) ?? null;
+        return { ...w, connection };
+      });
     }),
   })),
   withMethods(

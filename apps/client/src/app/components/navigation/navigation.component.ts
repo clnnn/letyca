@@ -17,6 +17,9 @@ const tuiImports = [TuiNavigation, TuiIcon, TuiTabs];
       <a tuiTab routerLink="/connections" routerLinkActive iconStart="cable">
         Connections
       </a>
+      <a tuiTab routerLink="/widgets" routerLinkActive iconStart="puzzle"
+        >Widgets</a
+      >
     </tui-tabs>
   `,
 })

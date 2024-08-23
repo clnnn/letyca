@@ -4,6 +4,7 @@ import {
   ExploreComponent,
   HomeComponent,
 } from './components';
+import { WidgetsComponent } from './components/widgets/widgets.component';
 
 export const routes: Routes = [
   {
@@ -13,6 +14,10 @@ export const routes: Routes = [
   {
     path: 'connections',
     component: ConnectionsComponent,
+  },
+  {
+    path: 'widgets',
+    component: WidgetsComponent,
   },
   {
     path: 'explore',

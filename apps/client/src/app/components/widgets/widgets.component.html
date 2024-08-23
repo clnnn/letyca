@@ -1,0 +1,72 @@
+<div class="header">
+  <span class="tui-text_h3">Widgets</span>
+</div>
+<table tuiTable [size]="size" [style.width.rem]="58">
+  <thead>
+    <tr>
+      <th tuiTh>Connection</th>
+      <th tuiTh>Name</th>
+      <th tuiTh>Actions</th>
+    </tr>
+  </thead>
+  <tbody tuiTbody>
+    @for (w of store.widgetTableData(); track $index) {
+      <tr>
+        <td tuiTd>
+          <div [tuiCell]="size">
+            <span tuiTitle>
+              {{ w.connection?.host }}
+              <span tuiSubtitle>{{ w.connection?.port }}</span>
+            </span>
+          </div>
+        </td>
+        <td tuiTd>
+          <div [tuiCell]="size">
+            <span tuiTitle>
+              <span tuiStatus>
+                @switch (w.type) {
+                  @case ('countLabel') {
+                    <tui-icon icon="hash" size="m"></tui-icon>
+                  }
+                  @case ('bar') {
+                    <tui-icon
+                      icon="chart-column-increasing"
+                      size="m"
+                    ></tui-icon>
+                  }
+                  @case ('line') {
+                    <tui-icon icon="chart-line" size="m"></tui-icon>
+                  }
+                  @case ('pie') {
+                    <tui-icon icon="chart-pie" size="m"></tui-icon>
+                  }
+                }
+                {{ w.name }}
+              </span>
+            </span>
+          </div>
+        </td>
+        <td tuiTd>
+          <span tuiStatus>
+            <button
+              appearance="link"
+              iconStart="trash-2"
+              size="xs"
+              tuiIconButton
+            >
+              More
+            </button>
+          </span>
+        </td>
+      </tr>
+    } @empty {
+      <tr>
+        <td tuiTd colspan="4">
+          <div [tuiCell]="size">
+            <span tuiTitle>No connections found</span>
+          </div>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
