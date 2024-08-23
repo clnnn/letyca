@@ -2,6 +2,7 @@ import { Controller, Get, Query } from '@nestjs/common';
 import { PrismaService } from '../data-access/prisma.service';
 import { b } from 'baml_client';
 import { DDLService } from '../service/ddl.service';
+import { GetSuggestionResponse } from '@letyca/contracts';
 
 @Controller('suggestions')
 export class SuggestionController {
@@ -11,10 +12,9 @@ export class SuggestionController {
   ) {}
 
   @Get()
-  async getAll(
+  async get(
     @Query('connectionId') connectionId?: string,
-    @Query('userRequest') userRequest?: string,
-  ): Promise<string[]> {
+  ): Promise<GetSuggestionResponse> {
     if (!connectionId) {
       throw new Error('Connection ID is required');
     }
@@ -29,12 +29,10 @@ export class SuggestionController {
       throw new Error('Connection not found');
     }
 
-    if (!userRequest) {
-      const ddl = await this.ddl.retrieve(connection);
-      return (await b.GetSuggestionsByDDL(ddl)).suggestions;
-    } else {
-      // not implemented yet
-      return [];
-    }
+    const ddl = await this.ddl.retrieve(connection);
+    const suggestion = await (await b.GetSuggestionsByDDL(ddl)).suggestions[0];
+    return {
+      suggestion,
+    };
   }
 }

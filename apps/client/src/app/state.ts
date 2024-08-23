@@ -8,6 +8,7 @@ import {
   patchState,
   signalStore,
   withComputed,
+  withHooks,
   withMethods,
   withState,
 } from '@ngrx/signals';
@@ -41,7 +42,6 @@ type State = {
   previewChart: GeneratedPreviewChart | null;
   previewChartLoading: LoadingState;
 
-  suggestions: string[];
   suggestionsLoading: LoadingState;
 };
 
@@ -55,7 +55,6 @@ const initialState: State = {
   previewChart: null,
   previewChartLoading: LoadingState.INIT,
 
-  suggestions: [],
   suggestionsLoading: LoadingState.INIT,
 };
 
@@ -98,7 +97,6 @@ export const Store = signalStore(
       ),
       selectConnection(connectionId: string): void {
         patchState(store, { selectedConnectionId: connectionId });
-        this.loadSuggestions({ connectionId });
       },
       setUserRequest(userRequest: string): void {
         patchState(store, { userRequest });
@@ -116,7 +114,6 @@ export const Store = signalStore(
               return null;
             }
             const req: GenerateChartRequest = { connectionId, userRequest };
-            console.log(req);
             return req;
           }),
           filter((req): req is GenerateChartRequest => req !== null),
@@ -145,18 +142,22 @@ export const Store = signalStore(
           selectedConnectionId: null,
         });
       },
-      loadSuggestions: rxMethod<{ connectionId: string }>(
+      loadSuggestion: rxMethod<void>(
         pipe(
           tap(() =>
             patchState(store, { suggestionsLoading: LoadingState.LOADING }),
           ),
-          exhaustMap(({ connectionId }) =>
-            suggestionsService.fetchAll(connectionId).pipe(
+          map(() => store.selectedConnectionId()),
+          filter(
+            (connectionId): connectionId is string => connectionId !== null,
+          ),
+          exhaustMap((connectionId) =>
+            suggestionsService.fetch(connectionId).pipe(
               tapResponse({
-                next: (suggestions) =>
+                next: (res) =>
                   patchState(store, {
                     suggestionsLoading: LoadingState.LOADED,
-                    suggestions,
+                    userRequest: res.suggestion,
                   }),
                 error: () =>
                   patchState(store, {
@@ -169,4 +170,9 @@ export const Store = signalStore(
       ),
     }),
   ),
+  withHooks({
+    onInit(store) {
+      store.loadConnections();
+    },
+  }),
 );
