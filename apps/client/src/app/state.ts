@@ -145,7 +145,10 @@ export const Store = signalStore(
       loadSuggestion: rxMethod<void>(
         pipe(
           tap(() =>
-            patchState(store, { suggestionsLoading: LoadingState.LOADING }),
+            patchState(store, {
+              suggestionsLoading: LoadingState.LOADING,
+              userRequest: 'Loading suggestion...',
+            }),
           ),
           map(() => store.selectedConnectionId()),
           filter(

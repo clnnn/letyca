@@ -24,7 +24,8 @@
     (ngModelChange)="store.setUserRequest($event)"
     [disabled]="
       this.store.selectedConnectionId() === null ||
-      store.previewChartLoading() === 'LOADING'
+      store.previewChartLoading() === 'LOADING' ||
+      store.suggestionsLoading() === 'LOADING'
     "
   >
     What do you want to display?
@@ -37,7 +38,8 @@
     class="send-button"
     [disabled]="
       store.userRequest().length === 0 ||
-      this.store.selectedConnectionId() === null ||
+      store.selectedConnectionId() === null ||
+      store.suggestionsLoading() === 'LOADING' ||
       store.previewChartLoading() === 'LOADING'
     "
     (click)="store.generateChart()"
