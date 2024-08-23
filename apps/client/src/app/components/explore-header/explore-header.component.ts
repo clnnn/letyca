@@ -2,14 +2,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   effect,
-  EventEmitter,
   inject,
   Input,
-  Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoadingState } from '../../utils';
 import { TuiDataListWrapper, TuiStringifyContentPipe } from '@taiga-ui/kit';
 import { TuiDataList } from '@taiga-ui/core';
 import { TuiComboBoxModule } from '@taiga-ui/legacy';
