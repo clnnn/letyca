@@ -57,6 +57,11 @@ export class ChartController {
     return {
       chart,
       sql: query.rawSQL,
+      xAxes:
+        query.type === 'groupingAggregation' || query.type === 'nonAggregation'
+          ? query.dimensionColumns
+          : [],
+      yAxes: query.aggregationColumns,
     };
   }
 }
