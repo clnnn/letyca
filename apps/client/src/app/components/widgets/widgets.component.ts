@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { Store } from '../../state';
 import { TuiTable } from '@taiga-ui/addon-table';
 import { TuiTitle, TuiButton, TuiIcon } from '@taiga-ui/core';
@@ -15,7 +20,11 @@ const tuiImports = [TuiCell, TuiTitle, TuiButton, TuiIcon, TuiTable, TuiChip];
   styleUrl: './widgets.component.scss',
   imports: [...tuiImports],
 })
-export class WidgetsComponent {
+export class WidgetsComponent implements OnInit {
   protected readonly store = inject(Store);
   protected readonly size: 'l' | 'm' | 's' = 'l';
+
+  ngOnInit(): void {
+    this.store.loadWidgets();
+  }
 }

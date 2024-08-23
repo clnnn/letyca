@@ -24,7 +24,7 @@ import {
   pipe,
   tap,
 } from 'rxjs';
-import { computed, inject } from '@angular/core';
+import { computed, effect, inject } from '@angular/core';
 import { ConnectionService } from './service/connection.service';
 import { tapResponse } from '@ngrx/operators';
 import { ChartService } from './service/chart.service';
@@ -298,7 +298,6 @@ export const Store = signalStore(
   withHooks({
     onInit(store) {
       store.loadConnections();
-      store.loadWidgets();
     },
   }),
 );
