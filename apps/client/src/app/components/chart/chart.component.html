@@ -35,7 +35,9 @@
       }
     }
     <div class="bottom">
-      <button tuiButton>Save as Widget</button>
+      <button tuiButton (click)="store.saveWidget()" [loading]="true">
+        Save Widget
+      </button>
     </div>
   } @else if (activeItemIndex === 1) {
     <json-viewer class="main" [data]="chart"> </json-viewer>

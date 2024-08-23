@@ -41,6 +41,7 @@ type State = {
 
   previewChart: GeneratedPreviewChart | null;
   previewChartLoading: LoadingState;
+  savingWidget: LoadingState;
 
   suggestionsLoading: LoadingState;
 };
@@ -54,6 +55,7 @@ const initialState: State = {
 
   previewChart: null,
   previewChartLoading: LoadingState.INIT,
+  savingWidget: LoadingState.INIT,
 
   suggestionsLoading: LoadingState.INIT,
 };
@@ -129,6 +131,28 @@ export const Store = signalStore(
                   patchState(store, {
                     previewChartLoading: LoadingState.ERROR,
                   }),
+              }),
+            ),
+          ),
+        ),
+      ),
+      saveWidget: rxMethod<void>(
+        pipe(
+          tap(() => patchState(store, { savingWidget: LoadingState.LOADING })),
+          map(() => store.previewChart()),
+          filter(
+            (previewChart): previewChart is GeneratedPreviewChart =>
+              previewChart !== null,
+          ),
+          exhaustMap((widget) =>
+            chartService.save(widget).pipe(
+              tapResponse({
+                next: () => {
+                  patchState(store, { savingWidget: LoadingState.LOADED });
+                },
+                error: () => {
+                  patchState(store, { savingWidget: LoadingState.ERROR });
+                },
               }),
             ),
           ),

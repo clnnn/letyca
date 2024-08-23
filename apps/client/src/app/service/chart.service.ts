@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GenerateChartRequest, GenerateChartResponse } from '@letyca/contracts';
+import {
+  CreateWidgetRequest,
+  GenerateChartRequest,
+  GenerateChartResponse,
+} from '@letyca/contracts';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -9,8 +13,12 @@ export class ChartService {
   constructor(private readonly http: HttpClient) {}
 
   generateChart(
-    request: GenerateChartRequest
+    request: GenerateChartRequest,
   ): Observable<GenerateChartResponse> {
     return this.http.post<GenerateChartResponse>(this.apiUrl, request);
+  }
+
+  save(request: CreateWidgetRequest): Observable<void> {
+    return this.http.post<void>(this.apiUrl, request);
   }
 }
