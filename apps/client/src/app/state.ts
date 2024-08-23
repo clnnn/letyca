@@ -19,6 +19,7 @@ import { ConnectionService } from './service/connection.service';
 import { tapResponse } from '@ngrx/operators';
 import { ChartService } from './service/chart.service';
 import { SuggestionsService } from './service/suggestions.service';
+import { WidgetService } from './service/widget.service';
 
 // State models
 export type User = {
@@ -75,6 +76,7 @@ export const Store = signalStore(
       connectionService = inject(ConnectionService),
       chartService = inject(ChartService),
       suggestionsService = inject(SuggestionsService),
+      widgetService = inject(WidgetService),
     ) => ({
       loadConnections: rxMethod<void>(
         pipe(
@@ -145,7 +147,7 @@ export const Store = signalStore(
               previewChart !== null,
           ),
           exhaustMap((widget) =>
-            chartService.save(widget).pipe(
+            widgetService.save(widget).pipe(
               tapResponse({
                 next: () => {
                   patchState(store, { savingWidget: LoadingState.LOADED });

@@ -11,10 +11,16 @@ import { QueryGenerationService } from './service/query-generation.service';
 import { QueryParsingService } from './service/query-parsing.service';
 import { DDLService } from './service/ddl.service';
 import { SuggestionController } from './controller/suggestion.controller';
+import { WidgetController } from './controller/widget.controller';
 
 @Module({
   imports: [ConfigModule.forRoot()],
-  controllers: [ConnectionController, ChartController, SuggestionController],
+  controllers: [
+    ConnectionController,
+    ChartController,
+    SuggestionController,
+    WidgetController,
+  ],
   providers: [
     PrismaService,
     DataLayerService,

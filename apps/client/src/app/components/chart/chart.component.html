@@ -35,7 +35,11 @@
       }
     }
     <div class="bottom">
-      <button tuiButton (click)="store.saveWidget()" [loading]="true">
+      <button
+        tuiButton
+        (click)="store.saveWidget()"
+        [loading]="store.savingWidget() === 'LOADING'"
+      >
         Save Widget
       </button>
     </div>

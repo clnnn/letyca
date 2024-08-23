@@ -14,12 +14,14 @@ import {
 } from 'ngx-lottie';
 import player from 'lottie-web';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
+import { WidgetService } from './service/widget.service';
 
 const services = [
   ConnectionService,
   SuggestionsService,
   TypeWritterSerivce,
   ChartService,
+  WidgetService,
 ];
 
 export const appConfig: ApplicationConfig = {
