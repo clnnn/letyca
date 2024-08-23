@@ -67,7 +67,7 @@ client<llm> ChartAxisExtractionClient {
 client<llm> ChartAxisExtractionOllamaClient {
   provider ollama
   options {
-    model phi3
+    model phi3.5
     temperature 0
     base_url env.OLLAMA_HOST
   }
@@ -94,7 +94,7 @@ client<llm> UserRequestSuggestionsClient {
 client<llm> UserRequestSuggestionsOllamaClient {
   provider ollama
   options {
-    model phi3
+    model phi3.5
     base_url env.OLLAMA_HOST
   }
 }
