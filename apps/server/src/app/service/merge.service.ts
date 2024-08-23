@@ -79,6 +79,7 @@ export class MergeService {
 
     return {
       chartType: 'unknown',
+      title: 'Unknown chart',
     };
   }
 }

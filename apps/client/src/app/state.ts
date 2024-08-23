@@ -1,5 +1,6 @@
 import {
   ConnectionListItem,
+  CreateWidgetRequest,
   GenerateChartRequest,
   GenerateChartResponse,
 } from '@letyca/contracts';
@@ -13,7 +14,15 @@ import {
   withState,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { distinctUntilChanged, exhaustMap, filter, map, pipe, tap } from 'rxjs';
+import {
+  distinctUntilChanged,
+  exhaustMap,
+  filter,
+  map,
+  of,
+  pipe,
+  tap,
+} from 'rxjs';
 import { computed, inject } from '@angular/core';
 import { ConnectionService } from './service/connection.service';
 import { tapResponse } from '@ngrx/operators';
@@ -141,13 +150,22 @@ export const Store = signalStore(
       saveWidget: rxMethod<void>(
         pipe(
           tap(() => patchState(store, { savingWidget: LoadingState.LOADING })),
-          map(() => store.previewChart()),
-          filter(
-            (previewChart): previewChart is GeneratedPreviewChart =>
-              previewChart !== null,
+          map(
+            () => [store.previewChart(), store.selectedConnectionId()] as const,
           ),
-          exhaustMap((widget) =>
-            widgetService.save(widget).pipe(
+          exhaustMap(([previewChart, connectionId]) => {
+            if (!previewChart || !connectionId) {
+              return of(null);
+            }
+            const req: CreateWidgetRequest = {
+              title: previewChart.chart.title,
+              sql: previewChart.sql,
+              dimensionColumns: previewChart.dimensionColumns,
+              aggregationColumns: previewChart.aggregationColumns,
+              sqlType: previewChart.sqlType,
+              chartType: previewChart.chart.chartType,
+            };
+            return widgetService.save(req, connectionId).pipe(
               tapResponse({
                 next: () => {
                   patchState(store, { savingWidget: LoadingState.LOADED });
@@ -156,8 +174,8 @@ export const Store = signalStore(
                   patchState(store, { savingWidget: LoadingState.ERROR });
                 },
               }),
-            ),
-          ),
+            );
+          }),
         ),
       ),
       explorePageClosed(): void {

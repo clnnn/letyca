@@ -5,3 +5,4 @@ export * from './generate-chart.response';
 export * from './get-suggestion.response';
 export * from './create-widget.request';
 export * from './create-widget.response';
+export * from './get-widgets.response';

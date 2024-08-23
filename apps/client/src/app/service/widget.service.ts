@@ -8,7 +8,12 @@ export class WidgetService {
   private readonly apiUrl = '/api/widgets';
   private readonly http = inject(HttpClient);
 
-  save(request: CreateWidgetRequest): Observable<CreateWidgetResponse> {
-    return this.http.post<CreateWidgetResponse>(this.apiUrl, request);
+  save(
+    request: CreateWidgetRequest,
+    connectionId: string,
+  ): Observable<CreateWidgetResponse> {
+    return this.http.post<CreateWidgetResponse>(this.apiUrl, request, {
+      params: { connectionId },
+    });
   }
 }

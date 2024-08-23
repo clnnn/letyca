@@ -11,11 +11,22 @@ datasource db {
 }
 
 model Connection {
-  id       String @id @default(uuid())
+  id       String   @id @default(uuid())
   host     String
   port     Int
   database String
   schema   String
   username String
   password String
+  Widget   Widget[]
+}
+
+model Widget {
+  id           String     @id @default(uuid())
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  connectionId String
+  name         String
+  connection   Connection @relation(fields: [connectionId], references: [id])
+  data         Json
 }
