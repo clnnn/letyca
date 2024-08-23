@@ -1,5 +1,24 @@
 :host {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 2rem;
+  grid-template-rows: 1fr auto;
+  column-gap: 2rem;
+
+  .side {
+    grid-area: side;
+  }
+
+  .main {
+    grid-area: main;
+  }
+
+  .bottom {
+    grid-area: footer;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  grid-template-areas:
+    'side main'
+    '. footer';
 }

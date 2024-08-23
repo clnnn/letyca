@@ -1,5 +1,10 @@
 @if (chart) {
-  <nav tuiTabs [(activeItemIndex)]="activeItemIndex" vertical="left">
+  <nav
+    class="side"
+    tuiTabs
+    [(activeItemIndex)]="activeItemIndex"
+    vertical="left"
+  >
     <button tuiTab>Rendered Chart</button>
     <button tuiTab>JSON</button>
     <button tuiTab>Data Query</button>
@@ -8,29 +13,32 @@
   @if (activeItemIndex === 0) {
     @switch (chart.chartType) {
       @case ('countLabel') {
-        <le-count-label [chart]="chart" />
+        <le-count-label class="main" [chart]="chart" />
       }
 
       @case ('pie') {
-        <le-pie-chart [chart]="chart" />
+        <le-pie-chart class="main" [chart]="chart" />
       }
 
       @case ('bar') {
-        <le-bar-chart [chart]="chart" />
+        <le-bar-chart class="main" [chart]="chart" />
       }
 
       @case ('line') {
-        <le-line-chart [chart]="chart" />
+        <le-line-chart class="main" [chart]="chart" />
       }
       @default {
-        <tui-chip appearance="error"
+        <tui-chip class="main" appearance="error"
           >The visualisation of your requested data is not supported
           yet!</tui-chip
         >
       }
     }
+    <div class="bottom">
+      <button tuiButton>Save as Widget</button>
+    </div>
   } @else if (activeItemIndex === 1) {
-    <json-viewer [data]="chart"> </json-viewer>
+    <json-viewer class="main" [data]="chart"> </json-viewer>
   } @else if (activeItemIndex === 2) {
     <textarea class="main" highlight-js lang="sql">{{ sql }}</textarea>
   }

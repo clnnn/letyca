@@ -5,7 +5,7 @@ import {
   inject,
 } from '@angular/core';
 import { TuiCardLarge } from '@taiga-ui/layout';
-import { TuiTitle } from '@taiga-ui/core';
+import { TuiButton, TuiTitle } from '@taiga-ui/core';
 import { CountUpDirective } from '../../directive/count-up.directive';
 import { CountLabelComponent } from '../count-label/count-label.component';
 import { Store } from '../../state';
@@ -17,7 +17,7 @@ import '@alenaksu/json-viewer';
 import { HighlightJsDirective } from 'ngx-highlight-js';
 import { format } from 'sql-formatter';
 
-const tuiImports = [TuiCardLarge, TuiTitle, TuiTabs, TuiChip];
+const tuiImports = [TuiCardLarge, TuiTitle, TuiTabs, TuiChip, TuiButton];
 
 @Component({
   selector: 'le-chart',
