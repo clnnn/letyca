@@ -43,6 +43,11 @@ export type Chart = CountLabel | PieChart | LineChart | BarChart | UnknownChart;
 export type GenerateChartResponse = {
   chart: Chart;
   sql: string;
-  xAxes: string[];
-  yAxes: string[];
+  sqlType:
+    | 'basicAggregation'
+    | 'groupingAggregation'
+    | 'nonAggregation'
+    | 'invalidQuery';
+  dimensionColumns: string[];
+  aggregationColumns: string[];
 };
