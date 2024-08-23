@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  OnInit,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ConnectionsTableComponent } from '../connections-table/connections-table.component';
 import { TuiButton } from '@taiga-ui/core';
 import { Store } from '../../state';
@@ -28,14 +23,6 @@ import { Store } from '../../state';
     `,
   ],
 })
-export class ConnectionsComponent implements OnInit {
+export class ConnectionsComponent {
   readonly store = inject(Store);
-
-  ngOnInit(): void {
-    this.store.loadConnections();
-  }
-
-  newConnection() {
-    console.log('New connection');
-  }
 }
