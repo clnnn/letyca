@@ -3,7 +3,7 @@ import {
   CreateWidgetResponse,
   GetWidgetsResponse,
 } from '@letyca/contracts';
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { PrismaService } from '../data-access/prisma.service';
 
 @Controller('widgets')
@@ -53,5 +53,10 @@ export class WidgetController {
         type: JSON.parse(w.data as unknown as string).chartType,
       })),
     };
+  }
+
+  @Delete()
+  async delete(@Query('id') id: string): Promise<void> {
+    await this.prismaService.widget.delete({ where: { id } });
   }
 }
