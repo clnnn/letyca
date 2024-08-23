@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { CreateWidgetRequest, CreateWidgetResponse } from '@letyca/contracts';
+import {
+  CreateWidgetRequest,
+  CreateWidgetResponse,
+  GetWidgetsResponse,
+} from '@letyca/contracts';
 import { Observable } from 'rxjs';
 
 @Injectable()
@@ -15,5 +19,9 @@ export class WidgetService {
     return this.http.post<CreateWidgetResponse>(this.apiUrl, request, {
       params: { connectionId },
     });
+  }
+
+  fetchAll(): Observable<GetWidgetsResponse> {
+    return this.http.get<GetWidgetsResponse>(this.apiUrl);
   }
 }

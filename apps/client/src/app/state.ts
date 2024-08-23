@@ -3,6 +3,7 @@ import {
   CreateWidgetRequest,
   GenerateChartRequest,
   GenerateChartResponse,
+  WidgetListItem,
 } from '@letyca/contracts';
 import { LoadingState } from './utils';
 import {
@@ -42,6 +43,8 @@ export type Connection = ConnectionListItem;
 
 export type GeneratedPreviewChart = GenerateChartResponse;
 
+export type Widget = WidgetListItem;
+
 type State = {
   connectionsLoading: LoadingState;
   connections: Connection[];
@@ -51,9 +54,12 @@ type State = {
 
   previewChart: GeneratedPreviewChart | null;
   previewChartLoading: LoadingState;
-  savingWidget: LoadingState;
 
   suggestionsLoading: LoadingState;
+
+  savingWidget: LoadingState;
+  widgets: Widget[];
+  widgetsLoading: LoadingState;
 };
 
 const initialState: State = {
@@ -65,12 +71,14 @@ const initialState: State = {
 
   previewChart: null,
   previewChartLoading: LoadingState.INIT,
-  savingWidget: LoadingState.INIT,
 
   suggestionsLoading: LoadingState.INIT,
+
+  savingWidget: LoadingState.INIT,
+  widgets: [],
+  widgetsLoading: LoadingState.INIT,
 };
 
-// Signal store
 export const Store = signalStore(
   { providedIn: 'root' },
   withState(initialState),
@@ -178,6 +186,26 @@ export const Store = signalStore(
           }),
         ),
       ),
+      loadWidgets: rxMethod<void>(
+        pipe(
+          tap(() =>
+            patchState(store, { widgetsLoading: LoadingState.LOADING }),
+          ),
+          exhaustMap(() =>
+            widgetService.fetchAll().pipe(
+              tapResponse({
+                next: (res) =>
+                  patchState(store, {
+                    widgetsLoading: LoadingState.LOADED,
+                    widgets: res.widgets,
+                  }),
+                error: () =>
+                  patchState(store, { widgetsLoading: LoadingState.ERROR }),
+              }),
+            ),
+          ),
+        ),
+      ),
       explorePageClosed(): void {
         patchState(store, {
           previewChart: null,
@@ -220,6 +248,7 @@ export const Store = signalStore(
   withHooks({
     onInit(store) {
       store.loadConnections();
+      store.loadWidgets();
     },
   }),
 );
