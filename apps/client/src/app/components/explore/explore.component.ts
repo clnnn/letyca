@@ -3,7 +3,6 @@ import {
   Component,
   inject,
   OnDestroy,
-  OnInit,
 } from '@angular/core';
 import { Store } from '../../state';
 import { ExploreHeaderComponent } from '../explore-header/explore-header.component';
@@ -55,12 +54,8 @@ import { ChartComponent } from '../chart/chart.component';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExploreComponent implements OnInit, OnDestroy {
+export class ExploreComponent implements OnDestroy {
   readonly store = inject(Store);
-
-  ngOnInit(): void {
-    this.store.loadConnections();
-  }
 
   ngOnDestroy(): void {
     this.store.explorePageClosed();
