@@ -11,12 +11,21 @@ import {
   Param,
   Post,
   Query,
+  Render,
 } from '@nestjs/common';
 import { PrismaService } from '../data-access/prisma.service';
+import { DataLayerService } from '../service/data-layer.service';
+import { MergeService } from '../service/merge.service';
+import { raw } from '@prisma/client/runtime/library';
+import { BasicAggregation, SQLQuery } from '../service/query-parsing.service';
 
 @Controller('widgets')
 export class WidgetController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly dataLayer: DataLayerService,
+    private readonly mergeService: MergeService,
+  ) {}
 
   @Post()
   async create(
@@ -66,5 +75,82 @@ export class WidgetController {
   @Delete()
   async delete(@Query('id') id: string): Promise<void> {
     await this.prismaService.widget.delete({ where: { id } });
+  }
+
+  @Get(':id')
+  @Render('index')
+  async findOne(@Param('id') id: string) {
+    const widget = await this.prismaService.widget.findUnique({
+      where: { id },
+    });
+
+    if (!widget) {
+      throw new Error('Widget not found');
+    }
+
+    const connection = await this.prismaService.connection.findUnique({
+      where: { id: widget.connectionId },
+    });
+
+    if (!connection) {
+      throw new Error('Connection not found');
+    }
+
+    const {
+      sql,
+      title,
+      chartType,
+      sqlType,
+      aggregationColumns,
+      dimensionColumns,
+    } = JSON.parse(widget.data as unknown as string) as CreateWidgetRequest;
+
+    const result = await this.dataLayer.runQuery(sql, connection);
+
+    if (result.status !== 'success') {
+      throw new Error('Query failed');
+    }
+
+    if (chartType === 'unknown') {
+      throw new Error('Unknown chart cannot be displayed');
+    }
+
+    if (sqlType === 'invalidQuery') {
+      throw new Error('Invalid query');
+    }
+
+    let query: SQLQuery | undefined;
+    if (sqlType === 'basicAggregation') {
+      query = {
+        type: 'basicAggregation',
+        aggregationColumns,
+        rawSQL: sql,
+      };
+    } else if (
+      sqlType === 'groupingAggregation' ||
+      sqlType === 'nonAggregation'
+    ) {
+      query = {
+        type: 'groupingAggregation',
+        aggregationColumns,
+        dimensionColumns,
+        rawSQL: sql,
+      };
+    }
+    if (!query) {
+      throw new Error('Query type not supported');
+    }
+
+    const chart = this.mergeService.concat(
+      { title, chartType },
+      result.data,
+      query,
+    );
+
+    if (chart.chartType === 'unknown') {
+      throw new Error('Unknown chart');
+    }
+
+    return { title, chartType, data: JSON.stringify(chart.data) };
   }
 }
