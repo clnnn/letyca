@@ -69,7 +69,7 @@ export class WidgetController {
         id: w.id,
         name: w.name,
         connectionId: w.connectionId,
-        type: JSON.parse(w.data as unknown as string).chartType,
+        type: JSON.parse(w.data as unknown as string).chartMetadata.chartType,
       })),
     };
   }
