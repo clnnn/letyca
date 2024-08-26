@@ -30,4 +30,7 @@ export class ConnectionsTableComponent {
 
   @Output()
   readonly newConnection = new EventEmitter<void>();
+
+  @Output()
+  readonly deleteConnection = new EventEmitter<string>();
 }

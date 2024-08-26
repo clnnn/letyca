@@ -51,17 +51,10 @@
           <span tuiStatus>
             <button
               appearance="link"
-              iconStart="@tui.pencil"
-              size="xs"
-              tuiIconButton
-            >
-              Edit
-            </button>
-            <button
-              appearance="link"
               iconStart="trash-2"
               size="xs"
               tuiIconButton
+              (click)="deleteConnection.emit(conn.id)"
             >
               More
             </button>

@@ -152,6 +152,37 @@ export const Store = signalStore(
           ),
         ),
       ),
+      deleteConnection: rxMethod<string>(
+        pipe(
+          exhaustMap((connectionId) =>
+            connectionService.deleteById(connectionId).pipe(
+              tapResponse({
+                next: () => {
+                  patchState(store, {
+                    connections: store
+                      .connections()
+                      .filter((c) => c.id !== connectionId),
+                  });
+                  alerts
+                    .open('Connection deleted successfully', {
+                      label: 'Success',
+                      appearance: 'success',
+                    })
+                    .subscribe();
+                },
+                error: () => {
+                  alerts
+                    .open('Failed to delete connection', {
+                      label: 'Error',
+                      appearance: 'error',
+                    })
+                    .subscribe();
+                },
+              }),
+            ),
+          ),
+        ),
+      ),
       selectConnection(connectionId: string): void {
         patchState(store, { selectedConnectionId: connectionId });
       },

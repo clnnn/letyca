@@ -20,6 +20,7 @@ import { filter } from 'rxjs';
     <le-connections-table
       [connections]="store.connections()"
       (newConnection)="openDialog()"
+      (deleteConnection)="store.deleteConnection($event)"
     ></le-connections-table>
   `,
   styles: [
