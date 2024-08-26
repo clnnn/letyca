@@ -1,6 +1,14 @@
 <div class="header">
   <span class="tui-text_h3">Connections</span>
-  <tui-chip appearance="accent">WIP</tui-chip>
+  <button
+    appearance="primary"
+    iconStart="@tui.plus"
+    [size]="size"
+    tuiButton
+    (click)="newConnection.emit()"
+  >
+    Add connection
+  </button>
 </div>
 <table tuiTable [size]="size" [style.width.rem]="58">
   <thead>
@@ -13,56 +21,61 @@
   </thead>
   <tbody tuiTbody>
     @for (conn of connections; track $index) {
-    <tr>
-      <td tuiTd>
-        <div [tuiCell]="size">
-          <span tuiTitle>
-            {{ conn.host }}
-            <span tuiSubtitle>{{ conn.port }}</span>
-          </span>
-        </div>
-      </td>
-      <td tuiTd>
-        <div [tuiCell]="size">
-          <span tuiTitle>
-            <span tuiStatus>
-              <tui-icon icon="database" />
-              {{ conn.database }}
+      <tr>
+        <td tuiTd>
+          <div [tuiCell]="size">
+            <span tuiTitle>
+              {{ conn.host }}
+              <span tuiSubtitle>{{ conn.port }}</span>
             </span>
+          </div>
+        </td>
+        <td tuiTd>
+          <div [tuiCell]="size">
+            <span tuiTitle>
+              <span tuiStatus>
+                <tui-icon icon="database" />
+                {{ conn.database }}
+              </span>
+            </span>
+          </div>
+        </td>
+        <td tuiTd>
+          <div [tuiCell]="size">
+            <span tuiTitle>
+              {{ conn.schema }}
+            </span>
+          </div>
+        </td>
+        <td tuiTd>
+          <span tuiStatus>
+            <button
+              appearance="link"
+              iconStart="@tui.pencil"
+              size="xs"
+              tuiIconButton
+            >
+              Edit
+            </button>
+            <button
+              appearance="link"
+              iconStart="trash-2"
+              size="xs"
+              tuiIconButton
+            >
+              More
+            </button>
           </span>
-        </div>
-      </td>
-      <td tuiTd>
-        <div [tuiCell]="size">
-          <span tuiTitle>
-            {{ conn.schema }}
-          </span>
-        </div>
-      </td>
-      <td tuiTd>
-        <span tuiStatus>
-          <button
-            appearance="link"
-            iconStart="@tui.pencil"
-            size="xs"
-            tuiIconButton
-          >
-            Edit
-          </button>
-          <button appearance="link" iconStart="trash-2" size="xs" tuiIconButton>
-            More
-          </button>
-        </span>
-      </td>
-    </tr>
+        </td>
+      </tr>
     } @empty {
-    <tr>
-      <td tuiTd colspan="4">
-        <div [tuiCell]="size">
-          <span tuiTitle>No connections found</span>
-        </div>
-      </td>
-    </tr>
+      <tr>
+        <td tuiTd colspan="4">
+          <div [tuiCell]="size">
+            <span tuiTitle>No connections found</span>
+          </div>
+        </td>
+      </tr>
     }
   </tbody>
 </table>

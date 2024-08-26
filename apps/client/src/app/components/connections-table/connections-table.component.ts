@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  output,
+} from '@angular/core';
 import { TuiTitle, TuiButton, TuiIcon } from '@taiga-ui/core';
 import { TuiCell } from '@taiga-ui/layout';
 import { TuiTable } from '@taiga-ui/addon-table';
@@ -20,4 +27,7 @@ export class ConnectionsTableComponent {
 
   @Input({ required: true })
   connections: Connection[] = [];
+
+  @Output()
+  readonly newConnection = new EventEmitter<void>();
 }

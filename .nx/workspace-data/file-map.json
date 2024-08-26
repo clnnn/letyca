@@ -22,15 +22,16 @@
     "@ngrx/signals": "^18.0.2",
     "@nx/angular": "19.5.7",
     "@prisma/client": "^5.9.1",
-    "@taiga-ui/addon-table": "^4.0.0",
-    "@taiga-ui/cdk": "4.0.0",
-    "@taiga-ui/core": "4.0.0",
-    "@taiga-ui/icons": "4.0.0",
-    "@taiga-ui/kit": "4.0.0",
-    "@taiga-ui/layout": "4.0.0",
-    "@taiga-ui/legacy": "^4.0.0",
-    "@taiga-ui/styles": "^4.0.0",
+    "@taiga-ui/addon-table": "4.3.0",
+    "@taiga-ui/cdk": "4.3.0",
+    "@taiga-ui/core": "4.3.0",
+    "@taiga-ui/icons": "4.3.0",
+    "@taiga-ui/kit": "4.3.0",
+    "@taiga-ui/layout": "4.3.0",
+    "@taiga-ui/legacy": "4.3.0",
+    "@taiga-ui/styles": "4.3.0",
     "@tinkoff/ng-dompurify": "3.0.0",
+    "@tinkoff/ng-polymorpheus": "^4.3.0",
     "ag-grid-angular": "^30.2.0",
     "ag-grid-community": "^30.2.0",
     "axios": "1.6.7",
@@ -97,123 +98,6 @@
   "nxJsonPlugins": [],
   "fileMap": {
     "projectFileMap": {
-      "contracts": [
-        {
-          "file": "contracts/.eslintrc.json",
-          "hash": "10868475473741014577"
-        },
-        {
-          "file": "contracts/README.md",
-          "hash": "16932128431962063377"
-        },
-        {
-          "file": "contracts/jest.config.ts",
-          "hash": "10733571996953449077"
-        },
-        {
-          "file": "contracts/project.json",
-          "hash": "3422854332292414280"
-        },
-        {
-          "file": "contracts/src/create-connection.request.ts",
-          "hash": "9238667002021198850"
-        },
-        {
-          "file": "contracts/src/create-widget.request.ts",
-          "hash": "7410143653835700011"
-        },
-        {
-          "file": "contracts/src/create-widget.response.ts",
-          "hash": "10992553615166782798"
-        },
-        {
-          "file": "contracts/src/generate-chart.request.ts",
-          "hash": "13913775839230237254"
-        },
-        {
-          "file": "contracts/src/generate-chart.response.ts",
-          "hash": "17871508142600029720"
-        },
-        {
-          "file": "contracts/src/get-connections.response.ts",
-          "hash": "1520503922966892565"
-        },
-        {
-          "file": "contracts/src/get-suggestion.response.ts",
-          "hash": "1478999678038500754"
-        },
-        {
-          "file": "contracts/src/get-widgets.response.ts",
-          "hash": "11769814584459284772"
-        },
-        {
-          "file": "contracts/src/index.ts",
-          "hash": "11592209713317371875"
-        },
-        {
-          "file": "contracts/src/test-setup.ts",
-          "hash": "12935735732682149507",
-          "deps": [
-            "npm:jest-preset-angular"
-          ]
-        },
-        {
-          "file": "contracts/tsconfig.json",
-          "hash": "4881022640630122902"
-        },
-        {
-          "file": "contracts/tsconfig.lib.json",
-          "hash": "4766185256741444917"
-        },
-        {
-          "file": "contracts/tsconfig.spec.json",
-          "hash": "2129196202529263968"
-        }
-      ],
-      "server-e2e": [
-        {
-          "file": "apps/server-e2e/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "apps/server-e2e/jest.config.ts",
-          "hash": "14212190043399416865"
-        },
-        {
-          "file": "apps/server-e2e/project.json",
-          "hash": "5162425300193861452"
-        },
-        {
-          "file": "apps/server-e2e/src/server/server.spec.ts",
-          "hash": "110394728024017389",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "apps/server-e2e/src/support/global-setup.ts",
-          "hash": "2568409276037275290"
-        },
-        {
-          "file": "apps/server-e2e/src/support/global-teardown.ts",
-          "hash": "5275447082211835490"
-        },
-        {
-          "file": "apps/server-e2e/src/support/test-setup.ts",
-          "hash": "10984585515912236441",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "apps/server-e2e/tsconfig.json",
-          "hash": "15443990093475294480"
-        },
-        {
-          "file": "apps/server-e2e/tsconfig.spec.json",
-          "hash": "14954872453723519891"
-        }
-      ],
       "server": [
         {
           "file": "apps/server/.eslintrc.json",
@@ -381,6 +265,79 @@
           ]
         }
       ],
+      "contracts": [
+        {
+          "file": "contracts/.eslintrc.json",
+          "hash": "10868475473741014577"
+        },
+        {
+          "file": "contracts/README.md",
+          "hash": "16932128431962063377"
+        },
+        {
+          "file": "contracts/jest.config.ts",
+          "hash": "10733571996953449077"
+        },
+        {
+          "file": "contracts/project.json",
+          "hash": "3422854332292414280"
+        },
+        {
+          "file": "contracts/src/create-connection.request.ts",
+          "hash": "9238667002021198850"
+        },
+        {
+          "file": "contracts/src/create-widget.request.ts",
+          "hash": "7410143653835700011"
+        },
+        {
+          "file": "contracts/src/create-widget.response.ts",
+          "hash": "10992553615166782798"
+        },
+        {
+          "file": "contracts/src/generate-chart.request.ts",
+          "hash": "13913775839230237254"
+        },
+        {
+          "file": "contracts/src/generate-chart.response.ts",
+          "hash": "17871508142600029720"
+        },
+        {
+          "file": "contracts/src/get-connections.response.ts",
+          "hash": "1520503922966892565"
+        },
+        {
+          "file": "contracts/src/get-suggestion.response.ts",
+          "hash": "1478999678038500754"
+        },
+        {
+          "file": "contracts/src/get-widgets.response.ts",
+          "hash": "11769814584459284772"
+        },
+        {
+          "file": "contracts/src/index.ts",
+          "hash": "11592209713317371875"
+        },
+        {
+          "file": "contracts/src/test-setup.ts",
+          "hash": "12935735732682149507",
+          "deps": [
+            "npm:jest-preset-angular"
+          ]
+        },
+        {
+          "file": "contracts/tsconfig.json",
+          "hash": "4881022640630122902"
+        },
+        {
+          "file": "contracts/tsconfig.lib.json",
+          "hash": "4766185256741444917"
+        },
+        {
+          "file": "contracts/tsconfig.spec.json",
+          "hash": "2129196202529263968"
+        }
+      ],
       "client": [
         {
           "file": "apps/client/.eslintrc.json",
@@ -511,7 +468,7 @@
         },
         {
           "file": "apps/client/src/app/components/chart/chart.component.ts",
-          "hash": "9711944149705600794",
+          "hash": "17989335266471835836",
           "deps": [
             "npm:@angular/core",
             "npm:@taiga-ui/layout",
@@ -524,15 +481,15 @@
         },
         {
           "file": "apps/client/src/app/components/connections-table/connections-table.component.html",
-          "hash": "14995829325280378805"
+          "hash": "2100230780994233844"
         },
         {
           "file": "apps/client/src/app/components/connections-table/connections-table.component.scss",
-          "hash": "8802177717165909595"
+          "hash": "10446943960166864577"
         },
         {
           "file": "apps/client/src/app/components/connections-table/connections-table.component.ts",
-          "hash": "4115357681554412342",
+          "hash": "6553476417367246626",
           "deps": [
             "npm:@angular/core",
             "npm:@taiga-ui/core",
@@ -543,10 +500,12 @@
         },
         {
           "file": "apps/client/src/app/components/connections/connections.component.ts",
-          "hash": "13362003763262500276",
+          "hash": "17997353163379548593",
           "deps": [
             "npm:@angular/core",
-            "npm:@taiga-ui/core"
+            "npm:@taiga-ui/core",
+            "npm:@taiga-ui/polymorpheus",
+            "npm:rxjs"
           ]
         },
         {
@@ -559,6 +518,25 @@
             "contracts",
             "npm:@angular/common",
             "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/client/src/app/components/create-edit-connection-dialog-content/create-edit-connection-dialog-content.component.html",
+          "hash": "3612877719622711818"
+        },
+        {
+          "file": "apps/client/src/app/components/create-edit-connection-dialog-content/create-edit-connection-dialog-content.component.scss",
+          "hash": "1178647169382088098"
+        },
+        {
+          "file": "apps/client/src/app/components/create-edit-connection-dialog-content/create-edit-connection-dialog-content.component.ts",
+          "hash": "16377686734350642037",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@taiga-ui/core",
+            "npm:@tinkoff/ng-polymorpheus",
+            "npm:@taiga-ui/legacy"
           ]
         },
         {
@@ -760,7 +738,7 @@
         },
         {
           "file": "apps/client/src/app/state.ts",
-          "hash": "13677072150868888758",
+          "hash": "14212470695905551316",
           "deps": [
             "contracts",
             "npm:@ngrx/signals",
@@ -835,6 +813,50 @@
         {
           "file": "apps/client/tsconfig.spec.json",
           "hash": "2927375835638640771"
+        }
+      ],
+      "server-e2e": [
+        {
+          "file": "apps/server-e2e/.eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "apps/server-e2e/jest.config.ts",
+          "hash": "14212190043399416865"
+        },
+        {
+          "file": "apps/server-e2e/project.json",
+          "hash": "5162425300193861452"
+        },
+        {
+          "file": "apps/server-e2e/src/server/server.spec.ts",
+          "hash": "110394728024017389",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/server-e2e/src/support/global-setup.ts",
+          "hash": "2568409276037275290"
+        },
+        {
+          "file": "apps/server-e2e/src/support/global-teardown.ts",
+          "hash": "5275447082211835490"
+        },
+        {
+          "file": "apps/server-e2e/src/support/test-setup.ts",
+          "hash": "10984585515912236441",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/server-e2e/tsconfig.json",
+          "hash": "15443990093475294480"
+        },
+        {
+          "file": "apps/server-e2e/tsconfig.spec.json",
+          "hash": "14954872453723519891"
         }
       ]
     },
@@ -997,11 +1019,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "12987336405968312592"
+        "hash": "6415903345353340377"
       },
       {
         "file": "package.json",
-        "hash": "13118237250806906992"
+        "hash": "8670149608475637235"
       },
       {
         "file": "prisma/migrations/20231015145732_init/migration.sql",

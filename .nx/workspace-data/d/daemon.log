@@ -1,0 +1,33 @@
+[NX Daemon Server] - 2024-08-26T12:47:56.206Z - Started listening on: /tmp/c52ddf65534b7b460350/d.sock
+[NX Daemon Server] - 2024-08-26T12:47:56.212Z - [WATCHER]: Subscribed to changes within: /workspace (native)
+[NX Daemon Server] - 2024-08-26T12:47:56.213Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-26T12:47:56.215Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-08-26T12:47:56.217Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-26T12:47:56.223Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2024-08-26T12:47:56.223Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2024-08-26T12:47:56.223Z - Handled FORCE_SHUTDOWN. Handling time: 1. Response time: 0.
+[NX Daemon Server] - 2024-08-26T12:47:56.224Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-26T12:47:56.224Z - [WATCHER]: Stopping the watcher for /workspace (sources)
+[NX Daemon Server] - 2024-08-26T12:47:56.225Z - [WATCHER]: Stopping the watcher for /workspace (outputs)
+[NX Daemon Server] - 2024-08-26T12:48:11.889Z - Started listening on: /tmp/c52ddf65534b7b460350/d.sock
+[NX Daemon Server] - 2024-08-26T12:48:11.895Z - [WATCHER]: Subscribed to changes within: /workspace (native)
+[NX Daemon Server] - 2024-08-26T12:48:11.904Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-26T12:48:11.905Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-08-26T12:48:11.910Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-26T12:48:11.916Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2024-08-26T12:48:11.917Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2024-08-26T12:48:11.918Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 2.
+[NX Daemon Server] - 2024-08-26T12:48:11.920Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-26T12:48:11.921Z - [WATCHER]: Stopping the watcher for /workspace (sources)
+[NX Daemon Server] - 2024-08-26T12:48:11.921Z - [WATCHER]: Stopping the watcher for /workspace (outputs)
+[NX Daemon Server] - 2024-08-26T12:48:56.670Z - Started listening on: /tmp/c52ddf65534b7b460350/d.sock
+[NX Daemon Server] - 2024-08-26T12:48:56.676Z - [WATCHER]: Subscribed to changes within: /workspace (native)
+[NX Daemon Server] - 2024-08-26T12:48:56.681Z - Established a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-26T12:48:56.683Z - Established a connection. Number of open connections: 2
+[NX Daemon Server] - 2024-08-26T12:48:56.685Z - Closed a connection. Number of open connections: 1
+[NX Daemon Server] - 2024-08-26T12:48:56.690Z - [REQUEST]: Responding to the client. Shutdown initiated
+[NX Daemon Server] - 2024-08-26T12:48:56.690Z - Done responding to the client Shutdown initiated
+[NX Daemon Server] - 2024-08-26T12:48:56.691Z - Handled FORCE_SHUTDOWN. Handling time: 0. Response time: 1.
+[NX Daemon Server] - 2024-08-26T12:48:56.692Z - Closed a connection. Number of open connections: 0
+[NX Daemon Server] - 2024-08-26T12:48:56.692Z - [WATCHER]: Stopping the watcher for /workspace (sources)
+[NX Daemon Server] - 2024-08-26T12:48:56.693Z - [WATCHER]: Stopping the watcher for /workspace (outputs)

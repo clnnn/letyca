@@ -1,5 +1,6 @@
 import {
   ConnectionListItem,
+  CreateConnectionRequest,
   CreateWidgetRequest,
   GenerateChartRequest,
   GenerateChartResponse,
@@ -23,16 +24,14 @@ import {
   of,
   pipe,
   tap,
-  withLatestFrom,
 } from 'rxjs';
-import { computed, effect, inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { ConnectionService } from './service/connection.service';
 import { tapResponse } from '@ngrx/operators';
 import { ChartService } from './service/chart.service';
 import { SuggestionsService } from './service/suggestions.service';
 import { WidgetService } from './service/widget.service';
 import { TuiAlertService } from '@taiga-ui/core';
-import { toObservable } from '@angular/core/rxjs-interop';
 
 // State models
 export type User = {
@@ -43,6 +42,8 @@ export type User = {
 };
 
 export type Connection = ConnectionListItem;
+
+export type NewConnection = CreateConnectionRequest;
 
 export type GeneratedPreviewChart = GenerateChartResponse;
 
@@ -124,6 +125,30 @@ export const Store = signalStore(
                   patchState(store, { connectionsLoading: LoadingState.ERROR }),
               }),
             ),
+          ),
+        ),
+      ),
+      createConnection: rxMethod<NewConnection>(
+        exhaustMap((conn) =>
+          connectionService.create(conn).pipe(
+            tapResponse({
+              next: () => {
+                alerts
+                  .open('Connection created successfully', {
+                    label: 'Success',
+                    appearance: 'success',
+                  })
+                  .subscribe();
+              },
+              error: () => {
+                alerts
+                  .open('Failed to create connection', {
+                    label: 'Error',
+                    appearance: 'error',
+                  })
+                  .subscribe();
+              },
+            }),
           ),
         ),
       ),
