@@ -115,10 +115,6 @@ export class WidgetController {
       throw new Error('Unknown chart cannot be displayed');
     }
 
-    if (sqlType === 'invalidQuery') {
-      throw new Error('Invalid query');
-    }
-
     let query: SQLQuery | undefined;
     if (sqlType === 'basicAggregation') {
       query = {
