@@ -3,7 +3,6 @@ import {
   Component,
   inject,
   input,
-  Input,
 } from '@angular/core';
 import { BarChart } from '@letyca/contracts';
 import { TuiTitle } from '@taiga-ui/core';

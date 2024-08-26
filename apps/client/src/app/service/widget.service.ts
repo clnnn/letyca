@@ -30,4 +30,10 @@ export class WidgetService {
       params: { id: widgetId },
     });
   }
+
+  fetchEmbedded(widgetId: string): Observable<string> {
+    return this.http.get(`${this.apiUrl}/${widgetId}/embedded`, {
+      responseType: 'text',
+    });
+  }
 }

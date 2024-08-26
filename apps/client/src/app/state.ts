@@ -256,6 +256,34 @@ export const Store = signalStore(
           ),
         ),
       ),
+      copyToClipboard: rxMethod<string>(
+        pipe(
+          exhaustMap((widgetId) =>
+            widgetService.fetchEmbedded(widgetId).pipe(
+              tapResponse({
+                next: async (res) => {
+                  await navigator.clipboard.writeText(res);
+                  alerts
+                    .open('Widget URL copied to clipboard', {
+                      label: 'Success',
+                      appearance: 'success',
+                    })
+                    .subscribe();
+                },
+                error: (e) => {
+                  console.error(e);
+                  alerts
+                    .open('Failed to copy widget URL', {
+                      label: 'Error',
+                      appearance: 'error',
+                    })
+                    .subscribe();
+                },
+              }),
+            ),
+          ),
+        ),
+      ),
       explorePageClosed(): void {
         patchState(store, {
           previewChart: null,

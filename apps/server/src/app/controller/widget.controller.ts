@@ -12,12 +12,13 @@ import {
   Post,
   Query,
   Render,
+  Req,
 } from '@nestjs/common';
 import { PrismaService } from '../data-access/prisma.service';
 import { DataLayerService } from '../service/data-layer.service';
 import { MergeService } from '../service/merge.service';
-import { raw } from '@prisma/client/runtime/library';
-import { BasicAggregation, SQLQuery } from '../service/query-parsing.service';
+import { SQLQuery } from '../service/query-parsing.service';
+import { Request } from 'express';
 
 @Controller('widgets')
 export class WidgetController {
@@ -78,8 +79,8 @@ export class WidgetController {
   }
 
   @Get(':id')
-  @Render('index')
-  async findOne(@Param('id') id: string) {
+  @Render('widget')
+  async getWidgetHTML(@Param('id') id: string) {
     const widget = await this.prismaService.widget.findUnique({
       where: { id },
     });
@@ -148,5 +149,11 @@ export class WidgetController {
     }
 
     return { title, chartType, data: JSON.stringify(chart.data) };
+  }
+
+  @Get(':id/embedded')
+  getEmbeddedChart(@Param('id') id: string, @Req() req: Request): string {
+    const url = `${req.protocol}://${req.get('host')}/api/widgets/${id}`;
+    return `<iframe src="${url}" />`;
   }
 }

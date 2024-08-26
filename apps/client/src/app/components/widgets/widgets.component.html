@@ -50,12 +50,21 @@
           <span tuiStatus>
             <button
               appearance="link"
+              iconStart="code-xml"
+              size="xs"
+              tuiIconButton
+              (click)="store.copyToClipboard(w.id)"
+            >
+              Copy code
+            </button>
+            <button
+              appearance="link"
               iconStart="trash-2"
               size="xs"
               tuiIconButton
               (click)="store.deleteWidget(w.id)"
             >
-              More
+              Delete
             </button>
           </span>
         </td>
