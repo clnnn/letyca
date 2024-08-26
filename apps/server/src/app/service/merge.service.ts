@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Row } from './data-layer.service';
-import { Chart, ChartMetadata } from '@letyca/contracts';
-import { SQLQuery } from './query-parsing.service';
+import { Chart, ChartMetadata, SQLQuery } from '@letyca/contracts';
 
 @Injectable()
 export class MergeService {

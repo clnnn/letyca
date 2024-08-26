@@ -2,6 +2,7 @@ import {
   CreateWidgetRequest,
   CreateWidgetResponse,
   GetWidgetsResponse,
+  SQLQuery,
 } from '@letyca/contracts';
 import {
   Body,
@@ -17,7 +18,6 @@ import {
 import { PrismaService } from '../data-access/prisma.service';
 import { DataLayerService } from '../service/data-layer.service';
 import { MergeService } from '../service/merge.service';
-import { SQLQuery } from '../service/query-parsing.service';
 import { Request } from 'express';
 
 @Controller('widgets')
@@ -33,7 +33,8 @@ export class WidgetController {
     @Body() req: CreateWidgetRequest,
     @Query('connectionId') connectionId?: string,
   ): Promise<CreateWidgetResponse> {
-    if (req.chartType === 'unknown') {
+    const { chartMetadata, query } = req;
+    if (chartMetadata.chartType === 'unknown') {
       throw new Error('Unknown chart cannot be saved');
     }
 
@@ -51,7 +52,7 @@ export class WidgetController {
 
     const result = await this.prismaService.widget.create({
       data: {
-        name: req.title,
+        name: chartMetadata.title,
         connectionId,
         data: JSON.stringify(req),
       },
@@ -98,44 +99,17 @@ export class WidgetController {
     }
 
     const {
-      sql,
-      title,
-      chartType,
-      sqlType,
-      aggregationColumns,
-      dimensionColumns,
+      chartMetadata: { title, chartType },
+      query,
     } = JSON.parse(widget.data as unknown as string) as CreateWidgetRequest;
 
-    const result = await this.dataLayer.runQuery(sql, connection);
-
+    const result = await this.dataLayer.runQuery(query.rawSQL, connection);
     if (result.status !== 'success') {
       throw new Error('Query failed');
     }
 
     if (chartType === 'unknown') {
-      throw new Error('Unknown chart cannot be displayed');
-    }
-
-    let query: SQLQuery | undefined;
-    if (sqlType === 'basicAggregation') {
-      query = {
-        type: 'basicAggregation',
-        aggregationColumns,
-        rawSQL: sql,
-      };
-    } else if (
-      sqlType === 'groupingAggregation' ||
-      sqlType === 'nonAggregation'
-    ) {
-      query = {
-        type: 'groupingAggregation',
-        aggregationColumns,
-        dimensionColumns,
-        rawSQL: sql,
-      };
-    }
-    if (!query) {
-      throw new Error('Query type not supported');
+      throw new Error('Unknown chart type');
     }
 
     const chart = this.mergeService.concat(
@@ -145,7 +119,7 @@ export class WidgetController {
     );
 
     if (chart.chartType === 'unknown') {
-      throw new Error('Unknown chart');
+      throw new Error('Unknown chart type');
     }
 
     return { title, chartType, data: JSON.stringify(chart.data) };

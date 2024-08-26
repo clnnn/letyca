@@ -41,14 +41,28 @@ export interface UnknownChart {
 
 export type Chart = CountLabel | PieChart | LineChart | BarChart | UnknownChart;
 
-export type GenerateChartResponse = {
-  chart: Chart;
-  sql: string;
-  sqlType:
-    | 'basicAggregation'
-    | 'groupingAggregation'
-    | 'nonAggregation'
-    | 'invalidQuery';
+export type BasicAggregation = {
+  type: 'basicAggregation';
+  aggregationColumns: string[];
+};
+
+export type GroupingAggregation = {
+  type: 'groupingAggregation';
+  aggregationColumns: string[];
+  dimensionColumns: string[];
+};
+
+export type NonAggregation = {
+  type: 'nonAggregation';
   dimensionColumns: string[];
   aggregationColumns: string[];
+};
+
+export type SQLQuery = {
+  rawSQL: string;
+} & (BasicAggregation | GroupingAggregation | NonAggregation);
+
+export type GenerateChartResponse = {
+  chart: Chart;
+  query: SQLQuery;
 };

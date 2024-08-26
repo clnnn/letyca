@@ -2,11 +2,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { b } from 'baml_client';
 import { Connection } from 'prisma/prisma-client';
 import { DDLService } from './ddl.service';
-import {
-  InvalidQuery,
-  QueryParsingService,
-  SQLQuery,
-} from './query-parsing.service';
+import { InvalidQuery, QueryParsingService } from './query-parsing.service';
+import { SQLQuery } from '@letyca/contracts';
 
 @Injectable()
 export class QueryGenerationService {

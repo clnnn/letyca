@@ -23,6 +23,7 @@ import {
   of,
   pipe,
   tap,
+  withLatestFrom,
 } from 'rxjs';
 import { computed, effect, inject } from '@angular/core';
 import { ConnectionService } from './service/connection.service';
@@ -31,6 +32,7 @@ import { ChartService } from './service/chart.service';
 import { SuggestionsService } from './service/suggestions.service';
 import { WidgetService } from './service/widget.service';
 import { TuiAlertService } from '@taiga-ui/core';
+import { toObservable } from '@angular/core/rxjs-interop';
 
 // State models
 export type User = {
@@ -175,12 +177,11 @@ export const Store = signalStore(
               return of(null);
             }
             const req: CreateWidgetRequest = {
-              title: previewChart.chart.title,
-              sql: previewChart.sql,
-              dimensionColumns: previewChart.dimensionColumns,
-              aggregationColumns: previewChart.aggregationColumns,
-              sqlType: previewChart.sqlType,
-              chartType: previewChart.chart.chartType,
+              chartMetadata: {
+                title: previewChart.chart.title,
+                chartType: previewChart.chart.chartType,
+              },
+              query: previewChart.query,
             };
             return widgetService.save(req, connectionId).pipe(
               tapResponse({

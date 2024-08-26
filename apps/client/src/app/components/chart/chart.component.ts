@@ -48,7 +48,7 @@ export class ChartComponent {
   readonly chart = this.store.previewChart()?.chart;
 
   get sql(): string {
-    const sql = this.store.previewChart()?.sql ?? '';
+    const sql = this.store.previewChart()?.query.rawSQL ?? '-- No SQL query';
     return format(sql, { language: 'postgresql' });
   }
 

@@ -14475,7 +14475,7 @@
       },
       {
         "source": "server",
-        "target": "npm:@prisma/client",
+        "target": "npm:express",
         "type": "static"
       },
       {

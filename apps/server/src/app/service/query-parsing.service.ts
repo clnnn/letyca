@@ -3,27 +3,11 @@ import { isDeepStrictEqual } from 'util';
 import { parse } from 'pgsql-parser';
 import { Node, RawStmt, ResTarget } from '@pgsql/types';
 import { b } from 'baml_client';
-
-export type BasicAggregation = {
-  type: 'basicAggregation';
-  aggregationColumns: string[];
-};
-
-export type GroupingAggregation = {
-  type: 'groupingAggregation';
-  aggregationColumns: string[];
-  dimensionColumns: string[];
-};
-
-export type NonAggregation = {
-  type: 'nonAggregation';
-  dimensionColumns: string[];
-  aggregationColumns: string[];
-};
-
-export type SQLQuery = {
-  rawSQL: string;
-} & (BasicAggregation | GroupingAggregation | NonAggregation);
+import {
+  BasicAggregation,
+  GroupingAggregation,
+  SQLQuery,
+} from '@letyca/contracts';
 
 export type InvalidQuery = {
   type: 'invalidQuery';

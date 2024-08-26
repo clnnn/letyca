@@ -37,7 +37,6 @@ export class ChartController {
       this.metadataService.generate(userRequest),
       this.queryGenerationService.generate(userRequest, connection),
     ]);
-
     this.logger.debug('Generated metadata', metadata);
     this.logger.debug('Generated SQL', query);
 
@@ -49,20 +48,11 @@ export class ChartController {
     if (result.status === 'fail') {
       throw new Error(result.reason);
     }
-
     this.logger.log('Data result size', result.data.length);
 
-    const chart = this.mergeService.concat(metadata, result.data, query);
-
     return {
-      chart,
-      sql: query.rawSQL,
-      sqlType: query.type,
-      dimensionColumns:
-        query.type === 'groupingAggregation' || query.type === 'nonAggregation'
-          ? query.dimensionColumns
-          : [],
-      aggregationColumns: query.aggregationColumns,
+      chart: this.mergeService.concat(metadata, result.data, query),
+      query,
     };
   }
 }

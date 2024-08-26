@@ -1,7 +1,5 @@
 import { GenerateChartResponse } from './generate-chart.response';
 
-export type CreateWidgetRequest = Pick<
-  GenerateChartResponse,
-  'sql' | 'dimensionColumns' | 'aggregationColumns' | 'sqlType'
-> &
-  Pick<GenerateChartResponse['chart'], 'chartType' | 'title'>;
+export type CreateWidgetRequest = {
+  chartMetadata: Pick<GenerateChartResponse['chart'], 'title' | 'chartType'>;
+} & Pick<GenerateChartResponse, 'query'>;
