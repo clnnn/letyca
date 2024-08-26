@@ -14461,11 +14461,6 @@
       },
       {
         "source": "client",
-        "target": "npm:@tinkoff/ng-polymorpheus",
-        "type": "static"
-      },
-      {
-        "source": "client",
         "target": "npm:@taiga-ui/legacy",
         "type": "static"
       },
@@ -14509,6 +14504,11 @@
       {
         "source": "server",
         "target": "npm:prisma",
+        "type": "static"
+      },
+      {
+        "source": "server",
+        "target": "npm:rxjs",
         "type": "static"
       },
       {

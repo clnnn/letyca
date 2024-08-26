@@ -98,6 +98,50 @@
   "nxJsonPlugins": [],
   "fileMap": {
     "projectFileMap": {
+      "server-e2e": [
+        {
+          "file": "apps/server-e2e/.eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "apps/server-e2e/jest.config.ts",
+          "hash": "14212190043399416865"
+        },
+        {
+          "file": "apps/server-e2e/project.json",
+          "hash": "5162425300193861452"
+        },
+        {
+          "file": "apps/server-e2e/src/server/server.spec.ts",
+          "hash": "110394728024017389",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/server-e2e/src/support/global-setup.ts",
+          "hash": "2568409276037275290"
+        },
+        {
+          "file": "apps/server-e2e/src/support/global-teardown.ts",
+          "hash": "5275447082211835490"
+        },
+        {
+          "file": "apps/server-e2e/src/support/test-setup.ts",
+          "hash": "10984585515912236441",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/server-e2e/tsconfig.json",
+          "hash": "15443990093475294480"
+        },
+        {
+          "file": "apps/server-e2e/tsconfig.spec.json",
+          "hash": "14954872453723519891"
+        }
+      ],
       "server": [
         {
           "file": "apps/server/.eslintrc.json",
@@ -137,7 +181,7 @@
         },
         {
           "file": "apps/server/src/app/controller/connection.controller.ts",
-          "hash": "9552811576909058036",
+          "hash": "5100048704077545902",
           "deps": [
             "contracts",
             "npm:@nestjs/common"
@@ -166,6 +210,15 @@
           "deps": [
             "npm:@nestjs/common",
             "npm:prisma"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/interceptor/connection-management.interceptor.ts",
+          "hash": "13824906121837540138",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:rxjs"
           ]
         },
         {
@@ -481,7 +534,7 @@
         },
         {
           "file": "apps/client/src/app/components/connections-table/connections-table.component.html",
-          "hash": "2100230780994233844"
+          "hash": "13488281753544805072"
         },
         {
           "file": "apps/client/src/app/components/connections-table/connections-table.component.scss",
@@ -489,7 +542,7 @@
         },
         {
           "file": "apps/client/src/app/components/connections-table/connections-table.component.ts",
-          "hash": "6553476417367246626",
+          "hash": "4374140116494787850",
           "deps": [
             "npm:@angular/core",
             "npm:@taiga-ui/core",
@@ -500,7 +553,7 @@
         },
         {
           "file": "apps/client/src/app/components/connections/connections.component.ts",
-          "hash": "17997353163379548593",
+          "hash": "703407056217668782",
           "deps": [
             "npm:@angular/core",
             "npm:@taiga-ui/core",
@@ -522,7 +575,7 @@
         },
         {
           "file": "apps/client/src/app/components/create-edit-connection-dialog-content/create-edit-connection-dialog-content.component.html",
-          "hash": "3612877719622711818"
+          "hash": "1240946860913251573"
         },
         {
           "file": "apps/client/src/app/components/create-edit-connection-dialog-content/create-edit-connection-dialog-content.component.scss",
@@ -530,13 +583,13 @@
         },
         {
           "file": "apps/client/src/app/components/create-edit-connection-dialog-content/create-edit-connection-dialog-content.component.ts",
-          "hash": "16377686734350642037",
+          "hash": "6561836994678631778",
           "deps": [
             "npm:@angular/core",
             "npm:@angular/forms",
             "npm:@taiga-ui/core",
-            "npm:@tinkoff/ng-polymorpheus",
-            "npm:@taiga-ui/legacy"
+            "npm:@taiga-ui/legacy",
+            "npm:@taiga-ui/polymorpheus"
           ]
         },
         {
@@ -738,7 +791,7 @@
         },
         {
           "file": "apps/client/src/app/state.ts",
-          "hash": "14212470695905551316",
+          "hash": "5835177482946798686",
           "deps": [
             "contracts",
             "npm:@ngrx/signals",
@@ -814,50 +867,6 @@
           "file": "apps/client/tsconfig.spec.json",
           "hash": "2927375835638640771"
         }
-      ],
-      "server-e2e": [
-        {
-          "file": "apps/server-e2e/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "apps/server-e2e/jest.config.ts",
-          "hash": "14212190043399416865"
-        },
-        {
-          "file": "apps/server-e2e/project.json",
-          "hash": "5162425300193861452"
-        },
-        {
-          "file": "apps/server-e2e/src/server/server.spec.ts",
-          "hash": "110394728024017389",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "apps/server-e2e/src/support/global-setup.ts",
-          "hash": "2568409276037275290"
-        },
-        {
-          "file": "apps/server-e2e/src/support/global-teardown.ts",
-          "hash": "5275447082211835490"
-        },
-        {
-          "file": "apps/server-e2e/src/support/test-setup.ts",
-          "hash": "10984585515912236441",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "apps/server-e2e/tsconfig.json",
-          "hash": "15443990093475294480"
-        },
-        {
-          "file": "apps/server-e2e/tsconfig.spec.json",
-          "hash": "14954872453723519891"
-        }
       ]
     },
     "nonProjectFiles": [
@@ -891,7 +900,7 @@
       },
       {
         "file": ".env.template",
-        "hash": "12396566088554306391"
+        "hash": "17726939129037725726"
       },
       {
         "file": ".eslintignore",
