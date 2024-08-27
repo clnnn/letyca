@@ -5,7 +5,8 @@ COPY package*.json /work/
 RUN npm ci
 
 COPY . .
-RUN npm run generate
+RUN npm run prisma-generate
+RUN npm run baml-generate
 RUN npm run build-backend
 
 FROM mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye as production
