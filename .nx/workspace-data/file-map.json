@@ -31,7 +31,7 @@
     "@taiga-ui/legacy": "4.3.0",
     "@taiga-ui/styles": "4.3.0",
     "@tinkoff/ng-dompurify": "3.0.0",
-    "@tinkoff/ng-polymorpheus": "^4.3.0",
+    "@tinkoff/ng-polymorpheus": "4.3.0",
     "ag-grid-angular": "^30.2.0",
     "ag-grid-community": "^30.2.0",
     "axios": "1.6.7",
@@ -98,226 +98,6 @@
   "nxJsonPlugins": [],
   "fileMap": {
     "projectFileMap": {
-      "server-e2e": [
-        {
-          "file": "apps/server-e2e/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "apps/server-e2e/jest.config.ts",
-          "hash": "14212190043399416865"
-        },
-        {
-          "file": "apps/server-e2e/project.json",
-          "hash": "5162425300193861452"
-        },
-        {
-          "file": "apps/server-e2e/src/server/server.spec.ts",
-          "hash": "110394728024017389",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "apps/server-e2e/src/support/global-setup.ts",
-          "hash": "2568409276037275290"
-        },
-        {
-          "file": "apps/server-e2e/src/support/global-teardown.ts",
-          "hash": "5275447082211835490"
-        },
-        {
-          "file": "apps/server-e2e/src/support/test-setup.ts",
-          "hash": "10984585515912236441",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "apps/server-e2e/tsconfig.json",
-          "hash": "15443990093475294480"
-        },
-        {
-          "file": "apps/server-e2e/tsconfig.spec.json",
-          "hash": "14954872453723519891"
-        }
-      ],
-      "server": [
-        {
-          "file": "apps/server/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "apps/server/docker-pack/Dockerfile",
-          "hash": "10894695473880127199"
-        },
-        {
-          "file": "apps/server/docker-pack/start.sh",
-          "hash": "10389681052937107359"
-        },
-        {
-          "file": "apps/server/jest.config.ts",
-          "hash": "12824702076423017321"
-        },
-        {
-          "file": "apps/server/project.json",
-          "hash": "11908442280694891210"
-        },
-        {
-          "file": "apps/server/src/app/app.module.ts",
-          "hash": "5111753110642746699",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/config"
-          ]
-        },
-        {
-          "file": "apps/server/src/app/controller/chart.controller.ts",
-          "hash": "8655505423034729457",
-          "deps": [
-            "npm:@nestjs/common",
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/server/src/app/controller/connection.controller.ts",
-          "hash": "5100048704077545902",
-          "deps": [
-            "contracts",
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/server/src/app/controller/suggestion.controller.ts",
-          "hash": "10594881215773385359",
-          "deps": [
-            "npm:@nestjs/common",
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/server/src/app/controller/widget.controller.ts",
-          "hash": "15182075324061442470",
-          "deps": [
-            "contracts",
-            "npm:@nestjs/common",
-            "npm:express"
-          ]
-        },
-        {
-          "file": "apps/server/src/app/data-access/prisma.service.ts",
-          "hash": "15823662745324688642",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:prisma"
-          ]
-        },
-        {
-          "file": "apps/server/src/app/interceptor/connection-management.interceptor.ts",
-          "hash": "13824906121837540138",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/config",
-            "npm:rxjs"
-          ]
-        },
-        {
-          "file": "apps/server/src/app/service/chart-metadata.service.ts",
-          "hash": "16406269394790034370",
-          "deps": [
-            "contracts",
-            "npm:@nestjs/common"
-          ]
-        },
-        {
-          "file": "apps/server/src/app/service/data-layer.service.ts",
-          "hash": "39056567340554018",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:prisma"
-          ]
-        },
-        {
-          "file": "apps/server/src/app/service/ddl.service.ts",
-          "hash": "199363661406128649",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:pg-structure",
-            "npm:prisma"
-          ]
-        },
-        {
-          "file": "apps/server/src/app/service/merge.service.ts",
-          "hash": "10797606948573902563",
-          "deps": [
-            "npm:@nestjs/common",
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/server/src/app/service/query-generation.service.ts",
-          "hash": "16870461851173996503",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:prisma",
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/server/src/app/service/query-parsing.service.spec.ts",
-          "hash": "8989265147998486386"
-        },
-        {
-          "file": "apps/server/src/app/service/query-parsing.service.ts",
-          "hash": "9398464896805626913",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:pgsql-parser",
-            "npm:@pgsql/types",
-            "contracts"
-          ]
-        },
-        {
-          "file": "apps/server/src/app/utils.ts",
-          "hash": "9324226717777970814"
-        },
-        {
-          "file": "apps/server/src/assets/.gitkeep",
-          "hash": "3244421341483603138"
-        },
-        {
-          "file": "apps/server/src/main.ts",
-          "hash": "7282313191391650538",
-          "deps": [
-            "npm:@nestjs/common",
-            "npm:@nestjs/core",
-            "npm:@nestjs/platform-express"
-          ]
-        },
-        {
-          "file": "apps/server/src/views/widget.hbs",
-          "hash": "16009861333157536473"
-        },
-        {
-          "file": "apps/server/tsconfig.app.json",
-          "hash": "3171572500325445971"
-        },
-        {
-          "file": "apps/server/tsconfig.json",
-          "hash": "3490524966360018312"
-        },
-        {
-          "file": "apps/server/tsconfig.spec.json",
-          "hash": "11550347367511341917"
-        },
-        {
-          "file": "apps/server/webpack.config.js",
-          "hash": "10619490397189790225",
-          "deps": [
-            "npm:@nx/webpack"
-          ]
-        }
-      ],
       "contracts": [
         {
           "file": "contracts/.eslintrc.json",
@@ -867,6 +647,226 @@
           "file": "apps/client/tsconfig.spec.json",
           "hash": "2927375835638640771"
         }
+      ],
+      "server": [
+        {
+          "file": "apps/server/.eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "apps/server/docker-pack/Dockerfile",
+          "hash": "10894695473880127199"
+        },
+        {
+          "file": "apps/server/docker-pack/start.sh",
+          "hash": "10389681052937107359"
+        },
+        {
+          "file": "apps/server/jest.config.ts",
+          "hash": "12824702076423017321"
+        },
+        {
+          "file": "apps/server/project.json",
+          "hash": "11908442280694891210"
+        },
+        {
+          "file": "apps/server/src/app/app.module.ts",
+          "hash": "5111753110642746699",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/controller/chart.controller.ts",
+          "hash": "8655505423034729457",
+          "deps": [
+            "npm:@nestjs/common",
+            "contracts"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/controller/connection.controller.ts",
+          "hash": "5100048704077545902",
+          "deps": [
+            "contracts",
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/controller/suggestion.controller.ts",
+          "hash": "10594881215773385359",
+          "deps": [
+            "npm:@nestjs/common",
+            "contracts"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/controller/widget.controller.ts",
+          "hash": "7273102642916607261",
+          "deps": [
+            "contracts",
+            "npm:@nestjs/common",
+            "npm:express"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/data-access/prisma.service.ts",
+          "hash": "15823662745324688642",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:prisma"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/interceptor/connection-management.interceptor.ts",
+          "hash": "17151293651819735986",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/config",
+            "npm:rxjs"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/service/chart-metadata.service.ts",
+          "hash": "16406269394790034370",
+          "deps": [
+            "contracts",
+            "npm:@nestjs/common"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/service/data-layer.service.ts",
+          "hash": "39056567340554018",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:prisma"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/service/ddl.service.ts",
+          "hash": "199363661406128649",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:pg-structure",
+            "npm:prisma"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/service/merge.service.ts",
+          "hash": "10797606948573902563",
+          "deps": [
+            "npm:@nestjs/common",
+            "contracts"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/service/query-generation.service.ts",
+          "hash": "16870461851173996503",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:prisma",
+            "contracts"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/service/query-parsing.service.spec.ts",
+          "hash": "8989265147998486386"
+        },
+        {
+          "file": "apps/server/src/app/service/query-parsing.service.ts",
+          "hash": "9398464896805626913",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:pgsql-parser",
+            "npm:@pgsql/types",
+            "contracts"
+          ]
+        },
+        {
+          "file": "apps/server/src/app/utils.ts",
+          "hash": "9324226717777970814"
+        },
+        {
+          "file": "apps/server/src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "apps/server/src/main.ts",
+          "hash": "7282313191391650538",
+          "deps": [
+            "npm:@nestjs/common",
+            "npm:@nestjs/core",
+            "npm:@nestjs/platform-express"
+          ]
+        },
+        {
+          "file": "apps/server/src/views/widget.hbs",
+          "hash": "16009861333157536473"
+        },
+        {
+          "file": "apps/server/tsconfig.app.json",
+          "hash": "3171572500325445971"
+        },
+        {
+          "file": "apps/server/tsconfig.json",
+          "hash": "3490524966360018312"
+        },
+        {
+          "file": "apps/server/tsconfig.spec.json",
+          "hash": "11550347367511341917"
+        },
+        {
+          "file": "apps/server/webpack.config.js",
+          "hash": "10619490397189790225",
+          "deps": [
+            "npm:@nx/webpack"
+          ]
+        }
+      ],
+      "server-e2e": [
+        {
+          "file": "apps/server-e2e/.eslintrc.json",
+          "hash": "13800677001662881425"
+        },
+        {
+          "file": "apps/server-e2e/jest.config.ts",
+          "hash": "14212190043399416865"
+        },
+        {
+          "file": "apps/server-e2e/project.json",
+          "hash": "5162425300193861452"
+        },
+        {
+          "file": "apps/server-e2e/src/server/server.spec.ts",
+          "hash": "110394728024017389",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/server-e2e/src/support/global-setup.ts",
+          "hash": "2568409276037275290"
+        },
+        {
+          "file": "apps/server-e2e/src/support/global-teardown.ts",
+          "hash": "5275447082211835490"
+        },
+        {
+          "file": "apps/server-e2e/src/support/test-setup.ts",
+          "hash": "10984585515912236441",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/server-e2e/tsconfig.json",
+          "hash": "15443990093475294480"
+        },
+        {
+          "file": "apps/server-e2e/tsconfig.spec.json",
+          "hash": "14954872453723519891"
+        }
       ]
     },
     "nonProjectFiles": [
@@ -1032,7 +1032,7 @@
       },
       {
         "file": "package.json",
-        "hash": "8670149608475637235"
+        "hash": "4659634546794884878"
       },
       {
         "file": "prisma/migrations/20231015145732_init/migration.sql",
