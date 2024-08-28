@@ -127,7 +127,10 @@ export class WidgetController {
 
   @Get(':id/embedded')
   getEmbeddedChart(@Param('id') id: string, @Req() req: Request): string {
-    const url = `${req.protocol}://${req.get('host')}/api/widgets/${id}`;
+    const protocol = (req.headers.referer ?? req.protocol).startsWith('https')
+      ? 'https'
+      : 'http';
+    const url = `${protocol}://${req.get('host')}/api/widgets/${id}`;
     return `<iframe src="${url}" />`;
   }
 }
