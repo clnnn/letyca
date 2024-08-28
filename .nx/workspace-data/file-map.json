@@ -48,7 +48,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "sql-formatter": "^15.4.0",
-    "tslib": "^2.3.0",
+    "tslib": "^2.7.0",
     "zone.js": "0.14.3",
     "@angular-devkit/build-angular": "18.1.4",
     "@angular-devkit/core": "18.1.4",
@@ -98,77 +98,48 @@
   "nxJsonPlugins": [],
   "fileMap": {
     "projectFileMap": {
-      "contracts": [
+      "server-e2e": [
         {
-          "file": "contracts/.eslintrc.json",
-          "hash": "10868475473741014577"
+          "file": "apps/server-e2e/.eslintrc.json",
+          "hash": "13800677001662881425"
         },
         {
-          "file": "contracts/README.md",
-          "hash": "16932128431962063377"
+          "file": "apps/server-e2e/jest.config.ts",
+          "hash": "14212190043399416865"
         },
         {
-          "file": "contracts/jest.config.ts",
-          "hash": "10733571996953449077"
+          "file": "apps/server-e2e/project.json",
+          "hash": "5162425300193861452"
         },
         {
-          "file": "contracts/project.json",
-          "hash": "3422854332292414280"
-        },
-        {
-          "file": "contracts/src/create-connection.request.ts",
-          "hash": "9238667002021198850"
-        },
-        {
-          "file": "contracts/src/create-widget.request.ts",
-          "hash": "7410143653835700011"
-        },
-        {
-          "file": "contracts/src/create-widget.response.ts",
-          "hash": "10992553615166782798"
-        },
-        {
-          "file": "contracts/src/generate-chart.request.ts",
-          "hash": "13913775839230237254"
-        },
-        {
-          "file": "contracts/src/generate-chart.response.ts",
-          "hash": "17871508142600029720"
-        },
-        {
-          "file": "contracts/src/get-connections.response.ts",
-          "hash": "1520503922966892565"
-        },
-        {
-          "file": "contracts/src/get-suggestion.response.ts",
-          "hash": "1478999678038500754"
-        },
-        {
-          "file": "contracts/src/get-widgets.response.ts",
-          "hash": "11769814584459284772"
-        },
-        {
-          "file": "contracts/src/index.ts",
-          "hash": "11592209713317371875"
-        },
-        {
-          "file": "contracts/src/test-setup.ts",
-          "hash": "12935735732682149507",
+          "file": "apps/server-e2e/src/server/server.spec.ts",
+          "hash": "110394728024017389",
           "deps": [
-            "npm:jest-preset-angular"
+            "npm:axios"
           ]
         },
         {
-          "file": "contracts/tsconfig.json",
-          "hash": "4881022640630122902"
+          "file": "apps/server-e2e/src/support/global-setup.ts",
+          "hash": "2568409276037275290"
         },
         {
-          "file": "contracts/tsconfig.lib.json",
-          "hash": "4766185256741444917"
+          "file": "apps/server-e2e/src/support/global-teardown.ts",
+          "hash": "5275447082211835490"
         },
         {
-          "file": "contracts/tsconfig.spec.json",
-          "hash": "2129196202529263968"
+          "file": "apps/server-e2e/src/support/test-setup.ts",
+          "hash": "10984585515912236441",
+          "deps": [
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "apps/server-e2e/tsconfig.json",
+          "hash": "15443990093475294480"
+        },
+        {
+          "file": "apps/server-e2e/tsconfig.spec.json",
+          "hash": "14954872453723519891"
         }
       ],
       "client": [
@@ -648,6 +619,79 @@
           "hash": "2927375835638640771"
         }
       ],
+      "contracts": [
+        {
+          "file": "contracts/.eslintrc.json",
+          "hash": "10868475473741014577"
+        },
+        {
+          "file": "contracts/README.md",
+          "hash": "16932128431962063377"
+        },
+        {
+          "file": "contracts/jest.config.ts",
+          "hash": "10733571996953449077"
+        },
+        {
+          "file": "contracts/project.json",
+          "hash": "3422854332292414280"
+        },
+        {
+          "file": "contracts/src/create-connection.request.ts",
+          "hash": "9238667002021198850"
+        },
+        {
+          "file": "contracts/src/create-widget.request.ts",
+          "hash": "7410143653835700011"
+        },
+        {
+          "file": "contracts/src/create-widget.response.ts",
+          "hash": "10992553615166782798"
+        },
+        {
+          "file": "contracts/src/generate-chart.request.ts",
+          "hash": "13913775839230237254"
+        },
+        {
+          "file": "contracts/src/generate-chart.response.ts",
+          "hash": "17871508142600029720"
+        },
+        {
+          "file": "contracts/src/get-connections.response.ts",
+          "hash": "1520503922966892565"
+        },
+        {
+          "file": "contracts/src/get-suggestion.response.ts",
+          "hash": "1478999678038500754"
+        },
+        {
+          "file": "contracts/src/get-widgets.response.ts",
+          "hash": "11769814584459284772"
+        },
+        {
+          "file": "contracts/src/index.ts",
+          "hash": "11592209713317371875"
+        },
+        {
+          "file": "contracts/src/test-setup.ts",
+          "hash": "12935735732682149507",
+          "deps": [
+            "npm:jest-preset-angular"
+          ]
+        },
+        {
+          "file": "contracts/tsconfig.json",
+          "hash": "4881022640630122902"
+        },
+        {
+          "file": "contracts/tsconfig.lib.json",
+          "hash": "4766185256741444917"
+        },
+        {
+          "file": "contracts/tsconfig.spec.json",
+          "hash": "2129196202529263968"
+        }
+      ],
       "server": [
         {
           "file": "apps/server/.eslintrc.json",
@@ -655,7 +699,7 @@
         },
         {
           "file": "apps/server/docker-pack/Dockerfile",
-          "hash": "10894695473880127199"
+          "hash": "4247939711866586600"
         },
         {
           "file": "apps/server/docker-pack/start.sh",
@@ -823,50 +867,6 @@
             "npm:@nx/webpack"
           ]
         }
-      ],
-      "server-e2e": [
-        {
-          "file": "apps/server-e2e/.eslintrc.json",
-          "hash": "13800677001662881425"
-        },
-        {
-          "file": "apps/server-e2e/jest.config.ts",
-          "hash": "14212190043399416865"
-        },
-        {
-          "file": "apps/server-e2e/project.json",
-          "hash": "5162425300193861452"
-        },
-        {
-          "file": "apps/server-e2e/src/server/server.spec.ts",
-          "hash": "110394728024017389",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "apps/server-e2e/src/support/global-setup.ts",
-          "hash": "2568409276037275290"
-        },
-        {
-          "file": "apps/server-e2e/src/support/global-teardown.ts",
-          "hash": "5275447082211835490"
-        },
-        {
-          "file": "apps/server-e2e/src/support/test-setup.ts",
-          "hash": "10984585515912236441",
-          "deps": [
-            "npm:axios"
-          ]
-        },
-        {
-          "file": "apps/server-e2e/tsconfig.json",
-          "hash": "15443990093475294480"
-        },
-        {
-          "file": "apps/server-e2e/tsconfig.spec.json",
-          "hash": "14954872453723519891"
-        }
       ]
     },
     "nonProjectFiles": [
@@ -964,11 +964,11 @@
       },
       {
         "file": "iac/backend/.env.template",
-        "hash": "15089640116532902594"
+        "hash": "14197454393087495084"
       },
       {
         "file": "iac/deploy.sh",
-        "hash": "12370167323759249208"
+        "hash": "17243883442538094097"
       },
       {
         "file": "iac/docker-compose.yml",
@@ -1028,11 +1028,11 @@
       },
       {
         "file": "package-lock.json",
-        "hash": "6415903345353340377"
+        "hash": "5953195517403929518"
       },
       {
         "file": "package.json",
-        "hash": "4659634546794884878"
+        "hash": "11365675804794753995"
       },
       {
         "file": "prisma/migrations/20231015145732_init/migration.sql",
