@@ -16,7 +16,6 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
   const port = process.env.PORT || 3000;
   app.enableCors();
-  app.enable('trust proxy');
 
   app.set('views', path.join(__dirname, 'views'));
   app.setViewEngine('hbs');
