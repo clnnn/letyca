@@ -3,8 +3,7 @@
     tuiChip
     iconStart="star"
     appearance="custom"
-    tuiHintAppearance="warning"
-    tuiHint="The result may not be accurate"
+    tuiHint="Generate a prompt based on the selected connection. The result may not be accurate"
     [tuiSkeleton]="store.suggestionsLoading() === 'LOADING'"
     (click)="store.loadSuggestion()"
     [disabled]="
@@ -14,6 +13,20 @@
     "
   >
     AI Assisted Suggestion
+  </button>
+  <button
+    tuiChip
+    iconStart="database"
+    tuiHint="Vizualize your database schema"
+    [tuiSkeleton]="store.suggestionsLoading() === 'LOADING'"
+    (click)="showSchemaPreview()"
+    [disabled]="
+      store.selectedConnectionId() === null ||
+      store.suggestionsLoading() === 'LOADING' ||
+      store.previewChartLoading() === 'LOADING'
+    "
+  >
+    Schema Preview
   </button>
 </div>
 
@@ -45,3 +58,19 @@
     (click)="store.generateChart()"
   ></button>
 </div>
+
+<ng-template #preview let-preview>
+  <tui-preview [rotatable]="false" [zoomable]="true">
+    <img src="/assets/images/example-diagram.png" alt="Preview" />
+
+    <button
+      iconStart="@tui.x"
+      tuiIconButton
+      tuiPreviewAction
+      type="button"
+      (click)="preview.complete()"
+    >
+      Close
+    </button>
+  </tui-preview>
+</ng-template>

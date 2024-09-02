@@ -14,6 +14,11 @@
     font-weight: bold;
   }
 
+  .header {
+    display: flex;
+    gap: 0.5rem;
+  }
+
   .message-container {
     position: relative;
     .send-button {

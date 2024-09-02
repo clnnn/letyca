@@ -1,6 +1,18 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { TuiButton, TuiHint, TuiTitle } from '@taiga-ui/core';
-import { TuiButtonLoading, TuiChip, TuiSkeleton } from '@taiga-ui/kit';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import { TuiButton, TuiDialogContext, TuiHint, TuiTitle } from '@taiga-ui/core';
+import {
+  TuiButtonLoading,
+  TuiChip,
+  TuiPreview,
+  TuiPreviewDialogService,
+  TuiSkeleton,
+} from '@taiga-ui/kit';
 import { TuiTextareaModule } from '@taiga-ui/legacy';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, RouterLinkActive } from '@angular/router';
@@ -13,6 +25,8 @@ const tuiImports = [
   TuiChip,
   TuiSkeleton,
   TuiTitle,
+  TuiHint,
+  TuiPreview,
 ];
 
 @Component({
@@ -24,7 +38,6 @@ const tuiImports = [
     FormsModule,
     RouterLink,
     RouterLinkActive,
-    TuiHint,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './explore-prompt.component.html',
@@ -32,4 +45,12 @@ const tuiImports = [
 })
 export class ExplorePromptComponent {
   protected readonly store = inject(Store);
+  private readonly previewDialogService = inject(TuiPreviewDialogService);
+
+  @ViewChild('preview')
+  protected readonly preview?: TemplateRef<TuiDialogContext>;
+
+  protected showSchemaPreview(): void {
+    this.previewDialogService.open(this.preview ?? '').subscribe();
+  }
 }
