@@ -45,6 +45,7 @@ Thumbs.db
 .env
 
 .nx/cache
+/.nx
 .devcontainer/__data/ollama
 
 # BAML
