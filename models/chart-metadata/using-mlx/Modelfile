@@ -1,5 +1,6 @@
 
-FROM letyca-chart-metadata.gguf
+FROM phi3.5
+ADAPTER letyca-chart-metadata.Q4_K_M.gguf
 TEMPLATE """{{ if .System }}<|system|>
 {{ .System }}<|end|>
 {{ end }}{{ if .Prompt }}<|user|>

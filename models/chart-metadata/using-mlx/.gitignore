@@ -2,4 +2,5 @@
 /adapters
 /llama.cpp
 /lora_fused_model
+/mlx_model
 *.gguf
