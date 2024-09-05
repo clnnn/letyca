@@ -50,6 +50,7 @@ client<llm> TextToSQLOpenAIClient {
   provider openai
   options {
     model gpt-4o
+    temperature 0.2
     api_key env.OPENAI_API_KEY
   }
 }
