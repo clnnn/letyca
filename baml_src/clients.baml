@@ -49,7 +49,7 @@ client<llm> TextToSQLOllamaClient {
 client<llm> TextToSQLOpenAIClient {
   provider openai
   options {
-    model gpt-4o-mini
+    model gpt-4o
     api_key env.OPENAI_API_KEY
   }
 }
@@ -76,7 +76,7 @@ client<llm> ChartAxisExtractionOllamaClient {
 client<llm> ChartAxisExtractionOpenAIClient {
   provider openai
   options {
-    model gpt-4o-mini
+    model gpt-4o-mini	
     api_key env.OPENAI_API_KEY
   }
 }
@@ -102,7 +102,7 @@ client<llm> UserRequestSuggestionsOllamaClient {
 client<llm> UserRequestSuggestionsOpenAIClient {
   provider openai
   options {
-    model gpt-4o-mini
+    model gpt-4o-mini	
     api_key env.OPENAI_API_KEY
   }
 }

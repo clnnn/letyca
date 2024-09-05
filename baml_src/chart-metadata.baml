@@ -14,11 +14,18 @@ function ExtractChartMetadata(userRequest: string) -> ChartMetadata {
   client ChartMetadataClient
 
   prompt #"
-  <|system|>
-  You are a specialized chart metadata extractor. Extract the chart metadata from the user input<|end|>
-  {{ ctx.output_format }}
-  <|user|>
-  {{ userRequest }}<|end|>
-  <|assistant|>
+  {% if ctx.client.provider == "openai" %}
+    Given the user input, extract the information about the chart type and title
+    {{ userRequest }}
+    
+    {{ ctx.output_format }}
+  {% else %}
+    <|system|>
+    You are a specialized chart metadata extractor. Extract the chart metadata from the user input<|end|>
+    {{ ctx.output_format }}
+    <|user|>
+    {{ userRequest }}<|end|>
+    <|assistant|>
+  {% endif %}
   "#
 }
