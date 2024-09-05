@@ -39,7 +39,7 @@ export class MergeService {
                 .map((col) => row[col])
                 .join(' - ')
                 .trim()
-            : '';
+            : title;
 
         if (label.length > 0) {
           acc.push(label);
