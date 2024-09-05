@@ -12,17 +12,13 @@ class ChartMetadata {
 
 function ExtractChartMetadata(userRequest: string) -> ChartMetadata {
   client ChartMetadataClient
+
   prompt #"
-    {{ userRequest }}
-
-    {{ ctx.output_format }}
-    ```json
+  <|system|>
+  You are a specialized chart metadata extractor. Extract the chart metadata from the user input<|end|>
+  {{ ctx.output_format }}
+  <|user|>
+  {{ userRequest }}<|end|>
+  <|assistant|>
   "#
-}
-
-test Test1Name {
-  functions [ExtractChartMetadata]
-  args {
-    userRequest "total number of products by category"
-  }
 }
