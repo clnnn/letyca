@@ -1,13 +1,2 @@
-
 FROM phi3.5
-ADAPTER letyca-chart-metadata.Q4_K_M.gguf
-TEMPLATE """{{ if .System }}<|system|>
-{{ .System }}<|end|>
-{{ end }}{{ if .Prompt }}<|user|>
-{{ .Prompt }}<|end|>
-{{ end }}<|assistant|>
-{{ .Response }}<|end|>
-"""
-PARAMETER stop "<|end|>"
-PARAMETER stop "<|user|>"
-PARAMETER stop "<|assistant|>"
+ADAPTER letyca-chart-metadata.gguf
