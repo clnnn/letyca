@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { isDeepStrictEqual } from 'util';
 import { parse } from 'pgsql-parser';
 import { Node, RawStmt, ResTarget } from '@pgsql/types';
@@ -57,10 +57,11 @@ export class QueryParsingService {
       }
 
       const axis = await b.ExtractChartAxis(rawSQL);
+      Logger.log(axis);
       return {
         type: 'nonAggregation',
-        dimensionColumns: axis.xAxisKey,
-        aggregationColumns: axis.yAxisKey,
+        dimensionColumns: [axis.xAxisKey],
+        aggregationColumns: [axis.yAxisKey],
         rawSQL,
       };
     } else {
