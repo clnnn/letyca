@@ -1,6 +1,6 @@
 class ChartAxis {
-  xAxisKey string[] @description("Columns name that will be used as the label in the chart")
-  yAxisKey string[] @description("Columns name that will be used as the value in the chart")
+  xAxisKey string @description("Columns name that will be used as the label in the chart")
+  yAxisKey string @description("Columns name that will be used as the value in the chart")
 }
 
 function ExtractChartAxis(sql: string) -> ChartAxis {
