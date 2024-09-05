@@ -35,6 +35,7 @@
     class="tui-space_bottom-4 field-large"
     [ngModel]="store.userRequest()"
     (ngModelChange)="store.setUserRequest($event)"
+    (keydown.enter)="submitByEnter($event)"
     [disabled]="
       this.store.selectedConnectionId() === null ||
       store.previewChartLoading() === 'LOADING' ||

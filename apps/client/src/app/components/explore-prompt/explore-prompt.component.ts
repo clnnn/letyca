@@ -53,4 +53,25 @@ export class ExplorePromptComponent {
   protected showSchemaPreview(): void {
     this.previewDialogService.open(this.preview ?? '').subscribe();
   }
+
+  submitByEnter(event: Event): void {
+    event.preventDefault();
+    if (this.store.userRequest().length === 0) {
+      return;
+    }
+
+    if (this.store.selectedConnectionId() === null) {
+      return;
+    }
+
+    if (this.store.suggestionsLoading() === 'LOADING') {
+      return;
+    }
+
+    if (this.store.previewChartLoading() === 'LOADING') {
+      return;
+    }
+
+    this.store.generateChart();
+  }
 }
