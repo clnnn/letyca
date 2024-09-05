@@ -57,7 +57,6 @@ export class QueryParsingService {
       }
 
       const axis = await b.ExtractChartAxis(rawSQL);
-      Logger.log(axis);
       return {
         type: 'nonAggregation',
         dimensionColumns: [axis.xAxisKey],
