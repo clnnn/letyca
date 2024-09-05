@@ -30,16 +30,16 @@ export class MergeService {
       };
     }
 
-    if (
-      ((chartType === 'pie' || chartType === 'line' || chartType === 'bar') &&
-        query.type === 'groupingAggregation') ||
-      query.type === 'nonAggregation'
-    ) {
+    if (chartType === 'pie' || chartType === 'line' || chartType === 'bar') {
       const labels = rows.reduce((acc, row) => {
-        const label = query.dimensionColumns
-          .map((col) => row[col])
-          .join(' - ')
-          .trim();
+        const label =
+          query.type === 'groupingAggregation' ||
+          query.type === 'nonAggregation'
+            ? query.dimensionColumns
+                .map((col) => row[col])
+                .join(' - ')
+                .trim()
+            : '';
 
         if (label.length > 0) {
           acc.push(label);
