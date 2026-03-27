@@ -23,7 +23,7 @@ export class QueryGenerationService {
     const rawSQL = await b.GenerateSQL(userRequest, ddlStatements);
     this.logger.debug('Raw SQL', rawSQL);
     const preprocessedSQL = this.preprocess(rawSQL);
-    const parsedSQL = this.parser.parse(preprocessedSQL);
+    const parsedSQL = await this.parser.parse(preprocessedSQL);
     return parsedSQL;
   }
 

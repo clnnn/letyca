@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { isDeepStrictEqual } from 'util';
 import { parse } from 'pgsql-parser';
-import { Node, RawStmt, ResTarget } from '@pgsql/types';
+import { Node, ResTarget } from '@pgsql/types';
 import { b } from 'baml_client';
 import {
   BasicAggregation,
@@ -17,7 +17,7 @@ export type InvalidQuery = {
 @Injectable()
 export class QueryParsingService {
   async parse(rawSQL: string): Promise<SQLQuery | InvalidQuery> {
-    const stmts = parse(rawSQL);
+    const { stmts } = await parse(rawSQL);
 
     if (stmts.length < 1) {
       return {
@@ -26,23 +26,23 @@ export class QueryParsingService {
       };
     }
 
-    const rawStmt: RawStmt | undefined = stmts[0]?.RawStmt;
+    const stmt: Node | undefined = stmts[0]?.stmt;
 
-    if (!rawStmt?.stmt) {
+    if (!stmt) {
       return {
         type: 'invalidQuery',
         errorMessage: 'The provided SQL statement is invalid',
       };
     }
 
-    if (!('SelectStmt' in rawStmt.stmt)) {
+    if (!('SelectStmt' in stmt)) {
       return {
         type: 'invalidQuery',
         errorMessage: 'Only SELECT statements are supported',
       };
     }
 
-    const selectStmt = rawStmt.stmt.SelectStmt;
+    const selectStmt = stmt.SelectStmt;
     if (!selectStmt.groupClause) {
       const targetList = selectStmt.targetList ?? [];
       for (const target of targetList) {

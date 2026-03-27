@@ -1,9 +1,8 @@
-version: '3.8'
-
 services:
   autoheal:
     restart: unless-stopped
-    image: willfarrell/autoheal
+    image: willfarrell/autoheal:latest
+    network_mode: none
     environment:
       - AUTOHEAL_CONTAINER_LABEL=all
     volumes:
@@ -16,7 +15,7 @@ services:
 
   traefik:
     restart: unless-stopped
-    image: traefik:v2.10
+    image: traefik:v3.6
     # ports:
     #   - '80:80'
     #   - '8080:8080'

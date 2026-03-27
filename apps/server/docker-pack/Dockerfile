@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/typescript-node:22 as builder
+FROM mcr.microsoft.com/devcontainers/typescript-node:20 as builder
 WORKDIR /work
 
 COPY package*.json /work/
@@ -9,7 +9,7 @@ RUN npm run prisma-generate
 RUN npm run baml-generate
 RUN npm run build-backend
 
-FROM mcr.microsoft.com/devcontainers/typescript-node:22 as production
+FROM mcr.microsoft.com/devcontainers/typescript-node:20 as production
 
 WORKDIR /app
 
